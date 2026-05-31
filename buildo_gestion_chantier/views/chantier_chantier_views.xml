@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form view -->
+    <record id="view_chantier_chantier_form" model="ir.ui.view">
+        <field name="name">chantier.chantier.form</field>
+        <field name="model">chantier.chantier</field>
+        <field name="arch" type="xml">
+            <form string="Chantier">
+                <header>
+                    <button name="action_start" string="Démarrer" type="object"
+                            invisible="state != 'brouillon'" class="btn-primary"/>
+                    <button name="action_terminate" string="Terminer" type="object"
+                            invisible="state != 'en_cours'" class="btn-primary"/>
+                    <button name="action_cancel" string="Annuler" type="object"
+                            invisible="state not in ('brouillon', 'en_cours')"/>
+                    <button name="action_reset_draft" string="Remettre en brouillon" type="object"
+                            invisible="state not in ('annule', 'termine')"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="brouillon,en_cours,termine"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="Nom du chantier..."/></h1>
+                        <div>
+                            <strong>Réf : </strong>
+                            <field name="ref" readonly="1"/>
+                        </div>
+                    </div>
+                    <group>
+                        <group string="Informations générales">
+                            <field name="client_id"/>
+                            <field name="chef_chantier_id"/>
+                            <field name="adresse"/>
+                        </group>
+                        <group string="Planification">
+                            <field name="date_debut"/>
+                            <field name="date_fin_prevue"/>
+                            <field name="date_fin_reelle" invisible="state != 'termine'"/>
+                            <field name="budget_initial"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <group string="Indicateurs financiers" invisible="state == 'brouillon'">
+                        <field name="cout_reel"/>
+                        <field name="montant_facture"/>
+                        <field name="marge"/>
+                        <field name="nb_heures"/>
+                        <field name="avancement" widget="progressbar"/>
+                    </group>
+                    <field name="description" placeholder="Description du chantier..."/>
+                    <notebook>
+                        <page string="Tâches">
+                            <field name="tache_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="responsable_id"/>
+                                    <field name="date_debut"/>
+                                    <field name="date_fin"/>
+                                    <field name="state"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Heures prestées">
+                            <field name="heure_prestee_ids">
+                                <list>
+                                    <field name="ouvrier_id"/>
+                                    <field name="date"/>
+                                    <field name="nb_heures"/>
+                                    <field name="montant"/>
+                                    <field name="state"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Estimations matériaux">
+                            <field name="estimation_materiau_ids">
+                                <list editable="bottom">
+                                    <field name="materiau_id"/>
+                                    <field name="quantite_estimee"/>
+                                    <field name="unite"/>
+                                    <field name="prix_unitaire"/>
+                                    <field name="stock_disponible"/>
+                                    <field name="quantite_manquante"/>
+                                    <field name="montant_estime"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Estimations outils">
+                            <field name="estimation_outil_ids">
+                                <list editable="bottom">
+                                    <field name="outil_id"/>
+                                    <field name="etat_outil"/>
+                                    <field name="date_debut_prevue"/>
+                                    <field name="date_fin_prevue"/>
+                                    <field name="note"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Attributions outils">
+                            <field name="attribution_outil_ids">
+                                <list>
+                                    <field name="outil_id"/>
+                                    <field name="ouvrier_id"/>
+                                    <field name="date_sortie"/>
+                                    <field name="date_retour_prevue"/>
+                                    <field name="date_retour_reelle"/>
+                                    <field name="state"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Devis">
+                            <field name="devis_ids">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="date"/>
+                                    <field name="montant_ttc"/>
+                                    <field name="state"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Factures">
+                            <field name="facture_ids">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="date"/>
+                                    <field name="type_facture"/>
+                                    <field name="montant_total"/>
+                                    <field name="state"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Commandes fournisseur">
+                            <field name="commande_fournisseur_ids">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="fournisseur_id"/>
+                                    <field name="date"/>
+                                    <field name="montant_total"/>
+                                    <field name="state"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Demandes matériel">
+                            <field name="demande_materiel_ids">
+                                <list>
+                                    <field name="ouvrier_id"/>
+                                    <field name="date"/>
+                                    <field name="description"/>
+                                    <field name="quantite"/>
+                                    <field name="urgence"/>
+                                    <field name="state"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Rapports journaliers">
+                            <field name="rapport_journalier_ids">
+                                <list>
+                                    <field name="date"/>
+                                    <field name="auteur_id"/>
+                                    <field name="meteo"/>
+                                    <field name="nb_ouvriers"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Photos">
+                            <field name="photo_ids">
+                                <kanban>
+                                    <field name="name"/>
+                                    <field name="image"/>
+                                    <field name="date"/>
+                                    <templates>
+                                        <t t-name="card">
+                                            <img t-att-src="kanban_image('chantier.photo', 'image', record.id.value)"
+                                                 style="max-height:120px; object-fit:cover; width:100%;"/>
+                                            <div class="p-2">
+                                                <strong><field name="name"/></strong>
+                                                <div><field name="date"/></div>
+                                            </div>
+                                        </t>
+                                    </templates>
+                                </kanban>
+                            </field>
+                        </page>
+                        <page string="Plans">
+                            <field name="plan_ids">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="version"/>
+                                    <field name="date"/>
+                                    <field name="auteur_id"/>
+                                    <field name="fichier_name"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Paiements FSS">
+                            <field name="paiement_fss_ids">
+                                <list>
+                                    <field name="ouvrier_id"/>
+                                    <field name="periode"/>
+                                    <field name="montant"/>
+                                    <field name="state"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- List view -->
+    <record id="view_chantier_chantier_list" model="ir.ui.view">
+        <field name="name">chantier.chantier.list</field>
+        <field name="model">chantier.chantier</field>
+        <field name="arch" type="xml">
+            <list string="Chantiers" decoration-success="state == 'termine'"
+                  decoration-danger="state == 'annule'" decoration-info="state == 'en_cours'">
+                <field name="ref"/>
+                <field name="name"/>
+                <field name="client_id"/>
+                <field name="chef_chantier_id"/>
+                <field name="date_debut"/>
+                <field name="date_fin_prevue"/>
+                <field name="budget_initial"/>
+                <field name="avancement" widget="progressbar"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'termine'"
+                       decoration-warning="state == 'en_cours'"
+                       decoration-danger="state == 'annule'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Kanban view -->
+    <record id="view_chantier_chantier_kanban" model="ir.ui.view">
+        <field name="name">chantier.chantier.kanban</field>
+        <field name="model">chantier.chantier</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state" class="o_kanban_mobile">
+                <field name="name"/>
+                <field name="client_id"/>
+                <field name="chef_chantier_id"/>
+                <field name="budget_initial"/>
+                <field name="avancement"/>
+                <field name="state"/>
+                <field name="currency_id"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="fw-bold fs-5"><field name="name"/></div>
+                        <div class="text-muted"><field name="client_id"/></div>
+                        <div>Chef : <field name="chef_chantier_id"/></div>
+                        <div>Budget : <field name="budget_initial"/></div>
+                        <div class="mt-2">
+                            <field name="avancement" widget="progressbar"/>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Search view -->
+    <record id="view_chantier_chantier_search" model="ir.ui.view">
+        <field name="name">chantier.chantier.search</field>
+        <field name="model">chantier.chantier</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Chantier"/>
+                <field name="ref"/>
+                <field name="client_id"/>
+                <field name="chef_chantier_id"/>
+                <filter string="En cours" name="en_cours" domain="[('state', '=', 'en_cours')]"/>
+                <filter string="Brouillon" name="brouillon" domain="[('state', '=', 'brouillon')]"/>
+                <filter string="Terminé" name="termine" domain="[('state', '=', 'termine')]"/>
+                <group name="groupby">
+                    <filter string="Chef de chantier" name="group_chef" context="{'group_by': 'chef_chantier_id'}"/>
+                    <filter string="Client" name="group_client" context="{'group_by': 'client_id'}"/>
+                    <filter string="État" name="group_state" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_chantier_chantier" model="ir.actions.act_window">
+        <field name="name">Chantiers</field>
+        <field name="res_model">chantier.chantier</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="search_view_id" ref="view_chantier_chantier_search"/>
+        <field name="context">{'search_default_en_cours': 1}</field>
+    </record>
+</odoo>

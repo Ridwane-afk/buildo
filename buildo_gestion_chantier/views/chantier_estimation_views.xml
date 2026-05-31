@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Estimation matériaux -->
+    <record id="view_chantier_estimation_materiau_list" model="ir.ui.view">
+        <field name="name">chantier.estimation.materiau.list</field>
+        <field name="model">chantier.estimation.materiau</field>
+        <field name="arch" type="xml">
+            <list string="Estimations matériaux" decoration-danger="quantite_manquante &gt; 0">
+                <field name="chantier_id"/>
+                <field name="materiau_id"/>
+                <field name="quantite_estimee"/>
+                <field name="unite"/>
+                <field name="stock_disponible"/>
+                <field name="quantite_manquante"/>
+                <field name="montant_estime" sum="Total estimé"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_chantier_estimation_materiau" model="ir.actions.act_window">
+        <field name="name">Estimations matériaux</field>
+        <field name="res_model">chantier.estimation.materiau</field>
+        <field name="view_mode">list</field>
+    </record>
+
+    <!-- Attribution outils -->
+    <record id="view_chantier_attribution_outil_list" model="ir.ui.view">
+        <field name="name">chantier.attribution.outil.list</field>
+        <field name="model">chantier.attribution.outil</field>
+        <field name="arch" type="xml">
+            <list string="Attributions outils">
+                <field name="chantier_id"/>
+                <field name="outil_id"/>
+                <field name="ouvrier_id"/>
+                <field name="date_sortie"/>
+                <field name="date_retour_prevue"/>
+                <field name="date_retour_reelle"/>
+                <field name="state" widget="badge"
+                       decoration-warning="state == 'attribue'"
+                       decoration-success="state == 'retourne'"/>
+                <button name="action_retour" string="Retour" type="object"
+                        invisible="state != 'attribue'" class="btn-sm btn-secondary"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_chantier_attribution_outil_form" model="ir.ui.view">
+        <field name="name">chantier.attribution.outil.form</field>
+        <field name="model">chantier.attribution.outil</field>
+        <field name="arch" type="xml">
+            <form string="Attribution outil">
+                <header>
+                    <button name="action_retour" string="Enregistrer le retour" type="object"
+                            invisible="state != 'attribue'" class="btn-primary"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="chantier_id"/>
+                        <field name="outil_id"/>
+                        <field name="ouvrier_id"/>
+                        <field name="date_sortie"/>
+                        <field name="date_retour_prevue"/>
+                        <field name="date_retour_reelle" readonly="1"/>
+                    </group>
+                    <field name="note" placeholder="Note..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_chantier_attribution_outil" model="ir.actions.act_window">
+        <field name="name">Attributions outils</field>
+        <field name="res_model">chantier.attribution.outil</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

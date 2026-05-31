@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menu principal BUILDO -->
+    <menuitem id="menu_buildo_root"
+              name="BUILDO"
+              sequence="100"
+              web_icon="buildo_gestion_chantier,static/description/icon.png"/>
+
+    <!-- Chantiers -->
+    <menuitem id="menu_buildo_chantiers"
+              name="Chantiers"
+              parent="menu_buildo_root"
+              sequence="10"/>
+
+    <menuitem id="menu_chantier_chantier"
+              name="Tous les chantiers"
+              parent="menu_buildo_chantiers"
+              action="action_chantier_chantier"
+              sequence="10"/>
+
+    <menuitem id="menu_chantier_tache"
+              name="Tâches"
+              parent="menu_buildo_chantiers"
+              action="action_chantier_tache"
+              sequence="20"
+              groups="group_chef_chantier"/>
+
+    <!-- Terrain -->
+    <menuitem id="menu_buildo_terrain"
+              name="Terrain"
+              parent="menu_buildo_root"
+              sequence="20"/>
+
+    <menuitem id="menu_heure_prestee"
+              name="Heures prestées"
+              parent="menu_buildo_terrain"
+              action="action_chantier_heure_prestee"
+              sequence="10"/>
+
+    <menuitem id="menu_demande_materiel"
+              name="Demandes de matériel"
+              parent="menu_buildo_terrain"
+              action="action_chantier_demande_materiel"
+              sequence="20"/>
+
+    <menuitem id="menu_rapport_journalier"
+              name="Rapports journaliers"
+              parent="menu_buildo_terrain"
+              action="action_chantier_rapport_journalier"
+              sequence="30"
+              groups="group_chef_chantier"/>
+
+    <!-- Stock -->
+    <menuitem id="menu_buildo_stock"
+              name="Stock"
+              parent="menu_buildo_root"
+              sequence="30"
+              groups="group_chef_chantier"/>
+
+    <menuitem id="menu_materiau"
+              name="Matériaux"
+              parent="menu_buildo_stock"
+              action="action_chantier_materiau"
+              sequence="10"/>
+
+    <menuitem id="menu_outil"
+              name="Outils"
+              parent="menu_buildo_stock"
+              action="action_chantier_outil"
+              sequence="20"/>
+
+    <menuitem id="menu_attribution_outil"
+              name="Attributions outils"
+              parent="menu_buildo_stock"
+              action="action_chantier_attribution_outil"
+              sequence="30"/>
+
+    <menuitem id="menu_estimation_materiau"
+              name="Estimations matériaux"
+              parent="menu_buildo_stock"
+              action="action_chantier_estimation_materiau"
+              sequence="40"/>
+
+    <!-- Commercial -->
+    <menuitem id="menu_buildo_commercial"
+              name="Commercial"
+              parent="menu_buildo_root"
+              sequence="40"
+              groups="group_service_administratif"/>
+
+    <menuitem id="menu_devis"
+              name="Devis"
+              parent="menu_buildo_commercial"
+              action="action_chantier_devis"
+              sequence="10"/>
+
+    <menuitem id="menu_facture"
+              name="Factures"
+              parent="menu_buildo_commercial"
+              action="action_chantier_facture"
+              sequence="20"/>
+
+    <menuitem id="menu_commande_fournisseur"
+              name="Commandes fournisseur"
+              parent="menu_buildo_commercial"
+              action="action_chantier_commande_fournisseur"
+              sequence="30"/>
+
+    <!-- Direction -->
+    <menuitem id="menu_buildo_direction"
+              name="Direction"
+              parent="menu_buildo_root"
+              sequence="50"
+              groups="group_direction"/>
+
+    <menuitem id="menu_paiement_fss"
+              name="Paiements FSS"
+              parent="menu_buildo_direction"
+              action="action_chantier_paiement_fss"
+              sequence="10"/>
+</odoo>

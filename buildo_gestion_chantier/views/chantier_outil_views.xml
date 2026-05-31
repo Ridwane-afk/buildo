@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_chantier_outil_list" model="ir.ui.view">
+        <field name="name">chantier.outil.list</field>
+        <field name="model">chantier.outil</field>
+        <field name="arch" type="xml">
+            <list string="Outils" decoration-warning="etat == 'attribue'"
+                  decoration-danger="etat == 'hors_service'">
+                <field name="name"/>
+                <field name="ref_interne"/>
+                <field name="categorie"/>
+                <field name="etat" widget="badge"
+                       decoration-success="etat == 'disponible'"
+                       decoration-warning="etat == 'attribue'"
+                       decoration-info="etat == 'maintenance'"
+                       decoration-danger="etat == 'hors_service'"/>
+                <field name="valeur_achat"/>
+                <field name="date_achat"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_chantier_outil_form" model="ir.ui.view">
+        <field name="name">chantier.outil.form</field>
+        <field name="model">chantier.outil</field>
+        <field name="arch" type="xml">
+            <form string="Outil">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="ref_interne"/>
+                            <field name="categorie"/>
+                            <field name="etat"/>
+                        </group>
+                        <group>
+                            <field name="valeur_achat"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="date_achat"/>
+                            <field name="actif"/>
+                        </group>
+                    </group>
+                    <field name="description" placeholder="Description..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_chantier_outil" model="ir.actions.act_window">
+        <field name="name">Outils</field>
+        <field name="res_model">chantier.outil</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('actif', '=', True)]</field>
+    </record>
+</odoo>

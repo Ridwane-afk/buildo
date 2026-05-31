@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_chantier_demande_materiel_list" model="ir.ui.view">
+        <field name="name">chantier.demande.materiel.list</field>
+        <field name="model">chantier.demande.materiel</field>
+        <field name="arch" type="xml">
+            <list string="Demandes de matériel"
+                  decoration-success="state == 'valide'" decoration-danger="state == 'refuse'">
+                <field name="chantier_id"/>
+                <field name="ouvrier_id"/>
+                <field name="date"/>
+                <field name="description"/>
+                <field name="materiau_id"/>
+                <field name="quantite"/>
+                <field name="urgence" widget="badge"
+                       decoration-danger="urgence == 'urgente'"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'valide'"
+                       decoration-danger="state == 'refuse'"
+                       decoration-warning="state == 'soumis'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_chantier_demande_materiel_form" model="ir.ui.view">
+        <field name="name">chantier.demande.materiel.form</field>
+        <field name="model">chantier.demande.materiel</field>
+        <field name="arch" type="xml">
+            <form string="Demande de matériel">
+                <header>
+                    <button name="action_soumettre" string="Soumettre" type="object"
+                            invisible="state != 'brouillon'" class="btn-primary"/>
+                    <button name="action_valider" string="Valider" type="object"
+                            invisible="state != 'soumis'" class="btn-primary"
+                            groups="buildo_gestion_chantier.group_chef_chantier"/>
+                    <button name="action_refuser" string="Refuser" type="object"
+                            invisible="state != 'soumis'"
+                            groups="buildo_gestion_chantier.group_chef_chantier"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="brouillon,soumis,valide"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="chantier_id"/>
+                        <field name="ouvrier_id"/>
+                        <field name="date"/>
+                        <field name="materiau_id"/>
+                        <field name="description"/>
+                        <field name="quantite"/>
+                        <field name="urgence"/>
+                    </group>
+                    <field name="note" placeholder="Note..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_chantier_demande_materiel" model="ir.actions.act_window">
+        <field name="name">Demandes de matériel</field>
+        <field name="res_model">chantier.demande.materiel</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

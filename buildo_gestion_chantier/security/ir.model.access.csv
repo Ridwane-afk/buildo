@@ -1,0 +1,56 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_chantier_chantier_ouvrier,chantier.chantier ouvrier,model_chantier_chantier,group_ouvrier,1,0,0,0
+access_chantier_chantier_chef,chantier.chantier chef,model_chantier_chantier,group_chef_chantier,1,1,1,0
+access_chantier_chantier_admin,chantier.chantier admin,model_chantier_chantier,group_admin_buildo,1,1,1,1
+
+access_chantier_tache_chef,chantier.tache chef,model_chantier_tache,group_chef_chantier,1,1,1,1
+access_chantier_tache_ouvrier,chantier.tache ouvrier,model_chantier_tache,group_ouvrier,1,0,0,0
+
+access_chantier_heure_prestee_ouvrier,chantier.heure.prestee ouvrier,model_chantier_heure_prestee,group_ouvrier,1,1,1,0
+access_chantier_heure_prestee_chef,chantier.heure.prestee chef,model_chantier_heure_prestee,group_chef_chantier,1,1,1,1
+
+access_chantier_demande_materiel_ouvrier,chantier.demande.materiel ouvrier,model_chantier_demande_materiel,group_ouvrier,1,1,1,0
+access_chantier_demande_materiel_chef,chantier.demande.materiel chef,model_chantier_demande_materiel,group_chef_chantier,1,1,1,1
+
+access_chantier_rapport_journalier_chef,chantier.rapport.journalier chef,model_chantier_rapport_journalier,group_chef_chantier,1,1,1,1
+access_chantier_rapport_journalier_ouvrier,chantier.rapport.journalier ouvrier,model_chantier_rapport_journalier,group_ouvrier,1,0,0,0
+
+access_chantier_photo_chef,chantier.photo chef,model_chantier_photo,group_chef_chantier,1,1,1,1
+access_chantier_photo_ouvrier,chantier.photo ouvrier,model_chantier_photo,group_ouvrier,1,0,0,0
+
+access_chantier_plan_chef,chantier.plan chef,model_chantier_plan,group_chef_chantier,1,1,1,1
+access_chantier_plan_ouvrier,chantier.plan ouvrier,model_chantier_plan,group_ouvrier,1,0,0,0
+
+access_chantier_materiau_ouvrier,chantier.materiau ouvrier,model_chantier_materiau,group_ouvrier,1,0,0,0
+access_chantier_materiau_chef,chantier.materiau chef,model_chantier_materiau,group_chef_chantier,1,1,1,0
+access_chantier_materiau_admin,chantier.materiau admin,model_chantier_materiau,group_admin_buildo,1,1,1,1
+
+access_chantier_outil_ouvrier,chantier.outil ouvrier,model_chantier_outil,group_ouvrier,1,0,0,0
+access_chantier_outil_chef,chantier.outil chef,model_chantier_outil,group_chef_chantier,1,1,1,0
+access_chantier_outil_admin,chantier.outil admin,model_chantier_outil,group_admin_buildo,1,1,1,1
+
+access_chantier_estimation_materiau_chef,chantier.estimation.materiau chef,model_chantier_estimation_materiau,group_chef_chantier,1,1,1,1
+access_chantier_estimation_outil_chef,chantier.estimation.outil chef,model_chantier_estimation_outil,group_chef_chantier,1,1,1,1
+access_chantier_attribution_outil_chef,chantier.attribution.outil chef,model_chantier_attribution_outil,group_chef_chantier,1,1,1,1
+
+access_chantier_devis_admin,chantier.devis admin,model_chantier_devis,group_service_administratif,1,1,1,1
+access_chantier_devis_direction,chantier.devis direction,model_chantier_devis,group_direction,1,1,0,0
+access_chantier_devis_ouvrier,chantier.devis ouvrier,model_chantier_devis,group_ouvrier,1,0,0,0
+
+access_chantier_devis_ligne_admin,chantier.devis.ligne admin,model_chantier_devis_ligne,group_service_administratif,1,1,1,1
+access_chantier_devis_ligne_ouvrier,chantier.devis.ligne ouvrier,model_chantier_devis_ligne,group_ouvrier,1,0,0,0
+
+access_chantier_avenant_admin,chantier.avenant admin,model_chantier_avenant,group_service_administratif,1,1,1,1
+access_chantier_avenant_ouvrier,chantier.avenant ouvrier,model_chantier_avenant,group_ouvrier,1,0,0,0
+
+access_chantier_facture_admin,chantier.facture admin,model_chantier_facture,group_service_administratif,1,1,1,1
+access_chantier_facture_direction,chantier.facture direction,model_chantier_facture,group_direction,1,1,0,0
+access_chantier_facture_ouvrier,chantier.facture ouvrier,model_chantier_facture,group_ouvrier,1,0,0,0
+
+access_chantier_commande_fournisseur_admin,chantier.commande.fournisseur admin,model_chantier_commande_fournisseur,group_service_administratif,1,1,1,1
+access_chantier_commande_fournisseur_chef,chantier.commande.fournisseur chef,model_chantier_commande_fournisseur,group_chef_chantier,1,1,1,0
+access_chantier_commande_fournisseur_ligne_admin,chantier.commande.fournisseur.ligne admin,model_chantier_commande_fournisseur_ligne,group_service_administratif,1,1,1,1
+access_chantier_commande_fournisseur_ligne_chef,chantier.commande.fournisseur.ligne chef,model_chantier_commande_fournisseur_ligne,group_chef_chantier,1,1,1,0
+
+access_chantier_paiement_fss_direction,chantier.paiement.fss direction,model_chantier_paiement_fss,group_direction,1,1,1,1
+access_chantier_paiement_fss_admin,chantier.paiement.fss admin,model_chantier_paiement_fss,group_service_administratif,1,1,1,0

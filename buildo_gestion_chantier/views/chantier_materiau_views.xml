@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_chantier_materiau_list" model="ir.ui.view">
+        <field name="name">chantier.materiau.list</field>
+        <field name="model">chantier.materiau</field>
+        <field name="arch" type="xml">
+            <list string="Matériaux" decoration-danger="stock_disponible &lt;= seuil_alerte">
+                <field name="name"/>
+                <field name="ref_interne"/>
+                <field name="categorie"/>
+                <field name="unite"/>
+                <field name="prix_unitaire"/>
+                <field name="stock_disponible"/>
+                <field name="seuil_alerte"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_chantier_materiau_form" model="ir.ui.view">
+        <field name="name">chantier.materiau.form</field>
+        <field name="model">chantier.materiau</field>
+        <field name="arch" type="xml">
+            <form string="Matériau">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="ref_interne"/>
+                            <field name="categorie"/>
+                            <field name="unite"/>
+                        </group>
+                        <group>
+                            <field name="prix_unitaire"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="stock_disponible"/>
+                            <field name="seuil_alerte"/>
+                            <field name="actif"/>
+                        </group>
+                    </group>
+                    <field name="description" placeholder="Description..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_chantier_materiau" model="ir.actions.act_window">
+        <field name="name">Matériaux</field>
+        <field name="res_model">chantier.materiau</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('actif', '=', True)]</field>
+    </record>
+</odoo>
