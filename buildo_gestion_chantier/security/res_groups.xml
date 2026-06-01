@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record model="res.groups.privilege" id="privilege_buildo">
-        <field name="name">BUILDO — Gestion chantiers</field>
+        <field name="name">BUILDO Gestion chantiers</field>
         <field name="sequence">100</field>
         <field name="category_id" ref="base.module_category_services"/>
     </record>
