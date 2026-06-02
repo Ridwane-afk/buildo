@@ -42,11 +42,17 @@
                         </group>
                     </group>
                     <group string="Indicateurs financiers" invisible="state == 'brouillon'">
-                        <field name="cout_reel"/>
-                        <field name="montant_facture"/>
-                        <field name="marge"/>
-                        <field name="nb_heures"/>
-                        <field name="avancement" widget="progressbar"/>
+                        <group string="Coûts">
+                            <field name="cout_main_oeuvre"/>
+                            <field name="cout_materiaux"/>
+                            <field name="cout_reel" class="fw-bold"/>
+                            <field name="nb_heures"/>
+                        </group>
+                        <group string="Rentabilité">
+                            <field name="montant_facture"/>
+                            <field name="marge" class="fw-bold"/>
+                            <field name="avancement" widget="progressbar"/>
+                        </group>
                     </group>
                     <field name="description" placeholder="Description du chantier..."/>
                     <notebook>
