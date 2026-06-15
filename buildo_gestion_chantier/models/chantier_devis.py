@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 
 
 class ChantierDevis(models.Model):
@@ -38,7 +39,13 @@ class ChantierDevis(models.Model):
                 vals['name'] = self.env['ir.sequence'].next_by_code('chantier.devis') or 'Nouveau'
         return super().create(vals_list)
 
-    @api.depends('ligne_ids.sous_total')
+    @api.constrains('date', 'date_validite')
+    def _check_dates(self):
+        for rec in self:
+            if rec.date and rec.date_validite and rec.date_validite < rec.date:
+                raise ValidationError("La date de validité ne peut pas être antérieure à la date du devis.")
+
+    @api.depends('ligne_ids.sous_total', 'ligne_ids.quantite', 'ligne_ids.prix_unitaire')
     def _compute_montants(self):
         for rec in self:
             rec.montant_ht = sum(rec.ligne_ids.mapped('sous_total'))

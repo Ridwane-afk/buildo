@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 
 
 class ChantierHeurePrestee(models.Model):
@@ -22,6 +23,14 @@ class ChantierHeurePrestee(models.Model):
     ], default='brouillon', string='État')
     validateur_id = fields.Many2one('res.users', 'Validé par', readonly=True)
     note_refus = fields.Text('Motif du refus')
+
+    @api.constrains('nb_heures', 'taux_horaire')
+    def _check_heures(self):
+        for rec in self:
+            if rec.nb_heures <= 0:
+                raise ValidationError("Le nombre d'heures doit être supérieur à 0.")
+            if rec.taux_horaire <= 0:
+                raise ValidationError("Le taux horaire doit être supérieur à 0.")
 
     @api.depends('nb_heures', 'taux_horaire')
     def _compute_montant(self):

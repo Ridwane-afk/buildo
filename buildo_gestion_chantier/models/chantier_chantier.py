@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 
 
 class ChantierChantier(models.Model):
@@ -48,6 +49,18 @@ class ChantierChantier(models.Model):
     marge = fields.Monetary('Marge', compute='_compute_financier', currency_field='currency_id', store=True)
     nb_heures = fields.Float('Heures validées', compute='_compute_heures', store=True)
     avancement = fields.Float('Avancement (%)', compute='_compute_avancement', store=True)
+
+    @api.constrains('date_debut', 'date_fin_prevue')
+    def _check_dates(self):
+        for rec in self:
+            if rec.date_debut and rec.date_fin_prevue and rec.date_fin_prevue < rec.date_debut:
+                raise ValidationError("La date de fin prévue ne peut pas être antérieure à la date de début.")
+
+    @api.constrains('budget_initial')
+    def _check_budget(self):
+        for rec in self:
+            if rec.budget_initial is not False and rec.budget_initial < 0:
+                raise ValidationError("Le budget initial ne peut pas être négatif.")
 
     @api.model_create_multi
     def create(self, vals_list):

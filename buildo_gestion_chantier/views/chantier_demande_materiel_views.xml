@@ -36,6 +36,8 @@
                     <button name="action_refuser" string="Refuser" type="object"
                             invisible="state != 'soumis'"
                             groups="buildo_gestion_chantier.group_chef_chantier"/>
+                    <button name="action_reset" string="Remettre en brouillon" type="object"
+                            invisible="state not in ('soumis', 'refuse')"/>
                     <field name="state" widget="statusbar"
                            statusbar_visible="brouillon,soumis,valide"/>
                 </header>

@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 
 
 class ChantierEstimationMateriau(models.Model):
@@ -18,6 +19,12 @@ class ChantierEstimationMateriau(models.Model):
     stock_disponible = fields.Float('Stock disponible', related='materiau_id.stock_disponible', readonly=True)
     quantite_manquante = fields.Float('Quantité manquante', compute='_compute_manquant', store=True)
     note = fields.Text('Note')
+
+    @api.constrains('quantite_estimee')
+    def _check_quantite(self):
+        for rec in self:
+            if rec.quantite_estimee <= 0:
+                raise ValidationError("La quantité estimée doit être supérieure à 0.")
 
     @api.depends('quantite_estimee', 'prix_unitaire')
     def _compute_montant(self):

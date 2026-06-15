@@ -1,5 +1,5 @@
 from odoo import models, fields, api
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 
 
 class ChantierFacture(models.Model):
@@ -40,6 +40,14 @@ class ChantierFacture(models.Model):
             if vals.get('name', 'Nouveau') == 'Nouveau':
                 vals['name'] = self.env['ir.sequence'].next_by_code('chantier.facture') or 'Nouveau'
         return super().create(vals_list)
+
+    @api.constrains('montant_ht', 'pourcentage_avancement')
+    def _check_montant(self):
+        for rec in self:
+            if rec.montant_ht < 0:
+                raise ValidationError("Le montant HT ne peut pas être négatif.")
+            if rec.pourcentage_avancement < 0 or rec.pourcentage_avancement > 100:
+                raise ValidationError("Le pourcentage d'avancement doit être compris entre 0 et 100.")
 
     @api.depends('montant_ht')
     def _compute_tva(self):

@@ -1,4 +1,5 @@
-from odoo import models, fields
+from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 
 
 class ChantierDemandeMateriel(models.Model):
@@ -25,6 +26,12 @@ class ChantierDemandeMateriel(models.Model):
     validateur_id = fields.Many2one('res.users', 'Validé par', readonly=True)
     note = fields.Text('Note')
 
+    @api.constrains('quantite')
+    def _check_quantite(self):
+        for rec in self:
+            if rec.quantite <= 0:
+                raise ValidationError("La quantité demandée doit être supérieure à 0.")
+
     def action_soumettre(self):
         self.write({'state': 'soumis'})
 
@@ -33,3 +40,6 @@ class ChantierDemandeMateriel(models.Model):
 
     def action_refuser(self):
         self.write({'state': 'refuse'})
+
+    def action_reset(self):
+        self.write({'state': 'brouillon', 'validateur_id': False})
