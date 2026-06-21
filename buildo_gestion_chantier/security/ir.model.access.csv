@@ -30,9 +30,13 @@ access_chantier_outil_chef,chantier.outil chef,model_chantier_outil,group_chef_c
 access_chantier_outil_admin,chantier.outil admin,model_chantier_outil,group_admin_buildo,1,1,1,1
 
 access_chantier_estimation_materiau_chef,chantier.estimation.materiau chef,model_chantier_estimation_materiau,group_chef_chantier,1,1,1,1
+access_chantier_estimation_materiau_ouvrier,chantier.estimation.materiau ouvrier,model_chantier_estimation_materiau,group_ouvrier,1,0,0,0
 access_chantier_estimation_outil_chef,chantier.estimation.outil chef,model_chantier_estimation_outil,group_chef_chantier,1,1,1,1
+access_chantier_estimation_outil_ouvrier,chantier.estimation.outil ouvrier,model_chantier_estimation_outil,group_ouvrier,1,0,0,0
 access_chantier_attribution_outil_chef,chantier.attribution.outil chef,model_chantier_attribution_outil,group_chef_chantier,1,1,1,1
+access_chantier_attribution_outil_ouvrier,chantier.attribution.outil ouvrier,model_chantier_attribution_outil,group_ouvrier,1,0,0,0
 
+access_chantier_avenant_chef,chantier.avenant chef,model_chantier_avenant,group_chef_chantier,1,1,1,0
 access_chantier_avenant_admin,chantier.avenant admin,model_chantier_avenant,group_service_administratif,1,1,1,1
 access_chantier_avenant_ouvrier,chantier.avenant ouvrier,model_chantier_avenant,group_ouvrier,1,0,0,0
 

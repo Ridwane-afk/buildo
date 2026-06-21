@@ -38,23 +38,23 @@ class ChantierEstimationMateriau(models.Model):
             rec.quantite_manquante = manquant if manquant > 0 else 0.0
 
     def action_generer_commande(self):
-        """Génère une commande fournisseur pour les matériaux manquants (F15)."""
+        """Génère une purchase.order pour les matériaux manquants (F15)."""
         lignes_manquantes = self.filtered(lambda r: r.quantite_manquante > 0)
         if not lignes_manquantes:
             return
         chantier = lignes_manquantes[0].chantier_id
-        commande = self.env['chantier.commande.fournisseur'].create({
+        po = self.env['purchase.order'].create({
             'chantier_id': chantier.id,
-            'date': fields.Date.today(),
-            'ligne_ids': [(0, 0, {
-                'materiau_id': ligne.materiau_id.id,
-                'quantite': ligne.quantite_manquante,
-                'prix_unitaire': ligne.prix_unitaire,
+            'order_line': [(0, 0, {
+                'name': ligne.materiau_id.name,
+                'product_qty': ligne.quantite_manquante,
+                'price_unit': ligne.prix_unitaire,
+                'date_planned': fields.Datetime.now(),
             }) for ligne in lignes_manquantes],
         })
         return {
             'type': 'ir.actions.act_window',
-            'res_model': 'chantier.commande.fournisseur',
-            'res_id': commande.id,
+            'res_model': 'purchase.order',
+            'res_id': po.id,
             'view_mode': 'form',
         }

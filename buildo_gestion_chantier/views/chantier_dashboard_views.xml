@@ -61,7 +61,7 @@
     <record id="action_chantier_dashboard" model="ir.actions.act_window">
         <field name="name">Tableau de bord — Rentabilité</field>
         <field name="res_model">chantier.chantier</field>
-        <field name="view_mode">list,graph,pivot,kanban</field>
+        <field name="view_mode">list,graph,pivot</field>
         <field name="view_ids" eval="[(5, 0, 0),
             (0, 0, {'view_mode': 'list', 'view_id': ref('view_chantier_rentabilite_list')}),
             (0, 0, {'view_mode': 'graph', 'view_id': ref('view_chantier_rentabilite_graph')}),

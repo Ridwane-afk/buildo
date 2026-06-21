@@ -50,6 +50,20 @@
               sequence="30"
               groups="group_chef_chantier"/>
 
+    <menuitem id="menu_photo"
+              name="Photos"
+              parent="menu_buildo_terrain"
+              action="action_chantier_photo"
+              sequence="40"
+              groups="group_chef_chantier"/>
+
+    <menuitem id="menu_plan"
+              name="Plans"
+              parent="menu_buildo_terrain"
+              action="action_chantier_plan"
+              sequence="50"
+              groups="group_chef_chantier"/>
+
     <!-- Stock -->
     <menuitem id="menu_buildo_stock"
               name="Stock"
@@ -81,32 +95,13 @@
               action="action_chantier_estimation_materiau"
               sequence="40"/>
 
-    <!-- Commercial -->
+    <!-- Commercial — modules natifs Ventes / Facturation / Achats -->
     <menuitem id="menu_buildo_commercial"
               name="Commercial"
               parent="menu_buildo_root"
               sequence="40"
               groups="group_service_administratif"/>
 
-    <menuitem id="menu_devis"
-              name="Devis"
-              parent="menu_buildo_commercial"
-              action="action_chantier_devis"
-              sequence="10"/>
-
-    <menuitem id="menu_facture"
-              name="Factures"
-              parent="menu_buildo_commercial"
-              action="action_chantier_facture"
-              sequence="20"/>
-
-    <menuitem id="menu_commande_fournisseur"
-              name="Commandes fournisseur"
-              parent="menu_buildo_commercial"
-              action="action_chantier_commande_fournisseur"
-              sequence="30"/>
-
-    <!-- Commercial : utilise les modules natifs Ventes / Facturation / Achats -->
     <menuitem id="menu_devis"
               name="Devis / Bons de commande"
               parent="menu_buildo_commercial"
@@ -130,21 +125,6 @@
               parent="menu_buildo_commercial"
               action="action_chantier_avenant"
               sequence="40"/>
-
-    <!-- Terrain — photos et plans -->
-    <menuitem id="menu_photo"
-              name="Photos"
-              parent="menu_buildo_terrain"
-              action="action_chantier_photo"
-              sequence="40"
-              groups="group_chef_chantier"/>
-
-    <menuitem id="menu_plan"
-              name="Plans"
-              parent="menu_buildo_terrain"
-              action="action_chantier_plan"
-              sequence="50"
-              groups="group_chef_chantier"/>
 
     <!-- Direction -->
     <menuitem id="menu_buildo_direction"

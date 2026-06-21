@@ -85,10 +85,12 @@ class ChantierChantier(models.Model):
                 ).mapped('amount_total')
             )
             rec.cout_reel = rec.cout_main_oeuvre + rec.cout_materiaux
-            # Factures clients payées (account.move)
+            # Factures clients encaissées ou partiellement encaissées (account.move)
+            # Inclut 'paid', 'in_payment' et déduit les avoirs (out_refund via amount_residual)
             rec.montant_facture = sum(
                 rec.facture_ids.filtered(
-                    lambda f: f.move_type == 'out_invoice' and f.payment_state == 'paid'
+                    lambda f: f.move_type == 'out_invoice'
+                    and f.payment_state in ('paid', 'in_payment', 'partial')
                 ).mapped('amount_total')
             )
             rec.marge = rec.montant_facture - rec.cout_reel
