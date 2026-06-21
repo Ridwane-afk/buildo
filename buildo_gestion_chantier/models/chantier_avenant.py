@@ -6,7 +6,7 @@ class ChantierAvenant(models.Model):
     _description = 'Avenant à un devis'
     _order = 'date desc, id desc'
 
-    name = fields.Char('Référence avenant', required=True)
+    name = fields.Char('Référence avenant', readonly=True, copy=False, default='Nouveau')
     devis_id = fields.Many2one('chantier.devis', 'Devis initial', required=True, ondelete='cascade')
     chantier_id = fields.Many2one('chantier.chantier', related='devis_id.chantier_id', readonly=True)
     date = fields.Date('Date', required=True, default=fields.Date.today)
@@ -19,6 +19,13 @@ class ChantierAvenant(models.Model):
         ('refuse', 'Refusé'),
     ], default='brouillon', string='État')
     note = fields.Text('Note')
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if vals.get('name', 'Nouveau') == 'Nouveau':
+                vals['name'] = self.env['ir.sequence'].next_by_code('chantier.avenant') or 'Nouveau'
+        return super().create(vals_list)
 
     def action_accepter(self):
         self.write({'state': 'accepte'})

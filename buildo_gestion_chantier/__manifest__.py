@@ -9,7 +9,7 @@ BUILDO — Gestion intégrée des chantiers du bâtiment
 Centralise la gestion des chantiers, des coûts, des heures prestées,
 des matériaux, de la facturation et de la rentabilité.
     """,
-    'author': 'Ridwane Afkir',
+    'author': 'Ridwane Afkir — ICC Bruxelles 2025-2026',
     'license': 'LGPL-3',
     'depends': ['base', 'mail', 'hr', 'stock', 'sale', 'account', 'purchase'],
     'data': [
@@ -28,6 +28,9 @@ des matériaux, de la facturation et de la rentabilité.
         'views/chantier_facture_views.xml',
         'views/chantier_commande_fournisseur_views.xml',
         'views/chantier_paiement_fss_views.xml',
+        'views/chantier_avenant_views.xml',
+        'views/chantier_photo_plan_views.xml',
+        'views/chantier_dashboard_views.xml',
         'views/menu_views.xml',
     ],
     'installable': True,

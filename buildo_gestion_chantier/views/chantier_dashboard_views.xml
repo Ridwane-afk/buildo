@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue liste avec indicateurs financiers complets (F23-F24) -->
+    <record id="view_chantier_rentabilite_list" model="ir.ui.view">
+        <field name="name">chantier.chantier.rentabilite.list</field>
+        <field name="model">chantier.chantier</field>
+        <field name="arch" type="xml">
+            <list string="Rentabilité des chantiers"
+                  decoration-success="marge &gt; 0"
+                  decoration-danger="marge &lt; 0">
+                <field name="ref"/>
+                <field name="name"/>
+                <field name="client_id"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'termine'"
+                       decoration-warning="state == 'en_cours'"/>
+                <field name="budget_initial" sum="Total budget"/>
+                <field name="cout_main_oeuvre" sum="Total M.O."/>
+                <field name="cout_materiaux" sum="Total matériaux"/>
+                <field name="cout_reel" sum="Total coût réel"/>
+                <field name="montant_facture" sum="Total facturé"/>
+                <field name="marge" sum="Marge totale"/>
+                <field name="avancement" widget="progressbar"/>
+                <field name="nb_heures"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue graphique rentabilité par chantier -->
+    <record id="view_chantier_rentabilite_graph" model="ir.ui.view">
+        <field name="name">chantier.chantier.rentabilite.graph</field>
+        <field name="model">chantier.chantier</field>
+        <field name="arch" type="xml">
+            <graph string="Rentabilité des chantiers" type="bar">
+                <field name="name"/>
+                <field name="marge" type="measure"/>
+                <field name="cout_reel" type="measure"/>
+                <field name="montant_facture" type="measure"/>
+                <field name="budget_initial" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Vue pivot budget vs coût réel (F24) -->
+    <record id="view_chantier_pivot" model="ir.ui.view">
+        <field name="name">chantier.chantier.pivot</field>
+        <field name="model">chantier.chantier</field>
+        <field name="arch" type="xml">
+            <pivot string="Analyse financière">
+                <field name="client_id" type="row"/>
+                <field name="state" type="col"/>
+                <field name="budget_initial" type="measure"/>
+                <field name="cout_reel" type="measure"/>
+                <field name="montant_facture" type="measure"/>
+                <field name="marge" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Action dashboard direction (F23-F25) -->
+    <record id="action_chantier_dashboard" model="ir.actions.act_window">
+        <field name="name">Tableau de bord — Rentabilité</field>
+        <field name="res_model">chantier.chantier</field>
+        <field name="view_mode">list,graph,pivot,kanban</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('view_chantier_rentabilite_list')}),
+            (0, 0, {'view_mode': 'graph', 'view_id': ref('view_chantier_rentabilite_graph')}),
+            (0, 0, {'view_mode': 'pivot', 'view_id': ref('view_chantier_pivot')}),
+        ]"/>
+        <field name="context">{'search_default_en_cours': 1}</field>
+    </record>
+
+    <!-- Vue liste heures avec filtres avancés -->
+    <record id="view_chantier_heure_search" model="ir.ui.view">
+        <field name="name">chantier.heure.prestee.search</field>
+        <field name="model">chantier.heure.prestee</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="chantier_id"/>
+                <field name="ouvrier_id"/>
+                <filter string="Validées" name="valide" domain="[('state','=','valide')]"/>
+                <filter string="En attente" name="soumis" domain="[('state','=','soumis')]"/>
+                <filter string="Refusées" name="refuse" domain="[('state','=','refuse')]"/>
+                <separator/>
+                <filter string="Ce mois" name="ce_mois"
+                        domain="[('date','&gt;=', (context_today()).strftime('%Y-%m-01'))]"/>
+                <group name="groupby">
+                    <filter string="Chantier" name="group_chantier" context="{'group_by':'chantier_id'}"/>
+                    <filter string="Ouvrier" name="group_ouvrier" context="{'group_by':'ouvrier_id'}"/>
+                    <filter string="Mois" name="group_mois" context="{'group_by':'date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Vue search chantiers avec filtres retard / en cours -->
+    <record id="view_chantier_chantier_search_v2" model="ir.ui.view">
+        <field name="name">chantier.chantier.search.v2</field>
+        <field name="model">chantier.chantier</field>
+        <field name="inherit_id" ref="view_chantier_chantier_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='termine']" position="after">
+                <separator/>
+                <filter string="En retard" name="en_retard"
+                        domain="[('date_fin_prevue','&lt;', context_today().strftime('%Y-%m-%d')),
+                                 ('state','=','en_cours')]"/>
+                <filter string="Budget dépassé" name="budget_depasse"
+                        domain="[('cout_reel','&gt;','budget_initial')]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Vue search factures impayées -->
+    <record id="view_chantier_facture_search" model="ir.ui.view">
+        <field name="name">chantier.facture.search</field>
+        <field name="model">chantier.facture</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="chantier_id"/>
+                <field name="client_id"/>
+                <filter string="Impayées" name="impayees"
+                        domain="[('state','in',['brouillon','envoyee'])]"/>
+                <filter string="En retard" name="en_retard"
+                        domain="[('date_echeance','&lt;', context_today().strftime('%Y-%m-%d')),
+                                 ('state','!=','payee')]"/>
+                <filter string="Payées" name="payees" domain="[('state','=','payee')]"/>
+                <group name="groupby">
+                    <filter string="Chantier" name="group_chantier" context="{'group_by':'chantier_id'}"/>
+                    <filter string="État" name="group_state" context="{'group_by':'state'}"/>
+                    <filter string="Mois" name="group_mois" context="{'group_by':'date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

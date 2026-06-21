@@ -106,6 +106,28 @@
               action="action_chantier_commande_fournisseur"
               sequence="30"/>
 
+    <!-- Commercial — avenants -->
+    <menuitem id="menu_avenant"
+              name="Avenants"
+              parent="menu_buildo_commercial"
+              action="action_chantier_avenant"
+              sequence="25"/>
+
+    <!-- Terrain — photos et plans -->
+    <menuitem id="menu_photo"
+              name="Photos"
+              parent="menu_buildo_terrain"
+              action="action_chantier_photo"
+              sequence="40"
+              groups="group_chef_chantier"/>
+
+    <menuitem id="menu_plan"
+              name="Plans"
+              parent="menu_buildo_terrain"
+              action="action_chantier_plan"
+              sequence="50"
+              groups="group_chef_chantier"/>
+
     <!-- Direction -->
     <menuitem id="menu_buildo_direction"
               name="Direction"
@@ -113,9 +135,15 @@
               sequence="50"
               groups="group_direction"/>
 
+    <menuitem id="menu_dashboard"
+              name="Tableau de bord"
+              parent="menu_buildo_direction"
+              action="action_chantier_dashboard"
+              sequence="10"/>
+
     <menuitem id="menu_paiement_fss"
               name="Paiements FSS"
               parent="menu_buildo_direction"
               action="action_chantier_paiement_fss"
-              sequence="10"/>
+              sequence="20"/>
 </odoo>
