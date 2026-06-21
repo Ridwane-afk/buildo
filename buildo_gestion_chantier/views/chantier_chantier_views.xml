@@ -130,47 +130,6 @@
                                 </list>
                             </field>
                         </page>
-                        <page string="Devis / Bons de commande">
-                            <field name="devis_ids">
-                                <list>
-                                    <field name="name"/>
-                                    <field name="date_order"/>
-                                    <field name="partner_id"/>
-                                    <field name="pourcentage_avancement"/>
-                                    <field name="amount_total"/>
-                                    <field name="state" widget="badge"
-                                           decoration-success="state == 'sale'"
-                                           decoration-warning="state == 'sent'"/>
-                                </list>
-                            </field>
-                        </page>
-                        <page string="Factures">
-                            <field name="facture_ids">
-                                <list>
-                                    <field name="name"/>
-                                    <field name="invoice_date"/>
-                                    <field name="invoice_date_due"/>
-                                    <field name="pourcentage_avancement"/>
-                                    <field name="amount_total"/>
-                                    <field name="payment_state" widget="badge"
-                                           decoration-success="payment_state == 'paid'"
-                                           decoration-warning="payment_state == 'partial'"/>
-                                </list>
-                            </field>
-                        </page>
-                        <page string="Commandes fournisseur">
-                            <field name="commande_fournisseur_ids">
-                                <list>
-                                    <field name="name"/>
-                                    <field name="partner_id"/>
-                                    <field name="date_order"/>
-                                    <field name="amount_total"/>
-                                    <field name="state" widget="badge"
-                                           decoration-success="state == 'purchase'"
-                                           decoration-warning="state == 'sent'"/>
-                                </list>
-                            </field>
-                        </page>
                         <page string="Demandes matériel">
                             <field name="demande_materiel_ids">
                                 <list>
