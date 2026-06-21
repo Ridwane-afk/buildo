@@ -33,24 +33,8 @@ access_chantier_estimation_materiau_chef,chantier.estimation.materiau chef,model
 access_chantier_estimation_outil_chef,chantier.estimation.outil chef,model_chantier_estimation_outil,group_chef_chantier,1,1,1,1
 access_chantier_attribution_outil_chef,chantier.attribution.outil chef,model_chantier_attribution_outil,group_chef_chantier,1,1,1,1
 
-access_chantier_devis_admin,chantier.devis admin,model_chantier_devis,group_service_administratif,1,1,1,1
-access_chantier_devis_direction,chantier.devis direction,model_chantier_devis,group_direction,1,1,0,0
-access_chantier_devis_ouvrier,chantier.devis ouvrier,model_chantier_devis,group_ouvrier,1,0,0,0
-
-access_chantier_devis_ligne_admin,chantier.devis.ligne admin,model_chantier_devis_ligne,group_service_administratif,1,1,1,1
-access_chantier_devis_ligne_ouvrier,chantier.devis.ligne ouvrier,model_chantier_devis_ligne,group_ouvrier,1,0,0,0
-
 access_chantier_avenant_admin,chantier.avenant admin,model_chantier_avenant,group_service_administratif,1,1,1,1
 access_chantier_avenant_ouvrier,chantier.avenant ouvrier,model_chantier_avenant,group_ouvrier,1,0,0,0
-
-access_chantier_facture_admin,chantier.facture admin,model_chantier_facture,group_service_administratif,1,1,1,1
-access_chantier_facture_direction,chantier.facture direction,model_chantier_facture,group_direction,1,1,0,0
-access_chantier_facture_ouvrier,chantier.facture ouvrier,model_chantier_facture,group_ouvrier,1,0,0,0
-
-access_chantier_commande_fournisseur_admin,chantier.commande.fournisseur admin,model_chantier_commande_fournisseur,group_service_administratif,1,1,1,1
-access_chantier_commande_fournisseur_chef,chantier.commande.fournisseur chef,model_chantier_commande_fournisseur,group_chef_chantier,1,1,1,0
-access_chantier_commande_fournisseur_ligne_admin,chantier.commande.fournisseur.ligne admin,model_chantier_commande_fournisseur_ligne,group_service_administratif,1,1,1,1
-access_chantier_commande_fournisseur_ligne_chef,chantier.commande.fournisseur.ligne chef,model_chantier_commande_fournisseur_ligne,group_chef_chantier,1,1,1,0
 
 access_chantier_paiement_fss_direction,chantier.paiement.fss direction,model_chantier_paiement_fss,group_direction,1,1,1,1
 access_chantier_paiement_fss_admin,chantier.paiement.fss admin,model_chantier_paiement_fss,group_service_administratif,1,1,1,0

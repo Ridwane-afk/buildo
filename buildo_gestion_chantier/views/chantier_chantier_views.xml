@@ -19,6 +19,21 @@
                            statusbar_visible="brouillon,en_cours,termine"/>
                 </header>
                 <sheet>
+                    <!-- Smart buttons -->
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_devis" type="object" class="oe_stat_button"
+                                icon="fa-file-text-o">
+                            <field name="devis_ids" widget="statinfo" string="Devis"/>
+                        </button>
+                        <button name="action_view_factures" type="object" class="oe_stat_button"
+                                icon="fa-pencil-square-o">
+                            <field name="facture_ids" widget="statinfo" string="Factures"/>
+                        </button>
+                        <button name="action_view_commandes" type="object" class="oe_stat_button"
+                                icon="fa-shopping-cart">
+                            <field name="commande_fournisseur_ids" widget="statinfo" string="Achats"/>
+                        </button>
+                    </div>
                     <div class="oe_title">
                         <label for="name"/>
                         <h1><field name="name" placeholder="Nom du chantier..."/></h1>
@@ -115,13 +130,17 @@
                                 </list>
                             </field>
                         </page>
-                        <page string="Devis">
+                        <page string="Devis / Bons de commande">
                             <field name="devis_ids">
                                 <list>
                                     <field name="name"/>
-                                    <field name="date"/>
-                                    <field name="montant_ttc"/>
-                                    <field name="state"/>
+                                    <field name="date_order"/>
+                                    <field name="partner_id"/>
+                                    <field name="pourcentage_avancement"/>
+                                    <field name="amount_total"/>
+                                    <field name="state" widget="badge"
+                                           decoration-success="state == 'sale'"
+                                           decoration-warning="state == 'sent'"/>
                                 </list>
                             </field>
                         </page>
@@ -129,10 +148,13 @@
                             <field name="facture_ids">
                                 <list>
                                     <field name="name"/>
-                                    <field name="date"/>
-                                    <field name="type_facture"/>
-                                    <field name="montant_total"/>
-                                    <field name="state"/>
+                                    <field name="invoice_date"/>
+                                    <field name="invoice_date_due"/>
+                                    <field name="pourcentage_avancement"/>
+                                    <field name="amount_total"/>
+                                    <field name="payment_state" widget="badge"
+                                           decoration-success="payment_state == 'paid'"
+                                           decoration-warning="payment_state == 'partial'"/>
                                 </list>
                             </field>
                         </page>
@@ -140,10 +162,12 @@
                             <field name="commande_fournisseur_ids">
                                 <list>
                                     <field name="name"/>
-                                    <field name="fournisseur_id"/>
-                                    <field name="date"/>
-                                    <field name="montant_total"/>
-                                    <field name="state"/>
+                                    <field name="partner_id"/>
+                                    <field name="date_order"/>
+                                    <field name="amount_total"/>
+                                    <field name="state" widget="badge"
+                                           decoration-success="state == 'purchase'"
+                                           decoration-warning="state == 'sent'"/>
                                 </list>
                             </field>
                         </page>

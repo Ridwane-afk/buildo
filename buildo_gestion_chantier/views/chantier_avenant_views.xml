@@ -20,7 +20,7 @@
                     </div>
                     <group>
                         <group>
-                            <field name="devis_id"/>
+                            <field name="sale_order_id"/>
                             <field name="chantier_id"/>
                             <field name="date"/>
                         </group>
@@ -45,7 +45,7 @@
             <list string="Avenants" decoration-success="state == 'accepte'"
                   decoration-danger="state == 'refuse'">
                 <field name="name"/>
-                <field name="devis_id"/>
+                <field name="sale_order_id"/>
                 <field name="chantier_id"/>
                 <field name="date"/>
                 <field name="motif"/>

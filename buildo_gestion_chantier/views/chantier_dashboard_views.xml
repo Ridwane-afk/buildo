@@ -105,31 +105,24 @@
                         domain="[('date_fin_prevue','&lt;', context_today().strftime('%Y-%m-%d')),
                                  ('state','=','en_cours')]"/>
                 <filter string="Budget dépassé" name="budget_depasse"
-                        domain="[('cout_reel','&gt;','budget_initial')]"/>
+                        domain="[('marge','&lt;', 0)]"/>
             </xpath>
         </field>
     </record>
 
-    <!-- Vue search factures impayées -->
-    <record id="view_chantier_facture_search" model="ir.ui.view">
-        <field name="name">chantier.facture.search</field>
-        <field name="model">chantier.facture</field>
+    <!-- Vue search factures chantier (account.move) -->
+    <record id="view_account_move_chantier_search" model="ir.ui.view">
+        <field name="name">account.move.chantier.search</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter"/>
         <field name="arch" type="xml">
-            <search>
+            <xpath expr="//search" position="inside">
                 <field name="chantier_id"/>
-                <field name="client_id"/>
-                <filter string="Impayées" name="impayees"
-                        domain="[('state','in',['brouillon','envoyee'])]"/>
-                <filter string="En retard" name="en_retard"
-                        domain="[('date_echeance','&lt;', context_today().strftime('%Y-%m-%d')),
-                                 ('state','!=','payee')]"/>
-                <filter string="Payées" name="payees" domain="[('state','=','payee')]"/>
-                <group name="groupby">
-                    <filter string="Chantier" name="group_chantier" context="{'group_by':'chantier_id'}"/>
-                    <filter string="État" name="group_state" context="{'group_by':'state'}"/>
-                    <filter string="Mois" name="group_mois" context="{'group_by':'date:month'}"/>
-                </group>
-            </search>
+                <filter string="Impayées" name="impayees_chantier"
+                        domain="[('chantier_id','!=',False),('payment_state','in',['not_paid','partial'])]"/>
+                <filter string="Payées" name="payees_chantier"
+                        domain="[('chantier_id','!=',False),('payment_state','=','paid')]"/>
+            </xpath>
         </field>
     </record>
 </odoo>

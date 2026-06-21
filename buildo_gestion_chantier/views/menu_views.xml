@@ -106,12 +106,30 @@
               action="action_chantier_commande_fournisseur"
               sequence="30"/>
 
-    <!-- Commercial — avenants -->
+    <!-- Commercial : utilise les modules natifs Ventes / Facturation / Achats -->
+    <menuitem id="menu_devis"
+              name="Devis / Bons de commande"
+              parent="menu_buildo_commercial"
+              action="action_sale_order_chantier"
+              sequence="10"/>
+
+    <menuitem id="menu_facture"
+              name="Factures"
+              parent="menu_buildo_commercial"
+              action="action_account_move_chantier"
+              sequence="20"/>
+
+    <menuitem id="menu_commande_fournisseur"
+              name="Commandes fournisseur"
+              parent="menu_buildo_commercial"
+              action="action_purchase_order_chantier"
+              sequence="30"/>
+
     <menuitem id="menu_avenant"
               name="Avenants"
               parent="menu_buildo_commercial"
               action="action_chantier_avenant"
-              sequence="25"/>
+              sequence="40"/>
 
     <!-- Terrain — photos et plans -->
     <menuitem id="menu_photo"

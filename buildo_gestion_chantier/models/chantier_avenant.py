@@ -7,8 +7,8 @@ class ChantierAvenant(models.Model):
     _order = 'date desc, id desc'
 
     name = fields.Char('Référence avenant', readonly=True, copy=False, default='Nouveau')
-    devis_id = fields.Many2one('chantier.devis', 'Devis initial', required=True, ondelete='cascade')
-    chantier_id = fields.Many2one('chantier.chantier', related='devis_id.chantier_id', readonly=True)
+    sale_order_id = fields.Many2one('sale.order', 'Bon de commande', required=True, ondelete='cascade')
+    chantier_id = fields.Many2one('chantier.chantier', related='sale_order_id.chantier_id', readonly=True, store=True)
     date = fields.Date('Date', required=True, default=fields.Date.today)
     motif = fields.Text('Motif de la modification', required=True)
     montant_ht = fields.Monetary('Montant HT de l\'avenant', currency_field='currency_id')

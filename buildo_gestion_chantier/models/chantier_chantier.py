@@ -37,9 +37,10 @@ class ChantierChantier(models.Model):
     estimation_materiau_ids = fields.One2many('chantier.estimation.materiau', 'chantier_id', 'Estimations matériaux')
     estimation_outil_ids = fields.One2many('chantier.estimation.outil', 'chantier_id', 'Estimations outils')
     attribution_outil_ids = fields.One2many('chantier.attribution.outil', 'chantier_id', 'Attributions outils')
-    devis_ids = fields.One2many('chantier.devis', 'chantier_id', 'Devis')
-    facture_ids = fields.One2many('chantier.facture', 'chantier_id', 'Factures')
-    commande_fournisseur_ids = fields.One2many('chantier.commande.fournisseur', 'chantier_id', 'Commandes fournisseur')
+    devis_ids = fields.One2many('sale.order', 'chantier_id', 'Devis / Bons de commande')
+    facture_ids = fields.One2many('account.move', 'chantier_id', 'Factures',
+                                  domain=[('move_type', '=', 'out_invoice')])
+    commande_fournisseur_ids = fields.One2many('purchase.order', 'chantier_id', 'Commandes fournisseur')
     paiement_fss_ids = fields.One2many('chantier.paiement.fss', 'chantier_id', 'Paiements FSS')
 
     cout_reel = fields.Monetary('Coût réel', compute='_compute_financier', currency_field='currency_id', store=True)
@@ -70,19 +71,25 @@ class ChantierChantier(models.Model):
         return super().create(vals_list)
 
     @api.depends('heure_prestee_ids.montant', 'heure_prestee_ids.state',
-                 'commande_fournisseur_ids.montant_total', 'commande_fournisseur_ids.state',
-                 'facture_ids.montant_total', 'facture_ids.state')
+                 'commande_fournisseur_ids.amount_total', 'commande_fournisseur_ids.state',
+                 'facture_ids.amount_total', 'facture_ids.payment_state', 'facture_ids.move_type')
     def _compute_financier(self):
         for rec in self:
             rec.cout_main_oeuvre = sum(
                 rec.heure_prestee_ids.filtered(lambda h: h.state == 'valide').mapped('montant')
             )
+            # Commandes fournisseur confirmées ou reçues (purchase.order)
             rec.cout_materiaux = sum(
-                rec.commande_fournisseur_ids.filtered(lambda c: c.state == 'recu').mapped('montant_total')
+                rec.commande_fournisseur_ids.filtered(
+                    lambda c: c.state in ('purchase', 'done')
+                ).mapped('amount_total')
             )
             rec.cout_reel = rec.cout_main_oeuvre + rec.cout_materiaux
+            # Factures clients payées (account.move)
             rec.montant_facture = sum(
-                rec.facture_ids.filtered(lambda f: f.state == 'payee').mapped('montant_total')
+                rec.facture_ids.filtered(
+                    lambda f: f.move_type == 'out_invoice' and f.payment_state == 'paid'
+                ).mapped('amount_total')
             )
             rec.marge = rec.montant_facture - rec.cout_reel
 
@@ -102,6 +109,37 @@ class ChantierChantier(models.Model):
             else:
                 nb_fait = len(taches.filtered(lambda t: t.state == 'fait'))
                 rec.avancement = (nb_fait / len(taches)) * 100
+
+    def action_view_devis(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Devis / Bons de commande',
+            'res_model': 'sale.order',
+            'view_mode': 'list,form',
+            'domain': [('chantier_id', '=', self.id)],
+            'context': {'default_chantier_id': self.id, 'default_partner_id': self.client_id.id},
+        }
+
+    def action_view_factures(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Factures',
+            'res_model': 'account.move',
+            'view_mode': 'list,form',
+            'domain': [('chantier_id', '=', self.id), ('move_type', '=', 'out_invoice')],
+            'context': {'default_chantier_id': self.id, 'default_move_type': 'out_invoice',
+                        'default_partner_id': self.client_id.id},
+        }
+
+    def action_view_commandes(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Commandes fournisseur',
+            'res_model': 'purchase.order',
+            'view_mode': 'list,form',
+            'domain': [('chantier_id', '=', self.id)],
+            'context': {'default_chantier_id': self.id},
+        }
 
     def action_start(self):
         self.write({'state': 'en_cours'})

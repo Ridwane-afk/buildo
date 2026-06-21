@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Ajout chantier_id sur le formulaire de commande fournisseur -->
+    <record id="view_purchase_order_form_chantier" model="ir.ui.view">
+        <field name="name">purchase.order.form.chantier</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="chantier_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Ajout chantier_id sur la liste des commandes fournisseur -->
+    <record id="view_purchase_order_list_chantier" model="ir.ui.view">
+        <field name="name">purchase.order.list.chantier</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="chantier_id" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Action : commandes fournisseur liées aux chantiers -->
+    <record id="action_purchase_order_chantier" model="ir.actions.act_window">
+        <field name="name">Commandes fournisseur</field>
+        <field name="res_model">purchase.order</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('chantier_id', '!=', False)]</field>
+    </record>
+</odoo>

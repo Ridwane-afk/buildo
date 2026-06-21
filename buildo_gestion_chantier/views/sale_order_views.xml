@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Ajout chantier_id sur le formulaire de devis/bon de commande -->
+    <record id="view_sale_order_form_chantier" model="ir.ui.view">
+        <field name="name">sale.order.form.chantier</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="chantier_id"/>
+                <field name="pourcentage_avancement"
+                       invisible="not chantier_id"
+                       string="Avancement facturé (%)"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Ajout chantier_id sur la liste des devis -->
+    <record id="view_sale_order_list_chantier" model="ir.ui.view">
+        <field name="name">sale.order.list.chantier</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="chantier_id" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Onglet avenants dans le bon de commande -->
+    <record id="view_sale_order_avenant_tab" model="ir.ui.view">
+        <field name="name">sale.order.avenant.tab</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Avenants" invisible="not chantier_id">
+                    <field name="avenant_ids">
+                        <list editable="bottom">
+                            <field name="name" readonly="1"/>
+                            <field name="date"/>
+                            <field name="motif"/>
+                            <field name="montant_ht"/>
+                            <field name="state" widget="badge"
+                                   decoration-success="state == 'accepte'"
+                                   decoration-danger="state == 'refuse'"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Action : devis liés à un chantier -->
+    <record id="action_sale_order_chantier" model="ir.actions.act_window">
+        <field name="name">Devis / Bons de commande</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('chantier_id', '!=', False)]</field>
+        <field name="context">{'search_default_group_by_chantier': 1}</field>
+    </record>
+</odoo>
