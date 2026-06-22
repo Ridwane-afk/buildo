@@ -5,4 +5,5 @@ __pycache__/
 *.log
 dum/
 dum.zip
-ressourses/
+ressource/
+*.md
