@@ -156,11 +156,10 @@ class ChantierChantier(models.Model):
         self.write({'state': 'brouillon'})
 
     def action_ouvrir_assistant(self):
-        wizard = self.env['chantier.assistant.ia'].create({'chantier_id': self.id})
         return {
             'type': 'ir.actions.act_window',
             'res_model': 'chantier.assistant.ia',
-            'res_id': wizard.id,
             'view_mode': 'form',
             'target': 'new',
+            'context': {'default_chantier_id': self.id},
         }
