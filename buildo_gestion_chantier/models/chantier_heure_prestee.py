@@ -5,6 +5,7 @@ from odoo.exceptions import ValidationError
 class ChantierHeurePrestee(models.Model):
     _name = 'chantier.heure.prestee'
     _description = "Heures prestées par un ouvrier sur un chantier"
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _order = 'date desc, id desc'
 
     chantier_id = fields.Many2one('chantier.chantier', 'Chantier', required=True, ondelete='cascade')
@@ -20,7 +21,7 @@ class ChantierHeurePrestee(models.Model):
         ('soumis', 'Soumis'),
         ('valide', 'Validé'),
         ('refuse', 'Refusé'),
-    ], default='brouillon', string='État')
+    ], default='brouillon', string='État', tracking=True)
     validateur_id = fields.Many2one('res.users', 'Validé par', readonly=True)
     note_refus = fields.Text('Motif du refus')
 

@@ -38,6 +38,7 @@
                            placeholder="Motif du refus..."/>
                     <field name="validateur_id" invisible="state != 'valide'" readonly="1"/>
                 </sheet>
+                <chatter/>
             </form>
         </field>
     </record>
