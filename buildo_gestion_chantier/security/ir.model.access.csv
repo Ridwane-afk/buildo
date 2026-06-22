@@ -42,3 +42,6 @@ access_chantier_avenant_ouvrier,chantier.avenant ouvrier,model_chantier_avenant,
 
 access_chantier_paiement_fss_direction,chantier.paiement.fss direction,model_chantier_paiement_fss,group_direction,1,1,1,1
 access_chantier_paiement_fss_admin,chantier.paiement.fss admin,model_chantier_paiement_fss,group_service_administratif,1,1,1,0
+
+access_chantier_wizard_refus,chantier.wizard.refus,model_chantier_wizard_refus,group_chef_chantier,1,1,1,1
+access_chantier_assistant_ia,chantier.assistant.ia,model_chantier_assistant_ia,group_ouvrier,1,1,1,1

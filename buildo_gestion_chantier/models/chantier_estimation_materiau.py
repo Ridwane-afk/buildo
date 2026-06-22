@@ -1,5 +1,5 @@
 from odoo import models, fields, api
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, UserError
 
 
 class ChantierEstimationMateriau(models.Model):
@@ -38,19 +38,24 @@ class ChantierEstimationMateriau(models.Model):
             rec.quantite_manquante = manquant if manquant > 0 else 0.0
 
     def action_generer_commande(self):
-        """Génère une purchase.order pour les matériaux manquants (F15)."""
-        lignes_manquantes = self.filtered(lambda r: r.quantite_manquante > 0)
-        if not lignes_manquantes:
-            return
-        chantier = lignes_manquantes[0].chantier_id
+        lignes = self.filtered(
+            lambda r: r.quantite_manquante > 0 and r.materiau_id.product_id
+        )
+        if not lignes:
+            raise UserError(
+                "Aucune ligne avec stock insuffisant et produit Odoo lié. "
+                "Associez un produit Odoo à chaque matériau pour générer une commande."
+            )
+        chantier = lignes[0].chantier_id
         po = self.env['purchase.order'].create({
             'chantier_id': chantier.id,
             'order_line': [(0, 0, {
+                'product_id': ligne.materiau_id.product_id.id,
                 'name': ligne.materiau_id.name,
                 'product_qty': ligne.quantite_manquante,
                 'price_unit': ligne.prix_unitaire,
                 'date_planned': fields.Datetime.now(),
-            }) for ligne in lignes_manquantes],
+            }) for ligne in lignes],
         })
         return {
             'type': 'ir.actions.act_window',

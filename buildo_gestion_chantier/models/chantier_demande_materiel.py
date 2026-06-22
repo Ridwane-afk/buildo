@@ -39,7 +39,13 @@ class ChantierDemandeMateriel(models.Model):
         self.write({'state': 'valide', 'validateur_id': self.env.user.id})
 
     def action_refuser(self):
-        self.write({'state': 'refuse'})
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'chantier.wizard.refus',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {'active_model': self._name, 'active_ids': self.ids},
+        }
 
     def action_reset(self):
         self.write({'state': 'brouillon', 'validateur_id': False})

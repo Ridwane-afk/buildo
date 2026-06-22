@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_chantier_wizard_refus_form" model="ir.ui.view">
+        <field name="name">chantier.wizard.refus.form</field>
+        <field name="model">chantier.wizard.refus</field>
+        <field name="arch" type="xml">
+            <form string="Motif du refus">
+                <group>
+                    <field name="motif" placeholder="Décrivez le motif du refus (10 caractères minimum)..."/>
+                </group>
+                <footer>
+                    <button name="action_confirmer" string="Confirmer le refus"
+                            type="object" class="btn-danger"/>
+                    <button string="Annuler" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

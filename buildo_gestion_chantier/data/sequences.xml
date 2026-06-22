@@ -8,30 +8,6 @@
         <field name="company_id" eval="False"/>
     </record>
 
-    <record id="seq_chantier_devis" model="ir.sequence">
-        <field name="name">Devis chantier</field>
-        <field name="code">chantier.devis</field>
-        <field name="prefix">DEV/%(year)s/</field>
-        <field name="padding">4</field>
-        <field name="company_id" eval="False"/>
-    </record>
-
-    <record id="seq_chantier_facture" model="ir.sequence">
-        <field name="name">Facture chantier</field>
-        <field name="code">chantier.facture</field>
-        <field name="prefix">FAC/%(year)s/</field>
-        <field name="padding">4</field>
-        <field name="company_id" eval="False"/>
-    </record>
-
-    <record id="seq_chantier_commande_fournisseur" model="ir.sequence">
-        <field name="name">Commande fournisseur chantier</field>
-        <field name="code">chantier.commande.fournisseur</field>
-        <field name="prefix">CMD/%(year)s/</field>
-        <field name="padding">4</field>
-        <field name="company_id" eval="False"/>
-    </record>
-
     <record id="seq_chantier_avenant" model="ir.sequence">
         <field name="name">Avenant chantier</field>
         <field name="code">chantier.avenant</field>

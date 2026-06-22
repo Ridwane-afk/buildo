@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_chantier_assistant_ia_form" model="ir.ui.view">
+        <field name="name">chantier.assistant.ia.form</field>
+        <field name="model">chantier.assistant.ia</field>
+        <field name="arch" type="xml">
+            <form string="Assistant IA — Chantier">
+                <sheet>
+                    <group string="Votre question">
+                        <field name="question" nolabel="1" colspan="2"
+                               placeholder="Décrivez le problème ou posez votre question..."/>
+                    </group>
+                    <group string="Photo du problème (optionnel)">
+                        <field name="image" widget="image" nolabel="1"
+                               options="{'size': [480, 360]}"
+                               colspan="2"/>
+                        <field name="image_name" invisible="1"/>
+                    </group>
+                    <group string="Réponse de l'assistant" invisible="not reponse">
+                        <field name="reponse" nolabel="1" colspan="2"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_analyser" string="Analyser"
+                            type="object" class="btn-primary"/>
+                    <button string="Fermer" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

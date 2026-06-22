@@ -7,6 +7,7 @@
             <list string="Matériaux" decoration-danger="stock_disponible &lt;= seuil_alerte">
                 <field name="name"/>
                 <field name="ref_interne"/>
+                <field name="product_id"/>
                 <field name="categorie"/>
                 <field name="unite"/>
                 <field name="prix_unitaire"/>
@@ -23,18 +24,20 @@
             <form string="Matériau">
                 <sheet>
                     <group>
-                        <group>
+                        <group string="Identification">
                             <field name="name"/>
                             <field name="ref_interne"/>
                             <field name="categorie"/>
                             <field name="unite"/>
+                            <field name="actif"/>
                         </group>
-                        <group>
+                        <group string="Stock et prix">
+                            <field name="product_id"/>
                             <field name="prix_unitaire"/>
                             <field name="currency_id" invisible="1"/>
-                            <field name="stock_disponible"/>
+                            <field name="stock_disponible"
+                                   readonly="product_id != False"/>
                             <field name="seuil_alerte"/>
-                            <field name="actif"/>
                         </group>
                     </group>
                     <field name="description" placeholder="Description..."/>

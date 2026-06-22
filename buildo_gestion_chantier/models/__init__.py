@@ -13,6 +13,8 @@ from . import (
     chantier_attribution_outil,
     chantier_avenant,
     chantier_paiement_fss,
+    chantier_wizard_refus,
+    chantier_assistant_ia,
     sale_order_chantier,
     account_move_chantier,
     purchase_order_chantier,

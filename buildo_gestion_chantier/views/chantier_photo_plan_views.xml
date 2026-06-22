@@ -48,6 +48,7 @@
                 <templates>
                     <t t-name="card">
                         <img t-att-src="kanban_image('chantier.photo', 'image', record.id.value)"
+                             t-att-alt="record.name.value"
                              style="max-height:150px; object-fit:cover; width:100%; border-radius:4px;"/>
                         <div class="p-2">
                             <strong><field name="name"/></strong>
