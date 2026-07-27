@@ -46,8 +46,20 @@ class ChantierEstimationMateriau(models.Model):
                 "Aucune ligne avec stock insuffisant et produit Odoo lié. "
                 "Associez un produit Odoo à chaque matériau pour générer une commande."
             )
+        partner = None
+        for ligne in lignes:
+            sellers = ligne.materiau_id.product_id.seller_ids
+            if sellers:
+                partner = sellers[0].partner_id
+                break
+        if not partner:
+            raise UserError(
+                "Aucun fournisseur configuré sur ces produits. "
+                "Allez dans la fiche du produit (onglet Achat) et ajoutez un fournisseur."
+            )
         chantier = lignes[0].chantier_id
         po = self.env['purchase.order'].create({
+            'partner_id': partner.id,
             'chantier_id': chantier.id,
             'order_line': [(0, 0, {
                 'product_id': ligne.materiau_id.product_id.id,
