@@ -61,10 +61,37 @@
         </field>
     </record>
 
+    <record id="view_chantier_photo_search" model="ir.ui.view">
+        <field name="name">chantier.photo.search</field>
+        <field name="model">chantier.photo</field>
+        <field name="arch" type="xml">
+            <search string="Rechercher une photo">
+                <field name="name" string="Titre"/>
+                <field name="chantier_id"/>
+                <field name="auteur_id"/>
+                <separator/>
+                <filter string="Aujourd'hui" name="aujourd_hui"
+                        domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter string="Cette semaine" name="cette_semaine"
+                        domain="[('date', '&gt;=', (context_today() + relativedelta(weekday=0, days=-6)).strftime('%Y-%m-%d')),
+                                  ('date', '&lt;=', (context_today() + relativedelta(weekday=6, days=0)).strftime('%Y-%m-%d'))]"/>
+                <filter string="Ce mois" name="ce_mois"
+                        domain="[('date', '&gt;=', context_today().strftime('%Y-%m-01')),
+                                  ('date', '&lt;', (context_today() + relativedelta(months=1)).strftime('%Y-%m-01'))]"/>
+                <group name="groupby">
+                    <filter string="Chantier" name="group_chantier" context="{'group_by': 'chantier_id'}"/>
+                    <filter string="Auteur" name="group_auteur" context="{'group_by': 'auteur_id'}"/>
+                    <filter string="Mois" name="group_mois" context="{'group_by': 'date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
     <record id="action_chantier_photo" model="ir.actions.act_window">
         <field name="name">Photos</field>
         <field name="res_model">chantier.photo</field>
         <field name="view_mode">kanban,list,form</field>
+        <field name="search_view_id" ref="view_chantier_photo_search"/>
     </record>
 
     <!-- ─── PLANS ─── -->
