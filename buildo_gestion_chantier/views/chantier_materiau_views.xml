@@ -46,10 +46,38 @@
         </field>
     </record>
 
+    <record id="view_chantier_materiau_search" model="ir.ui.view">
+        <field name="name">chantier.materiau.search</field>
+        <field name="model">chantier.materiau</field>
+        <field name="arch" type="xml">
+            <search string="Rechercher un matériau">
+                <field name="name" string="Nom"/>
+                <field name="ref_interne"/>
+                <field name="product_id"/>
+                <field name="categorie"/>
+                <field name="unite"/>
+                <separator/>
+                <filter string="Sous le seuil d'alerte" name="sous_seuil" domain="[('en_alerte', '=', True)]"/>
+                <filter string="En rupture" name="rupture" domain="[('stock_disponible', '&lt;=', 0)]"/>
+                <separator/>
+                <filter string="Lié à un produit" name="avec_produit" domain="[('product_id', '!=', False)]"/>
+                <filter string="Sans produit lié" name="sans_produit" domain="[('product_id', '=', False)]"/>
+                <separator/>
+                <filter string="Archivés" name="archives" domain="[('actif', '=', False)]"/>
+                <group name="groupby">
+                    <filter string="Catégorie" name="group_categorie" context="{'group_by': 'categorie'}"/>
+                    <filter string="Unité" name="group_unite" context="{'group_by': 'unite'}"/>
+                    <filter string="Produit lié" name="group_produit" context="{'group_by': 'product_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
     <record id="action_chantier_materiau" model="ir.actions.act_window">
         <field name="name">Matériaux</field>
         <field name="res_model">chantier.materiau</field>
         <field name="view_mode">list,form</field>
         <field name="domain">[('actif', '=', True)]</field>
+        <field name="search_view_id" ref="view_chantier_materiau_search"/>
     </record>
 </odoo>

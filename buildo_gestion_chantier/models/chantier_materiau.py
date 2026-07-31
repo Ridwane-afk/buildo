@@ -45,9 +45,19 @@ class ChantierMateriau(models.Model):
     seuil_alerte = fields.Float('Seuil d\'alerte stock')
     description = fields.Text('Description')
     actif = fields.Boolean('Actif', default=True)
+    en_alerte = fields.Boolean(
+        'Sous le seuil d\'alerte',
+        compute='_compute_en_alerte',
+        store=True,
+    )
 
     @api.depends('product_id', 'product_id.qty_available')
     def _compute_stock_disponible(self):
         for rec in self:
             if rec.product_id:
                 rec.stock_disponible = rec.product_id.qty_available
+
+    @api.depends('stock_disponible', 'seuil_alerte')
+    def _compute_en_alerte(self):
+        for rec in self:
+            rec.en_alerte = rec.stock_disponible <= rec.seuil_alerte
