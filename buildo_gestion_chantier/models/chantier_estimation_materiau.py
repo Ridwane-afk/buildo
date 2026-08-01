@@ -19,6 +19,7 @@ class ChantierEstimationMateriau(models.Model):
     stock_disponible = fields.Float('Stock disponible', related='materiau_id.stock_disponible', readonly=True)
     quantite_manquante = fields.Float('Quantité manquante', compute='_compute_manquant', store=True)
     note = fields.Text('Note')
+    produit_id = fields.Many2one('product.product', 'Produit Odoo', related='materiau_id.product_id', store=True)
 
     @api.constrains('quantite_estimee')
     def _check_quantite(self):
@@ -46,32 +47,57 @@ class ChantierEstimationMateriau(models.Model):
                 "Aucune ligne avec stock insuffisant et produit Odoo lié. "
                 "Associez un produit Odoo à chaque matériau pour générer une commande."
             )
+        chantier = lignes[0].chantier_id
         partner = None
         for ligne in lignes:
             sellers = ligne.materiau_id.product_id.seller_ids
             if sellers:
                 partner = sellers[0].partner_id
                 break
-        if not partner:
-            raise UserError(
-                "Aucun fournisseur configuré sur ces produits. "
-                "Allez dans la fiche du produit (onglet Achat) et ajoutez un fournisseur."
-            )
-        chantier = lignes[0].chantier_id
-        po = self.env['purchase.order'].create({
-            'partner_id': partner.id,
-            'chantier_id': chantier.id,
-            'order_line': [(0, 0, {
-                'product_id': ligne.materiau_id.product_id.id,
-                'name': ligne.materiau_id.name,
-                'product_qty': ligne.quantite_manquante,
-                'price_unit': ligne.prix_unitaire,
-                'date_planned': fields.Datetime.now(),
-            }) for ligne in lignes],
-        })
+
+        order_line_vals = [(0, 0, {
+            'product_id': ligne.materiau_id.product_id.id,
+            'name': ligne.materiau_id.name,
+            'product_qty': ligne.quantite_manquante,
+            'price_unit': ligne.prix_unitaire,
+            'date_planned': fields.Datetime.now(),
+        }) for ligne in lignes]
+
+        if partner:
+            po = self.env['purchase.order'].create({
+                'partner_id': partner.id,
+                'chantier_id': chantier.id,
+                'order_line': order_line_vals,
+            })
+            return {
+                'type': 'ir.actions.act_window',
+                'res_model': 'purchase.order',
+                'res_id': po.id,
+                'view_mode': 'form',
+            }
+
+        # Pas de fournisseur connu pour ces produits : on ouvre une commande
+        # vierge pré-remplie, l'utilisateur choisit le fournisseur en la
+        # validant. Ce fournisseur est ensuite mémorisé sur les produits
+        # (voir purchase_order_chantier.py) pour les prochaines commandes.
         return {
             'type': 'ir.actions.act_window',
             'res_model': 'purchase.order',
-            'res_id': po.id,
+            'view_mode': 'form',
+            'target': 'current',
+            'context': {
+                'default_chantier_id': chantier.id,
+                'default_order_line': order_line_vals,
+            },
+        }
+
+    def action_voir_produit(self):
+        self.ensure_one()
+        if not self.produit_id:
+            raise UserError("Aucun produit Odoo lié à ce matériau.")
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'product.product',
+            'res_id': self.produit_id.id,
             'view_mode': 'form',
         }

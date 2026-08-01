@@ -13,7 +13,30 @@
                 <field name="stock_disponible"/>
                 <field name="quantite_manquante"/>
                 <field name="montant_estime" sum="Total estimé"/>
+                <field name="produit_id" column_invisible="1"/>
+                <button name="action_voir_produit" string="Produit" type="object"
+                        invisible="not produit_id" class="btn-sm btn-link"/>
+                <button name="action_generer_commande" string="Commander" type="object"
+                        invisible="quantite_manquante &lt;= 0" class="btn-sm btn-secondary"/>
             </list>
+        </field>
+    </record>
+
+    <record id="view_chantier_estimation_materiau_search" model="ir.ui.view">
+        <field name="name">chantier.estimation.materiau.search</field>
+        <field name="model">chantier.estimation.materiau</field>
+        <field name="arch" type="xml">
+            <search string="Rechercher une estimation">
+                <field name="chantier_id"/>
+                <field name="materiau_id"/>
+                <separator/>
+                <filter string="Manquant" name="manquant" domain="[('quantite_manquante', '&gt;', 0)]"/>
+                <filter string="Stock suffisant" name="stock_suffisant" domain="[('quantite_manquante', '=', 0)]"/>
+                <group name="groupby">
+                    <filter string="Chantier" name="group_chantier" context="{'group_by': 'chantier_id'}"/>
+                    <filter string="Matériau" name="group_materiau" context="{'group_by': 'materiau_id'}"/>
+                </group>
+            </search>
         </field>
     </record>
 
@@ -21,6 +44,7 @@
         <field name="name">Estimations matériaux</field>
         <field name="res_model">chantier.estimation.materiau</field>
         <field name="view_mode">list</field>
+        <field name="search_view_id" ref="view_chantier_estimation_materiau_search"/>
     </record>
 
     <!-- Attribution outils -->
