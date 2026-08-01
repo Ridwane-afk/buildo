@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields, api
 
 
 class ChantierOutil(models.Model):
@@ -27,3 +27,22 @@ class ChantierOutil(models.Model):
     date_achat = fields.Date('Date d\'achat')
     description = fields.Text('Description')
     actif = fields.Boolean('Actif', default=True)
+    attribution_ids = fields.One2many('chantier.attribution.outil', 'outil_id', string='Attributions')
+    attribue_a_id = fields.Many2one(
+        'res.users',
+        string='Attribué à',
+        compute='_compute_attribution_en_cours',
+        store=True,
+    )
+    date_retour_prevue = fields.Date(
+        string='Date de retour prévue',
+        compute='_compute_attribution_en_cours',
+        store=True,
+    )
+
+    @api.depends('attribution_ids.state', 'attribution_ids.ouvrier_id', 'attribution_ids.date_retour_prevue')
+    def _compute_attribution_en_cours(self):
+        for outil in self:
+            attribution_en_cours = outil.attribution_ids.filtered(lambda a: a.state == 'attribue')[:1]
+            outil.attribue_a_id = attribution_en_cours.ouvrier_id
+            outil.date_retour_prevue = attribution_en_cours.date_retour_prevue
