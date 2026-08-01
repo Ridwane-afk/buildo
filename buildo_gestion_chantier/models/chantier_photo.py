@@ -7,6 +7,7 @@ class ChantierPhoto(models.Model):
     _order = 'date desc, id desc'
 
     chantier_id = fields.Many2one('chantier.chantier', 'Chantier', required=True, ondelete='cascade')
+    tache_id = fields.Many2one('chantier.tache', 'Tâche liée', ondelete='set null')
     name = fields.Char('Titre', required=True)
     date = fields.Date('Date', default=fields.Date.today)
     image = fields.Image('Photo', max_width=1920, max_height=1920)

@@ -79,13 +79,30 @@
                     <notebook>
                         <page string="Tâches">
                             <field name="tache_ids">
-                                <list editable="bottom">
+                                <list editable="bottom" decoration-success="state == 'fait'" decoration-danger="state == 'bloque'">
                                     <field name="sequence" widget="handle"/>
                                     <field name="name"/>
                                     <field name="responsable_id"/>
                                     <field name="date_debut"/>
                                     <field name="date_fin"/>
-                                    <field name="state"/>
+                                    <field name="date_fin_reelle"/>
+                                    <field name="avancement" widget="progressbar"/>
+                                    <field name="montant_facturable"/>
+                                    <field name="currency_id" column_invisible="1"/>
+                                    <field name="facture_id" column_invisible="1"/>
+                                    <field name="state" widget="badge" readonly="1"
+                                           decoration-success="state == 'fait'"
+                                           decoration-warning="state == 'en_cours'"
+                                           decoration-danger="state == 'bloque'"/>
+                                    <button name="action_demarrer" string="Reprendre" type="object"
+                                            invisible="state == 'en_cours'" class="btn-sm btn-secondary"/>
+                                    <button name="action_valider" string="Valider" type="object"
+                                            invisible="state == 'fait'" class="btn-sm btn-primary"/>
+                                    <button name="action_bloquer" string="Bloquer" type="object"
+                                            invisible="state in ('fait', 'bloque')" class="btn-sm btn-secondary"/>
+                                    <button name="action_facturer" string="Facturer au client" type="object"
+                                            invisible="state != 'fait' or facture_id" class="btn-sm btn-primary"
+                                            groups="buildo_gestion_chantier.group_direction"/>
                                 </list>
                             </field>
                         </page>
