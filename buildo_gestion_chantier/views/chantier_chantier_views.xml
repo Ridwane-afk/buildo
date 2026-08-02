@@ -90,6 +90,7 @@
                                     <field name="montant_facturable"/>
                                     <field name="currency_id" column_invisible="1"/>
                                     <field name="facture_id" column_invisible="1"/>
+                                    <field name="facture_state" column_invisible="1"/>
                                     <field name="state" widget="badge" readonly="1"
                                            decoration-success="state == 'fait'"
                                            decoration-warning="state == 'en_cours'"
@@ -101,7 +102,7 @@
                                     <button name="action_bloquer" string="Bloquer" type="object"
                                             invisible="state in ('fait', 'bloque')" class="btn-sm btn-secondary"/>
                                     <button name="action_facturer" string="Facturer au client" type="object"
-                                            invisible="state != 'fait' or facture_id" class="btn-sm btn-primary"
+                                            invisible="state != 'fait' or (facture_id and facture_state != 'cancel')" class="btn-sm btn-primary"
                                             groups="buildo_gestion_chantier.group_direction"/>
                                 </list>
                             </field>

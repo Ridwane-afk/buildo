@@ -27,6 +27,7 @@ class ChantierTache(models.Model):
     currency_id = fields.Many2one('res.currency', default=lambda self: self.env.company.currency_id)
     montant_facturable = fields.Monetary('Montant facturable', currency_field='currency_id')
     facture_id = fields.Many2one('account.move', 'Facture', readonly=True, copy=False, tracking=True)
+    facture_state = fields.Selection(related='facture_id.state', string='État de la facture')
     avancement = fields.Integer('Avancement (%)', default=0, tracking=True)
 
     @api.constrains('avancement')
@@ -75,7 +76,7 @@ class ChantierTache(models.Model):
 
     def action_facturer(self):
         self.ensure_one()
-        if self.facture_id:
+        if self.facture_id and self.facture_id.state != 'cancel':
             raise UserError("Cette tâche a déjà été facturée.")
         if self.state != 'fait':
             raise UserError("Seule une tâche terminée peut être facturée.")
