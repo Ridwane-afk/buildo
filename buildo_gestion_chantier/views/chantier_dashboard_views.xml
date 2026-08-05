@@ -70,29 +70,6 @@
         <field name="context">{'search_default_en_cours': 1}</field>
     </record>
 
-    <!-- Vue liste heures avec filtres avancés -->
-    <record id="view_chantier_heure_search" model="ir.ui.view">
-        <field name="name">chantier.heure.prestee.search</field>
-        <field name="model">chantier.heure.prestee</field>
-        <field name="arch" type="xml">
-            <search>
-                <field name="chantier_id"/>
-                <field name="ouvrier_id"/>
-                <filter string="Validées" name="valide" domain="[('state','=','valide')]"/>
-                <filter string="En attente" name="soumis" domain="[('state','=','soumis')]"/>
-                <filter string="Refusées" name="refuse" domain="[('state','=','refuse')]"/>
-                <separator/>
-                <filter string="Ce mois" name="ce_mois"
-                        domain="[('date','&gt;=', (context_today()).strftime('%Y-%m-01'))]"/>
-                <group name="groupby">
-                    <filter string="Chantier" name="group_chantier" context="{'group_by':'chantier_id'}"/>
-                    <filter string="Ouvrier" name="group_ouvrier" context="{'group_by':'ouvrier_id'}"/>
-                    <filter string="Mois" name="group_mois" context="{'group_by':'date:month'}"/>
-                </group>
-            </search>
-        </field>
-    </record>
-
     <!-- Vue search chantiers avec filtres retard / en cours -->
     <record id="view_chantier_chantier_search_v2" model="ir.ui.view">
         <field name="name">chantier.chantier.search.v2</field>
