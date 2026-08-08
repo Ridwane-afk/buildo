@@ -92,6 +92,7 @@
         <field name="res_model">chantier.photo</field>
         <field name="view_mode">kanban,list,form</field>
         <field name="search_view_id" ref="view_chantier_photo_search"/>
+        <field name="context">{'search_default_group_chantier': 1}</field>
     </record>
 
     <!-- ─── PLANS ─── -->
