@@ -83,5 +83,6 @@
         <field name="view_mode">list,form</field>
         <field name="domain">[('actif', '=', True)]</field>
         <field name="search_view_id" ref="view_chantier_outil_search"/>
+        <field name="context">{'search_default_group_attribue_a': 1, 'search_default_group_categorie': 1}</field>
     </record>
 </odoo>
