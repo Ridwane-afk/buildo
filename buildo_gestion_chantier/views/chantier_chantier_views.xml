@@ -147,13 +147,16 @@
                         </page>
                         <page string="Attributions outils">
                             <field name="attribution_outil_ids">
-                                <list>
+                                <list delete="false">
                                     <field name="outil_id"/>
                                     <field name="ouvrier_id"/>
                                     <field name="date_sortie"/>
                                     <field name="date_retour_prevue"/>
                                     <field name="date_retour_reelle"/>
                                     <field name="state"/>
+                                    <button name="unlink" type="object" icon="fa-trash-o"
+                                            confirm="Êtes-vous sûr de vouloir supprimer cette attribution ?"
+                                            class="btn-sm btn-link text-danger"/>
                                 </list>
                             </field>
                         </page>

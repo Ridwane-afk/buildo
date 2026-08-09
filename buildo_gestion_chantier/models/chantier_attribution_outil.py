@@ -10,6 +10,7 @@ class ChantierAttributionOutil(models.Model):
     chantier_id = fields.Many2one('chantier.chantier', 'Chantier', required=True, ondelete='cascade')
     outil_id = fields.Many2one('chantier.outil', 'Outil', required=True,
                                domain=[('etat', '=', 'disponible')])
+    categorie = fields.Selection(related='outil_id.categorie', string='Catégorie')
     ouvrier_id = fields.Many2one('res.users', 'Ouvrier', required=True)
     date_sortie = fields.Date('Date de sortie', required=True, default=fields.Date.today)
     date_retour_prevue = fields.Date('Date de retour prévue')
