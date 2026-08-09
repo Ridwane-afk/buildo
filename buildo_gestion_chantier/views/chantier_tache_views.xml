@@ -4,7 +4,7 @@
         <field name="name">chantier.tache.list</field>
         <field name="model">chantier.tache</field>
         <field name="arch" type="xml">
-            <list string="Tâches" editable="bottom"
+            <list string="Tâches" editable="bottom" delete="false"
                   decoration-success="state == 'fait'" decoration-danger="state == 'bloque'">
                 <field name="sequence" widget="handle"/>
                 <field name="chantier_id"/>
@@ -18,6 +18,9 @@
                        decoration-success="state == 'fait'"
                        decoration-warning="state == 'en_cours'"
                        decoration-danger="state == 'bloque'"/>
+                <button name="unlink" type="object" icon="fa-trash-o"
+                        confirm="Êtes-vous sûr de vouloir supprimer cette tâche ?"
+                        class="btn-sm btn-link text-danger"/>
             </list>
         </field>
     </record>

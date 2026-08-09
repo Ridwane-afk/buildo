@@ -79,7 +79,7 @@
                     <notebook>
                         <page string="Tâches">
                             <field name="tache_ids">
-                                <list editable="bottom" decoration-success="state == 'fait'" decoration-danger="state == 'bloque'">
+                                <list editable="bottom" delete="false" decoration-success="state == 'fait'" decoration-danger="state == 'bloque'">
                                     <field name="sequence" widget="handle"/>
                                     <field name="name"/>
                                     <field name="responsable_id"/>
@@ -104,6 +104,9 @@
                                     <button name="action_facturer" string="Facturer au client" type="object"
                                             invisible="state != 'fait' or (facture_id and facture_state != 'cancel')" class="btn-sm btn-primary"
                                             groups="buildo_gestion_chantier.group_direction"/>
+                                    <button name="unlink" type="object" icon="fa-trash-o"
+                                            confirm="Êtes-vous sûr de vouloir supprimer cette tâche ?"
+                                            class="btn-sm btn-link text-danger"/>
                                 </list>
                             </field>
                         </page>
