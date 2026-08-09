@@ -25,7 +25,7 @@ class ChantierTache(models.Model):
     note = fields.Text('Notes')
     photo_ids = fields.One2many('chantier.photo', 'tache_id', string='Photos de preuve')
     currency_id = fields.Many2one('res.currency', default=lambda self: self.env.company.currency_id)
-    montant_facturable = fields.Monetary('Montant facturable', currency_field='currency_id')
+    montant_facturable = fields.Monetary('Montant facturable', currency_field='currency_id', tracking=True)
     facture_id = fields.Many2one('account.move', 'Facture', readonly=True, copy=False, tracking=True)
     facture_state = fields.Selection(related='facture_id.state', string='État de la facture', tracking=False)
     avancement = fields.Integer('Avancement (%)', default=0, tracking=True)
@@ -35,6 +35,14 @@ class ChantierTache(models.Model):
         for rec in self:
             if not 0 <= rec.avancement <= 100:
                 raise ValidationError("L'avancement doit être compris entre 0 et 100.")
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        taches = super().create(vals_list)
+        direction_partners = self.env.ref('buildo_gestion_chantier.group_direction').all_user_ids.mapped('partner_id')
+        if direction_partners:
+            taches.message_subscribe(partner_ids=direction_partners.ids)
+        return taches
 
     def action_demarrer(self):
         self.write({'state': 'en_cours', 'date_fin_reelle': False})
