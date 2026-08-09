@@ -69,9 +69,9 @@
                 <separator/>
                 <filter string="Archivés" name="archives" domain="[('actif', '=', False)]"/>
                 <group name="groupby">
+                    <filter string="Attribué à" name="group_attribue_a" context="{'group_by': 'attribue_a_id'}"/>
                     <filter string="Catégorie" name="group_categorie" context="{'group_by': 'categorie'}"/>
                     <filter string="État" name="group_etat" context="{'group_by': 'etat'}"/>
-                    <filter string="Attribué à" name="group_attribue_a" context="{'group_by': 'attribue_a_id'}"/>
                 </group>
             </search>
         </field>
