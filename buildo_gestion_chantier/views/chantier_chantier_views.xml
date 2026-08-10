@@ -5,7 +5,7 @@
         <field name="name">chantier.chantier.form</field>
         <field name="model">chantier.chantier</field>
         <field name="arch" type="xml">
-            <form string="Chantier">
+            <form string="Chantier" class="o_buildo_resizable_chatter">
                 <header>
                     <button name="action_start" string="Démarrer" type="object"
                             invisible="state != 'brouillon'" class="btn-primary"/>

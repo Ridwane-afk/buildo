@@ -1,0 +1,35 @@
+.o_buildo_resizable_chatter .o-mail-Form-chatter.o-aside {
+    position: relative;
+    min-width: 280px;
+    max-width: 85vw;
+}
+
+.o_buildo_chatter_resize_handle {
+    position: absolute;
+    top: 0;
+    left: -6px;
+    width: 12px;
+    height: 100%;
+    cursor: col-resize;
+    z-index: 10;
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 5px;
+        width: 2px;
+        height: 100%;
+        background-color: transparent;
+    }
+
+    &:hover::after,
+    &.o_buildo_resizing::after {
+        background-color: var(--o-brand-primary, #714B67);
+    }
+}
+
+body.o_buildo_chatter_resizing {
+    cursor: col-resize !important;
+    user-select: none !important;
+}
