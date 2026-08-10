@@ -1,35 +1,29 @@
-.o_buildo_resizable_chatter .o-mail-Form-chatter.o-aside {
+.o-mail-Form-chatter.o-aside.o_buildo_chatter_resizable {
     position: relative;
     min-width: 280px;
     max-width: 85vw;
-}
 
-.o_buildo_chatter_resize_handle {
-    position: absolute;
-    top: 0;
-    left: -6px;
-    width: 12px;
-    height: 100%;
-    cursor: col-resize;
-    z-index: 10;
-
-    &::after {
+    &::before {
         content: "";
         position: absolute;
         top: 0;
-        left: 5px;
-        width: 2px;
+        left: -6px;
+        width: 12px;
         height: 100%;
-        background-color: transparent;
+        cursor: col-resize;
+        z-index: 10;
     }
 
-    &:hover::after,
-    &.o_buildo_resizing::after {
-        background-color: var(--o-brand-primary, #714B67);
+    &:hover::before {
+        border-left: 2px solid var(--o-brand-primary, #714B67);
     }
 }
 
 body.o_buildo_chatter_resizing {
     cursor: col-resize !important;
     user-select: none !important;
+}
+
+body.o_buildo_chatter_resizing .o-mail-Form-chatter.o-aside.o_buildo_chatter_resizable::before {
+    border-left: 2px solid var(--o-brand-primary, #714B67);
 }
