@@ -12,6 +12,16 @@
                 <field name="pourcentage_avancement"
                        invisible="not chantier_id or move_type not in ('out_invoice','out_refund')"
                        string="Avancement facturé (%)"/>
+                <field name="tache_a_facturer_ids"
+                       invisible="move_type != 'out_invoice' or not tache_a_facturer_ids"
+                       groups="buildo_gestion_chantier.group_direction">
+                    <list create="false" delete="false" editable="false">
+                        <field name="chantier_id"/>
+                        <field name="name" string="Tâche"/>
+                        <field name="date_fin_reelle"/>
+                        <field name="montant_facturable"/>
+                    </list>
+                </field>
             </xpath>
         </field>
     </record>
