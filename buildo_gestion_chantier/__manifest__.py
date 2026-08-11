@@ -30,6 +30,7 @@ des matériaux, de la facturation et de la rentabilité.
         'views/chantier_photo_plan_views.xml',
         'views/chantier_dashboard_views.xml',
         'views/chantier_wizard_refus_views.xml',
+        'views/chantier_wizard_facturation_taches_views.xml',
         'views/chantier_assistant_ia_views.xml',
         'views/sale_order_views.xml',
         'views/account_move_views.xml',

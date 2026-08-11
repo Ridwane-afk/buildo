@@ -26,3 +26,13 @@ class AccountMove(models.Model):
                 ])
             else:
                 move.tache_a_facturer_ids = False
+
+    def action_ouvrir_wizard_taches(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'chantier.wizard.facturation.taches',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {'active_id': self.id},
+        }

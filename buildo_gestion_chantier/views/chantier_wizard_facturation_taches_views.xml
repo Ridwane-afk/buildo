@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_chantier_wizard_facturation_taches_form" model="ir.ui.view">
+        <field name="name">chantier.wizard.facturation.taches.form</field>
+        <field name="model">chantier.wizard.facturation.taches</field>
+        <field name="arch" type="xml">
+            <form string="Tâches terminées à facturer">
+                <field name="move_id" invisible="1"/>
+                <p>
+                    Décochez les tâches que vous ne souhaitez pas facturer maintenant.
+                    Les tâches gardées seront ajoutées comme lignes de facture.
+                </p>
+                <field name="tache_ids">
+                    <list create="false">
+                        <field name="chantier_id"/>
+                        <field name="name" string="Tâche"/>
+                        <field name="state"/>
+                        <field name="date_fin_reelle"/>
+                        <field name="montant_facturable" sum="Total"/>
+                    </list>
+                </field>
+                <footer>
+                    <button name="action_ajouter" string="Ajouter au brouillon" type="object" class="btn-primary"/>
+                    <button string="Annuler" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
