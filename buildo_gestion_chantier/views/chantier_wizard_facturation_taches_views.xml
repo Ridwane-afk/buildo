@@ -16,6 +16,7 @@
                         <field name="name" string="Tâche"/>
                         <field name="state"/>
                         <field name="date_fin_reelle"/>
+                        <field name="currency_id" column_invisible="1"/>
                         <field name="montant_facturable" sum="Total"/>
                     </list>
                 </field>
