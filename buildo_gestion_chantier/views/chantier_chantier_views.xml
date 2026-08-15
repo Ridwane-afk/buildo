@@ -43,18 +43,23 @@
                     <div class="oe_title">
                         <label for="name"/>
                         <h1><field name="name" placeholder="Nom du chantier..."/></h1>
-                        <div>
-                            <strong>Réf : </strong>
-                            <field name="ref" readonly="1"/>
+                        <div class="d-flex flex-wrap align-items-center text-muted gap-3">
+                            <span><i class="fa fa-hashtag me-1" title="Référence"/><field name="ref" readonly="1" class="oe_inline"/></span>
                         </div>
                     </div>
                     <group>
-                        <group string="Informations générales">
+                        <group>
+                            <div colspan="2" class="o_horizontal_separator text-uppercase fw-bolder small d-flex align-items-center">
+                                <i class="fa fa-info-circle me-1"/>Informations générales
+                            </div>
                             <field name="client_id"/>
                             <field name="chef_chantier_id"/>
                             <field name="adresse"/>
                         </group>
-                        <group string="Planification">
+                        <group>
+                            <div colspan="2" class="o_horizontal_separator text-uppercase fw-bolder small d-flex align-items-center">
+                                <i class="fa fa-calendar me-1"/>Planification
+                            </div>
                             <field name="date_debut"/>
                             <field name="date_fin_prevue"/>
                             <field name="date_fin_reelle" invisible="state != 'termine'"/>
@@ -62,19 +67,60 @@
                             <field name="currency_id" invisible="1"/>
                         </group>
                     </group>
-                    <group string="Indicateurs financiers" invisible="state == 'brouillon'">
-                        <group string="Coûts">
-                            <field name="cout_main_oeuvre"/>
-                            <field name="cout_materiaux"/>
-                            <field name="cout_reel" class="fw-bold"/>
-                            <field name="nb_heures"/>
-                        </group>
-                        <group string="Rentabilité">
-                            <field name="montant_facture"/>
-                            <field name="marge" class="fw-bold"/>
-                            <field name="avancement" widget="progressbar"/>
-                        </group>
-                    </group>
+                    <div class="o_horizontal_separator text-uppercase fw-bolder small d-flex align-items-center mt-3"
+                         invisible="state == 'brouillon'">
+                        <i class="fa fa-bar-chart me-1"/>Indicateurs financiers
+                    </div>
+                    <div class="row g-3 mb-3" invisible="state == 'brouillon'">
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="border rounded-3 p-3 h-100 bg-light">
+                                <div class="text-muted text-uppercase small fw-bold mb-2">
+                                    <i class="fa fa-tasks me-1"/>Avancement
+                                </div>
+                                <field name="avancement" widget="progressbar" nolabel="1" class="mb-0"/>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="border rounded-3 p-3 h-100 bg-light">
+                                <div class="text-muted text-uppercase small fw-bold mb-2">
+                                    <i class="fa fa-wrench me-1"/>Coût réel
+                                </div>
+                                <div class="fs-4 fw-bold"><field name="cout_reel" nolabel="1"/></div>
+                                <div class="text-muted small">
+                                    Main d'œuvre : <field name="cout_main_oeuvre" nolabel="1" class="oe_inline"/>
+                                </div>
+                                <div class="text-muted small">
+                                    Matériaux : <field name="cout_materiaux" nolabel="1" class="oe_inline"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="border rounded-3 p-3 h-100 bg-light">
+                                <div class="text-muted text-uppercase small fw-bold mb-2">
+                                    <i class="fa fa-file-text-o me-1"/>Facturé
+                                </div>
+                                <div class="fs-4 fw-bold"><field name="montant_facture" nolabel="1"/></div>
+                                <div class="text-muted small">
+                                    <field name="nb_heures" nolabel="1" class="oe_inline"/> heures validées
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="border rounded-3 p-3 h-100 bg-light">
+                                <div class="text-muted text-uppercase small fw-bold mb-2">
+                                    <i class="fa fa-balance-scale me-1"/>Marge
+                                </div>
+                                <div class="fs-4 fw-bold">
+                                    <field name="marge" nolabel="1"
+                                           decoration-danger="marge &lt; 0"
+                                           decoration-success="marge &gt;= 0"/>
+                                </div>
+                                <div class="text-muted small" invisible="not budget_initial">
+                                    sur budget de <field name="budget_initial" nolabel="1" class="oe_inline"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <field name="description" placeholder="Description du chantier..."/>
                     <notebook>
                         <page string="Tâches">
