@@ -1,6 +1,8 @@
 from . import (
     chantier_chantier,
     chantier_tache,
+    chantier_tache_checklist,
+    chantier_tache_document,
     chantier_heure_prestee,
     chantier_demande_materiel,
     chantier_rapport_journalier,

@@ -24,17 +24,28 @@ class ChantierTache(models.Model):
     ], default='a_faire', string='État', tracking=True)
     note = fields.Text('Notes')
     photo_ids = fields.One2many('chantier.photo', 'tache_id', string='Photos de preuve')
+    checklist_ids = fields.One2many('chantier.tache.checklist', 'tache_id', string='Sous-tâches')
+    document_ids = fields.One2many('chantier.tache.document', 'tache_id', string='Documents')
+    estimation_materiau_ids = fields.One2many('chantier.estimation.materiau', 'tache_id', string='Matériaux nécessaires')
+    estimation_outil_ids = fields.One2many('chantier.estimation.outil', 'tache_id', string='Outils nécessaires')
     currency_id = fields.Many2one('res.currency', default=lambda self: self.env.company.currency_id)
     montant_facturable = fields.Monetary('Montant facturable', currency_field='currency_id', tracking=True)
     facture_id = fields.Many2one('account.move', 'Facture', readonly=True, copy=False, tracking=True)
     facture_state = fields.Selection(related='facture_id.state', string='État de la facture', tracking=False)
     avancement = fields.Integer('Avancement (%)', default=0, tracking=True)
+    checklist_progress = fields.Integer('Sous-tâches réalisées (%)', compute='_compute_checklist_progress')
 
     @api.constrains('avancement')
     def _check_avancement(self):
         for rec in self:
             if not 0 <= rec.avancement <= 100:
                 raise ValidationError("L'avancement doit être compris entre 0 et 100.")
+
+    @api.depends('checklist_ids.fait')
+    def _compute_checklist_progress(self):
+        for rec in self:
+            items = rec.checklist_ids
+            rec.checklist_progress = round(100 * len(items.filtered('fait')) / len(items)) if items else 0
 
     @api.model_create_multi
     def create(self, vals_list):

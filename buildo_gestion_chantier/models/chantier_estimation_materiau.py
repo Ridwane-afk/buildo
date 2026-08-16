@@ -8,6 +8,7 @@ class ChantierEstimationMateriau(models.Model):
     _order = 'chantier_id, materiau_id'
 
     chantier_id = fields.Many2one('chantier.chantier', 'Chantier', required=True, ondelete='cascade')
+    tache_id = fields.Many2one('chantier.tache', 'Tâche liée', ondelete='set null')
     materiau_id = fields.Many2one('chantier.materiau', 'Matériau', required=True)
     quantite_estimee = fields.Float('Quantité estimée', required=True)
     unite = fields.Selection(related='materiau_id.unite', readonly=True)
@@ -26,6 +27,18 @@ class ChantierEstimationMateriau(models.Model):
         for rec in self:
             if rec.quantite_estimee <= 0:
                 raise ValidationError("La quantité estimée doit être supérieure à 0.")
+
+    @api.onchange('tache_id')
+    def _onchange_tache_id(self):
+        if self.tache_id and not self.chantier_id:
+            self.chantier_id = self.tache_id.chantier_id
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if not vals.get('chantier_id') and vals.get('tache_id'):
+                vals['chantier_id'] = self.env['chantier.tache'].browse(vals['tache_id']).chantier_id.id
+        return super().create(vals_list)
 
     @api.depends('quantite_estimee', 'prix_unitaire')
     def _compute_montant(self):

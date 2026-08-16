@@ -6,6 +6,12 @@ access_chantier_chantier_admin,chantier.chantier admin,model_chantier_chantier,g
 access_chantier_tache_chef,chantier.tache chef,model_chantier_tache,group_chef_chantier,1,1,1,1
 access_chantier_tache_ouvrier,chantier.tache ouvrier,model_chantier_tache,group_ouvrier,1,0,0,0
 
+access_chantier_tache_checklist_chef,chantier.tache.checklist chef,model_chantier_tache_checklist,group_chef_chantier,1,1,1,1
+access_chantier_tache_checklist_ouvrier,chantier.tache.checklist ouvrier,model_chantier_tache_checklist,group_ouvrier,1,0,0,0
+
+access_chantier_tache_document_chef,chantier.tache.document chef,model_chantier_tache_document,group_chef_chantier,1,1,1,1
+access_chantier_tache_document_ouvrier,chantier.tache.document ouvrier,model_chantier_tache_document,group_ouvrier,1,0,0,0
+
 access_chantier_heure_prestee_ouvrier,chantier.heure.prestee ouvrier,model_chantier_heure_prestee,group_ouvrier,1,1,1,0
 access_chantier_heure_prestee_chef,chantier.heure.prestee chef,model_chantier_heure_prestee,group_chef_chantier,1,1,1,1
 

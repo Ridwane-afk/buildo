@@ -66,6 +66,53 @@
                     <field name="description" placeholder="Description de la tâche..."/>
                     <field name="note" placeholder="Notes..."/>
                     <notebook>
+                        <page string="Sous-tâches">
+                            <div class="text-muted mb-2" invisible="not checklist_ids">
+                                <field name="checklist_progress" nolabel="1" class="oe_inline"/>% réalisé
+                            </div>
+                            <field name="checklist_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="fait"/>
+                                    <field name="name"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Matériaux nécessaires">
+                            <field name="estimation_materiau_ids" context="{'default_chantier_id': chantier_id}">
+                                <list editable="bottom" decoration-danger="quantite_manquante &gt; 0">
+                                    <field name="materiau_id"/>
+                                    <field name="quantite_estimee"/>
+                                    <field name="unite"/>
+                                    <field name="prix_unitaire"/>
+                                    <field name="stock_disponible"/>
+                                    <field name="quantite_manquante"/>
+                                    <field name="montant_estime"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Outils nécessaires">
+                            <field name="estimation_outil_ids" context="{'default_chantier_id': chantier_id}">
+                                <list editable="bottom">
+                                    <field name="outil_id"/>
+                                    <field name="etat_outil"/>
+                                    <field name="date_debut_prevue"/>
+                                    <field name="date_fin_prevue"/>
+                                    <field name="note"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Documents">
+                            <field name="document_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="date"/>
+                                    <field name="fichier" filename="fichier_name"/>
+                                    <field name="fichier_name" column_invisible="1"/>
+                                    <field name="auteur_id"/>
+                                </list>
+                            </field>
+                        </page>
                         <page string="Photos de preuve">
                             <field name="photo_ids">
                                 <list>
