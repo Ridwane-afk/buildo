@@ -37,6 +37,7 @@ des matériaux, de la facturation et de la rentabilité.
         'views/sale_order_views.xml',
         'views/account_move_views.xml',
         'views/purchase_order_views.xml',
+        'views/chantier_audit_views.xml',
         'views/menu_views.xml',
     ],
     'installable': True,

@@ -100,4 +100,207 @@
         <field name="perm_unlink" eval="True"/>
     </record>
 
+    <!-- Tâches, photos, plans, rapports journaliers, estimations, attributions outils :
+         même logique que les chantiers/avenants. Modèles avec chantier_id direct. -->
+
+    <record id="rule_tache_chef" model="ir.rule">
+        <field name="name">Tâches — chef voit les tâches de ses chantiers uniquement</field>
+        <field name="model_id" ref="model_chantier_tache"/>
+        <field name="domain_force">[('chantier_id.chef_chantier_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_chef_chantier'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+    <record id="rule_tache_service_admin" model="ir.rule">
+        <field name="name">Tâches — service administratif voit toutes les tâches</field>
+        <field name="model_id" ref="model_chantier_tache"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_service_administratif'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+    <record id="rule_photo_chef" model="ir.rule">
+        <field name="name">Photos — chef voit les photos de ses chantiers uniquement</field>
+        <field name="model_id" ref="model_chantier_photo"/>
+        <field name="domain_force">[('chantier_id.chef_chantier_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_chef_chantier'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+    <record id="rule_photo_service_admin" model="ir.rule">
+        <field name="name">Photos — service administratif voit toutes les photos</field>
+        <field name="model_id" ref="model_chantier_photo"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_service_administratif'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+    <record id="rule_plan_chef" model="ir.rule">
+        <field name="name">Plans — chef voit les plans de ses chantiers uniquement</field>
+        <field name="model_id" ref="model_chantier_plan"/>
+        <field name="domain_force">[('chantier_id.chef_chantier_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_chef_chantier'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+    <record id="rule_plan_service_admin" model="ir.rule">
+        <field name="name">Plans — service administratif voit tous les plans</field>
+        <field name="model_id" ref="model_chantier_plan"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_service_administratif'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+    <record id="rule_rapport_journalier_chef" model="ir.rule">
+        <field name="name">Rapports journaliers — chef voit les rapports de ses chantiers uniquement</field>
+        <field name="model_id" ref="model_chantier_rapport_journalier"/>
+        <field name="domain_force">[('chantier_id.chef_chantier_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_chef_chantier'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+    <record id="rule_rapport_journalier_service_admin" model="ir.rule">
+        <field name="name">Rapports journaliers — service administratif voit tous les rapports</field>
+        <field name="model_id" ref="model_chantier_rapport_journalier"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_service_administratif'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+    <record id="rule_estimation_materiau_chef" model="ir.rule">
+        <field name="name">Estimations matériaux — chef voit celles de ses chantiers uniquement</field>
+        <field name="model_id" ref="model_chantier_estimation_materiau"/>
+        <field name="domain_force">[('chantier_id.chef_chantier_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_chef_chantier'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+    <record id="rule_estimation_materiau_service_admin" model="ir.rule">
+        <field name="name">Estimations matériaux — service administratif voit tout</field>
+        <field name="model_id" ref="model_chantier_estimation_materiau"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_service_administratif'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+    <record id="rule_estimation_outil_chef" model="ir.rule">
+        <field name="name">Estimations outils — chef voit celles de ses chantiers uniquement</field>
+        <field name="model_id" ref="model_chantier_estimation_outil"/>
+        <field name="domain_force">[('chantier_id.chef_chantier_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_chef_chantier'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+    <record id="rule_estimation_outil_service_admin" model="ir.rule">
+        <field name="name">Estimations outils — service administratif voit tout</field>
+        <field name="model_id" ref="model_chantier_estimation_outil"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_service_administratif'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+    <record id="rule_attribution_outil_chef" model="ir.rule">
+        <field name="name">Attributions outils — chef voit celles de ses chantiers uniquement</field>
+        <field name="model_id" ref="model_chantier_attribution_outil"/>
+        <field name="domain_force">[('chantier_id.chef_chantier_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_chef_chantier'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+    <record id="rule_attribution_outil_service_admin" model="ir.rule">
+        <field name="name">Attributions outils — service administratif voit tout</field>
+        <field name="model_id" ref="model_chantier_attribution_outil"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_service_administratif'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+    <!-- Sous-tâches et documents de tâche : pas de chantier_id direct, on passe par tache_id.chantier_id. -->
+
+    <record id="rule_tache_checklist_chef" model="ir.rule">
+        <field name="name">Sous-tâches — chef voit celles de ses chantiers uniquement</field>
+        <field name="model_id" ref="model_chantier_tache_checklist"/>
+        <field name="domain_force">[('tache_id.chantier_id.chef_chantier_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_chef_chantier'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+    <record id="rule_tache_checklist_service_admin" model="ir.rule">
+        <field name="name">Sous-tâches — service administratif voit tout</field>
+        <field name="model_id" ref="model_chantier_tache_checklist"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_service_administratif'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+    <record id="rule_tache_document_chef" model="ir.rule">
+        <field name="name">Documents de tâche — chef voit ceux de ses chantiers uniquement</field>
+        <field name="model_id" ref="model_chantier_tache_document"/>
+        <field name="domain_force">[('tache_id.chantier_id.chef_chantier_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_chef_chantier'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+    <record id="rule_tache_document_service_admin" model="ir.rule">
+        <field name="name">Documents de tâche — service administratif voit tout</field>
+        <field name="model_id" ref="model_chantier_tache_document"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_service_administratif'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
 </odoo>

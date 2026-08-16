@@ -34,6 +34,7 @@
                     </group>
                     <field name="note" placeholder="Notes complémentaires..."/>
                 </sheet>
+                <chatter/>
             </form>
         </field>
     </record>

@@ -144,4 +144,17 @@
               parent="menu_buildo_direction"
               action="action_chantier_paiement_fss"
               sequence="20"/>
+
+    <!-- Administration -->
+    <menuitem id="menu_buildo_administration"
+              name="Administration"
+              parent="menu_buildo_root"
+              sequence="60"
+              groups="group_admin_buildo"/>
+
+    <menuitem id="menu_chantier_audit"
+              name="Journal d'audit"
+              parent="menu_buildo_administration"
+              action="action_chantier_audit"
+              sequence="10"/>
 </odoo>

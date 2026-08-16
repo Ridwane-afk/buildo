@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_chantier_audit_list" model="ir.ui.view">
+        <field name="name">mail.tracking.value.audit.list</field>
+        <field name="model">mail.tracking.value</field>
+        <field name="arch" type="xml">
+            <list string="Journal d'audit" default_order="message_date desc" create="false" edit="false" delete="false">
+                <field name="message_date"/>
+                <field name="message_author_id"/>
+                <field name="model_label"/>
+                <field name="record_name"/>
+                <field name="field_id"/>
+                <field name="old_value_display"/>
+                <field name="new_value_display"/>
+                <field name="res_model" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_chantier_audit_search" model="ir.ui.view">
+        <field name="name">mail.tracking.value.audit.search</field>
+        <field name="model">mail.tracking.value</field>
+        <field name="arch" type="xml">
+            <search string="Rechercher dans le journal d'audit">
+                <field name="record_name" string="Enregistrement"/>
+                <field name="message_author_id"/>
+                <field name="field_id"/>
+                <separator/>
+                <filter string="Chantiers" name="model_chantier" domain="[('res_model', '=', 'chantier.chantier')]"/>
+                <filter string="Tâches" name="model_tache" domain="[('res_model', '=', 'chantier.tache')]"/>
+                <filter string="Demandes de matériel" name="model_demande" domain="[('res_model', '=', 'chantier.demande.materiel')]"/>
+                <filter string="Heures prestées" name="model_heure" domain="[('res_model', '=', 'chantier.heure.prestee')]"/>
+                <filter string="Avenants" name="model_avenant" domain="[('res_model', '=', 'chantier.avenant')]"/>
+                <filter string="Paiements FSS" name="model_paiement" domain="[('res_model', '=', 'chantier.paiement.fss')]"/>
+                <separator/>
+                <filter string="Aujourd'hui" name="aujourd_hui"
+                        domain="[('message_date', '&gt;=', context_today().strftime('%Y-%m-%d 00:00:00')),
+                                  ('message_date', '&lt;=', context_today().strftime('%Y-%m-%d 23:59:59'))]"/>
+                <filter string="Cette semaine" name="cette_semaine"
+                        domain="[('message_date', '&gt;=', (context_today() + relativedelta(weekday=0, days=-6)).strftime('%Y-%m-%d')),
+                                  ('message_date', '&lt;=', (context_today() + relativedelta(weekday=6, days=0)).strftime('%Y-%m-%d 23:59:59'))]"/>
+                <group name="groupby">
+                    <filter string="Type d'enregistrement" name="group_model" context="{'group_by': 'model_label'}"/>
+                    <filter string="Modifié par" name="group_author" context="{'group_by': 'message_author_id'}"/>
+                    <filter string="Jour" name="group_date" context="{'group_by': 'message_date:day'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_chantier_audit" model="ir.actions.act_window">
+        <field name="name">Journal d'audit</field>
+        <field name="res_model">mail.tracking.value</field>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="view_chantier_audit_list"/>
+        <field name="domain">[('res_model', 'in', ['chantier.chantier', 'chantier.tache', 'chantier.demande.materiel', 'chantier.heure.prestee', 'chantier.avenant', 'chantier.paiement.fss'])]</field>
+        <field name="search_view_id" ref="view_chantier_audit_search"/>
+        <field name="context">{'search_default_cette_semaine': 1}</field>
+    </record>
+</odoo>

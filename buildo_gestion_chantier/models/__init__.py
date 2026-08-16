@@ -22,4 +22,5 @@ from . import (
     sale_order_chantier,
     account_move_chantier,
     purchase_order_chantier,
+    chantier_audit,
 )

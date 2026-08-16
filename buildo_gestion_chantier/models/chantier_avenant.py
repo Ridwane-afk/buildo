@@ -4,20 +4,21 @@ from odoo import models, fields, api
 class ChantierAvenant(models.Model):
     _name = 'chantier.avenant'
     _description = 'Avenant à un devis'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _order = 'date desc, id desc'
 
-    name = fields.Char('Référence avenant', readonly=True, copy=False, default='Nouveau')
+    name = fields.Char('Référence avenant', readonly=True, copy=False, default='Nouveau', tracking=True)
     sale_order_id = fields.Many2one('sale.order', 'Bon de commande', required=True, ondelete='cascade')
     chantier_id = fields.Many2one('chantier.chantier', related='sale_order_id.chantier_id', readonly=True, store=True)
-    date = fields.Date('Date', required=True, default=fields.Date.today)
+    date = fields.Date('Date', required=True, default=fields.Date.today, tracking=True)
     motif = fields.Text('Motif de la modification', required=True)
-    montant_ht = fields.Monetary('Montant HT de l\'avenant', currency_field='currency_id')
+    montant_ht = fields.Monetary('Montant HT de l\'avenant', currency_field='currency_id', tracking=True)
     currency_id = fields.Many2one('res.currency', default=lambda self: self.env.company.currency_id)
     state = fields.Selection([
         ('brouillon', 'Brouillon'),
         ('accepte', 'Accepté'),
         ('refuse', 'Refusé'),
-    ], default='brouillon', string='État')
+    ], default='brouillon', string='État', tracking=True)
     note = fields.Text('Note')
 
     @api.model_create_multi

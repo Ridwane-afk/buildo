@@ -53,3 +53,5 @@ access_chantier_wizard_refus,chantier.wizard.refus,model_chantier_wizard_refus,g
 access_chantier_assistant_ia,chantier.assistant.ia,model_chantier_assistant_ia,group_ouvrier,1,1,1,1
 access_chantier_wizard_facturation_taches,chantier.wizard.facturation.taches,model_chantier_wizard_facturation_taches,group_direction,1,1,1,1
 access_chantier_wizard_rapport_avancement,chantier.wizard.rapport.avancement,model_chantier_wizard_rapport_avancement,group_chef_chantier,1,1,1,1
+
+access_mail_tracking_value_audit_admin,mail.tracking.value audit admin,mail.model_mail_tracking_value,group_admin_buildo,1,0,0,0
