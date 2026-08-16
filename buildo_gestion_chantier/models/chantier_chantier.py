@@ -42,12 +42,16 @@ class ChantierChantier(models.Model):
                                   domain=[('move_type', '=', 'out_invoice')])
     commande_fournisseur_ids = fields.One2many('purchase.order', 'chantier_id', 'Commandes fournisseur')
     paiement_fss_ids = fields.One2many('chantier.paiement.fss', 'chantier_id', 'Paiements FSS')
+    avenant_ids = fields.One2many('chantier.avenant', 'chantier_id', 'Avenants')
 
     cout_reel = fields.Monetary('Coût réel', compute='_compute_financier', currency_field='currency_id', store=True)
     cout_main_oeuvre = fields.Monetary('Main d\'œuvre', compute='_compute_financier', currency_field='currency_id', store=True)
     cout_materiaux = fields.Monetary('Achats matériaux', compute='_compute_financier', currency_field='currency_id', store=True)
     montant_facture = fields.Monetary('Montant facturé', compute='_compute_financier', currency_field='currency_id', store=True)
     marge = fields.Monetary('Marge', compute='_compute_financier', currency_field='currency_id', store=True)
+    montant_avenants_acceptes = fields.Monetary('Avenants acceptés', compute='_compute_financier', currency_field='currency_id', store=True)
+    budget_revise = fields.Monetary('Budget révisé', compute='_compute_financier', currency_field='currency_id', store=True,
+                                     help="Budget initial augmenté du montant des avenants acceptés.")
     nb_heures = fields.Float('Heures validées', compute='_compute_heures', store=True)
     avancement = fields.Float('Avancement (%)', compute='_compute_avancement', store=True)
 
@@ -72,7 +76,8 @@ class ChantierChantier(models.Model):
 
     @api.depends('heure_prestee_ids.montant', 'heure_prestee_ids.state',
                  'commande_fournisseur_ids.amount_total', 'commande_fournisseur_ids.state',
-                 'facture_ids.amount_total', 'facture_ids.payment_state', 'facture_ids.move_type')
+                 'facture_ids.amount_total', 'facture_ids.payment_state', 'facture_ids.move_type',
+                 'avenant_ids.montant_ht', 'avenant_ids.state', 'budget_initial')
     def _compute_financier(self):
         for rec in self:
             rec.cout_main_oeuvre = sum(
@@ -94,6 +99,10 @@ class ChantierChantier(models.Model):
                 ).mapped('amount_total')
             )
             rec.marge = rec.montant_facture - rec.cout_reel
+            rec.montant_avenants_acceptes = sum(
+                rec.avenant_ids.filtered(lambda a: a.state == 'accepte').mapped('montant_ht')
+            )
+            rec.budget_revise = (rec.budget_initial or 0.0) + rec.montant_avenants_acceptes
 
     @api.depends('heure_prestee_ids.nb_heures', 'heure_prestee_ids.state')
     def _compute_heures(self):

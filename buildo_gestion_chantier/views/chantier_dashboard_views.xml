@@ -18,7 +18,8 @@
                        decoration-danger="state == 'annule'"/>
                 <field name="date_fin_prevue"
                        decoration-danger="date_fin_prevue and date_fin_prevue &lt; context_today().strftime('%Y-%m-%d') and state == 'en_cours'"/>
-                <field name="budget_initial" sum="Total budget"/>
+                <field name="budget_initial" sum="Total budget" optional="hide"/>
+                <field name="budget_revise" sum="Total budget révisé"/>
                 <field name="cout_main_oeuvre" sum="Total M.O."/>
                 <field name="cout_materiaux" sum="Total matériaux"/>
                 <field name="cout_reel" sum="Total coût réel"/>
@@ -92,7 +93,7 @@
                 <field name="marge" type="measure"/>
                 <field name="cout_reel" type="measure"/>
                 <field name="montant_facture" type="measure"/>
-                <field name="budget_initial" type="measure"/>
+                <field name="budget_revise" type="measure"/>
             </graph>
         </field>
     </record>
@@ -105,7 +106,7 @@
             <pivot string="Analyse financière">
                 <field name="client_id" type="row"/>
                 <field name="state" type="col"/>
-                <field name="budget_initial" type="measure"/>
+                <field name="budget_revise" type="measure"/>
                 <field name="cout_reel" type="measure"/>
                 <field name="montant_facture" type="measure"/>
                 <field name="marge" type="measure"/>

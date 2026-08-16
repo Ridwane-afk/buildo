@@ -117,8 +117,11 @@
                                            decoration-danger="marge &lt; 0"
                                            decoration-success="marge &gt;= 0"/>
                                 </div>
-                                <div class="text-muted small" invisible="not budget_initial">
-                                    sur budget de <field name="budget_initial" nolabel="1" class="oe_inline"/>
+                                <div class="text-muted small" invisible="not budget_revise">
+                                    sur budget de <field name="budget_revise" nolabel="1" class="oe_inline"/>
+                                </div>
+                                <div class="text-muted small" invisible="not montant_avenants_acceptes">
+                                    dont <field name="montant_avenants_acceptes" nolabel="1" class="oe_inline"/> d'avenants acceptés
                                 </div>
                             </div>
                         </div>
