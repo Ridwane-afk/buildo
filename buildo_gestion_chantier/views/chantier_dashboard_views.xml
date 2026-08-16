@@ -5,24 +5,80 @@
         <field name="name">chantier.chantier.rentabilite.list</field>
         <field name="model">chantier.chantier</field>
         <field name="arch" type="xml">
-            <list string="Rentabilité des chantiers"
+            <list string="Rentabilité des chantiers" default_order="marge asc"
                   decoration-success="marge &gt; 0"
                   decoration-danger="marge &lt; 0">
+                <field name="currency_id" column_invisible="1"/>
                 <field name="ref"/>
                 <field name="name"/>
                 <field name="client_id"/>
                 <field name="state" widget="badge"
                        decoration-success="state == 'termine'"
-                       decoration-warning="state == 'en_cours'"/>
+                       decoration-warning="state == 'en_cours'"
+                       decoration-danger="state == 'annule'"/>
+                <field name="date_fin_prevue"
+                       decoration-danger="date_fin_prevue and date_fin_prevue &lt; context_today().strftime('%Y-%m-%d') and state == 'en_cours'"/>
                 <field name="budget_initial" sum="Total budget"/>
                 <field name="cout_main_oeuvre" sum="Total M.O."/>
                 <field name="cout_materiaux" sum="Total matériaux"/>
                 <field name="cout_reel" sum="Total coût réel"/>
                 <field name="montant_facture" sum="Total facturé"/>
-                <field name="marge" sum="Marge totale"/>
+                <field name="marge" sum="Marge totale" class="fw-bold"/>
                 <field name="avancement" widget="progressbar"/>
                 <field name="nb_heures"/>
             </list>
+        </field>
+    </record>
+
+    <!-- Vue kanban synthèse rentabilité par chantier -->
+    <record id="view_chantier_rentabilite_kanban" model="ir.ui.view">
+        <field name="name">chantier.chantier.rentabilite.kanban</field>
+        <field name="model">chantier.chantier</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_dashboard">
+                <field name="name"/>
+                <field name="ref"/>
+                <field name="client_id"/>
+                <field name="state"/>
+                <field name="cout_reel"/>
+                <field name="montant_facture"/>
+                <field name="marge"/>
+                <field name="avancement"/>
+                <field name="currency_id"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="d-flex justify-content-between align-items-start mb-1">
+                            <div>
+                                <div class="fw-bold fs-5"><field name="name"/></div>
+                                <div class="text-muted small">
+                                    <field name="client_id"/> · <field name="ref"/>
+                                </div>
+                            </div>
+                            <field name="state" widget="badge"
+                                   decoration-success="state == 'termine'"
+                                   decoration-warning="state == 'en_cours'"
+                                   decoration-danger="state == 'annule'"/>
+                        </div>
+                        <field name="avancement" widget="progressbar"/>
+                        <div class="row mt-3 text-center">
+                            <div class="col">
+                                <div class="text-muted small text-uppercase">Coût réel</div>
+                                <div class="fw-bold"><field name="cout_reel"/></div>
+                            </div>
+                            <div class="col">
+                                <div class="text-muted small text-uppercase">Facturé</div>
+                                <div class="fw-bold"><field name="montant_facture"/></div>
+                            </div>
+                            <div class="col">
+                                <div class="text-muted small text-uppercase">Marge</div>
+                                <div t-att-class="{'fw-bold': true, 'text-danger': record.marge.raw_value &lt; 0, 'text-success': record.marge.raw_value &gt;= 0}">
+                                    <field name="marge"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
         </field>
     </record>
 
@@ -61,9 +117,10 @@
     <record id="action_chantier_dashboard" model="ir.actions.act_window">
         <field name="name">Tableau de bord — Rentabilité</field>
         <field name="res_model">chantier.chantier</field>
-        <field name="view_mode">list,form,graph,pivot</field>
+        <field name="view_mode">list,kanban,graph,pivot,form</field>
         <field name="view_ids" eval="[(5, 0, 0),
             (0, 0, {'view_mode': 'list', 'view_id': ref('view_chantier_rentabilite_list')}),
+            (0, 0, {'view_mode': 'kanban', 'view_id': ref('view_chantier_rentabilite_kanban')}),
             (0, 0, {'view_mode': 'graph', 'view_id': ref('view_chantier_rentabilite_graph')}),
             (0, 0, {'view_mode': 'pivot', 'view_id': ref('view_chantier_pivot')}),
         ]"/>
