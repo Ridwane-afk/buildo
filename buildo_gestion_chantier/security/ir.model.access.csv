@@ -46,3 +46,4 @@ access_chantier_paiement_fss_admin,chantier.paiement.fss admin,model_chantier_pa
 access_chantier_wizard_refus,chantier.wizard.refus,model_chantier_wizard_refus,group_chef_chantier,1,1,1,1
 access_chantier_assistant_ia,chantier.assistant.ia,model_chantier_assistant_ia,group_ouvrier,1,1,1,1
 access_chantier_wizard_facturation_taches,chantier.wizard.facturation.taches,model_chantier_wizard_facturation_taches,group_direction,1,1,1,1
+access_chantier_wizard_rapport_avancement,chantier.wizard.rapport.avancement,model_chantier_wizard_rapport_avancement,group_chef_chantier,1,1,1,1

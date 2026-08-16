@@ -163,3 +163,13 @@ class ChantierChantier(models.Model):
             'target': 'new',
             'context': {'default_chantier_id': self.id},
         }
+
+    def action_ouvrir_rapport_avancement(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': "Rapport d'avancement à envoyer au client",
+            'res_model': 'chantier.wizard.rapport.avancement',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {'active_id': self.id},
+        }

@@ -15,6 +15,8 @@
                             invisible="state not in ('brouillon', 'en_cours')"/>
                     <button name="action_reset_draft" string="Remettre en brouillon" type="object"
                             invisible="state not in ('annule', 'termine')"/>
+                    <button name="action_ouvrir_rapport_avancement" string="Rapport de suivi" type="object"
+                            icon="fa-file-pdf-o" invisible="state == 'brouillon'"/>
                     <field name="state" widget="statusbar"
                            statusbar_visible="brouillon,en_cours,termine"/>
                 </header>

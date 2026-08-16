@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_chantier_wizard_rapport_avancement_form" model="ir.ui.view">
+        <field name="name">chantier.wizard.rapport.avancement.form</field>
+        <field name="model">chantier.wizard.rapport.avancement</field>
+        <field name="arch" type="xml">
+            <form string="Rapport d'avancement à envoyer au client">
+                <field name="chantier_id" invisible="1"/>
+                <p class="text-muted">
+                    Sélectionnez les éléments à inclure dans le rapport PDF à envoyer au client.
+                    La sélection des photos se met à jour automatiquement selon les tâches choisies,
+                    mais vous pouvez l'ajuster librement.
+                </p>
+                <group>
+                    <field name="titre"/>
+                </group>
+                <group string="Message au client">
+                    <field name="message_client" nolabel="1" placeholder="Un mot sur l'avancement du chantier à destination du client..."/>
+                </group>
+                <notebook>
+                    <page string="Tâches">
+                        <field name="tache_ids" domain="[('chantier_id', '=', chantier_id)]">
+                            <list create="false">
+                                <field name="name" string="Tâche"/>
+                                <field name="state"/>
+                                <field name="avancement" widget="progressbar"/>
+                                <field name="date_fin_reelle"/>
+                            </list>
+                        </field>
+                    </page>
+                    <page string="Photos">
+                        <field name="photo_ids" domain="[('chantier_id', '=', chantier_id)]">
+                            <kanban>
+                                <field name="name"/>
+                                <field name="image"/>
+                                <field name="date"/>
+                                <field name="tache_id"/>
+                                <templates>
+                                    <t t-name="card">
+                                        <img t-att-src="'/web/image/chantier.photo/' + record.id.value + '/image'"
+                                             t-att-alt="record.name.value"
+                                             style="max-height:120px; object-fit:cover; width:100%;"/>
+                                        <div class="p-2">
+                                            <strong><field name="name"/></strong>
+                                            <div class="text-muted small"><field name="date"/></div>
+                                            <div class="text-muted small" invisible="not tache_id"><field name="tache_id"/></div>
+                                        </div>
+                                    </t>
+                                </templates>
+                            </kanban>
+                        </field>
+                    </page>
+                    <page string="Rapports journaliers">
+                        <field name="rapport_journalier_ids" domain="[('chantier_id', '=', chantier_id)]">
+                            <list create="false">
+                                <field name="date"/>
+                                <field name="auteur_id"/>
+                                <field name="meteo"/>
+                                <field name="nb_ouvriers"/>
+                            </list>
+                        </field>
+                    </page>
+                    <page string="Plans">
+                        <field name="plan_ids" domain="[('chantier_id', '=', chantier_id)]">
+                            <list create="false">
+                                <field name="name"/>
+                                <field name="version"/>
+                                <field name="date"/>
+                                <field name="fichier_name"/>
+                            </list>
+                        </field>
+                    </page>
+                </notebook>
+                <footer>
+                    <button name="action_generate_pdf" string="Générer le PDF" type="object" class="btn-primary" icon="fa-file-pdf-o"/>
+                    <button string="Annuler" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

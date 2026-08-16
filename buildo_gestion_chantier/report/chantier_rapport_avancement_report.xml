@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_rapport_avancement" model="ir.actions.report">
+        <field name="name">Rapport d'avancement chantier</field>
+        <field name="model">chantier.wizard.rapport.avancement</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">buildo_gestion_chantier.rapport_avancement</field>
+        <field name="report_file">buildo_gestion_chantier.rapport_avancement</field>
+        <field name="print_report_name">'Rapport avancement - %s' % (object.chantier_id.name or '')</field>
+    </record>
+
+    <template id="rapport_avancement">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="buildo_gestion_chantier.rapport_avancement_document"/>
+            </t>
+        </t>
+    </template>
+
+    <template id="rapport_avancement_document">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <div class="text-center mb-4">
+                    <h2><t t-esc="o.titre"/></h2>
+                    <div class="text-muted">
+                        <t t-esc="o.chantier_id.ref"/> — <t t-esc="o.chantier_id.name"/>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-6">
+                        <strong>Client :</strong> <span t-field="o.chantier_id.client_id.name"/><br/>
+                        <strong>Adresse :</strong> <span t-field="o.chantier_id.adresse"/><br/>
+                        <strong>Chef de chantier :</strong> <span t-field="o.chantier_id.chef_chantier_id.name"/>
+                    </div>
+                    <div class="col-6">
+                        <strong>Date de début :</strong> <span t-field="o.chantier_id.date_debut"/><br/>
+                        <strong>Fin prévue :</strong> <span t-field="o.chantier_id.date_fin_prevue"/><br/>
+                        <strong>Date du rapport :</strong> <span t-esc="datetime.date.today().strftime('%d/%m/%Y')"/>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <strong>Avancement global du chantier : <t t-esc="int(o.chantier_id.avancement)"/> %</strong>
+                    <div style="background:#e9ecef;border-radius:4px;height:14px;overflow:hidden;">
+                        <div t-attf-style="background:#714B67;height:14px;width:{{ o.chantier_id.avancement }}%;"/>
+                    </div>
+                </div>
+
+                <div t-if="o.message_client" class="mb-4" style="white-space:pre-wrap;">
+                    <t t-esc="o.message_client"/>
+                </div>
+
+                <div t-if="o.tache_ids">
+                    <h4>Tâches</h4>
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Tâche</th>
+                                <th>État</th>
+                                <th>Avancement</th>
+                                <th>Fin réelle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="o.tache_ids" t-as="tache">
+                                <td><t t-esc="tache.name"/></td>
+                                <td><span t-field="tache.state"/></td>
+                                <td><t t-esc="tache.avancement"/> %</td>
+                                <td><span t-field="tache.date_fin_reelle"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div t-if="o.rapport_journalier_ids">
+                    <h4>Rapports journaliers</h4>
+                    <div t-foreach="o.rapport_journalier_ids" t-as="rap"
+                         class="mb-3" style="border-left:3px solid #714B67;padding-left:10px;">
+                        <strong><span t-field="rap.date"/></strong>
+                        <t t-if="rap.meteo"> — <span t-field="rap.meteo"/></t>
+                        <t t-if="rap.nb_ouvriers"> — <t t-esc="rap.nb_ouvriers"/> ouvrier(s)</t>
+                        <div style="white-space:pre-wrap;"><t t-esc="rap.travaux_realises"/></div>
+                        <div t-if="rap.incidents" class="text-danger" style="white-space:pre-wrap;">
+                            Incidents : <t t-esc="rap.incidents"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div t-if="o.photo_ids">
+                    <h4>Photos</h4>
+                    <div class="row">
+                        <div t-foreach="o.photo_ids" t-as="photo" class="col-4 mb-3">
+                            <img t-if="photo.image" t-att-src="image_data_uri(photo.image)"
+                                 style="width:100%;max-height:150px;object-fit:cover;border-radius:4px;"/>
+                            <div class="text-muted small text-center">
+                                <t t-esc="photo.name"/> — <span t-field="photo.date"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div t-if="o.plan_ids">
+                    <h4>Plans</h4>
+                    <table class="table table-sm table-bordered">
+                        <thead><tr><th>Nom</th><th>Version</th><th>Date</th></tr></thead>
+                        <tbody>
+                            <tr t-foreach="o.plan_ids" t-as="plan">
+                                <td><t t-esc="plan.name"/></td>
+                                <td><t t-esc="plan.version"/></td>
+                                <td><span t-field="plan.date"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>
