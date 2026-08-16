@@ -33,7 +33,6 @@ class ChantierTache(models.Model):
     facture_id = fields.Many2one('account.move', 'Facture', readonly=True, copy=False, tracking=True)
     facture_state = fields.Selection(related='facture_id.state', string='État de la facture', tracking=False)
     avancement = fields.Integer('Avancement (%)', default=0, tracking=True)
-    checklist_progress = fields.Integer('Sous-tâches réalisées (%)', compute='_compute_checklist_progress')
 
     @api.constrains('avancement')
     def _check_avancement(self):
@@ -41,11 +40,12 @@ class ChantierTache(models.Model):
             if not 0 <= rec.avancement <= 100:
                 raise ValidationError("L'avancement doit être compris entre 0 et 100.")
 
-    @api.depends('checklist_ids.fait')
-    def _compute_checklist_progress(self):
+    def _sync_avancement_from_checklist(self):
+        """Recalcule l'avancement à partir des sous-tâches cochées, si la tâche en a."""
         for rec in self:
-            items = rec.checklist_ids
-            rec.checklist_progress = round(100 * len(items.filtered('fait')) / len(items)) if items else 0
+            if rec.checklist_ids:
+                items = rec.checklist_ids
+                rec.avancement = round(100 * len(items.filtered('fait')) / len(items))
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -125,5 +125,15 @@ class ChantierTache(models.Model):
             'type': 'ir.actions.act_window',
             'res_model': 'account.move',
             'res_id': self.facture_id.id,
+            'view_mode': 'form',
+        }
+
+    def action_open_form(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': self.name,
+            'res_model': 'chantier.tache',
+            'res_id': self.id,
             'view_mode': 'form',
         }

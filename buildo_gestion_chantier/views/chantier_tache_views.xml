@@ -18,6 +18,8 @@
                        decoration-success="state == 'fait'"
                        decoration-warning="state == 'en_cours'"
                        decoration-danger="state == 'bloque'"/>
+                <button name="action_open_form" type="object" icon="fa-external-link"
+                        class="btn-sm btn-link" title="Voir le détail"/>
                 <button name="unlink" type="object" icon="fa-trash-o"
                         confirm="Êtes-vous sûr de vouloir supprimer cette tâche ?"
                         class="btn-sm btn-link text-danger"/>
@@ -59,22 +61,30 @@
                         <field name="date_debut"/>
                         <field name="date_fin"/>
                         <field name="date_fin_reelle"/>
-                        <field name="avancement" widget="progressbar"/>
+                        <field name="avancement" widget="progressbar" readonly="checklist_ids"/>
+                        <div class="text-muted small" colspan="2" invisible="not checklist_ids">
+                            Calculé automatiquement à partir des sous-tâches cochées ci-dessous.
+                        </div>
                         <field name="currency_id" invisible="1"/>
                         <field name="montant_facturable"/>
                     </group>
+                    <div class="alert alert-success d-flex align-items-center mb-3" role="alert"
+                         invisible="state == 'fait' or not checklist_ids or avancement != 100">
+                        <i class="fa fa-check-circle me-2"/>
+                        Toutes les sous-tâches sont cochées. Vous pouvez valider la tâche.
+                    </div>
                     <field name="description" placeholder="Description de la tâche..."/>
                     <field name="note" placeholder="Notes..."/>
                     <notebook>
                         <page string="Sous-tâches">
-                            <div class="text-muted mb-2" invisible="not checklist_ids">
-                                <field name="checklist_progress" nolabel="1" class="oe_inline"/>% réalisé
-                            </div>
                             <field name="checklist_ids">
                                 <list editable="bottom">
                                     <field name="sequence" widget="handle"/>
                                     <field name="fait"/>
                                     <field name="name"/>
+                                    <field name="note"/>
+                                    <field name="fait_par_id" readonly="1"/>
+                                    <field name="fait_le" readonly="1"/>
                                 </list>
                             </field>
                         </page>

@@ -155,6 +155,8 @@
                                     <button name="action_facturer" string="Facturer au client" type="object"
                                             invisible="state != 'fait' or (facture_id and facture_state != 'cancel')" class="btn-sm btn-primary"
                                             groups="buildo_gestion_chantier.group_direction"/>
+                                    <button name="action_open_form" type="object" icon="fa-external-link"
+                                            class="btn-sm btn-link" title="Voir le détail"/>
                                     <button name="unlink" type="object" icon="fa-trash-o"
                                             confirm="Êtes-vous sûr de vouloir supprimer cette tâche ?"
                                             class="btn-sm btn-link text-danger"/>
