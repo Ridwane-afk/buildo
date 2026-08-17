@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
 
@@ -59,13 +59,13 @@ class ChantierChantier(models.Model):
     def _check_dates(self):
         for rec in self:
             if rec.date_debut and rec.date_fin_prevue and rec.date_fin_prevue < rec.date_debut:
-                raise ValidationError("La date de fin prévue ne peut pas être antérieure à la date de début.")
+                raise ValidationError(_("La date de fin prévue ne peut pas être antérieure à la date de début."))
 
     @api.constrains('budget_initial')
     def _check_budget(self):
         for rec in self:
             if rec.budget_initial is not False and rec.budget_initial < 0:
-                raise ValidationError("Le budget initial ne peut pas être négatif.")
+                raise ValidationError(_("Le budget initial ne peut pas être négatif."))
 
     @api.model_create_multi
     def create(self, vals_list):

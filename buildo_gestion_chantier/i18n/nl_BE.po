@@ -1,0 +1,2298 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-17 01:24+0000\n"
+"PO-Revision-Date: 2026-08-17 01:24+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: nl_BE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: buildo_gestion_chantier
+#: model:ir.actions.report,print_report_name:buildo_gestion_chantier.action_report_rapport_avancement
+msgid "'Rapport avancement - %s' % (object.chantier_id.name or '')"
+msgstr "'Voortgangsrapport - %s' % (object.chantier_id.name or '')"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.rapport_avancement_document
+msgid ""
+"<br/>\n"
+"                        <strong>Adresse :</strong>"
+msgstr ""
+"<br/>\n"
+"                        <strong>Adres:</strong>"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.rapport_avancement_document
+msgid ""
+"<br/>\n"
+"                        <strong>Chef de chantier :</strong>"
+msgstr ""
+"<br/>\n"
+"                        <strong>Werfleider:</strong>"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.rapport_avancement_document
+msgid ""
+"<br/>\n"
+"                        <strong>Date du rapport :</strong>"
+msgstr ""
+"<br/>\n"
+"                        <strong>Datum van het rapport:</strong>"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.rapport_avancement_document
+msgid ""
+"<br/>\n"
+"                        <strong>Fin prévue :</strong>"
+msgstr ""
+"<br/>\n"
+"                        <strong>Verwachte einddatum:</strong>"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid "<i class=\"fa fa-balance-scale me-1\"/>Marge"
+msgstr "<i class=\"fa fa-balance-scale me-1\"/>Marge"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid "<i class=\"fa fa-bar-chart me-1\"/>Indicateurs financiers"
+msgstr "<i class=\"fa fa-bar-chart me-1\"/>Financiële indicatoren"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid "<i class=\"fa fa-calendar me-1\"/>Planification"
+msgstr "<i class=\"fa fa-calendar me-1\"/>Planning"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_form
+msgid ""
+"<i class=\"fa fa-check-circle me-2\"/>\n"
+"                        Toutes les sous-tâches sont cochées. Vous pouvez valider la tâche."
+msgstr ""
+"<i class=\"fa fa-check-circle me-2\"/>\n"
+"                        Alle subtaken zijn aangevinkt. U kunt de taak valideren."
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid "<i class=\"fa fa-file-text-o me-1\"/>Facturé"
+msgstr "<i class=\"fa fa-file-text-o me-1\"/>Gefactureerd"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid "<i class=\"fa fa-hashtag me-1\" title=\"Référence\"/>"
+msgstr "<i class=\"fa fa-hashtag me-1\" title=\"Referentie\"/>"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid "<i class=\"fa fa-info-circle me-1\"/>Informations générales"
+msgstr "<i class=\"fa fa-info-circle me-1\"/>Algemene informatie"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid "<i class=\"fa fa-tasks me-1\"/>Avancement"
+msgstr "<i class=\"fa fa-tasks me-1\"/>Voortgang"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid "<i class=\"fa fa-wrench me-1\"/>Coût réel"
+msgstr "<i class=\"fa fa-wrench me-1\"/>Werkelijke kost"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid "<span class=\"o_stat_text\">Assistant IA</span>"
+msgstr "<span class=\"o_stat_text\">AI-assistent</span>"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.rapport_avancement_document
+msgid "<strong>Client :</strong>"
+msgstr "<strong>Klant:</strong>"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.rapport_avancement_document
+msgid "<strong>Date de début :</strong>"
+msgstr "<strong>Startdatum:</strong>"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_avenant_form
+msgid "Accepter"
+msgstr "Aanvaarden"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_avenant__state__accepte
+msgid "Accepté"
+msgstr "Aanvaard"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid "Achats"
+msgstr "Aankopen"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__cout_materiaux
+msgid "Achats matériaux"
+msgstr "Materiaalaankopen"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_materiau__actif
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_outil__actif
+msgid "Actif"
+msgstr "Actief"
+
+#. module: buildo_gestion_chantier
+#: model:res.groups,name:buildo_gestion_chantier.group_admin_buildo
+msgid "Administrateur BUILDO"
+msgstr "Beheerder BUILDO"
+
+#. module: buildo_gestion_chantier
+#: model:ir.ui.menu,name:buildo_gestion_chantier.menu_buildo_administration
+msgid "Administration"
+msgstr "Beheer"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__adresse
+msgid "Adresse du chantier"
+msgstr "Adres van de werf"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_wizard_facturation_taches_form
+msgid "Ajouter au brouillon"
+msgstr "Toevoegen aan ontwerp"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_plan__auteur_id
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_tache_document__auteur_id
+msgid "Ajouté par"
+msgstr "Toegevoegd door"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_pivot
+msgid "Analyse financière"
+msgstr "Financiële analyse"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_assistant_ia_form
+msgid "Analyser"
+msgstr "Analyseren"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_mail_tracking_value__old_value_display
+msgid "Ancienne valeur"
+msgstr "Oude waarde"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_plan__annotation
+msgid "Annotations"
+msgstr "Aantekeningen"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_plan_form
+msgid "Annotations sur ce plan..."
+msgstr "Aantekeningen op dit plan..."
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_wizard_facturation_taches_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_wizard_rapport_avancement_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_wizard_refus_form
+msgid "Annuler"
+msgstr "Annuleren"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_chantier__state__annule
+msgid "Annulé"
+msgstr "Geannuleerd"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_materiau_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_outil_search
+msgid "Archivés"
+msgstr "Gearchiveerd"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model,name:buildo_gestion_chantier.model_chantier_assistant_ia
+msgid "Assistant IA — Analyse de chantier"
+msgstr "AI-assistent — Werfanalyse"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_assistant_ia_form
+msgid "Assistant IA — Chantier"
+msgstr "AI-assistent — Werf"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model,name:buildo_gestion_chantier.model_chantier_attribution_outil
+msgid "Attribution d'un outil à un ouvrier"
+msgstr "Toewijzing van een gereedschap aan een arbeider"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_outil_form
+msgid "Attribution en cours"
+msgstr "Lopende toewijzing"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_attribution_outil_form
+msgid "Attribution outil"
+msgstr "Toewijzing gereedschap"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_outil__attribution_ids
+msgid "Attributions"
+msgstr "Toewijzingen"
+
+#. module: buildo_gestion_chantier
+#: model:ir.actions.act_window,name:buildo_gestion_chantier.action_chantier_attribution_outil
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__attribution_outil_ids
+#: model:ir.ui.menu,name:buildo_gestion_chantier.menu_attribution_outil
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_attribution_outil_list
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid "Attributions outils"
+msgstr "Toewijzingen gereedschap"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_attribution_outil__state__attribue
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_outil__etat__attribue
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_attribution_outil_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_outil_search
+msgid "Attribué"
+msgstr "Toegewezen"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_outil__attribue_a_id
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_attribution_outil_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_outil_search
+msgid "Attribué à"
+msgstr "Toegewezen aan"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_estimation_materiau.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_estimation_materiau.py:0
+msgid "Aucun produit Odoo lié à ce matériau."
+msgstr "Geen Odoo-product gekoppeld aan dit materiaal."
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_estimation_materiau.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_estimation_materiau.py:0
+msgid ""
+"Aucune ligne avec stock insuffisant et produit Odoo lié. Associez un produit"
+" Odoo à chaque matériau pour générer une commande."
+msgstr ""
+"Geen enkele lijn met onvoldoende voorraad en een gekoppeld Odoo-product. "
+"Koppel een Odoo-product aan elk materiaal om een bestelling te genereren."
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_audit_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_photo_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rapport_journalier_search
+msgid "Aujourd'hui"
+msgstr "Vandaag"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_rapport_journalier__auteur_id
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_photo_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_plan_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rapport_journalier_search
+msgid "Auteur"
+msgstr "Auteur"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_materiau__categorie__autre
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_outil__categorie__autre
+msgid "Autre"
+msgstr "Andere"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.rapport_avancement_document
+msgid "Avancement"
+msgstr "Voortgang"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__avancement
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_tache__avancement
+msgid "Avancement (%)"
+msgstr "Voortgang (%)"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_sale_order__pourcentage_avancement
+msgid "Avancement chantier (%)"
+msgstr "Voortgang werf (%)"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_account_bank_statement_line__pourcentage_avancement
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_account_move__pourcentage_avancement
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_account_move_form_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_sale_order_form_chantier
+msgid "Avancement facturé (%)"
+msgstr "Gefactureerde voortgang (%)"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.rapport_avancement_document
+msgid "Avancement global du chantier :"
+msgstr "Globale voortgang van de werf:"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rapport_journalier_search
+msgid "Avec incidents"
+msgstr "Met incidenten"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_avenant_form
+msgid "Avenant"
+msgstr "Aanhangsel"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model,name:buildo_gestion_chantier.model_chantier_avenant
+msgid "Avenant à un devis"
+msgstr "Aanhangsel bij een offerte"
+
+#. module: buildo_gestion_chantier
+#: model:ir.actions.act_window,name:buildo_gestion_chantier.action_chantier_avenant
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__avenant_ids
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_sale_order__avenant_ids
+#: model:ir.ui.menu,name:buildo_gestion_chantier.menu_avenant
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_audit_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_avenant_list
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_sale_order_avenant_tab
+msgid "Avenants"
+msgstr "Aanhangsels"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__montant_avenants_acceptes
+msgid "Avenants acceptés"
+msgstr "Aanvaarde aanhangsels"
+
+#. module: buildo_gestion_chantier
+#: model:ir.ui.menu,name:buildo_gestion_chantier.menu_buildo_root
+msgid "BUILDO"
+msgstr "BUILDO"
+
+#. module: buildo_gestion_chantier
+#: model:res.groups.privilege,name:buildo_gestion_chantier.privilege_buildo
+msgid "BUILDO Gestion chantiers"
+msgstr "BUILDO Werfbeheer"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_form
+msgid "Bloquer"
+msgstr "Blokkeren"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_tache__state__bloque
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_search
+msgid "Bloqué"
+msgstr "Geblokkeerd"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_materiau__categorie__bois
+msgid "Bois"
+msgstr "Hout"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_avenant__sale_order_id
+msgid "Bon de commande"
+msgstr "Bestelbon"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_avenant__state__brouillon
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_chantier__state__brouillon
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_demande_materiel__state__brouillon
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_heure_prestee__state__brouillon
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_search
+msgid "Brouillon"
+msgstr "Ontwerp"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_kanban
+msgid "Budget :"
+msgstr "Budget:"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_search_v2
+msgid "Budget dépassé"
+msgstr "Budget overschreden"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__budget_initial
+msgid "Budget initial"
+msgstr "Initieel budget"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,help:buildo_gestion_chantier.field_chantier_chantier__budget_revise
+msgid "Budget initial augmenté du montant des avenants acceptés."
+msgstr "Initieel budget verhoogd met het bedrag van de aanvaarde aanhangsels."
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__budget_revise
+msgid "Budget révisé"
+msgstr "Herzien budget"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_materiau__categorie__beton
+msgid "Béton / Ciment"
+msgstr "Beton / Cement"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_form
+msgid "Calculé automatiquement à partir des sous-tâches cochées ci-dessous."
+msgstr "Automatisch berekend op basis van de hieronder aangevinkte subtaken."
+
+#. module: buildo_gestion_chantier
+#: model:ir.model,name:buildo_gestion_chantier.model_chantier_materiau
+msgid "Catalogue des matériaux"
+msgstr "Materiaalcatalogus"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model,name:buildo_gestion_chantier.model_chantier_outil
+msgid "Catalogue des outils"
+msgstr "Gereedschapscatalogus"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_attribution_outil__categorie
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_materiau__categorie
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_outil__categorie
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_attribution_outil_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_materiau_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_outil_search
+msgid "Catégorie"
+msgstr "Categorie"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_heure_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_photo_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_plan_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rapport_journalier_search
+msgid "Ce mois"
+msgstr "Deze maand"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_attribution_outil.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_attribution_outil.py:0
+msgid "Cet outil a déjà été retourné."
+msgstr "Dit gereedschap werd al teruggebracht."
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_audit_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_photo_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_plan_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rapport_journalier_search
+msgid "Cette semaine"
+msgstr "Deze week"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_tache.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_tache.py:0
+msgid "Cette tâche a déjà été facturée."
+msgstr "Deze taak werd al gefactureerd."
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_account_bank_statement_line__chantier_id
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_account_move__chantier_id
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_assistant_ia__chantier_id
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_attribution_outil__chantier_id
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_avenant__chantier_id
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_demande_materiel__chantier_id
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_estimation_materiau__chantier_id
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_estimation_outil__chantier_id
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_heure_prestee__chantier_id
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_paiement_fss__chantier_id
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_photo__chantier_id
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_plan__chantier_id
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_rapport_journalier__chantier_id
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_tache__chantier_id
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_wizard_rapport_avancement__chantier_id
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_purchase_order__chantier_id
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_sale_order__chantier_id
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_attribution_outil_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_estimation_materiau_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_heure_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_photo_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_plan_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rapport_journalier_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_search
+msgid "Chantier"
+msgstr "Werf"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model,name:buildo_gestion_chantier.model_chantier_chantier
+msgid "Chantier de construction"
+msgstr "Bouwwerf"
+
+#. module: buildo_gestion_chantier
+#: model:ir.actions.act_window,name:buildo_gestion_chantier.action_chantier_chantier
+#: model:ir.ui.menu,name:buildo_gestion_chantier.menu_buildo_chantiers
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_audit_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_list
+msgid "Chantiers"
+msgstr "Werven"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_kanban
+msgid "Chef :"
+msgstr "Werfleider:"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__chef_chantier_id
+#: model:res.groups,name:buildo_gestion_chantier.group_chef_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_search
+msgid "Chef de chantier"
+msgstr "Werfleider"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__client_id
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_search
+msgid "Client"
+msgstr "Klant"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_assistant_ia.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_assistant_ia.py:0
+msgid ""
+"Clé API OpenAI non configurée. Allez dans Paramètres > Paramètres techniques"
+" > Paramètres système et ajoutez la clé 'buildo.openai.api_key'."
+msgstr ""
+"OpenAI API-sleutel niet geconfigureerd. Ga naar Instellingen > Technische "
+"instellingen > Systeemparameters en voeg de sleutel 'buildo.openai.api_key' "
+"toe."
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_estimation_materiau_list
+msgid "Commander"
+msgstr "Bestellen"
+
+#. module: buildo_gestion_chantier
+#: model:ir.actions.act_window,name:buildo_gestion_chantier.action_purchase_order_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__commande_fournisseur_ids
+#: model:ir.ui.menu,name:buildo_gestion_chantier.menu_commande_fournisseur
+msgid "Commandes fournisseur"
+msgstr "Leveranciersbestellingen"
+
+#. module: buildo_gestion_chantier
+#: model:ir.ui.menu,name:buildo_gestion_chantier.menu_buildo_commercial
+msgid "Commercial"
+msgstr "Verkoop"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_wizard_refus_form
+msgid "Confirmer le refus"
+msgstr "Weigering bevestigen"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__cout_reel
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rentabilite_kanban
+msgid "Coût réel"
+msgstr "Werkelijke kost"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_avenant__date
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_heure_prestee__date
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_photo__date
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_plan__date
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_rapport_journalier__date
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_tache_document__date
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_mail_tracking_value__message_date
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.rapport_avancement_document
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_search
+msgid "Date"
+msgstr "Datum"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_outil__date_achat
+msgid "Date d'achat"
+msgstr "Aankoopdatum"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_demande_materiel__date
+msgid "Date de demande"
+msgstr "Aanvraagdatum"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__date_debut
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_tache__date_debut
+msgid "Date de début"
+msgstr "Startdatum"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__date_fin_prevue
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_tache__date_fin
+msgid "Date de fin prévue"
+msgstr "Verwachte einddatum"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__date_fin_reelle
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_tache__date_fin_reelle
+msgid "Date de fin réelle"
+msgstr "Werkelijke einddatum"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_attribution_outil__date_retour_prevue
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_outil__date_retour_prevue
+msgid "Date de retour prévue"
+msgstr "Verwachte retourdatum"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_attribution_outil__date_retour_reelle
+msgid "Date de retour réelle"
+msgstr "Werkelijke retourdatum"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_attribution_outil__date_sortie
+msgid "Date de sortie"
+msgstr "Uitgiftedatum"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_paiement_fss__date
+msgid "Date du paiement"
+msgstr "Betalingsdatum"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_form
+msgid "Demande de matériel"
+msgstr "Materiaalaanvraag"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model,name:buildo_gestion_chantier.model_chantier_demande_materiel
+msgid "Demande de matériel par un ouvrier"
+msgstr "Materiaalaanvraag door een arbeider"
+
+#. module: buildo_gestion_chantier
+#: model:ir.actions.act_window,name:buildo_gestion_chantier.action_chantier_demande_materiel
+#: model:ir.ui.menu,name:buildo_gestion_chantier.menu_demande_materiel
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_audit_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_list
+msgid "Demandes de matériel"
+msgstr "Materiaalaanvragen"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__demande_materiel_ids
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid "Demandes matériel"
+msgstr "Materiaalaanvragen"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__description
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_materiau__description
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_outil__description
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_photo__description
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_tache__description
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_search
+msgid "Description"
+msgstr "Beschrijving"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_photo_form
+msgid "Description de la photo..."
+msgstr "Beschrijving van de foto..."
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_form
+msgid "Description de la tâche..."
+msgstr "Beschrijving van de taak..."
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_demande_materiel__description
+msgid "Description du besoin"
+msgstr "Beschrijving van de behoefte"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid "Description du chantier..."
+msgstr "Beschrijving van de werf..."
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_heure_prestee__description
+msgid "Description du travail"
+msgstr "Beschrijving van het werk"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_heure_prestee_form
+msgid "Description du travail effectué..."
+msgstr "Beschrijving van het uitgevoerde werk..."
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_materiau_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_outil_form
+msgid "Description..."
+msgstr "Beschrijving..."
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid "Devis"
+msgstr "Offerte"
+
+#. module: buildo_gestion_chantier
+#: model:ir.actions.act_window,name:buildo_gestion_chantier.action_sale_order_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__devis_ids
+#: model:ir.ui.menu,name:buildo_gestion_chantier.menu_devis
+msgid "Devis / Bons de commande"
+msgstr "Offertes / Bestelbonnen"
+
+#. module: buildo_gestion_chantier
+#: model:ir.ui.menu,name:buildo_gestion_chantier.menu_buildo_direction
+msgid "Direction"
+msgstr "Directie"
+
+#. module: buildo_gestion_chantier
+#: model:res.groups,name:buildo_gestion_chantier.group_direction
+msgid "Direction / Entrepreneur"
+msgstr "Directie / Aannemer"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_outil__etat__disponible
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_outil_search
+msgid "Disponible"
+msgstr "Beschikbaar"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model,name:buildo_gestion_chantier.model_chantier_tache_document
+msgid "Document lié à une tâche de chantier"
+msgstr "Document gekoppeld aan een werftaak"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_tache__document_ids
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_form
+msgid "Documents"
+msgstr "Documenten"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_search
+msgid "Début cette semaine"
+msgstr "Start deze week"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_estimation_outil__date_debut_prevue
+msgid "Début d'utilisation prévue"
+msgstr "Verwachte startdatum gebruik"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_wizard_facturation_taches_form
+msgid ""
+"Décochez les tâches que vous ne souhaitez pas facturer maintenant.\n"
+"                    Les tâches gardées seront ajoutées comme lignes de facture."
+msgstr ""
+"Vink de taken uit die u nu niet wenst te factureren.\n"
+"                    De behouden taken worden toegevoegd als factuurlijnen."
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rapport_journalier_form
+msgid "Décrire les travaux effectués..."
+msgstr "Beschrijf de uitgevoerde werken..."
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_avenant_form
+msgid "Décrivez la raison de cet avenant..."
+msgstr "Beschrijf de reden van dit aanhangsel..."
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_wizard_refus_form
+msgid "Décrivez le motif du refus (10 caractères minimum)..."
+msgstr "Beschrijf de reden van de weigering (minimum 10 tekens)..."
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_assistant_ia_form
+msgid "Décrivez le problème ou posez votre question..."
+msgstr "Beschrijf het probleem of stel uw vraag..."
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid "Démarrer"
+msgstr "Starten"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_heure_search
+msgid "En attente"
+msgstr "In afwachting"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_chantier__state__en_cours
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_tache__state__en_cours
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_search
+msgid "En cours"
+msgstr "Lopend"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_outil__etat__maintenance
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_outil_search
+msgid "En maintenance"
+msgstr "In onderhoud"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_search_v2
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_search
+msgid "En retard"
+msgstr "Te laat"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_materiau_search
+msgid "En rupture"
+msgstr "Niet op voorraad"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_mail_tracking_value__record_name
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_audit_search
+msgid "Enregistrement"
+msgstr "Record"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_attribution_outil_form
+msgid "Enregistrer le retour"
+msgstr "Retour registreren"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_rapport_journalier__meteo__soleil
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rapport_journalier_search
+msgid "Ensoleillé"
+msgstr "Zonnig"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_assistant_ia.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_assistant_ia.py:0
+msgid "Erreur API OpenAI (%(status)s) : %(detail)s"
+msgstr "OpenAI API-fout (%(status)s): %(detail)s"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_assistant_ia.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_assistant_ia.py:0
+msgid "Erreur inattendue : %s"
+msgstr "Onverwachte fout: %s"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model,name:buildo_gestion_chantier.model_chantier_estimation_outil
+msgid "Estimation d'outils pour un chantier"
+msgstr "Raming van gereedschap voor een werf"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model,name:buildo_gestion_chantier.model_chantier_estimation_materiau
+msgid "Estimation de matériaux pour un chantier"
+msgstr "Raming van materialen voor een werf"
+
+#. module: buildo_gestion_chantier
+#: model:ir.actions.act_window,name:buildo_gestion_chantier.action_chantier_estimation_materiau
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__estimation_materiau_ids
+#: model:ir.ui.menu,name:buildo_gestion_chantier.menu_estimation_materiau
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_estimation_materiau_list
+msgid "Estimations matériaux"
+msgstr "Materiaalramingen"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__estimation_outil_ids
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid "Estimations outils"
+msgstr "Gereedschapsramingen"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_tache__facture_id
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_form
+msgid "Facture"
+msgstr "Factuur"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_form
+msgid "Facturer au client"
+msgstr "Factureren aan klant"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__facture_ids
+#: model:ir.ui.menu,name:buildo_gestion_chantier.menu_facture
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid "Factures"
+msgstr "Facturen"
+
+#. module: buildo_gestion_chantier
+#: model:ir.actions.act_window,name:buildo_gestion_chantier.action_account_move_chantier
+msgid "Factures chantiers"
+msgstr "Werffacturen"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rentabilite_kanban
+msgid "Facturé"
+msgstr "Gefactureerd"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_tache_checklist__fait
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_tache__state__fait
+msgid "Fait"
+msgstr "Voltooid"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_assistant_ia_form
+msgid "Fermer"
+msgstr "Sluiten"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_tache_document__fichier
+msgid "Fichier"
+msgstr "Bestand"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_plan__fichier
+msgid "Fichier (PDF/image)"
+msgstr "Bestand (PDF/afbeelding)"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_search
+msgid "Fin ce mois"
+msgstr "Einde deze maand"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_search
+msgid "Fin cette semaine"
+msgstr "Einde deze week"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_estimation_outil__date_fin_prevue
+msgid "Fin d'utilisation prévue"
+msgstr "Verwachte einddatum gebruik"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.rapport_avancement_document
+msgid "Fin réelle"
+msgstr "Werkelijk einde"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_materiau__categorie__finition
+msgid "Finition"
+msgstr "Afwerking"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model,name:buildo_gestion_chantier.model_chantier_wizard_rapport_avancement
+msgid "Génération du rapport d'avancement chantier à envoyer au client"
+msgstr ""
+"Genereren van het voortgangsrapport van de werf om naar de klant te sturen"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_wizard_rapport_avancement_form
+msgid "Générer le PDF"
+msgstr "PDF genereren"
+
+#. module: buildo_gestion_chantier
+#: model:ir.actions.act_window,name:buildo_gestion_chantier.action_chantier_heure_prestee
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__heure_prestee_ids
+#: model:ir.ui.menu,name:buildo_gestion_chantier.menu_heure_prestee
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_audit_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_heure_prestee_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_heure_prestee_list
+msgid "Heures prestées"
+msgstr "Gepresteerde uren"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model,name:buildo_gestion_chantier.model_chantier_heure_prestee
+msgid "Heures prestées par un ouvrier sur un chantier"
+msgstr "Uren gepresteerd door een arbeider op een werf"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__nb_heures
+msgid "Heures validées"
+msgstr "Gevalideerde uren"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_outil__etat__hors_service
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_outil_search
+msgid "Hors service"
+msgstr "Buiten dienst"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_materiau_form
+msgid "Identification"
+msgstr "Identificatie"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_account_move_chantier_search
+msgid "Impayées"
+msgstr "Onbetaald"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_rapport_journalier__incidents
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rapport_journalier_form
+msgid "Incidents / Remarques"
+msgstr "Incidenten / Opmerkingen"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.rapport_avancement_document
+msgid "Incidents :"
+msgstr "Incidenten:"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rapport_journalier_form
+msgid "Incidents, problèmes, remarques..."
+msgstr "Incidenten, problemen, opmerkingen..."
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_tache.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_tache.py:0
+msgid "Indiquez un montant facturable avant de facturer cette tâche."
+msgstr "Geef een factureerbaar bedrag op voordat u deze taak factureert."
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_tache_checklist__name
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_tache_document__name
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_plan_search
+msgid "Intitulé"
+msgstr "Titel"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_plan__name
+msgid "Intitulé du plan"
+msgstr "Titel van het plan"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_materiau__categorie__isolation
+msgid "Isolation"
+msgstr "Isolatie"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_audit_search
+msgid "Jour"
+msgstr "Dag"
+
+#. module: buildo_gestion_chantier
+#: model:ir.actions.act_window,name:buildo_gestion_chantier.action_chantier_audit
+#: model:ir.ui.menu,name:buildo_gestion_chantier.menu_chantier_audit
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_audit_list
+msgid "Journal d'audit"
+msgstr "Auditlogboek"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_assistant_ia.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_assistant_ia.py:0
+msgid "L'API OpenAI n'a pas répondu dans le délai imparti. Réessayez."
+msgstr ""
+"De OpenAI API heeft niet binnen de gestelde tijd geantwoord. Probeer "
+"opnieuw."
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_tache.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_tache.py:0
+msgid "L'avancement doit être compris entre 0 et 100."
+msgstr "De voortgang moet tussen 0 en 100 liggen."
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_chantier.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_chantier.py:0
+msgid "La date de fin prévue ne peut pas être antérieure à la date de début."
+msgstr "De verwachte einddatum mag niet vóór de startdatum liggen."
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_demande_materiel.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_demande_materiel.py:0
+msgid "La quantité demandée doit être supérieure à 0."
+msgstr "De gevraagde hoeveelheid moet groter zijn dan 0."
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_estimation_materiau.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_estimation_materiau.py:0
+msgid "La quantité estimée doit être supérieure à 0."
+msgstr "De geraamde hoeveelheid moet groter zijn dan 0."
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_chantier.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_chantier.py:0
+msgid "Le budget initial ne peut pas être négatif."
+msgstr "Het initiële budget mag niet negatief zijn."
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_wizard_refus.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_wizard_refus.py:0
+msgid "Le motif doit contenir au moins 10 caractères."
+msgstr "De reden moet minstens 10 tekens bevatten."
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_heure_prestee.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_heure_prestee.py:0
+msgid "Le nombre d'heures doit être supérieur à 0."
+msgstr "Het aantal uren moet groter zijn dan 0."
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_heure_prestee.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_heure_prestee.py:0
+msgid "Le taux horaire doit être supérieur à 0."
+msgstr "Het uurtarief moet groter zijn dan 0."
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_outil__categorie__levage
+msgid "Levage / Manutention"
+msgstr "Hijswerk / Behandeling"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_materiau_search
+msgid "Lié à un produit"
+msgstr "Gekoppeld aan een product"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__cout_main_oeuvre
+msgid "Main d'œuvre"
+msgstr "Arbeid"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid "Main d'œuvre :"
+msgstr "Arbeid:"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_estimation_materiau_search
+msgid "Manquant"
+msgstr "Ontbrekend"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__marge
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rentabilite_kanban
+msgid "Marge"
+msgstr "Marge"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rentabilite_list
+msgid "Marge totale"
+msgstr "Totale marge"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_paiement_fss_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_paiement_fss_list
+msgid "Marquer payé"
+msgstr "Markeren als betaald"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_estimation_materiau__materiau_id
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_estimation_materiau_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_materiau_form
+msgid "Matériau"
+msgstr "Materiaal"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_demande_materiel__materiau_id
+msgid "Matériau (optionnel)"
+msgstr "Materiaal (optioneel)"
+
+#. module: buildo_gestion_chantier
+#: model:ir.actions.act_window,name:buildo_gestion_chantier.action_chantier_materiau
+#: model:ir.ui.menu,name:buildo_gestion_chantier.menu_materiau
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_materiau_list
+msgid "Matériaux"
+msgstr "Materialen"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid "Matériaux :"
+msgstr "Materialen:"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_tache__estimation_materiau_ids
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_form
+msgid "Matériaux nécessaires"
+msgstr "Benodigde materialen"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_wizard_rapport_avancement__message_client
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_wizard_rapport_avancement_form
+msgid "Message au client"
+msgstr "Bericht aan de klant"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_outil__categorie__mesure
+msgid "Mesure"
+msgstr "Meting"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_mail_tracking_value__message_author_id
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_audit_search
+msgid "Modifié par"
+msgstr "Gewijzigd door"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_mail_tracking_value__res_model
+msgid "Modèle"
+msgstr "Model"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_heure_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_photo_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_plan_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rapport_journalier_search
+msgid "Mois"
+msgstr "Maand"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_heure_prestee__montant
+msgid "Montant"
+msgstr "Bedrag"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_paiement_fss__montant
+msgid "Montant FSS (€)"
+msgstr "FSS-bedrag (€)"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_avenant__montant_ht
+msgid "Montant HT de l'avenant"
+msgstr "Bedrag excl. btw van het aanhangsel"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_estimation_materiau__montant_estime
+msgid "Montant estimé"
+msgstr "Geraamd bedrag"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_tache__montant_facturable
+msgid "Montant facturable"
+msgstr "Factureerbaar bedrag"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__montant_facture
+msgid "Montant facturé"
+msgstr "Gefactureerd bedrag"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_avenant__motif
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_avenant_form
+msgid "Motif de la modification"
+msgstr "Reden van de wijziging"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model,name:buildo_gestion_chantier.model_chantier_wizard_refus
+msgid "Motif de refus"
+msgstr "Reden van weigering"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_heure_prestee__note_refus
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_wizard_refus__motif
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_wizard_refus_form
+msgid "Motif du refus"
+msgstr "Reden van de weigering"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_heure_prestee_form
+msgid "Motif du refus..."
+msgstr "Reden van de weigering..."
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_materiau__categorie__metal
+msgid "Métal / Acier"
+msgstr "Metaal / Staal"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_rapport_journalier__meteo
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rapport_journalier_search
+msgid "Météo"
+msgstr "Weer"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_rapport_journalier__meteo__neige
+msgid "Neige"
+msgstr "Sneeuw"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.rapport_avancement_document
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_materiau_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_outil_search
+msgid "Nom"
+msgstr "Naam"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_outil__name
+msgid "Nom de l'outil"
+msgstr "Naam van het gereedschap"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_tache__name
+msgid "Nom de la tâche"
+msgstr "Naam van de taak"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__name
+msgid "Nom du chantier"
+msgstr "Naam van de werf"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid "Nom du chantier..."
+msgstr "Naam van de werf..."
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_plan__fichier_name
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_tache_document__fichier_name
+msgid "Nom du fichier"
+msgstr "Bestandsnaam"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_materiau__name
+msgid "Nom du matériau"
+msgstr "Naam van het materiaal"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_heure_prestee__nb_heures
+msgid "Nombre d'heures"
+msgstr "Aantal uren"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_rapport_journalier__nb_ouvriers
+msgid "Nombre d'ouvriers présents"
+msgstr "Aantal aanwezige arbeiders"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_demande_materiel__urgence__normale
+msgid "Normale"
+msgstr "Normaal"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_attribution_outil__note
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_avenant__note
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_demande_materiel__note
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_estimation_materiau__note
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_estimation_outil__note
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_paiement_fss__note
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_tache_checklist__note
+msgid "Note"
+msgstr "Notitie"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_attribution_outil_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_paiement_fss_form
+msgid "Note..."
+msgstr "Notitie..."
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_tache__note
+msgid "Notes"
+msgstr "Notities"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_rapport_journalier__note
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rapport_journalier_form
+msgid "Notes complémentaires"
+msgstr "Aanvullende notities"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_avenant_form
+msgid "Notes complémentaires..."
+msgstr "Aanvullende notities..."
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_form
+msgid "Notes..."
+msgstr "Notities..."
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_mail_tracking_value__new_value_display
+msgid "Nouvelle valeur"
+msgstr "Nieuwe waarde"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_rapport_journalier__meteo__nuageux
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rapport_journalier_search
+msgid "Nuageux"
+msgstr "Bewolkt"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_attribution_outil__outil_id
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_estimation_outil__outil_id
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_outil_form
+msgid "Outil"
+msgstr "Gereedschap"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_outil__categorie__outillage_main
+msgid "Outillage à main"
+msgstr "Handgereedschap"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_outil__categorie__outillage_electrique
+msgid "Outillage électrique"
+msgstr "Elektrisch gereedschap"
+
+#. module: buildo_gestion_chantier
+#: model:ir.actions.act_window,name:buildo_gestion_chantier.action_chantier_outil
+#: model:ir.ui.menu,name:buildo_gestion_chantier.menu_outil
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_outil_list
+msgid "Outils"
+msgstr "Gereedschap"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_tache__estimation_outil_ids
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_form
+msgid "Outils nécessaires"
+msgstr "Benodigd gereedschap"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_attribution_outil__ouvrier_id
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_demande_materiel__ouvrier_id
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_heure_prestee__ouvrier_id
+#: model:res.groups,name:buildo_gestion_chantier.group_ouvrier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_heure_search
+msgid "Ouvrier"
+msgstr "Arbeider"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_paiement_fss__ouvrier_id
+msgid "Ouvrier concerné"
+msgstr "Betrokken arbeider"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_paiement_fss_form
+msgid "Paiement FSS"
+msgstr "FSS-betaling"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model,name:buildo_gestion_chantier.model_chantier_paiement_fss
+msgid "Paiement Fonds de Sécurité d'Existence (FSS)"
+msgstr "Betaling Fonds voor Bestaanszekerheid (FSS)"
+
+#. module: buildo_gestion_chantier
+#: model:ir.actions.act_window,name:buildo_gestion_chantier.action_chantier_paiement_fss
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__paiement_fss_ids
+#: model:ir.ui.menu,name:buildo_gestion_chantier.menu_paiement_fss
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_audit_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_paiement_fss_list
+msgid "Paiements FSS"
+msgstr "FSS-betalingen"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_paiement_fss__state__paye
+msgid "Payé"
+msgstr "Betaald"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_account_move_chantier_search
+msgid "Payées"
+msgstr "Betaald"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_photo__image
+msgid "Photo"
+msgstr "Foto"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model,name:buildo_gestion_chantier.model_chantier_photo
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_photo_form
+msgid "Photo de chantier"
+msgstr "Werffoto"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_assistant_ia__image
+msgid "Photo du problème"
+msgstr "Foto van het probleem"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_assistant_ia_form
+msgid "Photo du problème (optionnel)"
+msgstr "Foto van het probleem (optioneel)"
+
+#. module: buildo_gestion_chantier
+#: model:ir.actions.act_window,name:buildo_gestion_chantier.action_chantier_photo
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__photo_ids
+#: model:ir.ui.menu,name:buildo_gestion_chantier.menu_photo
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.rapport_avancement_document
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_photo_list
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_wizard_rapport_avancement_form
+msgid "Photos"
+msgstr "Foto's"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_tache__photo_ids
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_form
+msgid "Photos de preuve"
+msgstr "Bewijsfoto's"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_wizard_rapport_avancement__photo_ids
+msgid "Photos à inclure"
+msgstr "Foto's om op te nemen"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_plan_form
+msgid "Plan de chantier"
+msgstr "Werfplan"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model,name:buildo_gestion_chantier.model_chantier_plan
+msgid "Plan de chantier (PDF ou image)"
+msgstr "Werfplan (PDF of afbeelding)"
+
+#. module: buildo_gestion_chantier
+#: model:ir.actions.act_window,name:buildo_gestion_chantier.action_chantier_plan
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__plan_ids
+#: model:ir.ui.menu,name:buildo_gestion_chantier.menu_plan
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.rapport_avancement_document
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_plan_list
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_wizard_rapport_avancement_form
+msgid "Plans"
+msgstr "Plannen"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_wizard_rapport_avancement__plan_ids
+msgid "Plans à inclure"
+msgstr "Plannen om op te nemen"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_materiau__categorie__plomberie
+msgid "Plomberie"
+msgstr "Sanitair"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_rapport_journalier__meteo__pluie
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rapport_journalier_search
+msgid "Pluie"
+msgstr "Regen"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_photo__auteur_id
+msgid "Pris par"
+msgstr "Genomen door"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_estimation_materiau__prix_unitaire
+msgid "Prix unitaire"
+msgstr "Eenheidsprijs"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_materiau__prix_unitaire
+msgid "Prix unitaire (€)"
+msgstr "Eenheidsprijs (€)"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_estimation_materiau_list
+msgid "Produit"
+msgstr "Product"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_estimation_materiau__produit_id
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_materiau__product_id
+msgid "Produit Odoo"
+msgstr "Odoo-product"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_materiau_search
+msgid "Produit lié"
+msgstr "Gekoppeld product"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_paiement_fss__periode
+msgid "Période (ex: Q1 2026)"
+msgstr "Periode (bv. Q1 2026)"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_demande_materiel__quantite
+msgid "Quantité demandée"
+msgstr "Gevraagde hoeveelheid"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_estimation_materiau__quantite_estimee
+msgid "Quantité estimée"
+msgstr "Geraamde hoeveelheid"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_estimation_materiau__quantite_manquante
+msgid "Quantité manquante"
+msgstr "Ontbrekende hoeveelheid"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_assistant_ia__question
+msgid "Question / Description du problème"
+msgstr "Vraag / Beschrijving van het probleem"
+
+#. module: buildo_gestion_chantier
+#: model:ir.actions.report,name:buildo_gestion_chantier.action_report_rapport_avancement
+msgid "Rapport d'avancement chantier"
+msgstr "Voortgangsrapport werf"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_wizard_rapport_avancement_form
+msgid "Rapport d'avancement à envoyer au client"
+msgstr "Voortgangsrapport te versturen naar de klant"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid "Rapport de suivi"
+msgstr "Opvolgingsrapport"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rapport_journalier_form
+msgid "Rapport journalier"
+msgstr "Dagrapport"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model,name:buildo_gestion_chantier.model_chantier_rapport_journalier
+msgid "Rapport journalier de chantier"
+msgstr "Dagrapport van de werf"
+
+#. module: buildo_gestion_chantier
+#: model:ir.actions.act_window,name:buildo_gestion_chantier.action_chantier_rapport_journalier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__rapport_journalier_ids
+#: model:ir.ui.menu,name:buildo_gestion_chantier.menu_rapport_journalier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.rapport_avancement_document
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rapport_journalier_list
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_wizard_rapport_avancement_form
+msgid "Rapports journaliers"
+msgstr "Dagrapporten"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_wizard_rapport_avancement__rapport_journalier_ids
+msgid "Rapports journaliers à inclure"
+msgstr "Dagrapporten om op te nemen"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_audit_search
+msgid "Rechercher dans le journal d'audit"
+msgstr "Zoeken in het auditlogboek"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_materiau_search
+msgid "Rechercher un matériau"
+msgstr "Een materiaal zoeken"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_outil_search
+msgid "Rechercher un outil"
+msgstr "Een gereedschap zoeken"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_plan_search
+msgid "Rechercher un plan"
+msgstr "Een plan zoeken"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rapport_journalier_search
+msgid "Rechercher un rapport"
+msgstr "Een rapport zoeken"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_attribution_outil_search
+msgid "Rechercher une attribution"
+msgstr "Een toewijzing zoeken"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_search
+msgid "Rechercher une demande"
+msgstr "Een aanvraag zoeken"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_estimation_materiau_search
+msgid "Rechercher une estimation"
+msgstr "Een raming zoeken"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_photo_search
+msgid "Rechercher une photo"
+msgstr "Een foto zoeken"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_search
+msgid "Rechercher une tâche"
+msgstr "Een taak zoeken"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_avenant_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_heure_prestee_form
+msgid "Refuser"
+msgstr "Weigeren"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_avenant__state__refuse
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_demande_materiel__state__refuse
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_heure_prestee__state__refuse
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_search
+msgid "Refusé"
+msgstr "Geweigerd"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_heure_search
+msgid "Refusées"
+msgstr "Geweigerd"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_heure_prestee_form
+msgid "Remettre en brouillon"
+msgstr "Terugzetten naar ontwerp"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_form
+msgid "Remettre à faire"
+msgstr "Terugzetten naar te doen"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rentabilite_graph
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rentabilite_list
+msgid "Rentabilité des chantiers"
+msgstr "Rendabiliteit van de werven"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_form
+msgid "Reprendre"
+msgstr "Hervatten"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_tache__responsable_id
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_search
+msgid "Responsable"
+msgstr "Verantwoordelijke"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_attribution_outil_list
+msgid "Retour"
+msgstr "Terugbrengen"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_attribution_outil__state__retourne
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_attribution_outil_search
+msgid "Retourné"
+msgstr "Teruggebracht"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__ref
+msgid "Référence"
+msgstr "Referentie"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_avenant__name
+msgid "Référence avenant"
+msgstr "Referentie aanhangsel"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_paiement_fss__reference_paiement
+msgid "Référence de paiement"
+msgstr "Betalingsreferentie"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_materiau__ref_interne
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_outil__ref_interne
+msgid "Référence interne"
+msgstr "Interne referentie"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_assistant_ia__reponse
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_assistant_ia_form
+msgid "Réponse de l'assistant"
+msgstr "Antwoord van de assistent"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_materiau_search
+msgid "Sans produit lié"
+msgstr "Zonder gekoppeld product"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rapport_journalier_search
+msgid "Semaine"
+msgstr "Week"
+
+#. module: buildo_gestion_chantier
+#: model:res.groups,name:buildo_gestion_chantier.group_service_administratif
+msgid "Service administratif"
+msgstr "Administratieve dienst"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_materiau__seuil_alerte
+msgid "Seuil d'alerte stock"
+msgstr "Voorraadalarmdrempel"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_tache.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_tache.py:0
+msgid "Seule une tâche terminée peut être facturée."
+msgstr "Enkel een voltooide taak kan gefactureerd worden."
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_heure_prestee_form
+msgid "Soumettre"
+msgstr "Indienen"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_demande_materiel__state__soumis
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_heure_prestee__state__soumis
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_search
+msgid "Soumis"
+msgstr "Ingediend"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_materiau__en_alerte
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_materiau_search
+msgid "Sous le seuil d'alerte"
+msgstr "Onder de alarmdrempel"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model,name:buildo_gestion_chantier.model_chantier_tache_checklist
+msgid "Sous-tâche / point de contrôle"
+msgstr "Subtaak / controlepunt"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_tache__checklist_ids
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_form
+msgid "Sous-tâches"
+msgstr "Subtaken"
+
+#. module: buildo_gestion_chantier
+#: model:ir.ui.menu,name:buildo_gestion_chantier.menu_buildo_stock
+msgid "Stock"
+msgstr "Voorraad"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_estimation_materiau__stock_disponible
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_materiau__stock_disponible
+msgid "Stock disponible"
+msgstr "Beschikbare voorraad"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_materiau_form
+msgid "Stock et prix"
+msgstr "Voorraad en prijs"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_estimation_materiau_search
+msgid "Stock suffisant"
+msgstr "Voldoende voorraad"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_outil__categorie__securite
+msgid "Sécurité"
+msgstr "Veiligheid"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model,name:buildo_gestion_chantier.model_chantier_wizard_facturation_taches
+msgid "Sélection des tâches terminées à facturer"
+msgstr "Selectie van de te factureren voltooide taken"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_account_move_form_chantier
+msgid "Sélectionner des tâches à facturer"
+msgstr "Te factureren taken selecteren"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_wizard_rapport_avancement.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_wizard_rapport_avancement.py:0
+msgid ""
+"Sélectionnez au moins un élément (tâche, photo, rapport ou plan) à inclure "
+"dans le rapport."
+msgstr ""
+"Selecteer minstens één element (taak, foto, rapport of plan) om in het "
+"rapport op te nemen."
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_wizard_facturation_taches.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_wizard_facturation_taches.py:0
+msgid "Sélectionnez au moins une tâche à facturer."
+msgstr "Selecteer minstens één te factureren taak."
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_wizard_rapport_avancement_form
+msgid ""
+"Sélectionnez les éléments à inclure dans le rapport PDF à envoyer au client.\n"
+"                    La sélection des photos se met à jour automatiquement selon les tâches choisies,\n"
+"                    mais vous pouvez l'ajuster librement."
+msgstr ""
+"Selecteer de elementen die u wilt opnemen in het PDF-rapport voor de klant.\n"
+"                    De selectie van foto's wordt automatisch bijgewerkt op basis van de gekozen taken,\n"
+"                    maar u kunt deze vrij aanpassen."
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_tache__sequence
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_tache_checklist__sequence
+msgid "Séquence"
+msgstr "Volgorde"
+
+#. module: buildo_gestion_chantier
+#: model:ir.ui.menu,name:buildo_gestion_chantier.menu_dashboard
+msgid "Tableau de bord"
+msgstr "Dashboard"
+
+#. module: buildo_gestion_chantier
+#: model:ir.actions.act_window,name:buildo_gestion_chantier.action_chantier_dashboard
+msgid "Tableau de bord — Rentabilité"
+msgstr "Dashboard — Rendabiliteit"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_heure_prestee__taux_horaire
+msgid "Taux horaire (€/h)"
+msgstr "Uurtarief (€/u)"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid "Terminer"
+msgstr "Voltooien"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_chantier__state__termine
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_search
+msgid "Terminé"
+msgstr "Voltooid"
+
+#. module: buildo_gestion_chantier
+#: model:ir.ui.menu,name:buildo_gestion_chantier.menu_buildo_terrain
+msgid "Terrain"
+msgstr "Terrein"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_photo__name
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_photo_search
+msgid "Titre"
+msgstr "Titel"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_wizard_rapport_avancement__titre
+msgid "Titre du rapport"
+msgstr "Titel van het rapport"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_materiau__categorie__toiture
+msgid "Toiture"
+msgstr "Dakwerk"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_avenant_list
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_heure_prestee_list
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_paiement_fss_list
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_wizard_facturation_taches_form
+msgid "Total"
+msgstr "Totaal"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rentabilite_list
+msgid "Total M.O."
+msgstr "Totaal arbeid"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rentabilite_list
+msgid "Total budget"
+msgstr "Totaal budget"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rentabilite_list
+msgid "Total budget révisé"
+msgstr "Totaal herzien budget"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rentabilite_list
+msgid "Total coût réel"
+msgstr "Totaal werkelijke kost"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_estimation_materiau_list
+msgid "Total estimé"
+msgstr "Totaal geraamd"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rentabilite_list
+msgid "Total facturé"
+msgstr "Totaal gefactureerd"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rentabilite_list
+msgid "Total matériaux"
+msgstr "Totaal materialen"
+
+#. module: buildo_gestion_chantier
+#: model:ir.ui.menu,name:buildo_gestion_chantier.menu_chantier_chantier
+msgid "Tous les chantiers"
+msgstr "Alle werven"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_rapport_journalier__travaux_realises
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rapport_journalier_form
+msgid "Travaux réalisés"
+msgstr "Uitgevoerde werken"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_mail_mail__model_label
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_mail_message__model_label
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_mail_tracking_value__model_label
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_audit_search
+msgid "Type d'enregistrement"
+msgstr "Type record"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_tache_checklist__tache_id
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_tache_document__tache_id
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.rapport_avancement_document
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_wizard_facturation_taches_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_wizard_rapport_avancement_form
+msgid "Tâche"
+msgstr "Taak"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_estimation_materiau__tache_id
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_estimation_outil__tache_id
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_photo__tache_id
+msgid "Tâche liée"
+msgstr "Gekoppelde taak"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model,name:buildo_gestion_chantier.model_chantier_tache
+msgid "Tâche planifiée du chantier"
+msgstr "Geplande taak van de werf"
+
+#. module: buildo_gestion_chantier
+#: model:ir.actions.act_window,name:buildo_gestion_chantier.action_chantier_tache
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__tache_ids
+#: model:ir.ui.menu,name:buildo_gestion_chantier.menu_chantier_tache
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.rapport_avancement_document
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_audit_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_list
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_wizard_rapport_avancement_form
+msgid "Tâches"
+msgstr "Taken"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_account_bank_statement_line__tache_a_facturer_ids
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_account_move__tache_a_facturer_ids
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_wizard_facturation_taches_form
+msgid "Tâches terminées à facturer"
+msgstr "Te factureren voltooide taken"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_wizard_facturation_taches__tache_ids
+msgid "Tâches à facturer"
+msgstr "Te factureren taken"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_wizard_rapport_avancement__tache_ids
+msgid "Tâches à inclure"
+msgstr "Taken om op te nemen"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_wizard_rapport_avancement_form
+msgid "Un mot sur l'avancement du chantier à destination du client..."
+msgstr "Enkele woorden over de voortgang van de werf voor de klant..."
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_estimation_materiau__unite
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_materiau__unite
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_materiau_search
+msgid "Unité"
+msgstr "Eenheid"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_demande_materiel__urgence
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_search
+msgid "Urgence"
+msgstr "Urgentie"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_demande_materiel__urgence__urgente
+msgid "Urgente"
+msgstr "Dringend"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_search
+msgid "Urgentes"
+msgstr "Dringend"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_outil__valeur_achat
+msgid "Valeur d'achat (€)"
+msgstr "Aankoopwaarde (€)"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_heure_prestee_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_form
+msgid "Valider"
+msgstr "Valideren"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_demande_materiel__state__valide
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_heure_prestee__state__valide
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_search
+msgid "Validé"
+msgstr "Gevalideerd"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_tache_checklist__fait_le
+msgid "Validé le"
+msgstr "Gevalideerd op"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_demande_materiel__validateur_id
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_heure_prestee__validateur_id
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_tache_checklist__fait_par_id
+msgid "Validé par"
+msgstr "Gevalideerd door"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_heure_search
+msgid "Validées"
+msgstr "Gevalideerd"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_rapport_journalier__meteo__vent
+msgid "Venteux"
+msgstr "Winderig"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_plan__version
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.rapport_avancement_document
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_plan_search
+msgid "Version"
+msgstr "Versie"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_list
+msgid "Voir le détail"
+msgstr "Details bekijken"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_assistant_ia_form
+msgid "Votre question"
+msgstr "Uw vraag"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid "d'avenants acceptés"
+msgstr "aanvaarde aanhangsels"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid "dont"
+msgstr "waarvan"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid "heures validées"
+msgstr "gevalideerde uren"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_materiau__unite__kg
+msgid "kg"
+msgstr "kg"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_materiau__unite__litre
+msgid "litre"
+msgstr "liter"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_materiau__unite__m
+msgid "m"
+msgstr "m"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_materiau__unite__m2
+msgid "m²"
+msgstr "m²"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_materiau__unite__m3
+msgid "m³"
+msgstr "m³"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.rapport_avancement_document
+msgid "ouvrier(s)"
+msgstr "arbeider(s)"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_materiau__unite__piece
+msgid "pièce"
+msgstr "stuk"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_materiau__unite__sac
+msgid "sac"
+msgstr "zak"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid "sur budget de"
+msgstr "op budget van"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_materiau__unite__tonne
+msgid "tonne"
+msgstr "ton"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_tache__state__a_faire
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_search
+msgid "À faire"
+msgstr "Te doen"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_paiement_fss__state__a_payer
+msgid "À payer"
+msgstr "Te betalen"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_materiau__categorie__electricite
+msgid "Électricité"
+msgstr "Elektriciteit"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_attribution_outil__state
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_avenant__state
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__state
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_demande_materiel__state
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_estimation_outil__etat_outil
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_heure_prestee__state
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_outil__etat
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_paiement_fss__state
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_tache__state
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.rapport_avancement_document
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_outil_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_search
+msgid "État"
+msgstr "Status"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_tache__facture_state
+msgid "État de la facture"
+msgstr "Status van de factuur"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid "Êtes-vous sûr de vouloir supprimer cette attribution ?"
+msgstr "Weet u zeker dat u deze toewijzing wilt verwijderen?"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_list
+msgid "Êtes-vous sûr de vouloir supprimer cette tâche ?"
+msgstr "Weet u zeker dat u deze taak wilt verwijderen?"

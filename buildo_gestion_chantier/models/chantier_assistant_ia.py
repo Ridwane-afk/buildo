@@ -3,7 +3,7 @@ import logging
 
 import requests
 
-from odoo import models, fields
+from odoo import models, fields, _
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
@@ -22,11 +22,11 @@ class ChantierAssistantIA(models.TransientModel):
     def _get_api_key(self):
         key = self.env['ir.config_parameter'].sudo().get_param('buildo.openai.api_key')
         if not key:
-            raise UserError(
+            raise UserError(_(
                 "Clé API OpenAI non configurée. Allez dans Paramètres > "
                 "Paramètres techniques > Paramètres système et ajoutez "
                 "la clé 'buildo.openai.api_key'."
-            )
+            ))
         return key
 
     def _construire_contexte(self):
@@ -55,6 +55,7 @@ class ChantierAssistantIA(models.TransientModel):
         api_key = self._get_api_key()
         contexte = self._construire_contexte()
 
+        langue_reponse = {'nl_NL': 'néerlandais', 'nl_BE': 'néerlandais'}.get(self.env.user.lang, 'français')
         system_prompt = (
             "Tu es un expert en bâtiment et travaux publics (BTP) spécialisé "
             "pour le marché belge. Tu maîtrises les techniques de construction, "
@@ -62,8 +63,8 @@ class ChantierAssistantIA(models.TransientModel):
             "les matériaux et leur mise en œuvre. Tu analyses les problèmes de "
             "chantier avec pragmatisme et proposes des solutions concrètes.\n\n"
             f"Contexte du chantier :\n{contexte}\n\n"
-            "Réponds en français, de façon précise et pratique. Si une photo "
-            "est fournie, commence par décrire ce que tu observes avant de "
+            f"Réponds en {langue_reponse}, de façon précise et pratique. Si une "
+            "photo est fournie, commence par décrire ce que tu observes avant de "
             "proposer une solution."
         )
 
@@ -104,16 +105,17 @@ class ChantierAssistantIA(models.TransientModel):
             resp.raise_for_status()
             self.reponse = resp.json()['choices'][0]['message']['content']
         except requests.exceptions.Timeout:
-            raise UserError(
+            raise UserError(_(
                 "L'API OpenAI n'a pas répondu dans le délai imparti. Réessayez."
-            )
+            ))
         except requests.exceptions.HTTPError:
-            raise UserError(
-                f"Erreur API OpenAI ({resp.status_code}) : {resp.text[:300]}"
-            )
+            raise UserError(_(
+                "Erreur API OpenAI (%(status)s) : %(detail)s",
+                status=resp.status_code, detail=resp.text[:300],
+            ))
         except Exception as e:
             _logger.exception("Erreur inattendue lors de l'appel OpenAI")
-            raise UserError(f"Erreur inattendue : {e}")
+            raise UserError(_("Erreur inattendue : %s", e))
 
         return {
             'type': 'ir.actions.act_window',

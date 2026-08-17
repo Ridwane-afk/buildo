@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
 
@@ -12,7 +12,7 @@ class ChantierWizardRefus(models.TransientModel):
     def _check_motif(self):
         for rec in self:
             if not rec.motif or len(rec.motif.strip()) < 10:
-                raise ValidationError("Le motif doit contenir au moins 10 caractères.")
+                raise ValidationError(_("Le motif doit contenir au moins 10 caractères."))
 
     def action_confirmer(self):
         ctx = self.env.context

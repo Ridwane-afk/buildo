@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 from odoo.exceptions import UserError, ValidationError
 
 
@@ -38,7 +38,7 @@ class ChantierTache(models.Model):
     def _check_avancement(self):
         for rec in self:
             if not 0 <= rec.avancement <= 100:
-                raise ValidationError("L'avancement doit être compris entre 0 et 100.")
+                raise ValidationError(_("L'avancement doit être compris entre 0 et 100."))
 
     def _sync_avancement_from_checklist(self):
         """Recalcule l'avancement à partir des sous-tâches cochées, si la tâche en a."""
@@ -96,11 +96,11 @@ class ChantierTache(models.Model):
     def action_facturer(self):
         self.ensure_one()
         if self.facture_id and self.facture_id.state != 'cancel':
-            raise UserError("Cette tâche a déjà été facturée.")
+            raise UserError(_("Cette tâche a déjà été facturée."))
         if self.state != 'fait':
-            raise UserError("Seule une tâche terminée peut être facturée.")
+            raise UserError(_("Seule une tâche terminée peut être facturée."))
         if not self.montant_facturable:
-            raise UserError("Indiquez un montant facturable avant de facturer cette tâche.")
+            raise UserError(_("Indiquez un montant facturable avant de facturer cette tâche."))
         facture = self.env['account.move'].create({
             'move_type': 'out_invoice',
             'partner_id': self.chantier_id.client_id.id,

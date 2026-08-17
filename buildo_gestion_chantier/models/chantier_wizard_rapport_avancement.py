@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 from odoo.exceptions import UserError
 
 
@@ -52,5 +52,5 @@ class ChantierWizardRapportAvancement(models.TransientModel):
     def action_generate_pdf(self):
         self.ensure_one()
         if not self.tache_ids and not self.photo_ids and not self.rapport_journalier_ids and not self.plan_ids:
-            raise UserError("Sélectionnez au moins un élément (tâche, photo, rapport ou plan) à inclure dans le rapport.")
+            raise UserError(_("Sélectionnez au moins un élément (tâche, photo, rapport ou plan) à inclure dans le rapport."))
         return self.env.ref('buildo_gestion_chantier.action_report_rapport_avancement').report_action(self)

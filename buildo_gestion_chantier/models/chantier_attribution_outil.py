@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 from odoo.exceptions import UserError
 
 
@@ -31,6 +31,6 @@ class ChantierAttributionOutil(models.Model):
     def action_retour(self):
         for rec in self:
             if rec.state != 'attribue':
-                raise UserError("Cet outil a déjà été retourné.")
+                raise UserError(_("Cet outil a déjà été retourné."))
             rec.write({'state': 'retourne', 'date_retour_reelle': fields.Date.today()})
             rec.outil_id.write({'etat': 'disponible'})

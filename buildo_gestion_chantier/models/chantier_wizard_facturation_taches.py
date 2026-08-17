@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 from odoo.exceptions import UserError
 
 
@@ -24,7 +24,7 @@ class ChantierWizardFacturationTaches(models.TransientModel):
     def action_ajouter(self):
         self.ensure_one()
         if not self.tache_ids:
-            raise UserError("Sélectionnez au moins une tâche à facturer.")
+            raise UserError(_("Sélectionnez au moins une tâche à facturer."))
         self.move_id.invoice_line_ids = [(0, 0, {
             'name': tache.name,
             'quantity': 1,

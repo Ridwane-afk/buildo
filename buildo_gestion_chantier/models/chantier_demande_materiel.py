@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
 
@@ -31,7 +31,7 @@ class ChantierDemandeMateriel(models.Model):
     def _check_quantite(self):
         for rec in self:
             if rec.quantite <= 0:
-                raise ValidationError("La quantité demandée doit être supérieure à 0.")
+                raise ValidationError(_("La quantité demandée doit être supérieure à 0."))
 
     def action_soumettre(self):
         self.write({'state': 'soumis'})

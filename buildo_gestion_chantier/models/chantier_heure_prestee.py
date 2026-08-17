@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
 
@@ -29,9 +29,9 @@ class ChantierHeurePrestee(models.Model):
     def _check_heures(self):
         for rec in self:
             if rec.nb_heures <= 0:
-                raise ValidationError("Le nombre d'heures doit être supérieur à 0.")
+                raise ValidationError(_("Le nombre d'heures doit être supérieur à 0."))
             if rec.taux_horaire <= 0:
-                raise ValidationError("Le taux horaire doit être supérieur à 0.")
+                raise ValidationError(_("Le taux horaire doit être supérieur à 0."))
 
     @api.depends('nb_heures', 'taux_horaire')
     def _compute_montant(self):

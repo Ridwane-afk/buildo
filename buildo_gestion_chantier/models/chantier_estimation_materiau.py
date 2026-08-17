@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError, UserError
 
 
@@ -26,7 +26,7 @@ class ChantierEstimationMateriau(models.Model):
     def _check_quantite(self):
         for rec in self:
             if rec.quantite_estimee <= 0:
-                raise ValidationError("La quantité estimée doit être supérieure à 0.")
+                raise ValidationError(_("La quantité estimée doit être supérieure à 0."))
 
     @api.onchange('tache_id')
     def _onchange_tache_id(self):
@@ -56,10 +56,10 @@ class ChantierEstimationMateriau(models.Model):
             lambda r: r.quantite_manquante > 0 and r.materiau_id.product_id
         )
         if not lignes:
-            raise UserError(
+            raise UserError(_(
                 "Aucune ligne avec stock insuffisant et produit Odoo lié. "
                 "Associez un produit Odoo à chaque matériau pour générer une commande."
-            )
+            ))
         chantier = lignes[0].chantier_id
         partner = None
         for ligne in lignes:
@@ -107,7 +107,7 @@ class ChantierEstimationMateriau(models.Model):
     def action_voir_produit(self):
         self.ensure_one()
         if not self.produit_id:
-            raise UserError("Aucun produit Odoo lié à ce matériau.")
+            raise UserError(_("Aucun produit Odoo lié à ce matériau."))
         return {
             'type': 'ir.actions.act_window',
             'res_model': 'product.product',
