@@ -85,7 +85,7 @@
                                 <field name="avancement" widget="progressbar" nolabel="1" class="mb-0"/>
                             </div>
                         </div>
-                        <div class="col-12 col-md-6 col-lg-3">
+                        <div class="col-12 col-md-6 col-lg-3" groups="buildo_gestion_chantier.group_chef_chantier">
                             <div class="border rounded-3 p-3 h-100 bg-light">
                                 <div class="text-muted text-uppercase small fw-bold mb-2">
                                     <i class="fa fa-wrench me-1"/>Coût réel
@@ -99,7 +99,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-6 col-lg-3">
+                        <div class="col-12 col-md-6 col-lg-3" groups="buildo_gestion_chantier.group_chef_chantier">
                             <div class="border rounded-3 p-3 h-100 bg-light">
                                 <div class="text-muted text-uppercase small fw-bold mb-2">
                                     <i class="fa fa-file-text-o me-1"/>Facturé
@@ -110,7 +110,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-6 col-lg-3">
+                        <div class="col-12 col-md-6 col-lg-3" groups="buildo_gestion_chantier.group_chef_chantier">
                             <div class="border rounded-3 p-3 h-100 bg-light">
                                 <div class="text-muted text-uppercase small fw-bold mb-2">
                                     <i class="fa fa-balance-scale me-1"/>Marge
@@ -269,7 +269,7 @@
                                 </list>
                             </field>
                         </page>
-                        <page string="Paiements FSS">
+                        <page string="Paiements FSS" groups="buildo_gestion_chantier.group_service_administratif">
                             <field name="paiement_fss_ids">
                                 <list>
                                     <field name="ouvrier_id"/>

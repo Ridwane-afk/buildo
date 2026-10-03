@@ -18,7 +18,8 @@ class ChantierChantier(models.Model):
     date_fin_prevue = fields.Date('Date de fin prévue', tracking=True)
     date_fin_reelle = fields.Date('Date de fin réelle')
     adresse = fields.Char('Adresse du chantier')
-    budget_initial = fields.Monetary('Budget initial', currency_field='currency_id', tracking=True)
+    budget_initial = fields.Monetary('Budget initial', currency_field='currency_id', tracking=True,
+                                     groups='buildo_gestion_chantier.group_chef_chantier')
     currency_id = fields.Many2one('res.currency', default=lambda self: self.env.company.currency_id)
     description = fields.Text('Description')
     state = fields.Selection([
@@ -37,21 +38,33 @@ class ChantierChantier(models.Model):
     estimation_materiau_ids = fields.One2many('chantier.estimation.materiau', 'chantier_id', 'Estimations matériaux')
     estimation_outil_ids = fields.One2many('chantier.estimation.outil', 'chantier_id', 'Estimations outils')
     attribution_outil_ids = fields.One2many('chantier.attribution.outil', 'chantier_id', 'Attributions outils')
-    devis_ids = fields.One2many('sale.order', 'chantier_id', 'Devis / Bons de commande')
+    devis_ids = fields.One2many('sale.order', 'chantier_id', 'Devis / Bons de commande',
+                                groups='buildo_gestion_chantier.group_service_administratif')
     facture_ids = fields.One2many('account.move', 'chantier_id', 'Factures',
-                                  domain=[('move_type', '=', 'out_invoice')])
-    commande_fournisseur_ids = fields.One2many('purchase.order', 'chantier_id', 'Commandes fournisseur')
-    paiement_fss_ids = fields.One2many('chantier.paiement.fss', 'chantier_id', 'Paiements FSS')
-    avenant_ids = fields.One2many('chantier.avenant', 'chantier_id', 'Avenants')
+                                  domain=[('move_type', '=', 'out_invoice')],
+                                  groups='buildo_gestion_chantier.group_service_administratif')
+    commande_fournisseur_ids = fields.One2many('purchase.order', 'chantier_id', 'Commandes fournisseur',
+                                               groups='buildo_gestion_chantier.group_service_administratif')
+    paiement_fss_ids = fields.One2many('chantier.paiement.fss', 'chantier_id', 'Paiements FSS',
+                                       groups='buildo_gestion_chantier.group_service_administratif')
+    avenant_ids = fields.One2many('chantier.avenant', 'chantier_id', 'Avenants',
+                                  groups='buildo_gestion_chantier.group_chef_chantier')
 
-    cout_reel = fields.Monetary('Coût réel', compute='_compute_financier', currency_field='currency_id', store=True)
-    cout_main_oeuvre = fields.Monetary('Main d\'œuvre', compute='_compute_financier', currency_field='currency_id', store=True)
-    cout_materiaux = fields.Monetary('Achats matériaux', compute='_compute_financier', currency_field='currency_id', store=True)
-    montant_facture = fields.Monetary('Montant facturé', compute='_compute_financier', currency_field='currency_id', store=True)
-    marge = fields.Monetary('Marge', compute='_compute_financier', currency_field='currency_id', store=True)
-    montant_avenants_acceptes = fields.Monetary('Avenants acceptés', compute='_compute_financier', currency_field='currency_id', store=True)
+    cout_reel = fields.Monetary('Coût réel', compute='_compute_financier', currency_field='currency_id', store=True,
+                                groups='buildo_gestion_chantier.group_chef_chantier')
+    cout_main_oeuvre = fields.Monetary('Main d\'œuvre', compute='_compute_financier', currency_field='currency_id', store=True,
+                                       groups='buildo_gestion_chantier.group_chef_chantier')
+    cout_materiaux = fields.Monetary('Achats matériaux', compute='_compute_financier', currency_field='currency_id', store=True,
+                                     groups='buildo_gestion_chantier.group_chef_chantier')
+    montant_facture = fields.Monetary('Montant facturé', compute='_compute_financier', currency_field='currency_id', store=True,
+                                      groups='buildo_gestion_chantier.group_chef_chantier')
+    marge = fields.Monetary('Marge', compute='_compute_financier', currency_field='currency_id', store=True,
+                            groups='buildo_gestion_chantier.group_chef_chantier')
+    montant_avenants_acceptes = fields.Monetary('Avenants acceptés', compute='_compute_financier', currency_field='currency_id', store=True,
+                                                groups='buildo_gestion_chantier.group_chef_chantier')
     budget_revise = fields.Monetary('Budget révisé', compute='_compute_financier', currency_field='currency_id', store=True,
-                                     help="Budget initial augmenté du montant des avenants acceptés.")
+                                     help="Budget initial augmenté du montant des avenants acceptés.",
+                                    groups='buildo_gestion_chantier.group_chef_chantier')
     nb_heures = fields.Float('Heures validées', compute='_compute_heures', store=True)
     avancement = fields.Float('Avancement (%)', compute='_compute_avancement', store=True)
 

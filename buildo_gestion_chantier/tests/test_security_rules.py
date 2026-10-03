@@ -107,3 +107,24 @@ class TestSecurityRules(ChantierTestCommon):
         arch = self.env['chantier.chantier'].with_user(self.admin_service).get_views([(False, 'form')])['views']['form']['arch']
         self.assertIn('action_view_devis', arch)
         self.chantier1.with_user(self.admin_service).read(['devis_ids', 'facture_ids', 'commande_fournisseur_ids'])
+
+    def _read_form_as(self, user, record):
+        """Lit la fiche comme le client web : tous les champs de la vue formulaire."""
+        Model = self.env[record._name].with_user(user)
+        fields_spec = Model.get_views([(False, 'form')])['models'][record._name]['fields']
+        return record.with_user(user).web_read({name: {} for name in fields_spec})
+
+    def test_ouvrier_cannot_read_chantier_finances(self):
+        ouvrier = self._create_buildo_user('ouvrier_fin_test', 'buildo_gestion_chantier.group_ouvrier')
+        data = self._read_form_as(ouvrier, self.chantier1)[0]
+        for name in ('marge', 'montant_facture', 'cout_reel', 'budget_initial', 'paiement_fss_ids'):
+            self.assertNotIn(name, data)
+        with self.assertRaises(AccessError):
+            self.chantier1.with_user(ouvrier).read(['marge'])
+        with self.assertRaises(AccessError):
+            self.env['chantier.avenant'].with_user(ouvrier).search([])
+
+    def test_chef_reads_chantier_finances(self):
+        data = self._read_form_as(self.chef1, self.chantier1)[0]
+        self.assertIn('marge', data)
+        self.assertNotIn('paiement_fss_ids', data)
