@@ -5,7 +5,7 @@ from odoo.exceptions import ValidationError
 class ChantierHeurePrestee(models.Model):
     _name = 'chantier.heure.prestee'
     _description = "Heures prestées par un ouvrier sur un chantier"
-    _inherit = ['mail.thread', 'mail.activity.mixin']
+    _inherit = ['mail.thread', 'mail.activity.mixin', 'chantier.validation.mixin']
     _order = 'date desc, id desc'
 
     chantier_id = fields.Many2one('chantier.chantier', 'Chantier', required=True, ondelete='cascade')

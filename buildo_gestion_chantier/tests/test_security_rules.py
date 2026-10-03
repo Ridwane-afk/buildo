@@ -68,3 +68,42 @@ class TestSecurityRules(ChantierTestCommon):
         Heure = self.env['chantier.heure.prestee'].with_user(ouvrier1)
         found = Heure.search([('id', 'in', (heure1 | heure2).ids)])
         self.assertEqual(found, heure1)
+
+    def test_ouvrier_cannot_validate_own_records(self):
+        ouvrier = self._create_buildo_user('ouvrier_valid_test', 'buildo_gestion_chantier.group_ouvrier')
+        Heure = self.env['chantier.heure.prestee'].with_user(ouvrier)
+        heure = Heure.create({'chantier_id': self.chantier1.id, 'nb_heures': 8, 'taux_horaire': 20})
+        heure.action_soumettre()
+        self.assertEqual(heure.state, 'soumis')
+        with self.assertRaises(AccessError):
+            heure.action_valider()
+        with self.assertRaises(AccessError):
+            heure.write({'state': 'refuse'})
+        with self.assertRaises(AccessError):
+            Heure.create({'chantier_id': self.chantier1.id, 'nb_heures': 1, 'state': 'valide'})
+        demande = self.env['chantier.demande.materiel'].with_user(ouvrier).create({
+            'chantier_id': self.chantier1.id, 'description': 'Sacs de ciment',
+        })
+        with self.assertRaises(AccessError):
+            demande.action_valider()
+
+    def test_ouvrier_cannot_modify_validated_record(self):
+        ouvrier = self._create_buildo_user('ouvrier_modif_test', 'buildo_gestion_chantier.group_ouvrier')
+        heure = self.env['chantier.heure.prestee'].with_user(ouvrier).create({
+            'chantier_id': self.chantier1.id, 'nb_heures': 8, 'taux_horaire': 20,
+        })
+        heure.action_soumettre()
+        heure.with_user(self.chef1).action_valider()
+        self.assertEqual(heure.state, 'valide')
+        self.assertEqual(heure.validateur_id, self.chef1)
+        with self.assertRaises(AccessError):
+            heure.with_user(ouvrier).write({'nb_heures': 80})
+
+    def test_smart_buttons_hidden_without_finance_access(self):
+        ouvrier = self._create_buildo_user('ouvrier_form_test', 'buildo_gestion_chantier.group_ouvrier')
+        for user in (ouvrier, self.chef1):
+            arch = self.env['chantier.chantier'].with_user(user).get_views([(False, 'form')])['views']['form']['arch']
+            self.assertNotIn('action_view_devis', arch)
+        arch = self.env['chantier.chantier'].with_user(self.admin_service).get_views([(False, 'form')])['views']['form']['arch']
+        self.assertIn('action_view_devis', arch)
+        self.chantier1.with_user(self.admin_service).read(['devis_ids', 'facture_ids', 'commande_fournisseur_ids'])

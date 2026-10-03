@@ -1,4 +1,5 @@
 from . import (
+    chantier_validation_mixin,
     chantier_chantier,
     chantier_tache,
     chantier_tache_checklist,

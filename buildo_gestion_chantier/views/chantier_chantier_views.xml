@@ -24,14 +24,17 @@
                     <!-- Smart buttons -->
                     <div class="oe_button_box" name="button_box">
                         <button name="action_view_devis" type="object" class="oe_stat_button"
+                                groups="buildo_gestion_chantier.group_service_administratif"
                                 icon="fa-file-text-o">
                             <field name="devis_ids" widget="statinfo" string="Devis"/>
                         </button>
                         <button name="action_view_factures" type="object" class="oe_stat_button"
+                                groups="buildo_gestion_chantier.group_service_administratif"
                                 icon="fa-pencil-square-o">
                             <field name="facture_ids" widget="statinfo" string="Factures"/>
                         </button>
                         <button name="action_view_commandes" type="object" class="oe_stat_button"
+                                groups="buildo_gestion_chantier.group_service_administratif"
                                 icon="fa-shopping-cart">
                             <field name="commande_fournisseur_ids" widget="statinfo" string="Achats"/>
                         </button>
