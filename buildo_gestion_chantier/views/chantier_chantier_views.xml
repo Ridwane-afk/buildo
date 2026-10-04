@@ -39,7 +39,7 @@
                             <field name="commande_fournisseur_ids" widget="statinfo" string="Achats"/>
                         </button>
                         <button name="action_ouvrir_assistant" type="object" class="oe_stat_button"
-                                icon="fa-comments">
+                                icon="fa-comments" groups="buildo_gestion_chantier.group_chef_chantier">
                             <div class="o_stat_info">
                                 <span class="o_stat_text">Assistant IA</span>
                             </div>
@@ -137,6 +137,7 @@
                                     <field name="sequence" widget="handle"/>
                                     <field name="name"/>
                                     <field name="responsable_id"/>
+                                    <field name="ouvrier_ids" widget="many2many_tags"/>
                                     <field name="date_debut"/>
                                     <field name="date_fin"/>
                                     <field name="date_fin_reelle"/>
@@ -150,11 +151,14 @@
                                            decoration-warning="state == 'en_cours'"
                                            decoration-danger="state == 'bloque'"/>
                                     <button name="action_demarrer" string="Reprendre" type="object"
-                                            invisible="state == 'en_cours'" class="btn-sm btn-secondary"/>
+                                            invisible="state == 'en_cours'" class="btn-sm btn-secondary"
+                                            groups="buildo_gestion_chantier.group_chef_chantier"/>
                                     <button name="action_valider" string="Valider" type="object"
-                                            invisible="state == 'fait'" class="btn-sm btn-primary"/>
+                                            invisible="state == 'fait'" class="btn-sm btn-primary"
+                                            groups="buildo_gestion_chantier.group_chef_chantier"/>
                                     <button name="action_bloquer" string="Bloquer" type="object"
-                                            invisible="state in ('fait', 'bloque')" class="btn-sm btn-secondary"/>
+                                            invisible="state in ('fait', 'bloque')" class="btn-sm btn-secondary"
+                                            groups="buildo_gestion_chantier.group_chef_chantier"/>
                                     <button name="action_facturer" string="Facturer au client" type="object"
                                             invisible="state != 'fait' or (facture_id and facture_state != 'cancel')" class="btn-sm btn-primary"
                                             groups="buildo_gestion_chantier.group_direction"/>
@@ -162,7 +166,7 @@
                                             class="btn-sm btn-link" title="Voir le détail"/>
                                     <button name="unlink" type="object" icon="fa-trash-o"
                                             confirm="Êtes-vous sûr de vouloir supprimer cette tâche ?"
-                                            class="btn-sm btn-link text-danger"/>
+                                            class="btn-sm btn-link text-danger" groups="buildo_gestion_chantier.group_chef_chantier"/>
                                 </list>
                             </field>
                         </page>
@@ -177,7 +181,7 @@
                                 </list>
                             </field>
                         </page>
-                        <page string="Estimations matériaux">
+                        <page string="Estimations matériaux" groups="buildo_gestion_chantier.group_chef_chantier">
                             <field name="estimation_materiau_ids">
                                 <list editable="bottom">
                                     <field name="materiau_id"/>
@@ -190,7 +194,7 @@
                                 </list>
                             </field>
                         </page>
-                        <page string="Estimations outils">
+                        <page string="Estimations outils" groups="buildo_gestion_chantier.group_chef_chantier">
                             <field name="estimation_outil_ids">
                                 <list editable="bottom">
                                     <field name="outil_id"/>
@@ -228,7 +232,7 @@
                                 </list>
                             </field>
                         </page>
-                        <page string="Rapports journaliers">
+                        <page string="Rapports journaliers" groups="buildo_gestion_chantier.group_chef_chantier">
                             <field name="rapport_journalier_ids">
                                 <list>
                                     <field name="date"/>
@@ -258,7 +262,7 @@
                                 </kanban>
                             </field>
                         </page>
-                        <page string="Plans">
+                        <page string="Plans" groups="buildo_gestion_chantier.group_chef_chantier">
                             <field name="plan_ids">
                                 <list>
                                     <field name="name"/>

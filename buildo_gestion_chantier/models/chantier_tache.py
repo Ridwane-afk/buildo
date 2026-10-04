@@ -15,6 +15,8 @@ class ChantierTache(models.Model):
     date_fin = fields.Date('Date de fin prévue', tracking=True)
     date_fin_reelle = fields.Date('Date de fin réelle', tracking=True, readonly=True)
     responsable_id = fields.Many2one('res.users', 'Responsable', tracking=True)
+    ouvrier_ids = fields.Many2many('res.users', 'chantier_tache_ouvrier_rel', 'tache_id', 'user_id',
+                                   string='Ouvriers assignés', domain=[('share', '=', False)])
     description = fields.Text('Description')
     state = fields.Selection([
         ('a_faire', 'À faire'),
@@ -26,12 +28,17 @@ class ChantierTache(models.Model):
     photo_ids = fields.One2many('chantier.photo', 'tache_id', string='Photos de preuve')
     checklist_ids = fields.One2many('chantier.tache.checklist', 'tache_id', string='Sous-tâches')
     document_ids = fields.One2many('chantier.tache.document', 'tache_id', string='Documents')
-    estimation_materiau_ids = fields.One2many('chantier.estimation.materiau', 'tache_id', string='Matériaux nécessaires')
-    estimation_outil_ids = fields.One2many('chantier.estimation.outil', 'tache_id', string='Outils nécessaires')
+    estimation_materiau_ids = fields.One2many('chantier.estimation.materiau', 'tache_id', string='Matériaux nécessaires',
+                                              groups='buildo_gestion_chantier.group_chef_chantier')
+    estimation_outil_ids = fields.One2many('chantier.estimation.outil', 'tache_id', string='Outils nécessaires',
+                                           groups='buildo_gestion_chantier.group_chef_chantier')
     currency_id = fields.Many2one('res.currency', default=lambda self: self.env.company.currency_id)
-    montant_facturable = fields.Monetary('Montant facturable', currency_field='currency_id', tracking=True)
-    facture_id = fields.Many2one('account.move', 'Facture', readonly=True, copy=False, tracking=True)
-    facture_state = fields.Selection(related='facture_id.state', string='État de la facture', tracking=False)
+    montant_facturable = fields.Monetary('Montant facturable', currency_field='currency_id', tracking=True,
+                                         groups='buildo_gestion_chantier.group_chef_chantier')
+    facture_id = fields.Many2one('account.move', 'Facture', readonly=True, copy=False, tracking=True,
+                                 groups='buildo_gestion_chantier.group_service_administratif')
+    facture_state = fields.Selection(related='facture_id.state', string='État de la facture', tracking=False,
+                                     groups='buildo_gestion_chantier.group_service_administratif')
     avancement = fields.Integer('Avancement (%)', default=0, tracking=True)
 
     @api.constrains('avancement')
@@ -136,4 +143,20 @@ class ChantierTache(models.Model):
             'res_model': 'chantier.tache',
             'res_id': self.id,
             'view_mode': 'form',
+        }
+
+    def action_ajouter_photo(self):
+        """Ouvre le formulaire de photo de preuve, rattaché à cette tâche."""
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _("Photo de preuve"),
+            'res_model': 'chantier.photo',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {
+                'default_tache_id': self.id,
+                'default_chantier_id': self.chantier_id.id,
+                'default_name': self.name,
+            },
         }

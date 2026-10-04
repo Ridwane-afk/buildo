@@ -120,4 +120,13 @@
         <field name="search_view_id" ref="view_chantier_attribution_outil_search"/>
         <field name="context">{'search_default_attribue': 1}</field>
     </record>
+
+    <!-- Historique des outils de l'utilisateur connecté (vue ouvrier) -->
+    <record id="action_mes_outils" model="ir.actions.act_window">
+        <field name="name">Mes outils</field>
+        <field name="res_model">chantier.attribution.outil</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('ouvrier_id', '=', uid)]</field>
+        <field name="context">{'create': False}</field>
+    </record>
 </odoo>

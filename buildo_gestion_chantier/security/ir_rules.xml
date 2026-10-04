@@ -325,4 +325,51 @@
         <field name="perm_unlink" eval="True"/>
     </record>
 
+    <!-- Ouvrier : ne voit que les chantiers et tâches qui lui sont assignés,
+         les photos de ses tâches et l'historique de ses propres outils.
+         Les règles chef / service administratif (combinées par OU) élargissent
+         ce périmètre pour les rôles supérieurs. -->
+
+    <record id="rule_chantier_ouvrier" model="ir.rule">
+        <field name="name">Chantiers — ouvrier voit les chantiers où une tâche lui est assignée</field>
+        <field name="model_id" ref="model_chantier_chantier"/>
+        <field name="domain_force">[('tache_ids.ouvrier_ids', 'in', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_ouvrier'))]"/>
+    </record>
+
+    <record id="rule_tache_ouvrier" model="ir.rule">
+        <field name="name">Tâches — ouvrier voit les tâches qui lui sont assignées</field>
+        <field name="model_id" ref="model_chantier_tache"/>
+        <field name="domain_force">[('ouvrier_ids', 'in', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_ouvrier'))]"/>
+    </record>
+
+    <record id="rule_tache_checklist_ouvrier" model="ir.rule">
+        <field name="name">Sous-tâches — ouvrier voit celles de ses tâches</field>
+        <field name="model_id" ref="model_chantier_tache_checklist"/>
+        <field name="domain_force">[('tache_id.ouvrier_ids', 'in', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_ouvrier'))]"/>
+    </record>
+
+    <record id="rule_tache_document_ouvrier" model="ir.rule">
+        <field name="name">Documents de tâche — ouvrier voit ceux de ses tâches</field>
+        <field name="model_id" ref="model_chantier_tache_document"/>
+        <field name="domain_force">[('tache_id.ouvrier_ids', 'in', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_ouvrier'))]"/>
+    </record>
+
+    <record id="rule_photo_ouvrier" model="ir.rule">
+        <field name="name">Photos — ouvrier voit et ajoute les photos de ses tâches</field>
+        <field name="model_id" ref="model_chantier_photo"/>
+        <field name="domain_force">[('tache_id.ouvrier_ids', 'in', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_ouvrier'))]"/>
+    </record>
+
+    <record id="rule_attribution_outil_ouvrier" model="ir.rule">
+        <field name="name">Attributions outils — ouvrier voit son propre historique</field>
+        <field name="model_id" ref="model_chantier_attribution_outil"/>
+        <field name="domain_force">[('ouvrier_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_ouvrier'))]"/>
+    </record>
+
 </odoo>

@@ -10,6 +10,7 @@
                 <field name="chantier_id"/>
                 <field name="name"/>
                 <field name="responsable_id"/>
+                <field name="ouvrier_ids" widget="many2many_tags"/>
                 <field name="date_debut"/>
                 <field name="date_fin"/>
                 <field name="date_fin_reelle"/>
@@ -22,7 +23,7 @@
                         class="btn-sm btn-link" title="Voir le détail"/>
                 <button name="unlink" type="object" icon="fa-trash-o"
                         confirm="Êtes-vous sûr de vouloir supprimer cette tâche ?"
-                        class="btn-sm btn-link text-danger"/>
+                        class="btn-sm btn-link text-danger" groups="buildo_gestion_chantier.group_chef_chantier"/>
             </list>
         </field>
     </record>
@@ -34,23 +35,29 @@
             <form string="Tâche">
                 <header>
                     <button name="action_demarrer" string="Reprendre" type="object"
-                            invisible="state == 'en_cours'" class="btn-primary"/>
+                            invisible="state == 'en_cours'" class="btn-primary"
+                            groups="buildo_gestion_chantier.group_chef_chantier"/>
                     <button name="action_valider" string="Valider" type="object"
-                            invisible="state == 'fait'" class="btn-primary"/>
+                            invisible="state == 'fait'" class="btn-primary"
+                            groups="buildo_gestion_chantier.group_chef_chantier"/>
                     <button name="action_bloquer" string="Bloquer" type="object"
-                            invisible="state in ('fait', 'bloque')" class="btn-secondary"/>
+                            invisible="state in ('fait', 'bloque')" class="btn-secondary"
+                            groups="buildo_gestion_chantier.group_chef_chantier"/>
                     <button name="action_remettre_a_faire" string="Remettre à faire" type="object"
-                            invisible="state == 'a_faire'" class="btn-secondary"/>
+                            invisible="state == 'a_faire'" class="btn-secondary"
+                            groups="buildo_gestion_chantier.group_chef_chantier"/>
                     <button name="action_facturer" string="Facturer au client" type="object"
                             invisible="state != 'fait' or (facture_id and facture_state != 'cancel')" class="btn-primary"
                             groups="buildo_gestion_chantier.group_direction"/>
+                    <button name="action_ajouter_photo" string="Ajouter une photo" type="object"
+                            class="btn-secondary" icon="fa-camera"/>
                     <field name="facture_state" invisible="1"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button name="action_view_facture" type="object" class="oe_stat_button" icon="fa-file-text-o"
-                                invisible="not facture_id">
+                                invisible="not facture_id" groups="buildo_gestion_chantier.group_service_administratif">
                             <field name="facture_id" widget="statinfo" string="Facture"/>
                         </button>
                     </div>
@@ -58,6 +65,7 @@
                         <field name="name"/>
                         <field name="chantier_id"/>
                         <field name="responsable_id"/>
+                        <field name="ouvrier_ids" widget="many2many_tags"/>
                         <field name="date_debut"/>
                         <field name="date_fin"/>
                         <field name="date_fin_reelle"/>
@@ -88,7 +96,7 @@
                                 </list>
                             </field>
                         </page>
-                        <page string="Matériaux nécessaires">
+                        <page string="Matériaux nécessaires" groups="buildo_gestion_chantier.group_chef_chantier">
                             <field name="estimation_materiau_ids" context="{'default_chantier_id': chantier_id}">
                                 <list editable="bottom" decoration-danger="quantite_manquante &gt; 0">
                                     <field name="materiau_id"/>
@@ -101,7 +109,7 @@
                                 </list>
                             </field>
                         </page>
-                        <page string="Outils nécessaires">
+                        <page string="Outils nécessaires" groups="buildo_gestion_chantier.group_chef_chantier">
                             <field name="estimation_outil_ids" context="{'default_chantier_id': chantier_id}">
                                 <list editable="bottom">
                                     <field name="outil_id"/>
@@ -148,6 +156,8 @@
                 <field name="name" string="Tâche"/>
                 <field name="chantier_id"/>
                 <field name="responsable_id"/>
+                <field name="ouvrier_ids"/>
+                <filter string="Mes tâches" name="mes_taches" domain="[('ouvrier_ids', 'in', uid)]"/>
                 <separator/>
                 <filter string="En retard" name="en_retard"
                         domain="[('date_fin', '&lt;', context_today().strftime('%Y-%m-%d')), ('state', 'not in', ['fait'])]"/>

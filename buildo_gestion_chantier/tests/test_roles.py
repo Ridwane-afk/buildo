@@ -30,6 +30,11 @@ class TestRoles(ChantierTestCommon):
                                          'chef_chantier_id': cls.chef1.id, 'budget_initial': 50000})
         cls.chantier2 = Chantier.create({'name': 'Chantier rôle 2', 'client_id': cls.client.id,
                                          'chef_chantier_id': cls.chef2.id, 'budget_initial': 80000})
+        Tache = cls.env['chantier.tache']
+        cls.tache1 = Tache.create({'name': 'Coffrage', 'chantier_id': cls.chantier1.id,
+                                   'ouvrier_ids': [(6, 0, cls.ouvrier1.ids)], 'montant_facturable': 1200})
+        cls.tache2 = Tache.create({'name': 'Ferraillage', 'chantier_id': cls.chantier2.id,
+                                   'ouvrier_ids': [(6, 0, cls.ouvrier2.ids)]})
         Heure = cls.env['chantier.heure.prestee']
         cls.heure1 = Heure.create({'chantier_id': cls.chantier1.id, 'ouvrier_id': cls.ouvrier1.id,
                                    'nb_heures': 8, 'taux_horaire': 20})
@@ -61,9 +66,13 @@ class TestRoles(ChantierTestCommon):
         'chantier.tache':              ('R---', 'RWCD', 'RWCD', 'RWCD', 'RWCD'),
         'chantier.heure.prestee':      ('RWC-', 'RWCD', 'RWCD', 'RWCD', 'RWCD'),
         'chantier.demande.materiel':   ('RWC-', 'RWCD', 'RWCD', 'RWCD', 'RWCD'),
-        'chantier.rapport.journalier': ('R---', 'RWCD', 'RWCD', 'RWCD', 'RWCD'),
-        'chantier.photo':              ('R---', 'RWCD', 'RWCD', 'RWCD', 'RWCD'),
-        'chantier.plan':               ('R---', 'RWCD', 'RWCD', 'RWCD', 'RWCD'),
+        'chantier.rapport.journalier': ('----', 'RWCD', 'RWCD', 'RWCD', 'RWCD'),
+        'chantier.photo':              ('R-C-', 'RWCD', 'RWCD', 'RWCD', 'RWCD'),
+        'chantier.plan':               ('----', 'RWCD', 'RWCD', 'RWCD', 'RWCD'),
+        'chantier.estimation.materiau': ('----', 'RWCD', 'RWCD', 'RWCD', 'RWCD'),
+        'chantier.estimation.outil':   ('----', 'RWCD', 'RWCD', 'RWCD', 'RWCD'),
+        'chantier.attribution.outil':  ('R---', 'RWCD', 'RWCD', 'RWCD', 'RWCD'),
+        'chantier.assistant.ia':       ('----', 'RWCD', 'RWCD', 'RWCD', 'RWCD'),
         'chantier.materiau':           ('R---', 'RWC-', 'RWC-', 'RWC-', 'RWCD'),
         'chantier.outil':              ('R---', 'RWC-', 'RWC-', 'RWC-', 'RWCD'),
         'chantier.avenant':            ('----', 'RWC-', 'RWCD', 'RWCD', 'RWCD'),
@@ -141,6 +150,65 @@ class TestRoles(ChantierTestCommon):
             with self.subTest(model=record._name), self.assertRaises(AccessError):
                 record.with_user(self.ouvrier1).read(['id'])
 
+    def test_ouvrier_sees_only_assigned(self):
+        Chantier = self.env['chantier.chantier'].with_user(self.ouvrier1)
+        self.assertEqual(Chantier.search([('id', 'in', (self.chantier1 | self.chantier2).ids)]), self.chantier1)
+        Tache = self.env['chantier.tache'].with_user(self.ouvrier1)
+        self.assertEqual(Tache.search([('id', 'in', (self.tache1 | self.tache2).ids)]), self.tache1)
+        with self.assertRaises(AccessError):
+            self.chantier2.with_user(self.ouvrier1).read(['name'])
+        with self.assertRaises(AccessError):
+            self.tache2.with_user(self.ouvrier1).read(['name'])
+        with self.assertRaises(AccessError):
+            self.tache1.with_user(self.ouvrier1).write({'name': 'Renommée'})
+
+    def test_ouvrier_menus(self):
+        Menu = self.env['ir.ui.menu'].with_user(self.ouvrier1)
+        visible = Menu.browse(Menu._visible_menu_ids())
+        root = self.env.ref('buildo_gestion_chantier.menu_buildo_root')
+        # Un sous-menu n'est atteignable que si sa section parente est elle-même visible
+        leaves = visible.filtered(lambda m: m.action and m.parent_id in visible and m.parent_id.parent_id == root)
+        self.assertEqual(set(leaves.mapped('name')),
+                         {'Tous les chantiers', 'Tâches', 'Heures prestées', 'Demandes de matériel', 'Photos', 'Mes outils'})
+
+    def test_ouvrier_forms_hide_restricted_data(self):
+        chantier = self._read_form_as(self.ouvrier1, self.chantier1)[0]
+        for name in ('estimation_materiau_ids', 'estimation_outil_ids', 'rapport_journalier_ids', 'plan_ids', 'marge'):
+            self.assertNotIn(name, chantier)
+        tache = self._read_form_as(self.ouvrier1, self.tache1)[0]
+        for name in ('estimation_materiau_ids', 'estimation_outil_ids', 'montant_facturable', 'facture_id'):
+            self.assertNotIn(name, tache)
+        self.assertEqual(tache['ouvrier_ids'], self.ouvrier1.ids)
+
+    def test_ouvrier_photo_on_assigned_task(self):
+        Photo = self.env['chantier.photo'].with_user(self.ouvrier1)
+        action = self.tache1.with_user(self.ouvrier1).action_ajouter_photo()
+        photo = Photo.with_context(**action['context']).create({'name': 'Coffrage terminé'})
+        self.assertEqual(photo.chantier_id, self.chantier1)
+        self.assertEqual(photo.auteur_id, self.ouvrier1)
+        # Sans chantier explicite, il est déduit de la tâche
+        photo2 = Photo.create({'name': 'Vue d\'ensemble', 'tache_id': self.tache1.id})
+        self.assertEqual(photo2.chantier_id, self.chantier1)
+        with self.assertRaises(AccessError):
+            Photo.create({'name': 'Pas ma tâche', 'tache_id': self.tache2.id})
+        with self.assertRaises(AccessError):
+            photo.unlink()
+
+    def test_ouvrier_tools_history(self):
+        outil = self.env['chantier.outil'].create({'name': 'Perforateur'})
+        Attribution = self.env['chantier.attribution.outil']
+        mine = Attribution.create({'chantier_id': self.chantier1.id, 'outil_id': outil.id, 'ouvrier_id': self.ouvrier1.id})
+        other = Attribution.create({'chantier_id': self.chantier2.id, 'outil_id': outil.id, 'ouvrier_id': self.ouvrier2.id})
+        found = Attribution.with_user(self.ouvrier1).search([('id', 'in', (mine | other).ids)])
+        self.assertEqual(found, mine)
+        with self.assertRaises(AccessError):
+            mine.with_user(self.ouvrier1).write({'note': 'x'})
+
+    def _read_form_as(self, user, record):
+        Model = self.env[record._name].with_user(user)
+        fields_spec = Model.get_views([(False, 'form')])['models'][record._name]['fields']
+        return record.with_user(user).web_read({name: {} for name in fields_spec})
+
     # ------------------------------------------------------------------
     # Chef de chantier
     # ------------------------------------------------------------------
@@ -155,6 +223,12 @@ class TestRoles(ChantierTestCommon):
         self.assertEqual(Demande.search([('id', 'in', (self.demande1 | self.demande2).ids)]), self.demande1)
         with self.assertRaises(AccessError):
             self.heure2.with_user(self.chef1).action_valider()
+
+    def test_chef_opens_task_form(self):
+        data = self._read_form_as(self.chef1, self.tache1)[0]
+        self.assertIn('montant_facturable', data)
+        self.assertIn('estimation_materiau_ids', data)
+        self.assertNotIn('facture_id', data)
 
     def test_chef_validates_own_site(self):
         self.heure1.with_user(self.chef1).action_valider()

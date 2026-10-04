@@ -11,6 +11,7 @@
                     <group>
                         <group>
                             <field name="name"/>
+                            <field name="tache_id"/>
                             <field name="chantier_id"/>
                             <field name="date"/>
                             <field name="auteur_id"/>

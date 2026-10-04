@@ -116,6 +116,8 @@ class TestSecurityRules(ChantierTestCommon):
 
     def test_ouvrier_cannot_read_chantier_finances(self):
         ouvrier = self._create_buildo_user('ouvrier_fin_test', 'buildo_gestion_chantier.group_ouvrier')
+        self.env['chantier.tache'].create({'name': 'Maçonnerie', 'chantier_id': self.chantier1.id,
+                                           'ouvrier_ids': [(6, 0, ouvrier.ids)]})
         data = self._read_form_as(ouvrier, self.chantier1)[0]
         for name in ('marge', 'montant_facture', 'cout_reel', 'budget_initial', 'paiement_fss_ids'):
             self.assertNotIn(name, data)

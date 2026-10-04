@@ -23,7 +23,7 @@
               parent="menu_buildo_chantiers"
               action="action_chantier_tache"
               sequence="20"
-              groups="group_chef_chantier"/>
+              groups="-group_chef_chantier,group_ouvrier"/>
 
     <!-- Terrain -->
     <menuitem id="menu_buildo_terrain"
@@ -55,7 +55,13 @@
               parent="menu_buildo_terrain"
               action="action_chantier_photo"
               sequence="40"
-              groups="group_chef_chantier"/>
+              groups="-group_chef_chantier,group_ouvrier"/>
+
+    <menuitem id="menu_mes_outils"
+              name="Mes outils"
+              parent="menu_buildo_terrain"
+              action="action_mes_outils"
+              sequence="45"/>
 
     <menuitem id="menu_plan"
               name="Plans"

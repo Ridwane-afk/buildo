@@ -19,13 +19,11 @@ access_chantier_demande_materiel_ouvrier,chantier.demande.materiel ouvrier,model
 access_chantier_demande_materiel_chef,chantier.demande.materiel chef,model_chantier_demande_materiel,group_chef_chantier,1,1,1,1
 
 access_chantier_rapport_journalier_chef,chantier.rapport.journalier chef,model_chantier_rapport_journalier,group_chef_chantier,1,1,1,1
-access_chantier_rapport_journalier_ouvrier,chantier.rapport.journalier ouvrier,model_chantier_rapport_journalier,group_ouvrier,1,0,0,0
 
 access_chantier_photo_chef,chantier.photo chef,model_chantier_photo,group_chef_chantier,1,1,1,1
-access_chantier_photo_ouvrier,chantier.photo ouvrier,model_chantier_photo,group_ouvrier,1,0,0,0
+access_chantier_photo_ouvrier,chantier.photo ouvrier,model_chantier_photo,group_ouvrier,1,0,1,0
 
 access_chantier_plan_chef,chantier.plan chef,model_chantier_plan,group_chef_chantier,1,1,1,1
-access_chantier_plan_ouvrier,chantier.plan ouvrier,model_chantier_plan,group_ouvrier,1,0,0,0
 
 access_chantier_materiau_ouvrier,chantier.materiau ouvrier,model_chantier_materiau,group_ouvrier,1,0,0,0
 access_chantier_materiau_chef,chantier.materiau chef,model_chantier_materiau,group_chef_chantier,1,1,1,0
@@ -36,9 +34,7 @@ access_chantier_outil_chef,chantier.outil chef,model_chantier_outil,group_chef_c
 access_chantier_outil_admin,chantier.outil admin,model_chantier_outil,group_admin_buildo,1,1,1,1
 
 access_chantier_estimation_materiau_chef,chantier.estimation.materiau chef,model_chantier_estimation_materiau,group_chef_chantier,1,1,1,1
-access_chantier_estimation_materiau_ouvrier,chantier.estimation.materiau ouvrier,model_chantier_estimation_materiau,group_ouvrier,1,0,0,0
 access_chantier_estimation_outil_chef,chantier.estimation.outil chef,model_chantier_estimation_outil,group_chef_chantier,1,1,1,1
-access_chantier_estimation_outil_ouvrier,chantier.estimation.outil ouvrier,model_chantier_estimation_outil,group_ouvrier,1,0,0,0
 access_chantier_attribution_outil_chef,chantier.attribution.outil chef,model_chantier_attribution_outil,group_chef_chantier,1,1,1,1
 access_chantier_attribution_outil_ouvrier,chantier.attribution.outil ouvrier,model_chantier_attribution_outil,group_ouvrier,1,0,0,0
 
@@ -49,7 +45,7 @@ access_chantier_paiement_fss_direction,chantier.paiement.fss direction,model_cha
 access_chantier_paiement_fss_admin,chantier.paiement.fss admin,model_chantier_paiement_fss,group_service_administratif,1,1,1,0
 
 access_chantier_wizard_refus,chantier.wizard.refus,model_chantier_wizard_refus,group_chef_chantier,1,1,1,1
-access_chantier_assistant_ia,chantier.assistant.ia,model_chantier_assistant_ia,group_ouvrier,1,1,1,1
+access_chantier_assistant_ia,chantier.assistant.ia,model_chantier_assistant_ia,group_chef_chantier,1,1,1,1
 access_chantier_wizard_facturation_taches,chantier.wizard.facturation.taches,model_chantier_wizard_facturation_taches,group_direction,1,1,1,1
 access_chantier_wizard_rapport_avancement,chantier.wizard.rapport.avancement,model_chantier_wizard_rapport_avancement,group_chef_chantier,1,1,1,1
 
