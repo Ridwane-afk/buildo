@@ -75,7 +75,7 @@ class TestRoles(ChantierTestCommon):
         'chantier.assistant.ia':       ('----', 'RWCD', 'RWCD', 'RWCD', 'RWCD'),
         'chantier.materiau':           ('R---', 'RWC-', 'RWC-', 'RWC-', 'RWCD'),
         'chantier.outil':              ('R---', 'RWC-', 'RWC-', 'RWC-', 'RWCD'),
-        'chantier.avenant':            ('----', 'RWC-', 'RWCD', 'RWCD', 'RWCD'),
+        'chantier.avenant':            ('----', '----', 'RWCD', 'RWCD', 'RWCD'),
         'chantier.paiement.fss':       ('----', '----', 'RWC-', 'RWCD', 'RWCD'),
         'sale.order':                  ('----', '----', 'RWC-', 'RWC-', 'RWC-'),
         'account.move':                ('----', '----', 'RWCD', 'RWCD', 'RWCD'),
@@ -229,6 +229,22 @@ class TestRoles(ChantierTestCommon):
         self.assertIn('montant_facturable', data)
         self.assertIn('estimation_materiau_ids', data)
         self.assertNotIn('facture_id', data)
+
+    def test_avenants_reserved_to_admin_and_direction(self):
+        with self.assertRaises(AccessError):
+            self.avenant.with_user(self.chef1).read(['name'])
+        with self.assertRaises(AccessError):
+            self.avenant.with_user(self.chef1).action_accepter()
+        with self.assertRaises(AccessError):
+            self.chantier1.with_user(self.chef1).read(['avenant_ids'])
+        # Le chef garde le budget révisé (synthèse chantier), sans voir les avenants eux-mêmes
+        self.chantier1.with_user(self.chef1).read(['budget_revise', 'montant_avenants_acceptes'])
+        for user in (self.admin_service, self.direction):
+            avenant = self.env['chantier.avenant'].with_user(user).create({
+                'chantier_id': self.chantier1.id, 'sale_order_id': self.devis.id, 'motif': 'Extension terrasse',
+            })
+            avenant.action_accepter()
+            self.assertEqual(avenant.state, 'accepte')
 
     def test_chef_validates_own_site(self):
         self.heure1.with_user(self.chef1).action_valider()

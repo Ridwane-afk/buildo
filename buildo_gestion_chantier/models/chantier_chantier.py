@@ -52,7 +52,7 @@ class ChantierChantier(models.Model):
     paiement_fss_ids = fields.One2many('chantier.paiement.fss', 'chantier_id', 'Paiements FSS',
                                        groups='buildo_gestion_chantier.group_service_administratif')
     avenant_ids = fields.One2many('chantier.avenant', 'chantier_id', 'Avenants',
-                                  groups='buildo_gestion_chantier.group_chef_chantier')
+                                  groups='buildo_gestion_chantier.group_service_administratif')
 
     cout_reel = fields.Monetary('Coût réel', compute='_compute_financier', currency_field='currency_id', store=True,
                                 groups='buildo_gestion_chantier.group_chef_chantier')

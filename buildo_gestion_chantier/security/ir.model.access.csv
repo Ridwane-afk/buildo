@@ -38,7 +38,6 @@ access_chantier_estimation_outil_chef,chantier.estimation.outil chef,model_chant
 access_chantier_attribution_outil_chef,chantier.attribution.outil chef,model_chantier_attribution_outil,group_chef_chantier,1,1,1,1
 access_chantier_attribution_outil_ouvrier,chantier.attribution.outil ouvrier,model_chantier_attribution_outil,group_ouvrier,1,0,0,0
 
-access_chantier_avenant_chef,chantier.avenant chef,model_chantier_avenant,group_chef_chantier,1,1,1,0
 access_chantier_avenant_admin,chantier.avenant admin,model_chantier_avenant,group_service_administratif,1,1,1,1
 
 access_chantier_paiement_fss_direction,chantier.paiement.fss direction,model_chantier_paiement_fss,group_direction,1,1,1,1
