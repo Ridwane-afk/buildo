@@ -13,6 +13,7 @@ API_SCOPE = 'buildo_rest'
 WRITABLE_FIELDS = [
     'name', 'client_id', 'chef_chantier_id', 'adresse',
     'date_debut', 'date_fin_prevue', 'budget_initial', 'description',
+    'active',  # archivage (soft delete) : PUT {"active": false}
 ]
 
 
@@ -62,6 +63,7 @@ def _chantier_to_dict(chantier):
         'ref': chantier.ref,
         'name': chantier.name,
         'state': chantier.state,
+        'active': chantier.active,
         'client': {'id': chantier.client_id.id, 'name': chantier.client_id.name} if chantier.client_id else None,
         'chef_chantier': {'id': chantier.chef_chantier_id.id, 'name': chantier.chef_chantier_id.name}
             if chantier.chef_chantier_id else None,
@@ -198,6 +200,16 @@ class ChantierApiController(http.Controller):
             chantier = request.env['chantier.chantier'].browse(chantier_id)
             chantier.check_access('unlink')
             name = chantier.name
+            # Hard delete uniquement pour un chantier sans transaction ; sinon
+            # 409 Conflict et on indique comment archiver (soft delete).
+            transactions = chantier._get_transactions_bloquantes()
+            if transactions:
+                return _json_response({
+                    'error': "Le chantier « %s » ne peut pas être supprimé : il contient %s. "
+                             "Ces données doivent être conservées (obligation légale)."
+                             % (name, ', '.join(transactions)),
+                    'solution': 'PUT /api/v1/chantiers/%d avec {"active": false} pour archiver.' % chantier_id,
+                }, status=409)
             chantier.unlink()
             return _json_response({'deleted': True, 'id': chantier_id, 'name': name})
         except ApiAuthError as e:

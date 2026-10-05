@@ -26,6 +26,8 @@
                            statusbar_visible="brouillon,en_cours,termine"/>
                 </header>
                 <sheet>
+                    <field name="active" invisible="1"/>
+                    <widget name="web_ribbon" title="Archivé" bg_color="text-bg-danger" invisible="active"/>
                     <!-- Smart buttons -->
                     <div class="oe_button_box" name="button_box">
                         <button name="action_view_devis" type="object" class="oe_stat_button"
@@ -359,6 +361,8 @@
                 <filter string="En cours" name="en_cours" domain="[('state', '=', 'en_cours')]"/>
                 <filter string="Brouillon" name="brouillon" domain="[('state', '=', 'brouillon')]"/>
                 <filter string="Terminé" name="termine" domain="[('state', '=', 'termine')]"/>
+                <separator/>
+                <filter string="Archivés" name="archives" domain="[('active', '=', False)]"/>
                 <group name="groupby">
                     <filter string="Chef de chantier" name="group_chef" context="{'group_by': 'chef_chantier_id'}"/>
                     <filter string="Client" name="group_client" context="{'group_by': 'client_id'}"/>

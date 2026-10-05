@@ -1,5 +1,5 @@
 from odoo import models, fields, api, _
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 
 
 class ChantierChantier(models.Model):
@@ -10,6 +10,8 @@ class ChantierChantier(models.Model):
     _order = 'date_debut desc, id desc'
 
     name = fields.Char('Nom du chantier', required=True, tracking=True)
+    # Archivage (soft delete) : un chantier qui porte des transactions n'est jamais supprimé
+    active = fields.Boolean('Actif', default=True, tracking=True)
     ref = fields.Char('Référence', readonly=True, copy=False, default='Nouveau')
     client_id = fields.Many2one('res.partner', 'Client', required=True, tracking=True,
                                 domain=[('customer_rank', '>', 0)])
@@ -137,6 +139,42 @@ class ChantierChantier(models.Model):
             else:
                 nb_fait = len(taches.filtered(lambda t: t.state == 'fait'))
                 rec.avancement = (nb_fait / len(taches)) * 100
+
+    def _get_transactions_bloquantes(self):
+        """Liste lisible des transactions qui interdisent la suppression physique du chantier.
+
+        Les comptages sont faits en sudo : le blocage doit dépendre des données
+        existantes, pas de ce que l'utilisateur courant a le droit de voir.
+        """
+        self.ensure_one()
+        env = self.sudo().env
+        domain = [('chantier_id', '=', self.id)]
+        comptages = [
+            (env['chantier.heure.prestee'].search_count(domain), _("heure(s) prestée(s)")),
+            (env['chantier.paiement.fss'].search_count(domain), _("paiement(s) FSS")),
+            (env['account.move'].search_count(domain + [('state', '!=', 'draft')]),
+             _("pièce(s) comptable(s) validée(s)")),
+            (env['purchase.order'].search_count(domain + [('state', 'in', ('purchase', 'done'))]),
+             _("commande(s) fournisseur confirmée(s)")),
+            (env['sale.order'].search_count(domain + [('state', '=', 'sale')]),
+             _("bon(s) de commande client confirmé(s)")),
+        ]
+        return ["%d %s" % (nombre, libelle) for nombre, libelle in comptages if nombre]
+
+    def unlink(self):
+        # Contrôle des droits d'abord : un rôle sans droit de suppression doit
+        # recevoir une AccessError, pas le message métier ci-dessous.
+        self.check_access('unlink')
+        for chantier in self:
+            transactions = chantier._get_transactions_bloquantes()
+            if transactions:
+                raise UserError(_(
+                    "Le chantier « %(chantier)s » ne peut pas être supprimé : il contient %(transactions)s.\n"
+                    "Ces données doivent être conservées (obligation légale). "
+                    "Archivez le chantier à la place.",
+                    chantier=chantier.display_name, transactions=", ".join(transactions),
+                ))
+        return super().unlink()
 
     def action_view_devis(self):
         return {

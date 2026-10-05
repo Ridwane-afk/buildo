@@ -7,7 +7,9 @@ class ChantierPaiementFss(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _order = 'date desc, id desc'
 
-    chantier_id = fields.Many2one('chantier.chantier', 'Chantier', required=True, ondelete='cascade')
+    # RESTRICT : un paiement FSS est une cotisation sociale effectivement versée ; sa trace doit
+    # survivre au chantier. Un chantier qui en possède s'archive au lieu d'être supprimé.
+    chantier_id = fields.Many2one('chantier.chantier', 'Chantier', required=True, ondelete='restrict')
     ouvrier_id = fields.Many2one('res.users', 'Ouvrier concerné', required=True, tracking=True)
     date = fields.Date('Date du paiement', required=True, default=fields.Date.today, tracking=True)
     periode = fields.Char('Période (ex: Q1 2026)', required=True)

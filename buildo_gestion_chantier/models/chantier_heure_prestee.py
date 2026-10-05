@@ -8,7 +8,9 @@ class ChantierHeurePrestee(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin', 'chantier.validation.mixin']
     _order = 'date desc, id desc'
 
-    chantier_id = fields.Many2one('chantier.chantier', 'Chantier', required=True, ondelete='cascade')
+    # RESTRICT : les heures prestées alimentent le suivi social (salaires, ONSS) et doivent être
+    # conservées 5 ans ; supprimer le chantier ne doit jamais les effacer. On archive le chantier.
+    chantier_id = fields.Many2one('chantier.chantier', 'Chantier', required=True, ondelete='restrict')
     ouvrier_id = fields.Many2one('res.users', 'Ouvrier', required=True, default=lambda self: self.env.user)
     date = fields.Date('Date', required=True, default=fields.Date.today)
     nb_heures = fields.Float('Nombre d\'heures', required=True)
