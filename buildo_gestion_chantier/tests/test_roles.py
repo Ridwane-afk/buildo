@@ -179,6 +179,13 @@ class TestRoles(ChantierTestCommon):
         for name in ('estimation_materiau_ids', 'estimation_outil_ids', 'montant_facturable', 'facture_id'):
             self.assertNotIn(name, tache)
         self.assertEqual(tache['ouvrier_ids'], self.ouvrier1.ids)
+        arch = self.env['chantier.chantier'].with_user(self.ouvrier1).get_views([(False, 'form')])['views']['form']['arch']
+        for button in ('action_start', 'action_terminate', 'action_cancel', 'action_ouvrir_rapport_avancement'):
+            self.assertNotIn(button, arch)
+
+    def test_display_names(self):
+        self.assertEqual(self.demande1.display_name, 'Sacs de ciment')
+        self.assertIn(self.ouvrier1.name, self.heure1.display_name)
 
     def test_ouvrier_photo_on_assigned_task(self):
         Photo = self.env['chantier.photo'].with_user(self.ouvrier1)

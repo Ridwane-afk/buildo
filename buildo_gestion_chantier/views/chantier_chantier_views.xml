@@ -8,15 +8,20 @@
             <form string="Chantier">
                 <header>
                     <button name="action_start" string="Démarrer" type="object"
-                            invisible="state != 'brouillon'" class="btn-primary"/>
+                            invisible="state != 'brouillon'" class="btn-primary"
+                            groups="buildo_gestion_chantier.group_chef_chantier"/>
                     <button name="action_terminate" string="Terminer" type="object"
-                            invisible="state != 'en_cours'" class="btn-primary"/>
+                            invisible="state != 'en_cours'" class="btn-primary"
+                            groups="buildo_gestion_chantier.group_chef_chantier"/>
                     <button name="action_cancel" string="Annuler" type="object"
-                            invisible="state not in ('brouillon', 'en_cours')"/>
+                            invisible="state not in ('brouillon', 'en_cours')"
+                            groups="buildo_gestion_chantier.group_chef_chantier"/>
                     <button name="action_reset_draft" string="Remettre en brouillon" type="object"
-                            invisible="state not in ('annule', 'termine')"/>
+                            invisible="state not in ('annule', 'termine')"
+                            groups="buildo_gestion_chantier.group_chef_chantier"/>
                     <button name="action_ouvrir_rapport_avancement" string="Rapport de suivi" type="object"
-                            icon="fa-file-pdf-o" invisible="state == 'brouillon'"/>
+                            icon="fa-file-pdf-o" invisible="state == 'brouillon'"
+                            groups="buildo_gestion_chantier.group_chef_chantier"/>
                     <field name="state" widget="statusbar"
                            statusbar_visible="brouillon,en_cours,termine"/>
                 </header>

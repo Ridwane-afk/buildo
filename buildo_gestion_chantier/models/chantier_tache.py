@@ -39,7 +39,7 @@ class ChantierTache(models.Model):
                                  groups='buildo_gestion_chantier.group_service_administratif')
     facture_state = fields.Selection(related='facture_id.state', string='État de la facture', tracking=False,
                                      groups='buildo_gestion_chantier.group_service_administratif')
-    avancement = fields.Integer('Avancement (%)', default=0, tracking=True)
+    avancement = fields.Integer('Avancement (%)', default=0, tracking=True, aggregator='avg')
 
     @api.constrains('avancement')
     def _check_avancement(self):

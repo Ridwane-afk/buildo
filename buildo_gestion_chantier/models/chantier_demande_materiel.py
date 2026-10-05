@@ -5,6 +5,7 @@ from odoo.exceptions import ValidationError
 class ChantierDemandeMateriel(models.Model):
     _name = 'chantier.demande.materiel'
     _description = 'Demande de matériel par un ouvrier'
+    _rec_name = 'description'
     _inherit = ['mail.thread', 'mail.activity.mixin', 'chantier.validation.mixin']
     _order = 'date desc, id desc'
 

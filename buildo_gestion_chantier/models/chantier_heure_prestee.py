@@ -33,6 +33,12 @@ class ChantierHeurePrestee(models.Model):
             if rec.taux_horaire <= 0:
                 raise ValidationError(_("Le taux horaire doit être supérieur à 0."))
 
+    @api.depends('ouvrier_id', 'date', 'nb_heures')
+    def _compute_display_name(self):
+        for rec in self:
+            rec.display_name = _("%(ouvrier)s — %(date)s (%(heures)s h)", ouvrier=rec.ouvrier_id.name or '',
+                                 date=rec.date or '', heures=rec.nb_heures)
+
     @api.depends('nb_heures', 'taux_horaire')
     def _compute_montant(self):
         for rec in self:
