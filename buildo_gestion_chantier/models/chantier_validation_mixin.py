@@ -21,6 +21,8 @@ class ChantierValidationMixin(models.AbstractModel):
             return
         if vals.get('state') in ('valide', 'refuse') or vals.get('validateur_id'):
             raise AccessError(_("Seul un chef de chantier peut valider ou refuser."))
+        if 'ouvrier_id' in vals and vals['ouvrier_id'] != self.env.uid:
+            raise AccessError(_("Un ouvrier ne peut encoder que pour lui-même."))
 
     @api.model_create_multi
     def create(self, vals_list):

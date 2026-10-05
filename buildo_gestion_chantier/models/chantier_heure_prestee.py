@@ -12,9 +12,11 @@ class ChantierHeurePrestee(models.Model):
     ouvrier_id = fields.Many2one('res.users', 'Ouvrier', required=True, default=lambda self: self.env.user)
     date = fields.Date('Date', required=True, default=fields.Date.today)
     nb_heures = fields.Float('Nombre d\'heures', required=True)
-    taux_horaire = fields.Monetary('Taux horaire (€/h)', currency_field='currency_id', default=15.0)
+    taux_horaire = fields.Monetary('Taux horaire (€/h)', currency_field='currency_id', default=15.0,
+                                   groups='buildo_gestion_chantier.group_chef_chantier')
     currency_id = fields.Many2one('res.currency', default=lambda self: self.env.company.currency_id)
-    montant = fields.Monetary('Montant', compute='_compute_montant', store=True, currency_field='currency_id')
+    montant = fields.Monetary('Montant', compute='_compute_montant', store=True, currency_field='currency_id',
+                              groups='buildo_gestion_chantier.group_chef_chantier')
     description = fields.Char('Description du travail')
     state = fields.Selection([
         ('brouillon', 'Brouillon'),

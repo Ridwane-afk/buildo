@@ -72,7 +72,7 @@ class TestSecurityRules(ChantierTestCommon):
     def test_ouvrier_cannot_validate_own_records(self):
         ouvrier = self._create_buildo_user('ouvrier_valid_test', 'buildo_gestion_chantier.group_ouvrier')
         Heure = self.env['chantier.heure.prestee'].with_user(ouvrier)
-        heure = Heure.create({'chantier_id': self.chantier1.id, 'nb_heures': 8, 'taux_horaire': 20})
+        heure = Heure.create({'chantier_id': self.chantier1.id, 'nb_heures': 8})
         heure.action_soumettre()
         self.assertEqual(heure.state, 'soumis')
         with self.assertRaises(AccessError):
@@ -90,7 +90,7 @@ class TestSecurityRules(ChantierTestCommon):
     def test_ouvrier_cannot_modify_validated_record(self):
         ouvrier = self._create_buildo_user('ouvrier_modif_test', 'buildo_gestion_chantier.group_ouvrier')
         heure = self.env['chantier.heure.prestee'].with_user(ouvrier).create({
-            'chantier_id': self.chantier1.id, 'nb_heures': 8, 'taux_horaire': 20,
+            'chantier_id': self.chantier1.id, 'nb_heures': 8,
         })
         heure.action_soumettre()
         heure.with_user(self.chef1).action_valider()

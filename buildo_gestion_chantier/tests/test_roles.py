@@ -1,3 +1,5 @@
+from lxml import etree
+
 from odoo.exceptions import AccessError
 from odoo.tests import tagged
 from odoo.tools.safe_eval import safe_eval
@@ -186,6 +188,41 @@ class TestRoles(ChantierTestCommon):
         visible = Menu._visible_menu_ids()
         for xmlid in ('menu_mes_demandes_materiel', 'menu_demande_materiel'):
             self.assertIn(self.env.ref('buildo_gestion_chantier.' + xmlid).id, visible)
+
+    def test_ouvrier_heures_form(self):
+        Heure = self.env['chantier.heure.prestee'].with_user(self.ouvrier1)
+        views = Heure.get_views([(False, 'form'), (False, 'list')])
+        fields_form = views['models']['chantier.heure.prestee']['fields']
+        self.assertNotIn('taux_horaire', fields_form)
+        self.assertNotIn('montant', fields_form)
+        ouvrier_nodes = etree.fromstring(views['views']['form']['arch']).xpath("//field[@name='ouvrier_id']")
+        self.assertEqual(len(ouvrier_nodes), 1)
+        self.assertIn(ouvrier_nodes[0].get('readonly'), ('1', 'True'))
+        # L'ouvrier est rempli automatiquement, le montant est calculé avec le taux par défaut
+        heure = Heure.create({'chantier_id': self.chantier1.id, 'nb_heures': 4})
+        self.assertEqual(heure.ouvrier_id, self.ouvrier1)
+        self.assertEqual(heure.sudo().montant, 60.0)
+        with self.assertRaises(AccessError):
+            heure.read(['taux_horaire'])
+        with self.assertRaises(AccessError):
+            heure.write({'taux_horaire': 99})
+        with self.assertRaises(AccessError):
+            heure.write({'ouvrier_id': self.ouvrier2.id})
+        with self.assertRaises(AccessError):
+            Heure.create({'chantier_id': self.chantier1.id, 'nb_heures': 2, 'ouvrier_id': self.ouvrier2.id})
+        demande = self.env['chantier.demande.materiel'].with_user(self.ouvrier1).create({
+            'chantier_id': self.chantier1.id, 'description': 'Vis',
+        })
+        with self.assertRaises(AccessError):
+            demande.write({'ouvrier_id': self.ouvrier2.id})
+
+    def test_chef_sets_rate_and_worker(self):
+        heure = self.env['chantier.heure.prestee'].with_user(self.chef1).create({
+            'chantier_id': self.chantier1.id, 'ouvrier_id': self.ouvrier1.id, 'nb_heures': 2, 'taux_horaire': 30,
+        })
+        self.assertEqual(heure.montant, 60.0)
+        arch = heure.get_views([(False, 'form')])['views']['form']['arch']
+        self.assertEqual(arch.count('name="ouvrier_id"'), 1)
 
     def test_ouvrier_forms_hide_restricted_data(self):
         chantier = self._read_form_as(self.ouvrier1, self.chantier1)[0]

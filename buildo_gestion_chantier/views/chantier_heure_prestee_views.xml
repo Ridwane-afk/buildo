@@ -23,7 +23,8 @@
                     <group>
                         <group>
                             <field name="chantier_id"/>
-                            <field name="ouvrier_id"/>
+                            <field name="ouvrier_id" groups="buildo_gestion_chantier.group_chef_chantier"/>
+                            <field name="ouvrier_id" readonly="1" groups="!buildo_gestion_chantier.group_chef_chantier"/>
                             <field name="date"/>
                         </group>
                         <group>
