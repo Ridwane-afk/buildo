@@ -37,11 +37,18 @@
               action="action_chantier_heure_prestee"
               sequence="10"/>
 
+    <menuitem id="menu_mes_demandes_materiel"
+              name="Mes demandes"
+              parent="menu_buildo_terrain"
+              action="action_mes_demandes_materiel"
+              sequence="15"/>
+
     <menuitem id="menu_demande_materiel"
               name="Demandes de matériel"
               parent="menu_buildo_terrain"
               action="action_chantier_demande_materiel"
-              sequence="20"/>
+              sequence="20"
+              groups="group_chef_chantier"/>
 
     <menuitem id="menu_rapport_journalier"
               name="Rapports journaliers"

@@ -1,5 +1,6 @@
 from odoo.exceptions import AccessError
 from odoo.tests import tagged
+from odoo.tools.safe_eval import safe_eval
 
 from .common import ChantierTestCommon
 
@@ -169,7 +170,22 @@ class TestRoles(ChantierTestCommon):
         # Un sous-menu n'est atteignable que si sa section parente est elle-même visible
         leaves = visible.filtered(lambda m: m.action and m.parent_id in visible and m.parent_id.parent_id == root)
         self.assertEqual(set(leaves.mapped('name')),
-                         {'Tous les chantiers', 'Tâches', 'Heures prestées', 'Demandes de matériel', 'Photos', 'Mes outils'})
+                         {'Tous les chantiers', 'Tâches', 'Heures prestées', 'Mes demandes', 'Photos', 'Mes outils'})
+
+    def test_mes_demandes(self):
+        action = self.env.ref('buildo_gestion_chantier.action_mes_demandes_materiel')
+        self.assertFalse(action.context and 'search_default' in action.context)
+        brouillon = self.env['chantier.demande.materiel'].with_user(self.ouvrier1).create({
+            'chantier_id': self.chantier1.id, 'description': 'Gants',
+        })
+        domain = safe_eval(action.domain, {'uid': self.ouvrier1.id})
+        found = self.env['chantier.demande.materiel'].with_user(self.ouvrier1).search(domain)
+        self.assertEqual(found, self.demande1 | brouillon)
+        # Le chef voit les deux menus : ses propres demandes et celles à valider
+        Menu = self.env['ir.ui.menu'].with_user(self.chef1)
+        visible = Menu._visible_menu_ids()
+        for xmlid in ('menu_mes_demandes_materiel', 'menu_demande_materiel'):
+            self.assertIn(self.env.ref('buildo_gestion_chantier.' + xmlid).id, visible)
 
     def test_ouvrier_forms_hide_restricted_data(self):
         chantier = self._read_form_as(self.ouvrier1, self.chantier1)[0]
