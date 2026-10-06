@@ -81,3 +81,21 @@ class TestTacheApi(HttpCase, ChantierTestCommon):
         self.assertEqual(res.status_code, 400)
         self.assertEqual(self.url_open('/api/v1/taches/999999', headers=headers).status_code, 404)
         self.assertEqual(self.url_open('/api/v1/taches').status_code, 401)
+
+    def test_ouvrier_chantiers_api(self):
+        """Un ouvrier lit ses chantiers via l'API, sans les champs financiers."""
+        headers = self._headers(self.ouvrier_key)
+        res = self.url_open('/api/v1/chantiers', headers=headers)
+        self.assertEqual(res.status_code, 200)
+        results = res.json()['results']
+        self.assertEqual([c['id'] for c in results], [self.own_chantier.id])
+        self.assertNotIn('marge', results[0])
+        self.assertNotIn('budget_initial', results[0])
+        detail = self.url_open('/api/v1/chantiers/%d' % self.own_chantier.id, headers=headers)
+        self.assertEqual(detail.status_code, 200)
+        create = self.url_open('/api/v1/chantiers', headers=headers,
+                               json={'name': 'Interdit', 'client_id': self.client.id})
+        self.assertEqual(create.status_code, 403)
+        # Le chef, lui, reçoit les champs financiers
+        chef = self.url_open('/api/v1/chantiers/%d' % self.own_chantier.id, headers=self._headers(self.chef_key))
+        self.assertIn('marge', chef.json())

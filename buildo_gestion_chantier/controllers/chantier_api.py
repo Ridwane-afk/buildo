@@ -57,8 +57,16 @@ def _authenticate():
     return uid
 
 
+# Champs financiers réservés au chef de chantier et au-dessus (groups sur le
+# modèle) : ils ne sont renvoyés que si l'appelant a le droit de les lire.
+FINANCIAL_FIELDS = [
+    'budget_initial', 'montant_avenants_acceptes', 'budget_revise', 'cout_main_oeuvre',
+    'cout_materiaux', 'cout_reel', 'montant_facture', 'marge',
+]
+
+
 def _chantier_to_dict(chantier):
-    return {
+    data = {
         'id': chantier.id,
         'ref': chantier.ref,
         'name': chantier.name,
@@ -73,17 +81,14 @@ def _chantier_to_dict(chantier):
         'date_fin_reelle': chantier.date_fin_reelle,
         'description': chantier.description,
         'currency': chantier.currency_id.name,
-        'budget_initial': chantier.budget_initial,
-        'montant_avenants_acceptes': chantier.montant_avenants_acceptes,
-        'budget_revise': chantier.budget_revise,
-        'cout_main_oeuvre': chantier.cout_main_oeuvre,
-        'cout_materiaux': chantier.cout_materiaux,
-        'cout_reel': chantier.cout_reel,
-        'montant_facture': chantier.montant_facture,
-        'marge': chantier.marge,
         'avancement': chantier.avancement,
         'nb_heures': chantier.nb_heures,
     }
+    data.update({
+        name: chantier[name] for name in FINANCIAL_FIELDS
+        if chantier._has_field_access(chantier._fields[name], 'read')
+    })
+    return data
 
 
 def _extract_writable_vals(payload):
