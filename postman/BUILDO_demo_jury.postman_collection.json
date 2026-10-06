@@ -1,0 +1,386 @@
+{
+  "info": {
+    "_postman_id": "21a6f4a4-9ec5-433c-85dc-98375de33561",
+    "name": "BUILDO — Démo jury (2 ressources CRUD)",
+    "description": "Démo de l'API REST : lancer les 8 requêtes dans l'ordre avec Send.\nChantiers : GET, POST, PUT (DELETE à la fin). Tâches : POST, GET, PUT, DELETE.\nLe POST chantier mémorise chantier_id, le POST tâche mémorise tache_id.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{api_key}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8069",
+      "type": "string"
+    },
+    {
+      "key": "api_key",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "chantier_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "tache_id",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "id": "a685d4fb-568e-4f6c-810a-d5b5b59a4d68",
+      "name": "Ressource 1 — Chantiers",
+      "item": [
+        {
+          "id": "074b9cc7-0a0b-4e97-afe3-fea05c3bba1c",
+          "name": "1. GET — Lister les chantiers",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "f5a6f638-974e-43d3-8a42-9a3325424a9f",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('200 OK', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/chantiers",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "chantiers"
+              ]
+            },
+            "description": "Odoo : BUILDO > Chantiers. BD : SELECT id, ref, name FROM chantier_chantier ORDER BY id;"
+          },
+          "response": []
+        },
+        {
+          "id": "32a1f44d-5278-46bd-829f-6fcba30a590a",
+          "name": "2. POST — Créer un chantier",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "43245e82-a8f2-4ed5-9819-444b4df18f4f",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('201 Created', () => pm.response.to.have.status(201));",
+                  "pm.collectionVariables.set('chantier_id', pm.response.json().id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/chantiers",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "chantiers"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Chantier démo jury\",\n  \"client_id\": 9,\n  \"adresse\": \"Rue de la Démo 1, 1000 Bruxelles\",\n  \"budget_initial\": 25000\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "03d40f38-ccfe-433b-9604-eff9c8475945",
+          "name": "3. PUT — Modifier le chantier",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "9fd263d0-c239-4d7e-8b8d-4c8c8ca232cb",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('200 OK', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/chantiers/{{chantier_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "chantiers",
+                "{{chantier_id}}"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"budget_initial\": 30000,\n  \"description\": \"Budget revu après visite\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "id": "87cc1808-90ed-40b3-b6f1-42a11e29886e",
+      "name": "Ressource 2 — Tâches (+ suppression du chantier)",
+      "item": [
+        {
+          "id": "382cff22-ac6b-4206-9673-d90eaa6fcbad",
+          "name": "4. POST — Créer une tâche dans ce chantier",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "6ee9f13c-6690-4a81-b5e5-f3a8ded35d14",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('201 Created', () => pm.response.to.have.status(201));",
+                  "pm.collectionVariables.set('tache_id', pm.response.json().id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/taches",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "taches"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Coulage de la dalle\",\n  \"chantier_id\": {{chantier_id}},\n  \"ouvrier_ids\": [\n    55\n  ],\n  \"date_debut\": \"2026-10-06\",\n  \"date_fin\": \"2026-10-10\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "4943fe75-21e9-4d6f-a9b0-4c99640eaa0c",
+          "name": "5. GET — Lister les tâches du chantier",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "17aecd88-9f11-4c6e-95f9-61a4e382da28",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('200 OK', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/taches?chantier_id={{chantier_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "taches"
+              ],
+              "query": [
+                {
+                  "key": "chantier_id",
+                  "value": "{{chantier_id}}"
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "id": "46d5d875-46dd-448f-a42c-859fd361c45b",
+          "name": "6. PUT — Mettre la tâche à 50 %",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "852c003b-eb98-4c55-a625-0c780c29e407",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('200 OK', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/taches/{{tache_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "taches",
+                "{{tache_id}}"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"avancement\": 50,\n  \"description\": \"Moitié de la dalle coulée\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "023d393e-fe0f-4db4-abfb-4fe83f92c6a5",
+          "name": "7. DELETE — Supprimer la tâche",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "5407c95b-0adc-4267-b75b-08f2f89949e4",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('200 OK', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/taches/{{tache_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "taches",
+                "{{tache_id}}"
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "id": "312b202a-e246-4ff6-9ddb-479e83e4e556",
+          "name": "8. DELETE — Supprimer le chantier",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "e0424517-6759-4848-82f2-a155368b06c8",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('200 OK', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/chantiers/{{chantier_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "chantiers",
+                "{{chantier_id}}"
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

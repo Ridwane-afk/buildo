@@ -6,3 +6,4 @@ from . import test_security_rules
 from . import test_api_controller
 from . import test_roles
 from . import test_suppression_desinscription
+from . import test_tache_api

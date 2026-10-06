@@ -50,9 +50,21 @@ Les appels s'exécutent avec les droits réels du propriétaire de la clé : un 
 | `GET` | `/api/v1/chantiers/<id>` | Détail d'un chantier. |
 | `POST` | `/api/v1/chantiers` | Création. Corps JSON avec au minimum `name` et `client_id`. |
 | `PUT` | `/api/v1/chantiers/<id>` | Modification partielle. |
-| `DELETE` | `/api/v1/chantiers/<id>` | Suppression. |
+| `DELETE` | `/api/v1/chantiers/<id>` | Suppression d'un chantier sans transaction. Renvoie `409` s'il porte des heures prestées, paiements FSS, pièces comptables ou commandes confirmées : il faut alors l'archiver (`PUT` avec `{"active": false}`). |
 
-Champs acceptés en écriture (`POST`/`PUT`) : `name`, `client_id`, `chef_chantier_id`, `adresse`, `date_debut`, `date_fin_prevue`, `budget_initial`, `description`. L'état du chantier (`state`) n'est volontairement pas modifiable par l'API : il passe uniquement par les actions métier de l'interface (Démarrer / Terminer / Annuler), pour ne pas contourner le suivi associé à ces transitions.
+Champs acceptés en écriture (`POST`/`PUT`) : `name`, `client_id`, `chef_chantier_id`, `adresse`, `date_debut`, `date_fin_prevue`, `budget_initial`, `description`, `active` (archivage). L'état du chantier (`state`) n'est volontairement pas modifiable par l'API : il passe uniquement par les actions métier de l'interface (Démarrer / Terminer / Annuler), pour ne pas contourner le suivi associé à ces transitions.
+
+### Ressource `taches`
+
+| Méthode | URL | Description |
+|---|---|---|
+| `GET` | `/api/v1/taches` | Liste des tâches. Paramètres optionnels : `chantier_id`, `state`, `limit`, `offset`. |
+| `GET` | `/api/v1/taches/<id>` | Détail d'une tâche. |
+| `POST` | `/api/v1/taches` | Création. Corps JSON avec au minimum `name` et `chantier_id`. |
+| `PUT` | `/api/v1/taches/<id>` | Modification partielle. |
+| `DELETE` | `/api/v1/taches/<id>` | Suppression (sous-tâches et documents compris). |
+
+Champs acceptés en écriture : `name`, `chantier_id`, `responsable_id`, `ouvrier_ids` (liste d'ids, remplace l'équipe assignée), `date_debut`, `date_fin`, `description`, `avancement` (0 à 100). Comme pour les chantiers, l'état passe par les actions métier. Un ouvrier ne voit via l'API que les tâches qui lui sont assignées, en lecture seule.
 
 ### Exemple
 
@@ -69,7 +81,11 @@ curl -X POST -H "Authorization: Bearer <clé_api>" -H "Content-Type: application
 
 ### Codes de réponse
 
-`200` / `201` succès · `400` requête invalide (champ obligatoire manquant, valeur incorrecte) · `401` clé API absente ou invalide · `403` droits insuffisants sur ce chantier · `404` chantier introuvable.
+`200` / `201` succès · `400` requête invalide (champ obligatoire manquant, valeur incorrecte) · `401` clé API absente ou invalide · `403` droits insuffisants · `404` enregistrement introuvable · `409` suppression refusée (données à conserver, archiver à la place).
+
+### Tests avec Postman
+
+Le dossier `postman/` contient deux collections à importer dans Postman (`Cmd + O`) : `BUILDO_demo_jury` (démo GET / POST / PUT / DELETE sur les deux ressources) et `BUILDO_API` (tests complets : sécurité, CRUD, suppression légale). Renseigner la variable de collection `api_key`. Le fichier `demo_jury.sql` contient les requêtes SQL qui montrent l'impact de chaque appel dans la base.
 
 ## Structure du module
 

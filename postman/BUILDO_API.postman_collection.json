@@ -1,0 +1,639 @@
+{
+  "info": {
+    "_postman_id": "bf44c8de-993d-450e-862a-6c1f7896ed4b",
+    "name": "BUILDO — API REST chantiers",
+    "description": "Tests de l'API REST du module buildo_gestion_chantier (Odoo 19).\n\nAvant de lancer : onglet Variables de la collection → coller la clé API dans `api_key` (Odoo → Mon profil → Sécurité du compte → Nouvelle clé API).\n\nOrdre conseillé : dossier 1 (sécurité), puis 2 (CRUD complet), puis 3 (suppression / archivage). Le dossier 2 crée un chantier, le modifie puis le supprime : il ne laisse aucune trace.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{api_key}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8069",
+      "type": "string"
+    },
+    {
+      "key": "api_key",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "client_id",
+      "value": "9",
+      "type": "string"
+    },
+    {
+      "key": "chantier_avec_heures",
+      "value": "2",
+      "type": "string"
+    },
+    {
+      "key": "chantier_id",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Sécurité",
+      "item": [
+        {
+          "id": "7807da2c-a3c0-46d8-a0c7-5f091c0b6bf6",
+          "name": "Sans clé API → 401",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('401 Unauthorized', () => pm.response.to.have.status(401));",
+                  "pm.test('Message d\\'erreur', () => pm.expect(pm.response.json().error).to.include('Clé API manquante'));"
+                ],
+                "type": "text/javascript",
+                "id": "948898d9-0cc8-4f26-8257-1279b1e26381"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/chantiers",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "chantiers"
+              ]
+            },
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "id": "4b0897ed-a3a1-47fe-975c-534a43ca6f9b",
+          "name": "Clé invalide → 401",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('401 Unauthorized', () => pm.response.to.have.status(401));"
+                ],
+                "type": "text/javascript",
+                "id": "89d089a4-8340-43ed-afe5-2f623be280ff"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "cle-invalide",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/chantiers",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "chantiers"
+              ]
+            },
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "id": "f70518b0-cfa1-40c4-9758-0ef9d4353aac",
+          "name": "Chantier inexistant → 404",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('404 Not Found', () => pm.response.to.have.status(404));"
+                ],
+                "type": "text/javascript",
+                "id": "58a19d0d-3eb8-41ce-b5a1-110099b52fbd"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/chantiers/999999",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "chantiers",
+                "999999"
+              ]
+            },
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "id": "64bc917b-23b4-4789-852c-2aaa2da4cd01",
+          "name": "Création sans nom ni client → 400",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('400 Bad Request', () => pm.response.to.have.status(400));"
+                ],
+                "type": "text/javascript",
+                "id": "3c0354d3-5f0f-4816-905a-8ada87d74063"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/chantiers",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "chantiers"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"adresse\": \"Rue sans chantier 1\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "4b65ce74-cc5b-421e-befa-0cba68abec3f"
+    },
+    {
+      "name": "2. CRUD complet",
+      "item": [
+        {
+          "id": "17e1fa19-23c6-4a7a-9b46-745408cc4590",
+          "name": "READ — Lister les chantiers",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('200 OK', () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test('Pagination présente', () => pm.expect(body).to.have.keys('total', 'limit', 'offset', 'results'));",
+                  "pm.test('Au plus 10 résultats', () => pm.expect(body.results.length).to.be.at.most(10));"
+                ],
+                "type": "text/javascript",
+                "id": "b68523cb-d692-474f-8f65-df4f9e3822b1"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/chantiers?limit=10&offset=0",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "chantiers"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "offset",
+                  "value": "0"
+                }
+              ]
+            },
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "id": "6d5d7f8f-0af2-42ec-8ad6-c6c436ee63e6",
+          "name": "CREATE — Créer un chantier",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('201 Created', () => pm.response.to.have.status(201));",
+                  "const body = pm.response.json();",
+                  "pm.test('Référence générée', () => pm.expect(body.ref).to.not.equal('Nouveau'));",
+                  "pm.test('Actif par défaut', () => pm.expect(body.active).to.be.true);",
+                  "pm.collectionVariables.set('chantier_id', body.id);"
+                ],
+                "type": "text/javascript",
+                "id": "caec4480-fc67-404c-89b7-66f72299810c"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/chantiers",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "chantiers"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Chantier test Postman\",\n  \"client_id\": {{client_id}},\n  \"adresse\": \"Rue de la Démo 1, 1000 Bruxelles\",\n  \"date_debut\": \"2026-10-06\",\n  \"budget_initial\": 25000\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "bd4e46a7-25e5-4b13-8e4e-bff2b002243c",
+          "name": "READ — Lire le chantier créé",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('200 OK', () => pm.response.to.have.status(200));",
+                  "pm.test('Budget initial = 25000', () => pm.expect(pm.response.json().budget_initial).to.eql(25000));"
+                ],
+                "type": "text/javascript",
+                "id": "25453f65-2a18-4285-a611-246407436697"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/chantiers/{{chantier_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "chantiers",
+                "{{chantier_id}}"
+              ]
+            },
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "id": "3d35dbe3-77b3-4199-9cee-281cb3d1e918",
+          "name": "UPDATE — Modifier le budget",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('200 OK', () => pm.response.to.have.status(200));",
+                  "pm.test('Budget initial = 30000', () => pm.expect(pm.response.json().budget_initial).to.eql(30000));"
+                ],
+                "type": "text/javascript",
+                "id": "bf483db5-82b0-4f59-8b2c-8914d16cf296"
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/chantiers/{{chantier_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "chantiers",
+                "{{chantier_id}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"budget_initial\": 30000,\n  \"description\": \"Budget revu après visite\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "b8766bbe-a086-496c-92d1-2fedd12fc6ae",
+          "name": "DELETE — Supprimer le chantier vide (hard delete) → 200",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('200 OK', () => pm.response.to.have.status(200));",
+                  "pm.test('deleted = true', () => pm.expect(pm.response.json().deleted).to.be.true);"
+                ],
+                "type": "text/javascript",
+                "id": "4de145e1-a3f0-459d-8b71-96e70d4221a2"
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/api/v1/chantiers/{{chantier_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "chantiers",
+                "{{chantier_id}}"
+              ]
+            },
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "id": "8c822dac-3ac7-4f97-9ac3-4387e057e809",
+          "name": "READ — Chantier supprimé → 404",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('404 Not Found', () => pm.response.to.have.status(404));"
+                ],
+                "type": "text/javascript",
+                "id": "00be4614-c2f0-4d29-8c85-5a12b30c220f"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/chantiers/{{chantier_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "chantiers",
+                "{{chantier_id}}"
+              ]
+            },
+            "header": []
+          },
+          "response": []
+        }
+      ],
+      "id": "bcb05f39-f2af-4675-affb-a85e67fa3fc4"
+    },
+    {
+      "name": "3. Suppression légale et archivage",
+      "item": [
+        {
+          "id": "353a3c2a-8654-4628-b4d9-73fd19590628",
+          "name": "DELETE — Chantier avec heures prestées → 409",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('409 Conflict', () => pm.response.to.have.status(409));",
+                  "const body = pm.response.json();",
+                  "pm.test('Explique les transactions', () => pm.expect(body.error).to.include('heure(s) prestée(s)'));",
+                  "pm.test('Propose l\\'archivage', () => pm.expect(body.solution).to.include('\"active\": false'));"
+                ],
+                "type": "text/javascript",
+                "id": "0a85a19c-7d6e-40ca-a2b3-37cfbe144d7c"
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/api/v1/chantiers/{{chantier_avec_heures}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "chantiers",
+                "{{chantier_avec_heures}}"
+              ]
+            },
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "id": "fce19cf5-6da3-4e6d-867c-ea4215bc31e1",
+          "name": "UPDATE — Archiver (soft delete) → 200",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('200 OK', () => pm.response.to.have.status(200));",
+                  "pm.test('active = false', () => pm.expect(pm.response.json().active).to.be.false);",
+                  "pm.test('Heures conservées', () => pm.expect(pm.response.json().nb_heures).to.be.above(0));"
+                ],
+                "type": "text/javascript",
+                "id": "a47be93f-d82d-4448-888b-14b95a786467"
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/chantiers/{{chantier_avec_heures}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "chantiers",
+                "{{chantier_avec_heures}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"active\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "9e47a6fb-487d-4d2b-932e-63ee9fe95a45",
+          "name": "READ — Le chantier archivé n'est plus listé",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('200 OK', () => pm.response.to.have.status(200));",
+                  "const ids = pm.response.json().results.map(c => c.id);",
+                  "pm.test('Absent de la liste', () => pm.expect(ids).to.not.include(Number(pm.collectionVariables.get('chantier_avec_heures'))));"
+                ],
+                "type": "text/javascript",
+                "id": "7620d7f6-0b7a-4e35-938f-b43fda8a61f9"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/chantiers?limit=200",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "chantiers"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "200"
+                }
+              ]
+            },
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "id": "987f35ee-216c-4ed2-954d-f224f91692c5",
+          "name": "UPDATE — Désarchiver → 200",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('200 OK', () => pm.response.to.have.status(200));",
+                  "pm.test('active = true', () => pm.expect(pm.response.json().active).to.be.true);"
+                ],
+                "type": "text/javascript",
+                "id": "da6bd9be-9604-4122-863e-7b545f88e5f7"
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/chantiers/{{chantier_avec_heures}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "chantiers",
+                "{{chantier_avec_heures}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"active\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "2029f4fb-e10f-4c56-a5c5-b65bc92e5fb5"
+    }
+  ]
+}
