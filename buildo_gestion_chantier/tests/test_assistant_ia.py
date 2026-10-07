@@ -44,3 +44,35 @@ class TestAssistantIA(ChantierTestCommon):
             with self.assertRaises(UserError):
                 self._assistant(b'%PDF-1.4 ceci est un PDF').action_analyser()
         post.assert_not_called()
+
+    def _payload_envoye(self, user):
+        """Lance l'analyse avec l'utilisateur donné et renvoie ce qui part chez OpenAI."""
+        reponse = MagicMock()
+        reponse.json.return_value = {'choices': [{'message': {'content': 'ok'}}]}
+        with patch(REQUESTS_POST, return_value=reponse) as post:
+            self.env['chantier.assistant.ia'].with_user(user).create({
+                'chantier_id': self.chantier.id, 'question': 'Quelle est la marge du chantier ?',
+            }).action_analyser()
+        return post.call_args.kwargs['json']['messages'][0]['content']
+
+    def test_ouvrier_sans_donnees_financieres(self):
+        g = 'buildo_gestion_chantier.group_%s'
+        ouvrier = self._create_buildo_user('ia_ouvrier', g % 'ouvrier')
+        chef = self._create_buildo_user('ia_chef', g % 'chef_chantier')
+        self.chantier.chef_chantier_id = chef
+        self.env['chantier.tache'].create({'name': 'Plomberie', 'chantier_id': self.chantier.id,
+                                           'ouvrier_ids': [(6, 0, ouvrier.ids)]})
+        # Le bouton Assistant IA est visible pour l'ouvrier
+        arch = self.env['chantier.chantier'].with_user(ouvrier).get_views([(False, 'form')])['views']['form']['arch']
+        self.assertIn('action_ouvrir_assistant', arch)
+
+        prompt_ouvrier = self._payload_envoye(ouvrier)
+        for interdit in ('Budget', 'Coût réel', 'Marge', 'Matériaux manquants'):
+            self.assertNotIn(interdit, prompt_ouvrier)
+        self.assertIn('Ton interlocuteur est un ouvrier', prompt_ouvrier)
+        self.assertIn('Avancement', prompt_ouvrier)
+
+        prompt_chef = self._payload_envoye(chef)
+        self.assertIn('Budget initial : 10000.00', prompt_chef)
+        self.assertNotIn('Ton interlocuteur est un ouvrier', prompt_chef)
+

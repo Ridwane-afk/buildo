@@ -75,7 +75,7 @@ class TestRoles(ChantierTestCommon):
         'chantier.estimation.materiau': ('----', 'RWCD', 'RWCD', 'RWCD', 'RWCD'),
         'chantier.estimation.outil':   ('----', 'RWCD', 'RWCD', 'RWCD', 'RWCD'),
         'chantier.attribution.outil':  ('R---', 'RWCD', 'RWCD', 'RWCD', 'RWCD'),
-        'chantier.assistant.ia':       ('----', 'RWCD', 'RWCD', 'RWCD', 'RWCD'),
+        'chantier.assistant.ia':       ('RWCD', 'RWCD', 'RWCD', 'RWCD', 'RWCD'),
         'chantier.materiau':           ('R---', 'RWC-', 'RWC-', 'RWC-', 'RWCD'),
         'chantier.outil':              ('R---', 'RWC-', 'RWC-', 'RWC-', 'RWCD'),
         'chantier.avenant':            ('----', '----', 'RWCD', 'RWCD', 'RWCD'),

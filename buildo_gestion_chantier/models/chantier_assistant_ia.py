@@ -33,27 +33,35 @@ class ChantierAssistantIA(models.TransientModel):
             ))
         return key
 
+    def _acces_finances(self):
+        """Les données financières (et les estimations) sont réservées au chef de chantier et au-dessus."""
+        return self.env.user.has_group('buildo_gestion_chantier.group_chef_chantier')
+
     def _construire_contexte(self):
         c = self.chantier_id
         etats = dict(c._fields['state'].selection)
         taches = c.tache_ids.filtered(lambda t: t.state == 'en_cours').mapped('name')
-        manquants = c.estimation_materiau_ids.filtered(lambda e: e.quantite_manquante > 0)
         lignes = [
-            f"{e.materiau_id.name} ({e.quantite_manquante:.1f} {e.unite})"
-            for e in manquants
+            f"Chantier : {c.name}",
+            f"État : {etats.get(c.state, c.state)}",
+            f"Adresse : {c.adresse or 'non renseignée'}",
+            f"Heures validées : {c.nb_heures:.1f} h",
+            f"Avancement : {c.avancement:.1f} %",
+            f"Tâches en cours : {', '.join(taches) or 'aucune'}",
         ]
-        return (
-            f"Chantier : {c.name}\n"
-            f"État : {etats.get(c.state, c.state)}\n"
-            f"Adresse : {c.adresse or 'non renseignée'}\n"
-            f"Budget initial : {c.budget_initial:.2f} {c.currency_id.symbol}\n"
-            f"Coût réel : {c.cout_reel:.2f} {c.currency_id.symbol}\n"
-            f"Marge : {c.marge:.2f} {c.currency_id.symbol}\n"
-            f"Heures validées : {c.nb_heures:.1f} h\n"
-            f"Avancement : {c.avancement:.1f} %\n"
-            f"Tâches en cours : {', '.join(taches) or 'aucune'}\n"
-            f"Matériaux manquants : {', '.join(lignes) or 'aucun'}"
-        )
+        # Pour un ouvrier, aucune donnée financière n'est transmise à l'IA :
+        # elle ne peut donc pas en révéler, même si on le lui demande.
+        if self._acces_finances():
+            manquants = c.estimation_materiau_ids.filtered(lambda e: e.quantite_manquante > 0)
+            lignes += [
+                f"Budget initial : {c.budget_initial:.2f} {c.currency_id.symbol}",
+                f"Coût réel : {c.cout_reel:.2f} {c.currency_id.symbol}",
+                f"Marge : {c.marge:.2f} {c.currency_id.symbol}",
+                "Matériaux manquants : %s" % (', '.join(
+                    f"{e.materiau_id.name} ({e.quantite_manquante:.1f} {e.unite})" for e in manquants
+                ) or 'aucun'),
+            ]
+        return "\n".join(lignes)
 
     def action_analyser(self):
         api_key = self._get_api_key()
@@ -71,6 +79,13 @@ class ChantierAssistantIA(models.TransientModel):
             "photo est fournie, commence par décrire ce que tu observes avant de "
             "proposer une solution."
         )
+        if not self._acces_finances():
+            system_prompt += (
+                "\n\nTon interlocuteur est un ouvrier. Ne donne aucune information "
+                "financière (budget, coûts, marge, prix, montants, salaires). Si on te "
+                "le demande, réponds que ces informations sont réservées au chef de "
+                "chantier et concentre-toi sur la technique et la sécurité."
+            )
 
         user_content = [{'type': 'text', 'text': self.question}]
 

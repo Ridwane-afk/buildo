@@ -46,7 +46,7 @@
                             <field name="commande_fournisseur_ids" widget="statinfo" string="Achats"/>
                         </button>
                         <button name="action_ouvrir_assistant" type="object" class="oe_stat_button"
-                                icon="fa-comments" groups="buildo_gestion_chantier.group_chef_chantier">
+                                icon="fa-comments">
                             <div class="o_stat_info">
                                 <span class="o_stat_text">Assistant IA</span>
                             </div>
