@@ -5,8 +5,12 @@ import requests
 
 from odoo import models, fields, _
 from odoo.exceptions import UserError
+from odoo.tools.mimetypes import guess_mimetype
 
 _logger = logging.getLogger(__name__)
+
+# Formats d'image acceptés par l'API OpenAI
+FORMATS_IMAGE_ACCEPTES = ('image/png', 'image/jpeg', 'image/gif', 'image/webp')
 
 
 class ChantierAssistantIA(models.TransientModel):
@@ -71,15 +75,17 @@ class ChantierAssistantIA(models.TransientModel):
         user_content = [{'type': 'text', 'text': self.question}]
 
         if self.image:
-            image_b64 = base64.b64encode(self.image).decode('utf-8')
-            mime = 'image/jpeg'
-            if self.image_name:
-                ext = self.image_name.lower().rsplit('.', 1)[-1]
-                mime = {
-                    'png': 'image/png',
-                    'gif': 'image/gif',
-                    'webp': 'image/webp',
-                }.get(ext, 'image/jpeg')
+            # Un champ Binary Odoo contient déjà l'image encodée en base64 :
+            # on l'envoie telle quelle (la ré-encoder la rendait illisible).
+            image_b64 = self.image.decode() if isinstance(self.image, bytes) else self.image
+            # Format détecté à partir du contenu, pas du nom de fichier
+            mime = guess_mimetype(base64.b64decode(image_b64))
+            if mime not in FORMATS_IMAGE_ACCEPTES:
+                raise UserError(_(
+                    "Format de photo non pris en charge (%(format)s). "
+                    "Utilisez une image PNG, JPEG, GIF ou WEBP.",
+                    format=mime,
+                ))
             user_content.append({
                 'type': 'image_url',
                 'image_url': {'url': f'data:{mime};base64,{image_b64}'},

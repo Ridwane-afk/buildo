@@ -7,3 +7,4 @@ from . import test_api_controller
 from . import test_roles
 from . import test_suppression_desinscription
 from . import test_tache_api
+from . import test_assistant_ia
