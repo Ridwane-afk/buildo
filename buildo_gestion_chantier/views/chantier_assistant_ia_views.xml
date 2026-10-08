@@ -4,25 +4,62 @@
         <field name="name">chantier.assistant.ia.form</field>
         <field name="model">chantier.assistant.ia</field>
         <field name="arch" type="xml">
-            <form string="Assistant IA — Chantier">
-                <sheet>
-                    <group string="Votre question">
-                        <field name="question" nolabel="1" colspan="2"
-                               placeholder="Décrivez le problème ou posez votre question..."/>
-                    </group>
-                    <group string="Photo du problème (optionnel)">
-                        <field name="image" widget="image" nolabel="1"
-                               options="{'size': [480, 360]}"
-                               colspan="2"/>
-                        <field name="image_name" invisible="1"/>
-                    </group>
-                    <group string="Réponse de l'assistant" invisible="not reponse">
-                        <field name="reponse" nolabel="1" colspan="2"/>
-                    </group>
-                </sheet>
+            <form string="Assistant IA" class="o_buildo_ia">
+                <field name="reponse" invisible="1"/>
+                <field name="image_name" invisible="1"/>
+
+                <!-- En-tête -->
+                <div class="o_buildo_ia_header">
+                    <div class="o_buildo_ia_avatar"><i class="fa fa-magic" title="Assistant IA"/></div>
+                    <div class="flex-grow-1">
+                        <div class="o_buildo_ia_title">Assistant BUILDO</div>
+                        <div class="o_buildo_ia_subtitle">
+                            Expert BTP · normes belges ·
+                            <field name="chantier_id" readonly="1" options="{'no_open': True}" class="oe_inline"/>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conversation -->
+                <div class="o_buildo_ia_chat">
+                    <div class="o_buildo_ia_msg o_buildo_ia_msg_bot" invisible="reponse">
+                        <p class="mb-2">Bonjour ! Décrivez un problème rencontré sur le chantier, je vous propose une solution concrète.</p>
+                        <p class="mb-1 text-muted small">Par exemple :</p>
+                        <ul class="mb-0 small text-muted">
+                            <li>« Une fissure apparaît sur le mur porteur, est-ce grave ? »</li>
+                            <li>« Quel isolant choisir pour une toiture plate ? »</li>
+                            <li>« Fuite sous l'évier après la pose : que vérifier ? »</li>
+                        </ul>
+                        <p class="mt-2 mb-0 small text-muted"><i class="fa fa-camera me-1"/>Ajoutez une photo pour un diagnostic plus précis.</p>
+                    </div>
+
+                    <div class="o_buildo_ia_msg o_buildo_ia_msg_user" invisible="not reponse">
+                        <field name="question" readonly="1" nolabel="1"/>
+                        <field name="image" widget="image" readonly="1" invisible="not image"
+                               options="{'size': [160, 120]}" class="o_buildo_ia_photo"/>
+                    </div>
+                    <div class="o_buildo_ia_msg o_buildo_ia_msg_bot" invisible="not reponse">
+                        <div class="o_buildo_ia_author"><i class="fa fa-magic me-1"/>Assistant BUILDO</div>
+                        <field name="reponse_html" readonly="1" nolabel="1" class="o_buildo_ia_answer"/>
+                    </div>
+                </div>
+
+                <!-- Zone de saisie -->
+                <div class="o_buildo_ia_composer" invisible="reponse">
+                    <field name="question" nolabel="1"
+                           placeholder="Décrivez le problème ou posez votre question…"/>
+                    <div class="o_buildo_ia_attach">
+                        <field name="image" widget="image" filename="image_name"
+                               options="{'size': [56, 56]}" class="o_buildo_ia_thumb"/>
+                        <span class="text-muted small">Photo du problème (optionnel) : PNG, JPEG ou WEBP</span>
+                    </div>
+                </div>
+
                 <footer>
-                    <button name="action_analyser" string="Analyser"
-                            type="object" class="btn-primary"/>
+                    <button name="action_analyser" string="Envoyer" type="object" icon="fa-paper-plane"
+                            class="btn-primary" invisible="reponse"/>
+                    <button name="action_nouvelle_question" string="Nouvelle question" type="object"
+                            icon="fa-plus" class="btn-primary" invisible="not reponse"/>
                     <button string="Fermer" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>

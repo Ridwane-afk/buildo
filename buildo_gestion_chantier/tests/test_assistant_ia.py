@@ -5,6 +5,7 @@ from odoo.exceptions import UserError
 from odoo.tests import tagged
 
 from .common import ChantierTestCommon
+from ..models.chantier_assistant_ia import markdown_vers_html
 
 # Image PNG 1x1 pixel
 PNG = base64.b64decode(
@@ -75,4 +76,22 @@ class TestAssistantIA(ChantierTestCommon):
         prompt_chef = self._payload_envoye(chef)
         self.assertIn('Budget initial : 10000.00', prompt_chef)
         self.assertNotIn('Ton interlocuteur est un ouvrier', prompt_chef)
+
+    def test_reponse_mise_en_forme_et_securisee(self):
+        html = markdown_vers_html("### Diagnostic\nLa **fuite** vient du raccord.\n1. Couper l'eau\n- Vérifier le joint\n"
+                                  "<script>alert(1)</script>")
+        self.assertIn('<h6>Diagnostic</h6>', html)
+        self.assertIn('<strong>fuite</strong>', html)
+        self.assertIn('<ol><li>', html)
+        self.assertIn('<ul><li>', html)
+        self.assertNotIn('<script>', html)
+        self.assertIn('&lt;script&gt;', html)
+
+    def test_nouvelle_question(self):
+        assistant = self._assistant(PNG)
+        action = assistant.action_nouvelle_question()
+        self.assertEqual(action['res_model'], 'chantier.assistant.ia')
+        self.assertFalse(action['res_id'])
+        self.assertEqual(action['context'], {'default_chantier_id': self.chantier.id})
+        self.assertEqual(action['name'], 'Assistant IA')
 

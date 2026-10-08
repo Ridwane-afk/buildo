@@ -1,9 +1,11 @@
 import base64
 import logging
+import re
 
 import requests
+from markupsafe import Markup, escape
 
-from odoo import models, fields, _
+from odoo import api, models, fields, _
 from odoo.exceptions import UserError
 from odoo.tools.mimetypes import guess_mimetype
 
@@ -11,6 +13,44 @@ _logger = logging.getLogger(__name__)
 
 # Formats d'image acceptés par l'API OpenAI
 FORMATS_IMAGE_ACCEPTES = ('image/png', 'image/jpeg', 'image/gif', 'image/webp')
+
+
+def _markdown_inline(texte):
+    """Gras, italique et code en ligne, après échappement du HTML."""
+    texte = str(escape(texte))
+    texte = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', texte)
+    texte = re.sub(r'(?<!\*)\*(?!\s)(.+?)(?<!\s)\*(?!\*)', r'<em>\1</em>', texte)
+    return re.sub(r'`(.+?)`', r'<code>\1</code>', texte)
+
+
+def markdown_vers_html(texte):
+    """Convertit le Markdown simple renvoyé par l'IA (titres, listes, gras) en HTML sûr.
+
+    Tout le texte est échappé avant mise en forme : une réponse contenant du
+    HTML ou du JavaScript est affichée comme du texte, jamais exécutée.
+    """
+    html, liste = [], None
+    for ligne in (texte or '').splitlines():
+        brut = ligne.strip()
+        puce = re.match(r'^[-*•]\s+(.*)', brut)
+        numero = re.match(r'^\d+[.)]\s+(.*)', brut)
+        titre = re.match(r'^#{1,6}\s+(.*)', brut)
+        type_liste = 'ul' if puce else 'ol' if numero else None
+        if liste and type_liste != liste:
+            html.append('</%s>' % liste)
+            liste = None
+        if type_liste:
+            if not liste:
+                html.append('<%s>' % type_liste)
+                liste = type_liste
+            html.append('<li>%s</li>' % _markdown_inline((puce or numero).group(1)))
+        elif titre:
+            html.append('<h6>%s</h6>' % _markdown_inline(titre.group(1)))
+        elif brut:
+            html.append('<p>%s</p>' % _markdown_inline(brut))
+    if liste:
+        html.append('</%s>' % liste)
+    return Markup(''.join(html))
 
 
 class ChantierAssistantIA(models.TransientModel):
@@ -22,6 +62,28 @@ class ChantierAssistantIA(models.TransientModel):
     image = fields.Binary('Photo du problème')
     image_name = fields.Char()
     reponse = fields.Text('Réponse de l\'assistant', readonly=True)
+    reponse_html = fields.Html('Réponse mise en forme', compute='_compute_reponse_html', sanitize=False)
+
+    @api.depends('reponse')
+    def _compute_reponse_html(self):
+        for rec in self:
+            rec.reponse_html = markdown_vers_html(rec.reponse)
+
+    def _action_fenetre(self, res_id=False, context=None):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _("Assistant IA"),
+            'res_model': self._name,
+            'res_id': res_id,
+            'view_mode': 'form',
+            'target': 'new',
+            'context': context or {},
+        }
+
+    def action_nouvelle_question(self):
+        """Rouvre l'assistant vide, sur le même chantier."""
+        self.ensure_one()
+        return self._action_fenetre(context={'default_chantier_id': self.chantier_id.id})
 
     def _get_api_key(self):
         key = self.env['ir.config_parameter'].sudo().get_param('buildo.openai.api_key')
@@ -138,10 +200,4 @@ class ChantierAssistantIA(models.TransientModel):
             _logger.exception("Erreur inattendue lors de l'appel OpenAI")
             raise UserError(_("Erreur inattendue : %s", e))
 
-        return {
-            'type': 'ir.actions.act_window',
-            'res_model': self._name,
-            'res_id': self.id,
-            'view_mode': 'form',
-            'target': 'new',
-        }
+        return self._action_fenetre(res_id=self.id)

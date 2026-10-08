@@ -220,13 +220,7 @@ class ChantierChantier(models.Model):
         self.write({'state': 'brouillon'})
 
     def action_ouvrir_assistant(self):
-        return {
-            'type': 'ir.actions.act_window',
-            'res_model': 'chantier.assistant.ia',
-            'view_mode': 'form',
-            'target': 'new',
-            'context': {'default_chantier_id': self.id},
-        }
+        return self.env['chantier.assistant.ia']._action_fenetre(context={'default_chantier_id': self.id})
 
     def action_ouvrir_rapport_avancement(self):
         return {
