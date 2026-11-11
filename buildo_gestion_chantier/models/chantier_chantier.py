@@ -49,6 +49,9 @@ class ChantierChantier(models.Model):
     facture_ids = fields.One2many('account.move', 'chantier_id', 'Factures',
                                   domain=[('move_type', '=', 'out_invoice')],
                                   groups='buildo_gestion_chantier.group_service_administratif')
+    avoir_ids = fields.One2many('account.move', 'chantier_id', 'Avoirs',
+                                domain=[('move_type', '=', 'out_refund')],
+                                groups='buildo_gestion_chantier.group_service_administratif')
     commande_fournisseur_ids = fields.One2many('purchase.order', 'chantier_id', 'Commandes fournisseur',
                                                groups='buildo_gestion_chantier.group_service_administratif')
     paiement_fss_ids = fields.One2many('chantier.paiement.fss', 'chantier_id', 'Paiements FSS',
@@ -95,7 +98,8 @@ class ChantierChantier(models.Model):
 
     @api.depends('heure_prestee_ids.montant', 'heure_prestee_ids.state',
                  'commande_fournisseur_ids.amount_total', 'commande_fournisseur_ids.state',
-                 'facture_ids.amount_total', 'facture_ids.payment_state', 'facture_ids.move_type',
+                 'facture_ids.state', 'facture_ids.amount_total_signed', 'facture_ids.amount_residual_signed',
+                 'avoir_ids.state', 'avoir_ids.amount_total_signed', 'avoir_ids.amount_residual_signed',
                  'avenant_ids.montant_ht', 'avenant_ids.state', 'budget_initial')
     def _compute_financier(self):
         for rec in self:
@@ -109,13 +113,13 @@ class ChantierChantier(models.Model):
                 ).mapped('amount_total')
             )
             rec.cout_reel = rec.cout_main_oeuvre + rec.cout_materiaux
-            # Factures clients encaissées ou partiellement encaissées (account.move)
-            # Inclut 'paid', 'in_payment' et déduit les avoirs (out_refund via amount_residual)
+            # Montant encaissé : part déjà réglée des factures clients validées, moins
+            # la part réglée des avoirs. Les montants « signed » sont positifs pour une
+            # facture et négatifs pour un avoir ; total - reste à payer = part réglée.
+            # Une facture partiellement payée ne compte donc que pour ce qui a été payé.
+            pieces = (rec.facture_ids | rec.avoir_ids).filtered(lambda m: m.state == 'posted')
             rec.montant_facture = sum(
-                rec.facture_ids.filtered(
-                    lambda f: f.move_type == 'out_invoice'
-                    and f.payment_state in ('paid', 'in_payment', 'partial')
-                ).mapped('amount_total')
+                m.amount_total_signed - m.amount_residual_signed for m in pieces
             )
             rec.marge = rec.montant_facture - rec.cout_reel
             rec.montant_avenants_acceptes = sum(
