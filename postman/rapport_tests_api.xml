@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="BUILDO — Tests API complets" tests="95" time="2.433">
+  <testsuite name="0. Préparation (admin) / Créer le chantier de test" id="c4d25491-0250-4bdf-be40-315824ae4b97" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.066">
+    <testcase name="Code HTTP 201" time="0.066" classname="0PreparationAdminCreerLeChantierDeTest"/>
+    <testcase name="Référence générée" time="0.066" classname="0PreparationAdminCreerLeChantierDeTest"/>
+  </testsuite>
+  <testsuite name="0. Préparation (admin) / Créer la tâche de test (ouvrier assigné)" id="c5fa9730-9de8-4acb-8d64-c1f018ca6c2b" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.037">
+    <testcase name="Code HTTP 201" time="0.037" classname="0PreparationAdminCreerLaTacheDeTestOuvrierAssigne"/>
+    <testcase name="Ouvrier assigné" time="0.037" classname="0PreparationAdminCreerLaTacheDeTestOuvrierAssigne"/>
+  </testsuite>
+  <testsuite name="0. Préparation (admin) / Repérer une tâche d'un autre chantier" id="40dedc70-7977-496d-9515-4d66448e0c72" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.023">
+    <testcase name="Code HTTP 200" time="0.023" classname="0PreparationAdminRepererUneTacheDunAutreChantier"/>
+    <testcase name="Au moins une tâche" time="0.023" classname="0PreparationAdminRepererUneTacheDunAutreChantier"/>
+  </testsuite>
+  <testsuite name="Rôle : Administrateur BUILDO / GET liste des chantiers" id="6ff24e24-7a28-4973-b839-c877843c769d" timestamp="2026-10-08T13:37:40.206Z" tests="4" failures="0" errors="0" time="0.033">
+    <testcase name="Code HTTP 200" time="0.033" classname="RoleAdministrateurBuildoGetListeDesChantiers"/>
+    <testcase name="Le chantier de test est listé" time="0.033" classname="RoleAdministrateurBuildoGetListeDesChantiers"/>
+    <testcase name="Voit les chantiers des autres" time="0.033" classname="RoleAdministrateurBuildoGetListeDesChantiers"/>
+    <testcase name="Champs financiers présents" time="0.033" classname="RoleAdministrateurBuildoGetListeDesChantiers"/>
+  </testsuite>
+  <testsuite name="Rôle : Administrateur BUILDO / GET détail du chantier de test" id="c3eb7627-17b4-4bf5-9f6c-25d9e241545b" timestamp="2026-10-08T13:37:40.206Z" tests="3" failures="0" errors="0" time="0.020">
+    <testcase name="Code HTTP 200" time="0.020" classname="RoleAdministrateurBuildoGetDetailDuChantierDeTest"/>
+    <testcase name="Bon chantier" time="0.020" classname="RoleAdministrateurBuildoGetDetailDuChantierDeTest"/>
+    <testcase name="Budget visible" time="0.020" classname="RoleAdministrateurBuildoGetDetailDuChantierDeTest"/>
+  </testsuite>
+  <testsuite name="Rôle : Administrateur BUILDO / GET détail d'un chantier d'un autre chef" id="fa1135be-739c-4256-97c2-7b88f2f8ca1f" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.019">
+    <testcase name="Code HTTP 200" time="0.019" classname="RoleAdministrateurBuildoGetDetailDunChantierDunAutreChef"/>
+  </testsuite>
+  <testsuite name="Rôle : Administrateur BUILDO / POST créer un chantier" id="b6320032-9aba-4da5-8018-76e331ee383b" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.028">
+    <testcase name="Code HTTP 201" time="0.028" classname="RoleAdministrateurBuildoPostCreerUnChantier"/>
+    <testcase name="Actif par défaut" time="0.028" classname="RoleAdministrateurBuildoPostCreerUnChantier"/>
+  </testsuite>
+  <testsuite name="Rôle : Administrateur BUILDO / PUT modifier le chantier de test" id="25786290-30ca-41dc-95f5-fc6d8b5672c6" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.021">
+    <testcase name="Code HTTP 200" time="0.021" classname="RoleAdministrateurBuildoPutModifierLeChantierDeTest"/>
+    <testcase name="Description mise à jour" time="0.021" classname="RoleAdministrateurBuildoPutModifierLeChantierDeTest"/>
+  </testsuite>
+  <testsuite name="Rôle : Administrateur BUILDO / DELETE supprimer un chantier vide" id="0a2debb3-0b21-4551-9f1b-31fff8c670c1" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.049">
+    <testcase name="Code HTTP 200" time="0.049" classname="RoleAdministrateurBuildoDeleteSupprimerUnChantierVide"/>
+    <testcase name="deleted = true" time="0.049" classname="RoleAdministrateurBuildoDeleteSupprimerUnChantierVide"/>
+  </testsuite>
+  <testsuite name="Rôle : Administrateur BUILDO / DELETE chantier avec heures prestées" id="ccf96ec5-4071-4d54-ba3e-985ca535f63e" timestamp="2026-10-08T13:37:40.206Z" tests="3" failures="0" errors="0" time="0.023">
+    <testcase name="Code HTTP 409" time="0.023" classname="RoleAdministrateurBuildoDeleteChantierAvecHeuresPrestees"/>
+    <testcase name="Explique les heures prestées" time="0.023" classname="RoleAdministrateurBuildoDeleteChantierAvecHeuresPrestees"/>
+    <testcase name="Propose l'archivage" time="0.023" classname="RoleAdministrateurBuildoDeleteChantierAvecHeuresPrestees"/>
+  </testsuite>
+  <testsuite name="Rôle : Administrateur BUILDO / GET tâches du chantier de test" id="05de5525-38d4-43d3-834f-61ce1ba1d4f3" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.019">
+    <testcase name="Code HTTP 200" time="0.019" classname="RoleAdministrateurBuildoGetTachesDuChantierDeTest"/>
+    <testcase name="La tâche de test est listée" time="0.019" classname="RoleAdministrateurBuildoGetTachesDuChantierDeTest"/>
+  </testsuite>
+  <testsuite name="Rôle : Administrateur BUILDO / GET détail de la tâche de test" id="e40b3e02-dfdb-46c6-804b-7e5f26ddbda8" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.021">
+    <testcase name="Code HTTP 200" time="0.021" classname="RoleAdministrateurBuildoGetDetailDeLaTacheDeTest"/>
+    <testcase name="Bonne tâche" time="0.021" classname="RoleAdministrateurBuildoGetDetailDeLaTacheDeTest"/>
+  </testsuite>
+  <testsuite name="Rôle : Administrateur BUILDO / GET tâche d'un autre chantier" id="88dc41a2-1dbe-4fe6-a434-ee7534d5d88a" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.024">
+    <testcase name="Code HTTP 200" time="0.024" classname="RoleAdministrateurBuildoGetTacheDunAutreChantier"/>
+  </testsuite>
+  <testsuite name="Rôle : Administrateur BUILDO / POST créer une tâche" id="2eca3d16-c9e4-4493-9a17-baa2b4efb267" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.035">
+    <testcase name="Code HTTP 201" time="0.035" classname="RoleAdministrateurBuildoPostCreerUneTache"/>
+    <testcase name="État initial à faire" time="0.035" classname="RoleAdministrateurBuildoPostCreerUneTache"/>
+  </testsuite>
+  <testsuite name="Rôle : Administrateur BUILDO / PUT avancement de la tâche de test" id="e142c507-2b29-4a7b-bf26-f3f643f135fd" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.030">
+    <testcase name="Code HTTP 200" time="0.030" classname="RoleAdministrateurBuildoPutAvancementDeLaTacheDeTest"/>
+    <testcase name="Avancement 10 %" time="0.030" classname="RoleAdministrateurBuildoPutAvancementDeLaTacheDeTest"/>
+  </testsuite>
+  <testsuite name="Rôle : Administrateur BUILDO / DELETE supprimer une tâche" id="da6d2497-222f-407a-8199-6abde4d495cf" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.042">
+    <testcase name="Code HTTP 200" time="0.042" classname="RoleAdministrateurBuildoDeleteSupprimerUneTache"/>
+    <testcase name="deleted = true" time="0.042" classname="RoleAdministrateurBuildoDeleteSupprimerUneTache"/>
+  </testsuite>
+  <testsuite name="Rôle : Direction / GET liste des chantiers" id="9b85a5ad-c8dc-4a1a-b870-dfb1b5e4a49e" timestamp="2026-10-08T13:37:40.206Z" tests="4" failures="0" errors="0" time="0.037">
+    <testcase name="Code HTTP 200" time="0.037" classname="RoleDirectionGetListeDesChantiers"/>
+    <testcase name="Le chantier de test est listé" time="0.037" classname="RoleDirectionGetListeDesChantiers"/>
+    <testcase name="Voit les chantiers des autres" time="0.037" classname="RoleDirectionGetListeDesChantiers"/>
+    <testcase name="Champs financiers présents" time="0.037" classname="RoleDirectionGetListeDesChantiers"/>
+  </testsuite>
+  <testsuite name="Rôle : Direction / GET détail du chantier de test" id="165e0360-848c-4fcb-b7ca-41b03eedd362" timestamp="2026-10-08T13:37:40.206Z" tests="3" failures="0" errors="0" time="0.020">
+    <testcase name="Code HTTP 200" time="0.020" classname="RoleDirectionGetDetailDuChantierDeTest"/>
+    <testcase name="Bon chantier" time="0.020" classname="RoleDirectionGetDetailDuChantierDeTest"/>
+    <testcase name="Budget visible" time="0.020" classname="RoleDirectionGetDetailDuChantierDeTest"/>
+  </testsuite>
+  <testsuite name="Rôle : Direction / GET détail d'un chantier d'un autre chef" id="b9d9ac98-e42c-4d5a-995d-5dd3877ead98" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.020">
+    <testcase name="Code HTTP 200" time="0.020" classname="RoleDirectionGetDetailDunChantierDunAutreChef"/>
+  </testsuite>
+  <testsuite name="Rôle : Direction / POST créer un chantier" id="3efe3adf-c52b-4d00-b050-89e5a26a4b5c" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.027">
+    <testcase name="Code HTTP 201" time="0.027" classname="RoleDirectionPostCreerUnChantier"/>
+    <testcase name="Actif par défaut" time="0.027" classname="RoleDirectionPostCreerUnChantier"/>
+  </testsuite>
+  <testsuite name="Rôle : Direction / PUT modifier le chantier de test" id="db90ff24-68e1-4119-b05e-0231b15b96e2" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.021">
+    <testcase name="Code HTTP 200" time="0.021" classname="RoleDirectionPutModifierLeChantierDeTest"/>
+    <testcase name="Description mise à jour" time="0.021" classname="RoleDirectionPutModifierLeChantierDeTest"/>
+  </testsuite>
+  <testsuite name="Rôle : Direction / DELETE supprimer un chantier vide" id="581f7936-1fcc-46d4-9ab0-c2779ff22ffa" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.018">
+    <testcase name="Code HTTP 403" time="0.018" classname="RoleDirectionDeleteSupprimerUnChantierVide"/>
+  </testsuite>
+  <testsuite name="Rôle : Direction / DELETE chantier avec heures prestées" id="28585336-9b62-45ac-9741-b4d96c203be8" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.017">
+    <testcase name="Code HTTP 403" time="0.017" classname="RoleDirectionDeleteChantierAvecHeuresPrestees"/>
+  </testsuite>
+  <testsuite name="Rôle : Direction / GET tâches du chantier de test" id="3c66bcf4-4c3f-41cb-a70b-077973dfbb87" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.022">
+    <testcase name="Code HTTP 200" time="0.022" classname="RoleDirectionGetTachesDuChantierDeTest"/>
+    <testcase name="La tâche de test est listée" time="0.022" classname="RoleDirectionGetTachesDuChantierDeTest"/>
+  </testsuite>
+  <testsuite name="Rôle : Direction / GET détail de la tâche de test" id="0d7c7112-2cdf-4ea4-80ac-11c929ccfbbd" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.021">
+    <testcase name="Code HTTP 200" time="0.021" classname="RoleDirectionGetDetailDeLaTacheDeTest"/>
+    <testcase name="Bonne tâche" time="0.021" classname="RoleDirectionGetDetailDeLaTacheDeTest"/>
+  </testsuite>
+  <testsuite name="Rôle : Direction / GET tâche d'un autre chantier" id="89376c14-965e-42ac-83ce-88fa296819db" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.023">
+    <testcase name="Code HTTP 200" time="0.023" classname="RoleDirectionGetTacheDunAutreChantier"/>
+  </testsuite>
+  <testsuite name="Rôle : Direction / POST créer une tâche" id="b421dff5-d07a-4936-bf2f-f18e2af4fdc1" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.036">
+    <testcase name="Code HTTP 201" time="0.036" classname="RoleDirectionPostCreerUneTache"/>
+    <testcase name="État initial à faire" time="0.036" classname="RoleDirectionPostCreerUneTache"/>
+  </testsuite>
+  <testsuite name="Rôle : Direction / PUT avancement de la tâche de test" id="211c22a6-42ea-43f3-92df-776495fd2d7e" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.033">
+    <testcase name="Code HTTP 200" time="0.033" classname="RoleDirectionPutAvancementDeLaTacheDeTest"/>
+    <testcase name="Avancement 20 %" time="0.033" classname="RoleDirectionPutAvancementDeLaTacheDeTest"/>
+  </testsuite>
+  <testsuite name="Rôle : Direction / DELETE supprimer une tâche" id="9ba612e4-ccc2-430f-8a79-4300c7180a17" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.043">
+    <testcase name="Code HTTP 200" time="0.043" classname="RoleDirectionDeleteSupprimerUneTache"/>
+    <testcase name="deleted = true" time="0.043" classname="RoleDirectionDeleteSupprimerUneTache"/>
+  </testsuite>
+  <testsuite name="Rôle : Service administratif / GET liste des chantiers" id="71114d46-9faa-4325-90ce-d66b7f9c4645" timestamp="2026-10-08T13:37:40.206Z" tests="4" failures="0" errors="0" time="0.036">
+    <testcase name="Code HTTP 200" time="0.036" classname="RoleServiceAdministratifGetListeDesChantiers"/>
+    <testcase name="Le chantier de test est listé" time="0.036" classname="RoleServiceAdministratifGetListeDesChantiers"/>
+    <testcase name="Voit les chantiers des autres" time="0.036" classname="RoleServiceAdministratifGetListeDesChantiers"/>
+    <testcase name="Champs financiers présents" time="0.036" classname="RoleServiceAdministratifGetListeDesChantiers"/>
+  </testsuite>
+  <testsuite name="Rôle : Service administratif / GET détail du chantier de test" id="6a8d4747-8595-4e93-b1bc-e76eaa922542" timestamp="2026-10-08T13:37:40.206Z" tests="3" failures="0" errors="0" time="0.021">
+    <testcase name="Code HTTP 200" time="0.021" classname="RoleServiceAdministratifGetDetailDuChantierDeTest"/>
+    <testcase name="Bon chantier" time="0.021" classname="RoleServiceAdministratifGetDetailDuChantierDeTest"/>
+    <testcase name="Budget visible" time="0.021" classname="RoleServiceAdministratifGetDetailDuChantierDeTest"/>
+  </testsuite>
+  <testsuite name="Rôle : Service administratif / GET détail d'un chantier d'un autre chef" id="36e78b9a-b6b6-4721-9a4d-310de43abb25" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.022">
+    <testcase name="Code HTTP 200" time="0.022" classname="RoleServiceAdministratifGetDetailDunChantierDunAutreChef"/>
+  </testsuite>
+  <testsuite name="Rôle : Service administratif / POST créer un chantier" id="b729a013-437d-48e0-ba13-255a9c364a30" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.030">
+    <testcase name="Code HTTP 201" time="0.030" classname="RoleServiceAdministratifPostCreerUnChantier"/>
+    <testcase name="Actif par défaut" time="0.030" classname="RoleServiceAdministratifPostCreerUnChantier"/>
+  </testsuite>
+  <testsuite name="Rôle : Service administratif / PUT modifier le chantier de test" id="c27f64f3-e218-4f37-ae5f-c69a44cb11dc" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.022">
+    <testcase name="Code HTTP 200" time="0.022" classname="RoleServiceAdministratifPutModifierLeChantierDeTest"/>
+    <testcase name="Description mise à jour" time="0.022" classname="RoleServiceAdministratifPutModifierLeChantierDeTest"/>
+  </testsuite>
+  <testsuite name="Rôle : Service administratif / DELETE supprimer un chantier vide" id="e4e31e79-8df9-470c-bb6f-ecee04248d4d" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.020">
+    <testcase name="Code HTTP 403" time="0.020" classname="RoleServiceAdministratifDeleteSupprimerUnChantierVide"/>
+  </testsuite>
+  <testsuite name="Rôle : Service administratif / DELETE chantier avec heures prestées" id="2997c672-df4f-4582-a5b0-7cacbdef6a01" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.018">
+    <testcase name="Code HTTP 403" time="0.018" classname="RoleServiceAdministratifDeleteChantierAvecHeuresPrestees"/>
+  </testsuite>
+  <testsuite name="Rôle : Service administratif / GET tâches du chantier de test" id="e04f08b2-14c2-43d1-ba1c-96d069e5ec7e" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.021">
+    <testcase name="Code HTTP 200" time="0.021" classname="RoleServiceAdministratifGetTachesDuChantierDeTest"/>
+    <testcase name="La tâche de test est listée" time="0.021" classname="RoleServiceAdministratifGetTachesDuChantierDeTest"/>
+  </testsuite>
+  <testsuite name="Rôle : Service administratif / GET détail de la tâche de test" id="49b7ef03-a196-43a6-92ba-a5ca119038d3" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.020">
+    <testcase name="Code HTTP 200" time="0.020" classname="RoleServiceAdministratifGetDetailDeLaTacheDeTest"/>
+    <testcase name="Bonne tâche" time="0.020" classname="RoleServiceAdministratifGetDetailDeLaTacheDeTest"/>
+  </testsuite>
+  <testsuite name="Rôle : Service administratif / GET tâche d'un autre chantier" id="27af9f0b-d10c-4e0a-bc37-706d9f22f724" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.021">
+    <testcase name="Code HTTP 200" time="0.021" classname="RoleServiceAdministratifGetTacheDunAutreChantier"/>
+  </testsuite>
+  <testsuite name="Rôle : Service administratif / POST créer une tâche" id="05d94fe5-7035-453c-a073-1b0c5c163b48" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.028">
+    <testcase name="Code HTTP 201" time="0.028" classname="RoleServiceAdministratifPostCreerUneTache"/>
+    <testcase name="État initial à faire" time="0.028" classname="RoleServiceAdministratifPostCreerUneTache"/>
+  </testsuite>
+  <testsuite name="Rôle : Service administratif / PUT avancement de la tâche de test" id="cf64c321-1812-4858-87ef-201cf243707f" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.027">
+    <testcase name="Code HTTP 200" time="0.027" classname="RoleServiceAdministratifPutAvancementDeLaTacheDeTest"/>
+    <testcase name="Avancement 30 %" time="0.027" classname="RoleServiceAdministratifPutAvancementDeLaTacheDeTest"/>
+  </testsuite>
+  <testsuite name="Rôle : Service administratif / DELETE supprimer une tâche" id="b2037ae5-a56e-43c6-9d76-3fa87d89a377" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.039">
+    <testcase name="Code HTTP 200" time="0.039" classname="RoleServiceAdministratifDeleteSupprimerUneTache"/>
+    <testcase name="deleted = true" time="0.039" classname="RoleServiceAdministratifDeleteSupprimerUneTache"/>
+  </testsuite>
+  <testsuite name="Rôle : Chef de chantier / GET liste des chantiers" id="b080d45e-45f1-4487-b976-cacbc13fa9e2" timestamp="2026-10-08T13:37:40.206Z" tests="4" failures="0" errors="0" time="0.027">
+    <testcase name="Code HTTP 200" time="0.027" classname="RoleChefDeChantierGetListeDesChantiers"/>
+    <testcase name="Le chantier de test est listé" time="0.027" classname="RoleChefDeChantierGetListeDesChantiers"/>
+    <testcase name="Ne voit pas les chantiers des autres" time="0.027" classname="RoleChefDeChantierGetListeDesChantiers"/>
+    <testcase name="Champs financiers présents" time="0.027" classname="RoleChefDeChantierGetListeDesChantiers"/>
+  </testsuite>
+  <testsuite name="Rôle : Chef de chantier / GET détail du chantier de test" id="2b51726d-67cf-43f4-a9e2-6624223baff9" timestamp="2026-10-08T13:37:40.206Z" tests="3" failures="0" errors="0" time="0.020">
+    <testcase name="Code HTTP 200" time="0.020" classname="RoleChefDeChantierGetDetailDuChantierDeTest"/>
+    <testcase name="Bon chantier" time="0.020" classname="RoleChefDeChantierGetDetailDuChantierDeTest"/>
+    <testcase name="Budget visible" time="0.020" classname="RoleChefDeChantierGetDetailDuChantierDeTest"/>
+  </testsuite>
+  <testsuite name="Rôle : Chef de chantier / GET détail d'un chantier d'un autre chef" id="1ad2374c-b7b6-4cca-97a7-4f47f25a495c" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.026">
+    <testcase name="Code HTTP 403" time="0.026" classname="RoleChefDeChantierGetDetailDunChantierDunAutreChef"/>
+  </testsuite>
+  <testsuite name="Rôle : Chef de chantier / POST créer un chantier" id="140c99ad-527c-40eb-b790-99f60366e723" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.029">
+    <testcase name="Code HTTP 201" time="0.029" classname="RoleChefDeChantierPostCreerUnChantier"/>
+    <testcase name="Actif par défaut" time="0.029" classname="RoleChefDeChantierPostCreerUnChantier"/>
+  </testsuite>
+  <testsuite name="Rôle : Chef de chantier / PUT modifier le chantier de test" id="15e3aae7-4878-4798-be16-6c230e9eb79f" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.020">
+    <testcase name="Code HTTP 200" time="0.020" classname="RoleChefDeChantierPutModifierLeChantierDeTest"/>
+    <testcase name="Description mise à jour" time="0.020" classname="RoleChefDeChantierPutModifierLeChantierDeTest"/>
+  </testsuite>
+  <testsuite name="Rôle : Chef de chantier / DELETE supprimer un chantier vide" id="dc7fad62-3710-4fbf-b89a-7b8319f97c22" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.019">
+    <testcase name="Code HTTP 403" time="0.019" classname="RoleChefDeChantierDeleteSupprimerUnChantierVide"/>
+  </testsuite>
+  <testsuite name="Rôle : Chef de chantier / DELETE chantier avec heures prestées" id="2ca0f9fd-1156-4a35-8b9e-4c53784cc3b5" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.017">
+    <testcase name="Code HTTP 403" time="0.017" classname="RoleChefDeChantierDeleteChantierAvecHeuresPrestees"/>
+  </testsuite>
+  <testsuite name="Rôle : Chef de chantier / GET tâches du chantier de test" id="407e1a95-74e9-47b3-a450-2b0b7bb13053" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.025">
+    <testcase name="Code HTTP 200" time="0.025" classname="RoleChefDeChantierGetTachesDuChantierDeTest"/>
+    <testcase name="La tâche de test est listée" time="0.025" classname="RoleChefDeChantierGetTachesDuChantierDeTest"/>
+  </testsuite>
+  <testsuite name="Rôle : Chef de chantier / GET détail de la tâche de test" id="ad14f801-2c9f-48d4-8085-aa3c6443e858" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.020">
+    <testcase name="Code HTTP 200" time="0.020" classname="RoleChefDeChantierGetDetailDeLaTacheDeTest"/>
+    <testcase name="Bonne tâche" time="0.020" classname="RoleChefDeChantierGetDetailDeLaTacheDeTest"/>
+  </testsuite>
+  <testsuite name="Rôle : Chef de chantier / GET tâche d'un autre chantier" id="87f975f0-439c-465a-a8b0-2c1f71fa9d0d" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.023">
+    <testcase name="Code HTTP 403" time="0.023" classname="RoleChefDeChantierGetTacheDunAutreChantier"/>
+  </testsuite>
+  <testsuite name="Rôle : Chef de chantier / POST créer une tâche" id="6528993c-d27b-4894-b3a8-a5416f8165a2" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.030">
+    <testcase name="Code HTTP 201" time="0.030" classname="RoleChefDeChantierPostCreerUneTache"/>
+    <testcase name="État initial à faire" time="0.030" classname="RoleChefDeChantierPostCreerUneTache"/>
+  </testsuite>
+  <testsuite name="Rôle : Chef de chantier / PUT avancement de la tâche de test" id="19d9f907-fa97-4917-97f0-6dd59bac71fb" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.023">
+    <testcase name="Code HTTP 200" time="0.023" classname="RoleChefDeChantierPutAvancementDeLaTacheDeTest"/>
+    <testcase name="Avancement 40 %" time="0.023" classname="RoleChefDeChantierPutAvancementDeLaTacheDeTest"/>
+  </testsuite>
+  <testsuite name="Rôle : Chef de chantier / DELETE supprimer une tâche" id="7666d90d-eb8e-4222-9a12-edc6f85c3bf7" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.040">
+    <testcase name="Code HTTP 200" time="0.040" classname="RoleChefDeChantierDeleteSupprimerUneTache"/>
+    <testcase name="deleted = true" time="0.040" classname="RoleChefDeChantierDeleteSupprimerUneTache"/>
+  </testsuite>
+  <testsuite name="Rôle : Ouvrier / GET liste des chantiers" id="5667c039-06f1-41aa-aa79-f7ca83f50dfb" timestamp="2026-10-08T13:37:40.206Z" tests="4" failures="0" errors="0" time="0.058">
+    <testcase name="Code HTTP 200" time="0.058" classname="RoleOuvrierGetListeDesChantiers"/>
+    <testcase name="Le chantier de test est listé" time="0.058" classname="RoleOuvrierGetListeDesChantiers"/>
+    <testcase name="Ne voit pas les chantiers des autres" time="0.058" classname="RoleOuvrierGetListeDesChantiers"/>
+    <testcase name="Aucun champ financier" time="0.058" classname="RoleOuvrierGetListeDesChantiers"/>
+  </testsuite>
+  <testsuite name="Rôle : Ouvrier / GET détail du chantier de test" id="ccfca9a7-ffae-4e5a-8dfd-09f44ed8503f" timestamp="2026-10-08T13:37:40.206Z" tests="3" failures="0" errors="0" time="0.022">
+    <testcase name="Code HTTP 200" time="0.022" classname="RoleOuvrierGetDetailDuChantierDeTest"/>
+    <testcase name="Bon chantier" time="0.022" classname="RoleOuvrierGetDetailDuChantierDeTest"/>
+    <testcase name="Budget masqué" time="0.022" classname="RoleOuvrierGetDetailDuChantierDeTest"/>
+  </testsuite>
+  <testsuite name="Rôle : Ouvrier / GET détail d'un chantier d'un autre chef" id="90a5fa5a-d5f0-450d-a35c-7da0a2c68968" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.025">
+    <testcase name="Code HTTP 403" time="0.025" classname="RoleOuvrierGetDetailDunChantierDunAutreChef"/>
+  </testsuite>
+  <testsuite name="Rôle : Ouvrier / POST créer un chantier" id="aeaa7872-1747-42c7-9718-4fc4f862cdfa" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.024">
+    <testcase name="Code HTTP 403" time="0.024" classname="RoleOuvrierPostCreerUnChantier"/>
+    <testcase name="Message d'erreur" time="0.024" classname="RoleOuvrierPostCreerUnChantier"/>
+  </testsuite>
+  <testsuite name="Rôle : Ouvrier / PUT modifier le chantier de test" id="8cb0a5c8-11cd-41f1-acd8-77952dbd5c89" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.016">
+    <testcase name="Code HTTP 403" time="0.016" classname="RoleOuvrierPutModifierLeChantierDeTest"/>
+  </testsuite>
+  <testsuite name="Rôle : Ouvrier / DELETE supprimer un chantier vide" id="0e99b974-34c5-4819-a78b-1399d5f13728" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.015">
+    <testcase name="Code HTTP 403" time="0.015" classname="RoleOuvrierDeleteSupprimerUnChantierVide"/>
+  </testsuite>
+  <testsuite name="Rôle : Ouvrier / DELETE chantier avec heures prestées" id="e5c79cef-5a48-4f24-b1be-23f8e8e7b891" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.017">
+    <testcase name="Code HTTP 403" time="0.017" classname="RoleOuvrierDeleteChantierAvecHeuresPrestees"/>
+  </testsuite>
+  <testsuite name="Rôle : Ouvrier / GET tâches du chantier de test" id="d9da47ac-a18a-454d-8298-885f69445cec" timestamp="2026-10-08T13:37:40.206Z" tests="3" failures="0" errors="0" time="0.022">
+    <testcase name="Code HTTP 200" time="0.022" classname="RoleOuvrierGetTachesDuChantierDeTest"/>
+    <testcase name="La tâche de test est listée" time="0.022" classname="RoleOuvrierGetTachesDuChantierDeTest"/>
+    <testcase name="Uniquement ses tâches" time="0.022" classname="RoleOuvrierGetTachesDuChantierDeTest"/>
+  </testsuite>
+  <testsuite name="Rôle : Ouvrier / GET détail de la tâche de test" id="4608d8bb-9c4b-4650-81f8-45bc9b1c4a31" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.019">
+    <testcase name="Code HTTP 200" time="0.019" classname="RoleOuvrierGetDetailDeLaTacheDeTest"/>
+    <testcase name="Bonne tâche" time="0.019" classname="RoleOuvrierGetDetailDeLaTacheDeTest"/>
+  </testsuite>
+  <testsuite name="Rôle : Ouvrier / GET tâche d'un autre chantier" id="e4b57b32-d234-4cf5-bf25-3ae1afde5c00" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.023">
+    <testcase name="Code HTTP 403" time="0.023" classname="RoleOuvrierGetTacheDunAutreChantier"/>
+  </testsuite>
+  <testsuite name="Rôle : Ouvrier / POST créer une tâche" id="d077c4e1-4335-4edd-ace1-62b7b674443d" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.017">
+    <testcase name="Code HTTP 403" time="0.017" classname="RoleOuvrierPostCreerUneTache"/>
+  </testsuite>
+  <testsuite name="Rôle : Ouvrier / PUT avancement de la tâche de test" id="7cea98c2-e8da-4e4e-a1cc-4da57dcf4a5a" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.018">
+    <testcase name="Code HTTP 403" time="0.018" classname="RoleOuvrierPutAvancementDeLaTacheDeTest"/>
+  </testsuite>
+  <testsuite name="Rôle : Ouvrier / DELETE supprimer une tâche" id="9c6319bc-0b96-440a-8c2d-1d5c7707d377" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.019">
+    <testcase name="Code HTTP 403" time="0.019" classname="RoleOuvrierDeleteSupprimerUneTache"/>
+  </testsuite>
+  <testsuite name="6. Cas d'erreur et paramètres / Sans clé API → 401" id="1d753f07-32ac-41ca-bbee-890a5e65d4e6" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.015">
+    <testcase name="Code HTTP 401" time="0.015" classname="6CasDerreurEtParametresSansCleApi401"/>
+  </testsuite>
+  <testsuite name="6. Cas d'erreur et paramètres / Clé invalide → 401" id="285c3475-a936-4182-a23f-ec88b8f8c54b" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.015">
+    <testcase name="Code HTTP 401" time="0.015" classname="6CasDerreurEtParametresCleInvalide401"/>
+  </testsuite>
+  <testsuite name="6. Cas d'erreur et paramètres / Tâches sans clé → 401" id="87927efb-ed4c-413a-aeb0-6b72943cf677" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.014">
+    <testcase name="Code HTTP 401" time="0.014" classname="6CasDerreurEtParametresTachesSansCle401"/>
+  </testsuite>
+  <testsuite name="6. Cas d'erreur et paramètres / En-tête X-API-Key accepté" id="da7067c9-00d7-4aa1-bc9f-dda1ed602e66" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.026">
+    <testcase name="Code HTTP 200" time="0.026" classname="6CasDerreurEtParametresEnTeteXApiKeyAccepte"/>
+  </testsuite>
+  <testsuite name="6. Cas d'erreur et paramètres / Chantier inexistant → 404" id="c17a4611-f44d-4f84-883f-e6c7ff720c27" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.017">
+    <testcase name="Code HTTP 404" time="0.017" classname="6CasDerreurEtParametresChantierInexistant404"/>
+  </testsuite>
+  <testsuite name="6. Cas d'erreur et paramètres / Tâche inexistante → 404" id="e585a30b-5bb1-4536-baf0-aed03e55421f" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.020">
+    <testcase name="Code HTTP 404" time="0.020" classname="6CasDerreurEtParametresTacheInexistante404"/>
+  </testsuite>
+  <testsuite name="6. Cas d'erreur et paramètres / PUT chantier inexistant → 404" id="2e5271ac-4782-49d7-ac58-737babc23ff8" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.016">
+    <testcase name="Code HTTP 404" time="0.016" classname="6CasDerreurEtParametresPutChantierInexistant404"/>
+  </testsuite>
+  <testsuite name="6. Cas d'erreur et paramètres / DELETE tâche inexistante → 404" id="84c0ca82-9e38-4992-a731-eea0c7624a32" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.016">
+    <testcase name="Code HTTP 404" time="0.016" classname="6CasDerreurEtParametresDeleteTacheInexistante404"/>
+  </testsuite>
+  <testsuite name="6. Cas d'erreur et paramètres / POST chantier sans nom ni client → 400" id="e77d43f8-4e34-440f-8e31-64f282c2b361" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.015">
+    <testcase name="Code HTTP 400" time="0.015" classname="6CasDerreurEtParametresPostChantierSansNomNiClient400"/>
+    <testcase name="Champs obligatoires cités" time="0.015" classname="6CasDerreurEtParametresPostChantierSansNomNiClient400"/>
+  </testsuite>
+  <testsuite name="6. Cas d'erreur et paramètres / POST JSON invalide → 400" id="15dbdd4c-8f19-4e93-a0a4-e3df1276e858" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.017">
+    <testcase name="Code HTTP 400" time="0.017" classname="6CasDerreurEtParametresPostJsonInvalide400"/>
+  </testsuite>
+  <testsuite name="6. Cas d'erreur et paramètres / POST tâche sans chantier → 400" id="62efd2e2-9464-46d6-b1f2-82053afe1f93" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.016">
+    <testcase name="Code HTTP 400" time="0.016" classname="6CasDerreurEtParametresPostTacheSansChantier400"/>
+  </testsuite>
+  <testsuite name="6. Cas d'erreur et paramètres / PUT avancement 150 % → 400" id="b1946b8e-2834-43f5-8523-003305254e09" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.022">
+    <testcase name="Code HTTP 400" time="0.022" classname="6CasDerreurEtParametresPutAvancement150400"/>
+  </testsuite>
+  <testsuite name="6. Cas d'erreur et paramètres / PUT état non modifiable → 400" id="8412e538-2858-4ae0-b3ea-dc869247c98b" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.017">
+    <testcase name="Code HTTP 400" time="0.017" classname="6CasDerreurEtParametresPutEtatNonModifiable400"/>
+    <testcase name="Liste des champs autorisés" time="0.017" classname="6CasDerreurEtParametresPutEtatNonModifiable400"/>
+  </testsuite>
+  <testsuite name="6. Cas d'erreur et paramètres / Paramètre limit non numérique → 400" id="b30de57f-129d-4f92-bc8a-b02fe8792342" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.017">
+    <testcase name="Code HTTP 400" time="0.017" classname="6CasDerreurEtParametresParametreLimitNonNumerique400"/>
+  </testsuite>
+  <testsuite name="6. Cas d'erreur et paramètres / Paramètre chantier_id non numérique → 400" id="652a4c4c-50c6-4eba-a836-365870124c9f" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.016">
+    <testcase name="Code HTTP 400" time="0.016" classname="6CasDerreurEtParametresParametreChantierIdNonNumerique400"/>
+  </testsuite>
+  <testsuite name="6. Cas d'erreur et paramètres / Pagination limit=5" id="a61b02d4-212d-42c6-95cd-8acc2b8927bf" timestamp="2026-10-08T13:37:40.206Z" tests="4" failures="0" errors="0" time="0.018">
+    <testcase name="Code HTTP 200" time="0.018" classname="6CasDerreurEtParametresPaginationLimit5"/>
+    <testcase name="Au plus 5 résultats" time="0.018" classname="6CasDerreurEtParametresPaginationLimit5"/>
+    <testcase name="limit renvoyé" time="0.018" classname="6CasDerreurEtParametresPaginationLimit5"/>
+    <testcase name="total cohérent" time="0.018" classname="6CasDerreurEtParametresPaginationLimit5"/>
+  </testsuite>
+  <testsuite name="6. Cas d'erreur et paramètres / Pagination limit plafonné à 200" id="42cfff6e-0401-4835-bee1-1747a1fea75c" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.032">
+    <testcase name="Code HTTP 200" time="0.032" classname="6CasDerreurEtParametresPaginationLimitPlafonneA200"/>
+    <testcase name="limit = 200" time="0.032" classname="6CasDerreurEtParametresPaginationLimitPlafonneA200"/>
+  </testsuite>
+  <testsuite name="6. Cas d'erreur et paramètres / Filtre state=en_cours" id="71fbb365-8062-42b2-bf84-1cd0fdd03d3d" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.028">
+    <testcase name="Code HTTP 200" time="0.028" classname="6CasDerreurEtParametresFiltreStateEnCours"/>
+    <testcase name="Tous en cours" time="0.028" classname="6CasDerreurEtParametresFiltreStateEnCours"/>
+  </testsuite>
+  <testsuite name="6. Cas d'erreur et paramètres / Archiver le chantier de test (soft delete)" id="f6abd4c3-e742-41c5-b630-2c41547dcad6" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.026">
+    <testcase name="Code HTTP 200" time="0.026" classname="6CasDerreurEtParametresArchiverLeChantierDeTestSoftDelete"/>
+    <testcase name="active = false" time="0.026" classname="6CasDerreurEtParametresArchiverLeChantierDeTestSoftDelete"/>
+  </testsuite>
+  <testsuite name="6. Cas d'erreur et paramètres / Le chantier archivé n'est plus listé" id="cc800a94-eee8-45cd-871e-801a1a11aecc" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.034">
+    <testcase name="Code HTTP 200" time="0.034" classname="6CasDerreurEtParametresLeChantierArchiveNestPlusListe"/>
+    <testcase name="Absent de la liste" time="0.034" classname="6CasDerreurEtParametresLeChantierArchiveNestPlusListe"/>
+  </testsuite>
+  <testsuite name="6. Cas d'erreur et paramètres / Désarchiver le chantier de test" id="d2db6834-9694-4f56-87e5-c148f179bb49" timestamp="2026-10-08T13:37:40.206Z" tests="2" failures="0" errors="0" time="0.027">
+    <testcase name="Code HTTP 200" time="0.027" classname="6CasDerreurEtParametresDesarchiverLeChantierDeTest"/>
+    <testcase name="active = true" time="0.027" classname="6CasDerreurEtParametresDesarchiverLeChantierDeTest"/>
+  </testsuite>
+  <testsuite name="7. Nettoyage (admin) / Supprimer le chantier créé par Direction" id="de01a46e-abd7-413a-ab66-eabc068a7c3d" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.049">
+    <testcase name="Code HTTP 200" time="0.049" classname="7NettoyageAdminSupprimerLeChantierCreeParDirection"/>
+  </testsuite>
+  <testsuite name="7. Nettoyage (admin) / Supprimer le chantier créé par Service administratif" id="2eb2fb76-5eec-481d-bfc8-13aee708ff23" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.048">
+    <testcase name="Code HTTP 200" time="0.048" classname="7NettoyageAdminSupprimerLeChantierCreeParServiceAdministratif"/>
+  </testsuite>
+  <testsuite name="7. Nettoyage (admin) / Supprimer le chantier créé par Chef de chantier" id="c647e0d7-c542-4684-8519-b8e7bc602c47" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.048">
+    <testcase name="Code HTTP 200" time="0.048" classname="7NettoyageAdminSupprimerLeChantierCreeParChefDeChantier"/>
+  </testsuite>
+  <testsuite name="7. Nettoyage (admin) / Supprimer la tâche de test" id="96414279-a39c-4835-aeae-39d0bc530433" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.038">
+    <testcase name="Code HTTP 200" time="0.038" classname="7NettoyageAdminSupprimerLaTacheDeTest"/>
+  </testsuite>
+  <testsuite name="7. Nettoyage (admin) / Supprimer le chantier de test" id="3cdc8731-bbfb-491a-b99e-b039190cc9b5" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.042">
+    <testcase name="Code HTTP 200" time="0.042" classname="7NettoyageAdminSupprimerLeChantierDeTest"/>
+  </testsuite>
+  <testsuite name="7. Nettoyage (admin) / Le chantier de test n'existe plus → 404" id="53c548db-f650-4a3b-a783-7a2d5c9b2220" timestamp="2026-10-08T13:37:40.206Z" tests="1" failures="0" errors="0" time="0.017">
+    <testcase name="Code HTTP 404" time="0.017" classname="7NettoyageAdminLeChantierDeTestNexistePlus404"/>
+  </testsuite>
+</testsuites>
