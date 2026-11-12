@@ -7,7 +7,7 @@
             <form string="Heures prestées">
                 <header>
                     <button name="action_soumettre" string="Soumettre" type="object"
-                            invisible="state != 'brouillon'" class="btn-primary"/>
+                            invisible="state != 'brouillon' or pointage_en_cours" class="btn-primary"/>
                     <button name="action_valider" string="Valider" type="object"
                             invisible="state != 'soumis'" class="btn-primary"
                             groups="buildo_gestion_chantier.group_chef_chantier"/>
@@ -28,7 +28,10 @@
                             <field name="date"/>
                         </group>
                         <group>
-                            <field name="nb_heures"/>
+                            <field name="heure_arrivee" invisible="not heure_arrivee"/>
+                            <field name="heure_depart" invisible="not heure_depart"/>
+                            <field name="pointage_en_cours" invisible="1"/>
+                            <field name="nb_heures" readonly="pointage_en_cours"/>
                             <field name="taux_horaire"/>
                             <field name="montant"/>
                             <field name="currency_id" invisible="1"/>
@@ -49,11 +52,22 @@
         <field name="model">chantier.heure.prestee</field>
         <field name="arch" type="xml">
             <list string="Heures prestées" decoration-success="state == 'valide'"
-                  decoration-danger="state == 'refuse'">
+                  decoration-danger="state == 'refuse'" decoration-info="pointage_en_cours">
+                <header>
+                    <button name="action_pointer_arrivee" string="Pointer mon arrivée" type="object"
+                            class="btn-primary" display="always" icon="fa-sign-in"/>
+                    <button name="action_pointer_depart" string="Pointer mon départ" type="object"
+                            class="btn-primary" display="always" icon="fa-sign-out"/>
+                    <button name="action_copier_derniere_journee" string="Copier ma dernière journée"
+                            type="object" display="always" icon="fa-clone"/>
+                </header>
+                <field name="pointage_en_cours" column_invisible="1"/>
                 <field name="chantier_id"/>
                 <field name="ouvrier_id"/>
                 <field name="date"/>
-                <field name="nb_heures"/>
+                <field name="heure_arrivee" widget="datetime" options="{'show_date': False}" optional="show"/>
+                <field name="heure_depart" widget="datetime" options="{'show_date': False}" optional="show"/>
+                <field name="nb_heures" sum="Total"/>
                 <field name="taux_horaire"/>
                 <field name="montant" sum="Total"/>
                 <field name="state" widget="badge"
@@ -74,6 +88,7 @@
                 <filter string="Validées" name="valide" domain="[('state','=','valide')]"/>
                 <filter string="En attente" name="soumis" domain="[('state','=','soumis')]"/>
                 <filter string="Refusées" name="refuse" domain="[('state','=','refuse')]"/>
+                <filter string="Pointage en cours" name="pointage_en_cours" domain="[('pointage_en_cours','=',True)]"/>
                 <separator/>
                 <filter string="Ce mois" name="ce_mois"
                         domain="[('date','&gt;=', (context_today()).strftime('%Y-%m-01'))]"/>
@@ -92,5 +107,34 @@
         <field name="view_mode">list,form</field>
         <field name="search_view_id" ref="view_chantier_heure_search"/>
         <field name="context">{'search_default_group_chantier': 1, 'search_default_group_ouvrier': 1}</field>
+    </record>
+
+    <record id="action_mes_heures" model="ir.actions.act_window">
+        <field name="name">Mes heures</field>
+        <field name="res_model">chantier.heure.prestee</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_chantier_heure_search"/>
+        <field name="domain">[('ouvrier_id', '=', uid)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Pointez votre arrivée sur le chantier</p>
+            <p>Cliquez sur « Pointer mon arrivée » en début de journée et sur « Pointer mon départ »
+               en fin de journée : les heures sont calculées pour vous.</p>
+        </field>
+    </record>
+
+    <record id="view_chantier_wizard_pointage_form" model="ir.ui.view">
+        <field name="name">chantier.wizard.pointage.form</field>
+        <field name="model">chantier.wizard.pointage</field>
+        <field name="arch" type="xml">
+            <form string="Pointer mon arrivée">
+                <group>
+                    <field name="chantier_id" options="{'no_create': True, 'no_open': True}"/>
+                </group>
+                <footer>
+                    <button name="action_confirmer" string="Pointer mon arrivée" type="object" class="btn-primary"/>
+                    <button string="Annuler" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
     </record>
 </odoo>

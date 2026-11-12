@@ -17,6 +17,7 @@ from . import (
     chantier_avenant,
     chantier_paiement_fss,
     chantier_wizard_refus,
+    chantier_wizard_pointage,
     chantier_wizard_facturation_taches,
     chantier_wizard_rapport_avancement,
     chantier_assistant_ia,

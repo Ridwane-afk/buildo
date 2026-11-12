@@ -9,3 +9,4 @@ from . import test_suppression_desinscription
 from . import test_tache_api
 from . import test_assistant_ia
 from . import test_financier
+from . import test_pointage

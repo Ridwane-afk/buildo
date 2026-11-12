@@ -31,11 +31,18 @@
               parent="menu_buildo_root"
               sequence="20"/>
 
+    <menuitem id="menu_mes_heures"
+              name="Mes heures"
+              parent="menu_buildo_terrain"
+              action="action_mes_heures"
+              sequence="5"/>
+
     <menuitem id="menu_heure_prestee"
               name="Heures prestées"
               parent="menu_buildo_terrain"
               action="action_chantier_heure_prestee"
-              sequence="10"/>
+              sequence="10"
+              groups="group_chef_chantier"/>
 
     <menuitem id="menu_mes_demandes_materiel"
               name="Mes demandes"
