@@ -31,7 +31,7 @@
                             <field name="heure_arrivee" invisible="not heure_arrivee"/>
                             <field name="heure_depart" invisible="not heure_depart"/>
                             <field name="pointage_en_cours" invisible="1"/>
-                            <field name="nb_heures" readonly="pointage_en_cours"/>
+                            <field name="nb_heures" widget="float_time" readonly="pointage_en_cours"/>
                             <field name="taux_horaire"/>
                             <field name="montant"/>
                             <field name="currency_id" invisible="1"/>
@@ -67,7 +67,7 @@
                 <field name="date"/>
                 <field name="heure_arrivee" widget="datetime" options="{'show_date': False}" optional="show"/>
                 <field name="heure_depart" widget="datetime" options="{'show_date': False}" optional="show"/>
-                <field name="nb_heures" sum="Total"/>
+                <field name="nb_heures" widget="float_time" sum="Total"/>
                 <field name="taux_horaire"/>
                 <field name="montant" sum="Total"/>
                 <field name="state" widget="badge"

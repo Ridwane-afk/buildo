@@ -45,8 +45,9 @@ class ChantierHeurePrestee(models.Model):
     @api.depends('ouvrier_id', 'date', 'nb_heures')
     def _compute_display_name(self):
         for rec in self:
-            rec.display_name = _("%(ouvrier)s — %(date)s (%(heures)s h)", ouvrier=rec.ouvrier_id.name or '',
-                                 date=rec.date or '', heures=rec.nb_heures)
+            minutes = round(rec.nb_heures * 60)
+            rec.display_name = _("%(ouvrier)s — %(date)s (%(heures)s)", ouvrier=rec.ouvrier_id.name or '',
+                                 date=rec.date or '', heures='%d:%02d' % divmod(minutes, 60))
 
     @api.depends('heure_arrivee', 'heure_depart')
     def _compute_pointage_en_cours(self):

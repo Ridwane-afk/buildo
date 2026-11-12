@@ -113,7 +113,7 @@
                                 </div>
                                 <div class="fs-4 fw-bold"><field name="montant_facture" nolabel="1"/></div>
                                 <div class="text-muted small">
-                                    <field name="nb_heures" nolabel="1" class="oe_inline"/> heures validées
+                                    <field name="nb_heures" widget="float_time" nolabel="1" class="oe_inline"/> h validées
                                 </div>
                             </div>
                         </div>
@@ -182,7 +182,7 @@
                                 <list>
                                     <field name="ouvrier_id"/>
                                     <field name="date"/>
-                                    <field name="nb_heures"/>
+                                    <field name="nb_heures" widget="float_time"/>
                                     <field name="montant"/>
                                     <field name="state"/>
                                 </list>

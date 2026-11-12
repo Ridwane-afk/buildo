@@ -27,7 +27,7 @@
                        decoration-success="marge &gt; 0"
                        decoration-danger="marge &lt; 0"/>
                 <field name="avancement" widget="progressbar"/>
-                <field name="nb_heures"/>
+                <field name="nb_heures" widget="float_time"/>
             </list>
         </field>
     </record>
