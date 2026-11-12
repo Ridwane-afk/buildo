@@ -1,6 +1,6 @@
 // Fenêtre « Assistant IA » : présentation en conversation
 .o_buildo_ia {
-    $ia-violet: var(--o-brand-primary, #714B67);
+    $ia-couleur: var(--o-brand-primary, #C2410C);
 
     .o_buildo_ia_header {
         display: flex;
@@ -21,7 +21,7 @@
         justify-content: center;
         color: #fff;
         font-size: 20px;
-        background: linear-gradient(135deg, #8a5f80, #4b2f45);
+        background: linear-gradient(135deg, #EA580C, #9A3412);
     }
 
     .o_buildo_ia_title {
@@ -62,7 +62,7 @@
     .o_buildo_ia_msg_user {
         align-self: flex-end;
         color: #fff;
-        background: $ia-violet;
+        background: $ia-couleur;
         border-bottom-right-radius: 4px;
 
         textarea,
@@ -82,7 +82,7 @@
     .o_buildo_ia_author {
         font-size: 0.8rem;
         font-weight: 600;
-        color: $ia-violet;
+        color: $ia-couleur;
         margin-bottom: 6px;
     }
 

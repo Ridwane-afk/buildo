@@ -15,7 +15,7 @@
     }
 
     &:hover::before {
-        border-left: 2px solid var(--o-brand-primary, #714B67);
+        border-left: 2px solid var(--o-brand-primary, #C2410C);
     }
 }
 
@@ -25,5 +25,5 @@ body.o_buildo_chatter_resizing {
 }
 
 body.o_buildo_chatter_resizing .o-mail-Form-chatter.o-aside.o_buildo_chatter_resizable::before {
-    border-left: 2px solid var(--o-brand-primary, #714B67);
+    border-left: 2px solid var(--o-brand-primary, #C2410C);
 }

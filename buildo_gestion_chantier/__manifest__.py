@@ -44,6 +44,9 @@ des matériaux, de la facturation et de la rentabilité.
     'application': True,
     'images': ['static/description/icon.png'],
     'assets': {
+        'web._assets_primary_variables': [
+            ('prepend', 'buildo_gestion_chantier/static/src/scss/primary_variables.scss'),
+        ],
         'web.assets_backend': [
             'buildo_gestion_chantier/static/src/scss/chantier_chatter_resize.scss',
             'buildo_gestion_chantier/static/src/scss/assistant_ia.scss',
