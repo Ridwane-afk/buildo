@@ -177,7 +177,7 @@
                                 </list>
                             </field>
                         </page>
-                        <page string="Heures prestées">
+                        <page string="Heures prestées" groups="buildo_gestion_chantier.group_chef_chantier">
                             <field name="heure_prestee_ids">
                                 <list>
                                     <field name="ouvrier_id"/>
