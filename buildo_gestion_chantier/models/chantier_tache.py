@@ -41,6 +41,12 @@ class ChantierTache(models.Model):
                                      groups='buildo_gestion_chantier.group_service_administratif')
     avancement = fields.Integer('Avancement (%)', default=0, tracking=True, aggregator='avg')
 
+    @api.constrains('date_debut', 'date_fin')
+    def _check_dates(self):
+        for rec in self:
+            if rec.date_debut and rec.date_fin and rec.date_fin < rec.date_debut:
+                raise ValidationError(_("La date de fin prévue d'une tâche ne peut pas précéder sa date de début."))
+
     @api.constrains('avancement')
     def _check_avancement(self):
         for rec in self:

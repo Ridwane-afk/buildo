@@ -90,3 +90,14 @@ class TestChantierTache(ChantierTestCommon):
         self.tache.action_facturer()
         with self.assertRaises(UserError):
             self.tache.action_facturer()
+
+    def test_dates_planning_coherentes(self):
+        # Le planning modifie les dates par glisser-déposer : la fin ne peut pas précéder le début.
+        self.tache.write({'date_debut': '2026-11-10', 'date_fin': '2026-11-14'})
+        with self.assertRaises(ValidationError):
+            self.tache.write({'date_fin': '2026-11-09'})
+
+    def test_vues_calendrier(self):
+        for modele in ('chantier.tache', 'chantier.chantier'):
+            vue = self.env[modele].get_views([(False, 'calendar')])['views']['calendar']
+            self.assertIn('date_start="date_debut"', vue['arch'])

@@ -2682,3 +2682,40 @@ msgstr "Weet u zeker dat u deze toewijzing wilt verwijderen?"
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_list
 msgid "Êtes-vous sûr de vouloir supprimer cette tâche ?"
 msgstr "Weet u zeker dat u deze taak wilt verwijderen?"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.actions.act_window,help:buildo_gestion_chantier.action_planning_taches
+msgid "Aucune tâche planifiée"
+msgstr "Geen geplande taken"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.actions.act_window,help:buildo_gestion_chantier.action_planning_taches
+msgid ""
+"Donnez une date de début et de fin aux tâches pour les voir dans le "
+"planning."
+msgstr "Geef de taken een begin- en einddatum om ze in de planning te zien."
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_tache.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_tache.py:0
+msgid ""
+"La date de fin prévue d'une tâche ne peut pas précéder sa date de début."
+msgstr ""
+"De geplande einddatum van een taak kan niet vóór de begindatum liggen."
+
+#. module: buildo_gestion_chantier
+#: model:ir.actions.act_window,name:buildo_gestion_chantier.action_planning_taches
+#: model:ir.ui.menu,name:buildo_gestion_chantier.menu_planning
+msgid "Planning"
+msgstr "Planning"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_calendar
+msgid "Planning des chantiers"
+msgstr "Planning van de werven"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_calendar
+msgid "Planning des tâches"
+msgstr "Planning van de taken"

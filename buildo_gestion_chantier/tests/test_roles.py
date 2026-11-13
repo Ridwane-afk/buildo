@@ -172,7 +172,7 @@ class TestRoles(ChantierTestCommon):
         # Un sous-menu n'est atteignable que si sa section parente est elle-même visible
         leaves = visible.filtered(lambda m: m.action and m.parent_id in visible and m.parent_id.parent_id == root)
         self.assertEqual(set(leaves.mapped('name')),
-                         {'Tous les chantiers', 'Tâches', 'Mes heures', 'Mes demandes', 'Photos', 'Mes outils'})
+                         {'Tous les chantiers', 'Planning', 'Tâches', 'Mes heures', 'Mes demandes', 'Photos', 'Mes outils'})
 
     def test_mes_demandes(self):
         action = self.env.ref('buildo_gestion_chantier.action_mes_demandes_materiel')

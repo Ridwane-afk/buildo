@@ -18,6 +18,12 @@
               action="action_chantier_chantier"
               sequence="10"/>
 
+    <menuitem id="menu_planning"
+              name="Planning"
+              parent="menu_buildo_chantiers"
+              action="action_planning_taches"
+              sequence="15"/>
+
     <menuitem id="menu_chantier_tache"
               name="Tâches"
               parent="menu_buildo_chantiers"
