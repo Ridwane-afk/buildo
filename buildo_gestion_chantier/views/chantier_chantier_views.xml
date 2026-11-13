@@ -66,7 +66,16 @@
                             </div>
                             <field name="client_id"/>
                             <field name="chef_chantier_id"/>
-                            <field name="adresse"/>
+                            <label for="adresse"/>
+                            <div class="o_row">
+                                <field name="adresse"/>
+                                <button name="action_localiser" type="object" icon="fa-map-marker"
+                                        title="Localiser sur la carte" class="btn-link p-0"
+                                        invisible="not adresse"
+                                        groups="buildo_gestion_chantier.group_chef_chantier"/>
+                            </div>
+                            <field name="latitude" groups="base.group_no_one"/>
+                            <field name="longitude" groups="base.group_no_one"/>
                         </group>
                         <group>
                             <div colspan="2" class="o_horizontal_separator text-uppercase fw-bolder small d-flex align-items-center">
@@ -385,6 +394,11 @@
                 <field name="avancement"/>
             </calendar>
         </field>
+    </record>
+
+    <record id="action_carte_chantiers" model="ir.actions.client">
+        <field name="name">Carte des chantiers</field>
+        <field name="tag">buildo_carte_chantiers</field>
     </record>
 
     <record id="action_chantier_chantier" model="ir.actions.act_window">

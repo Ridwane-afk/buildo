@@ -1,5 +1,16 @@
+import logging
+import math
+
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError, ValidationError
+
+_logger = logging.getLogger(__name__)
+
+
+def _distance_km(a, b):
+    """Distance approximative entre deux positions (latitude, longitude), suffisante à l'échelle de la Belgique."""
+    lat = math.radians((a[0] + b[0]) / 2)
+    return 111.2 * math.hypot(a[0] - b[0], (a[1] - b[1]) * math.cos(lat))
 
 
 class ChantierChantier(models.Model):
@@ -20,6 +31,9 @@ class ChantierChantier(models.Model):
     date_fin_prevue = fields.Date('Date de fin prévue', tracking=True)
     date_fin_reelle = fields.Date('Date de fin réelle')
     adresse = fields.Char('Adresse du chantier')
+    # Position sur la carte, calculée à partir de l'adresse (OpenStreetMap Nominatim).
+    latitude = fields.Float('Latitude', digits=(10, 7), copy=False)
+    longitude = fields.Float('Longitude', digits=(10, 7), copy=False)
     budget_initial = fields.Monetary('Budget initial', currency_field='currency_id', tracking=True,
                                      groups='buildo_gestion_chantier.group_chef_chantier')
     currency_id = fields.Many2one('res.currency', default=lambda self: self.env.company.currency_id)
@@ -94,7 +108,62 @@ class ChantierChantier(models.Model):
         for vals in vals_list:
             if vals.get('ref', 'Nouveau') == 'Nouveau':
                 vals['ref'] = self.env['ir.sequence'].next_by_code('chantier.chantier') or 'Nouveau'
-        return super().create(vals_list)
+        chantiers = super().create(vals_list)
+        chantiers.filtered('adresse')._localiser()
+        return chantiers
+
+    def write(self, vals):
+        if 'adresse' in vals and not {'latitude', 'longitude'} & vals.keys():
+            # Nouvelle adresse : l'ancienne position n'est plus valable.
+            vals = dict(vals, latitude=0.0, longitude=0.0)
+        res = super().write(vals)
+        if vals.get('adresse'):
+            self._localiser()
+        return res
+
+    def _localiser(self):
+        """Calcule la position de chaque chantier à partir de son adresse.
+
+        L'adresse complète est contrôlée par la position de la commune (partie
+        après la dernière virgule, ex. « 3000 Louvain ») : si la rue est trouvée
+        à plus de 10 km de sa commune, c'est une rue homonyme ailleurs et la
+        position de la commune est gardée. Une erreur réseau ne bloque jamais
+        l'enregistrement : le chantier reste simplement absent de la carte.
+        Renvoie les chantiers qui n'ont pas pu être localisés.
+        """
+        echecs = self.browse()
+        for rec in self:
+            adresse = (rec.adresse or '').strip()
+            position = rec._geocoder(adresse)
+            if ',' in adresse:
+                commune = rec._geocoder(adresse.rsplit(',', 1)[-1])
+                if commune and (not position or _distance_km(position, commune) > 10):
+                    position = commune
+            if position:
+                rec.sudo().write({'latitude': position[0], 'longitude': position[1]})
+            else:
+                echecs |= rec
+        return echecs
+
+    def _geocoder(self, adresse):
+        if not adresse.strip():
+            return None
+        try:
+            return self.env['base.geocoder'].geo_find('%s, Belgique' % adresse.strip())
+        except Exception:  # noqa: BLE001 - service externe indisponible
+            _logger.info("Géolocalisation impossible pour « %s »", adresse, exc_info=True)
+            return None
+
+    def action_localiser(self):
+        echecs = self._localiser()
+        if echecs:
+            raise UserError(_("Adresse introuvable sur la carte : %(chantiers)s. Vérifiez l'adresse (rue, numéro, code postal, commune).",
+                              chantiers=', '.join(echecs.mapped('name'))))
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'display_notification',
+            'params': {'message': _("Chantier localisé sur la carte."), 'type': 'success'},
+        }
 
     @api.depends('heure_prestee_ids.montant', 'heure_prestee_ids.state',
                  'commande_fournisseur_ids.amount_total', 'commande_fournisseur_ids.state',

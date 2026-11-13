@@ -11,7 +11,7 @@ des matériaux, de la facturation et de la rentabilité.
     """,
     'author': 'Ridwane Afkir',
     'license': 'LGPL-3',
-    'depends': ['base', 'mail', 'hr', 'stock', 'sale', 'account', 'purchase'],
+    'depends': ['base', 'mail', 'hr', 'stock', 'sale', 'account', 'purchase', 'base_geolocalize'],
     'data': [
         'security/res_groups.xml',
         'security/ir.model.access.csv',
@@ -51,6 +51,7 @@ des matériaux, de la facturation et de la rentabilité.
             'buildo_gestion_chantier/static/src/scss/chantier_chatter_resize.scss',
             'buildo_gestion_chantier/static/src/scss/assistant_ia.scss',
             'buildo_gestion_chantier/static/src/js/chantier_chatter_resize.js',
+            'buildo_gestion_chantier/static/src/carte/*',
         ],
     },
 }

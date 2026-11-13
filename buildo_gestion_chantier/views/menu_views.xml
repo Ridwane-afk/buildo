@@ -24,6 +24,12 @@
               action="action_planning_taches"
               sequence="15"/>
 
+    <menuitem id="menu_carte_chantiers"
+              name="Carte"
+              parent="menu_buildo_chantiers"
+              action="action_carte_chantiers"
+              sequence="16"/>
+
     <menuitem id="menu_chantier_tache"
               name="Tâches"
               parent="menu_buildo_chantiers"

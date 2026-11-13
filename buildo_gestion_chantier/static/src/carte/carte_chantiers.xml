@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="buildo_gestion_chantier.CarteChantiers">
+        <div class="o_buildo_carte d-flex flex-column h-100">
+            <div class="o_buildo_carte_entete d-flex flex-wrap align-items-center gap-3 px-3 py-2 border-bottom">
+                <h5 class="m-0">Carte des chantiers</h5>
+                <span class="text-muted small"><t t-esc="chantiers.length"/> chantier(s) sur la carte</span>
+                <div class="d-flex gap-3 ms-auto small">
+                    <span t-foreach="legende" t-as="item" t-key="item.etat" class="d-flex align-items-center gap-1">
+                        <span class="o_buildo_carte_pastille" t-attf-style="background: {{ item.couleur }}"/>
+                        <t t-esc="item.libelle"/>
+                    </span>
+                </div>
+            </div>
+            <div t-if="nbSansPosition" class="alert alert-warning rounded-0 m-0 py-1 px-3 small">
+                <i class="fa fa-map-marker me-1"/>
+                <t t-esc="nbSansPosition"/> chantier(s) sans position : ajoutez une adresse complète sur leur fiche.
+            </div>
+            <div class="o_buildo_carte_fond flex-grow-1" t-ref="carte"/>
+        </div>
+    </t>
+</templates>

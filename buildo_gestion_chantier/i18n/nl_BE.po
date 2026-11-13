@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-12 20:07+0000\n"
-"PO-Revision-Date: 2026-11-12 20:07+0000\n"
+"POT-Creation-Date: 2026-11-13 19:21+0000\n"
+"PO-Revision-Date: 2026-11-13 19:21+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_BE\n"
@@ -210,6 +210,17 @@ msgid "Adresse du chantier"
 msgstr "Adres van de werf"
 
 #. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_chantier.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_chantier.py:0
+msgid ""
+"Adresse introuvable sur la carte : %(chantiers)s. Vérifiez l'adresse (rue, "
+"numéro, code postal, commune)."
+msgstr ""
+"Adres niet gevonden op de kaart: %(chantiers)s. Controleer het adres "
+"(straat, nummer, postcode, gemeente)."
+
+#. module: buildo_gestion_chantier
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_wizard_facturation_taches_form
 msgid "Ajouter au brouillon"
 msgstr "Toevoegen aan ontwerp"
@@ -378,6 +389,11 @@ msgstr ""
 "Koppel een Odoo-product aan elk materiaal om een bestelling te genereren."
 
 #. module: buildo_gestion_chantier
+#: model_terms:ir.actions.act_window,help:buildo_gestion_chantier.action_planning_taches
+msgid "Aucune tâche planifiée"
+msgstr "Geen geplande taken"
+
+#. module: buildo_gestion_chantier
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_audit_search
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_search
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_photo_search
@@ -409,6 +425,13 @@ msgstr "Voortgang"
 #: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_tache__avancement
 msgid "Avancement (%)"
 msgstr "Voortgang (%)"
+
+#. module: buildo_gestion_chantier
+#. odoo-javascript
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/static/src/carte/carte_chantiers.js:0
+#: code:addons/buildo_gestion_chantier/static/src/carte/carte_chantiers.js:0
+msgid "Avancement : %s %"
+msgstr "Vordering: %s %"
 
 #. module: buildo_gestion_chantier
 #: model:ir.model.fields,field_description:buildo_gestion_chantier.field_sale_order__pourcentage_avancement
@@ -506,6 +529,9 @@ msgstr ""
 "voor."
 
 #. module: buildo_gestion_chantier
+#. odoo-javascript
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/static/src/carte/carte_chantiers.js:0
+#: code:addons/buildo_gestion_chantier/static/src/carte/carte_chantiers.js:0
 #: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_avenant__state__brouillon
 #: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_chantier__state__brouillon
 #: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_demande_materiel__state__brouillon
@@ -549,6 +575,19 @@ msgstr "Beton / Cement"
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_form
 msgid "Calculé automatiquement à partir des sous-tâches cochées ci-dessous."
 msgstr "Automatisch berekend op basis van de hieronder aangevinkte subtaken."
+
+#. module: buildo_gestion_chantier
+#: model:ir.ui.menu,name:buildo_gestion_chantier.menu_carte_chantiers
+msgid "Carte"
+msgstr "Kaart"
+
+#. module: buildo_gestion_chantier
+#. odoo-javascript
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/static/src/carte/carte_chantiers.xml:0
+#: code:addons/buildo_gestion_chantier/static/src/carte/carte_chantiers.xml:0
+#: model:ir.actions.client,name:buildo_gestion_chantier.action_carte_chantiers
+msgid "Carte des chantiers"
+msgstr "Kaart van de werven"
 
 #. module: buildo_gestion_chantier
 #: model:ir.model,name:buildo_gestion_chantier.model_chantier_materiau
@@ -638,6 +677,13 @@ msgstr "Werf"
 #: model:ir.model,name:buildo_gestion_chantier.model_chantier_chantier
 msgid "Chantier de construction"
 msgstr "Bouwwerf"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_chantier.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_chantier.py:0
+msgid "Chantier localisé sur la carte."
+msgstr "Werf op de kaart gelokaliseerd."
 
 #. module: buildo_gestion_chantier
 #: model:ir.actions.act_window,name:buildo_gestion_chantier.action_chantier_chantier
@@ -927,6 +973,13 @@ msgid "Documents"
 msgstr "Documenten"
 
 #. module: buildo_gestion_chantier
+#: model_terms:ir.actions.act_window,help:buildo_gestion_chantier.action_planning_taches
+msgid ""
+"Donnez une date de début et de fin aux tâches pour les voir dans le "
+"planning."
+msgstr "Geef de taken een begin- en einddatum om ze in de planning te zien."
+
+#. module: buildo_gestion_chantier
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_search
 msgid "Début cette semaine"
 msgstr "Start deze week"
@@ -981,6 +1034,9 @@ msgid "En attente"
 msgstr "In afwachting"
 
 #. module: buildo_gestion_chantier
+#. odoo-javascript
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/static/src/carte/carte_chantiers.js:0
+#: code:addons/buildo_gestion_chantier/static/src/carte/carte_chantiers.js:0
 #: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_chantier__state__en_cours
 #: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_tache__state__en_cours
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_search
@@ -1280,6 +1336,15 @@ msgstr "De voortgang moet tussen 0 en 100 liggen."
 
 #. module: buildo_gestion_chantier
 #. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_tache.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_tache.py:0
+msgid ""
+"La date de fin prévue d'une tâche ne peut pas précéder sa date de début."
+msgstr ""
+"De geplande einddatum van een taak kan niet vóór de begindatum liggen."
+
+#. module: buildo_gestion_chantier
+#. odoo-python
 #: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_chantier.py:0
 #: code:addons/buildo_gestion_chantier/models/chantier_chantier.py:0
 msgid "La date de fin prévue ne peut pas être antérieure à la date de début."
@@ -1298,6 +1363,11 @@ msgstr "De gevraagde hoeveelheid moet groter zijn dan 0."
 #: code:addons/buildo_gestion_chantier/models/chantier_estimation_materiau.py:0
 msgid "La quantité estimée doit être supérieure à 0."
 msgstr "De geraamde hoeveelheid moet groter zijn dan 0."
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__latitude
+msgid "Latitude"
+msgstr "Breedtegraad"
 
 #. module: buildo_gestion_chantier
 #. odoo-python
@@ -1347,6 +1417,16 @@ msgstr "Hijswerk / Behandeling"
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_materiau_search
 msgid "Lié à un produit"
 msgstr "Gekoppeld aan een product"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid "Localiser sur la carte"
+msgstr "Op de kaart lokaliseren"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__longitude
+msgid "Longitude"
+msgstr "Lengtegraad"
 
 #. module: buildo_gestion_chantier
 #: model:ir.model,name:buildo_gestion_chantier.model_mail_tracking_value
@@ -1701,6 +1781,13 @@ msgid "Ouvriers assignés"
 msgstr "Toegewezen arbeiders"
 
 #. module: buildo_gestion_chantier
+#. odoo-javascript
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/static/src/carte/carte_chantiers.js:0
+#: code:addons/buildo_gestion_chantier/static/src/carte/carte_chantiers.js:0
+msgid "Ouvrir le chantier"
+msgstr "Werf openen"
+
+#. module: buildo_gestion_chantier
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_paiement_fss_form
 msgid "Paiement FSS"
 msgstr "FSS-betaling"
@@ -1789,6 +1876,22 @@ msgstr "Werfplan"
 #: model:ir.model,name:buildo_gestion_chantier.model_chantier_plan
 msgid "Plan de chantier (PDF ou image)"
 msgstr "Werfplan (PDF of afbeelding)"
+
+#. module: buildo_gestion_chantier
+#: model:ir.actions.act_window,name:buildo_gestion_chantier.action_planning_taches
+#: model:ir.ui.menu,name:buildo_gestion_chantier.menu_planning
+msgid "Planning"
+msgstr "Planning"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_calendar
+msgid "Planning des chantiers"
+msgstr "Planning van de werven"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_calendar
+msgid "Planning des tâches"
+msgstr "Planning van de taken"
 
 #. module: buildo_gestion_chantier
 #: model:ir.actions.act_window,name:buildo_gestion_chantier.action_chantier_plan
@@ -2258,6 +2361,9 @@ msgid "Terminer"
 msgstr "Voltooien"
 
 #. module: buildo_gestion_chantier
+#. odoo-javascript
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/static/src/carte/carte_chantiers.js:0
+#: code:addons/buildo_gestion_chantier/static/src/carte/carte_chantiers.js:0
 #: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_chantier__state__termine
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_search
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_search
@@ -2526,6 +2632,21 @@ msgid "bon(s) de commande client confirmé(s)"
 msgstr "bevestigde klantenbestelling(en)"
 
 #. module: buildo_gestion_chantier
+#. odoo-javascript
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/static/src/carte/carte_chantiers.xml:0
+#: code:addons/buildo_gestion_chantier/static/src/carte/carte_chantiers.xml:0
+msgid ""
+"chantier(s) sans position : ajoutez une adresse complète sur leur fiche."
+msgstr "werf/werven zonder positie: vul een volledig adres in op hun fiche."
+
+#. module: buildo_gestion_chantier
+#. odoo-javascript
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/static/src/carte/carte_chantiers.xml:0
+#: code:addons/buildo_gestion_chantier/static/src/carte/carte_chantiers.xml:0
+msgid "chantier(s) sur la carte"
+msgstr "werf/werven op de kaart"
+
+#. module: buildo_gestion_chantier
 #. odoo-python
 #: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_chantier.py:0
 #: code:addons/buildo_gestion_chantier/models/chantier_chantier.py:0
@@ -2682,40 +2803,3 @@ msgstr "Weet u zeker dat u deze toewijzing wilt verwijderen?"
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_list
 msgid "Êtes-vous sûr de vouloir supprimer cette tâche ?"
 msgstr "Weet u zeker dat u deze taak wilt verwijderen?"
-
-#. module: buildo_gestion_chantier
-#: model_terms:ir.actions.act_window,help:buildo_gestion_chantier.action_planning_taches
-msgid "Aucune tâche planifiée"
-msgstr "Geen geplande taken"
-
-#. module: buildo_gestion_chantier
-#: model_terms:ir.actions.act_window,help:buildo_gestion_chantier.action_planning_taches
-msgid ""
-"Donnez une date de début et de fin aux tâches pour les voir dans le "
-"planning."
-msgstr "Geef de taken een begin- en einddatum om ze in de planning te zien."
-
-#. module: buildo_gestion_chantier
-#. odoo-python
-#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_tache.py:0
-#: code:addons/buildo_gestion_chantier/models/chantier_tache.py:0
-msgid ""
-"La date de fin prévue d'une tâche ne peut pas précéder sa date de début."
-msgstr ""
-"De geplande einddatum van een taak kan niet vóór de begindatum liggen."
-
-#. module: buildo_gestion_chantier
-#: model:ir.actions.act_window,name:buildo_gestion_chantier.action_planning_taches
-#: model:ir.ui.menu,name:buildo_gestion_chantier.menu_planning
-msgid "Planning"
-msgstr "Planning"
-
-#. module: buildo_gestion_chantier
-#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_calendar
-msgid "Planning des chantiers"
-msgstr "Planning van de werven"
-
-#. module: buildo_gestion_chantier
-#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_calendar
-msgid "Planning des tâches"
-msgstr "Planning van de taken"
