@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Canal Discuss réservé à la direction (et donc à l'administrateur BUILDO) :
+         ses membres sont abonnés automatiquement par leur groupe. -->
+    <record id="canal_resume_buildo" model="discuss.channel">
+        <field name="name">Résumé BUILDO</field>
+        <field name="description">Résumé quotidien de l'activité terrain : heures, photos et demandes de matériel.</field>
+        <field name="group_public_id" ref="group_direction"/>
+        <field name="group_ids" eval="[Command.link(ref('group_direction'))]"/>
+    </record>
+
+    <record id="cron_resume_quotidien" model="ir.cron">
+        <field name="name">BUILDO : résumé quotidien de l'activité terrain</field>
+        <field name="model_id" ref="model_chantier_chantier"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_resume_quotidien()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <!-- 18:00 UTC, soit 19:00 à Bruxelles en hiver -->
+        <field name="nextcall" eval="(DateTime.now() + relativedelta(hour=18, minute=0, second=0)).strftime('%Y-%m-%d %H:%M:%S')"/>
+    </record>
+
+    <record id="action_envoyer_resume" model="ir.actions.server">
+        <field name="name">Envoyer le résumé maintenant</field>
+        <field name="model_id" ref="model_chantier_chantier"/>
+        <field name="state">code</field>
+        <field name="code">action = model.action_envoyer_resume()</field>
+        <field name="group_ids" eval="[Command.link(ref('group_direction'))]"/>
+    </record>
+</odoo>

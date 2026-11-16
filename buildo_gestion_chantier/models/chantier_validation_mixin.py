@@ -34,4 +34,39 @@ class ChantierValidationMixin(models.AbstractModel):
         self._check_droit_validation(vals)
         if not self._est_chef() and any(rec.state == 'valide' for rec in self):
             raise AccessError(_("Un enregistrement validé ne peut être modifié que par un chef de chantier."))
-        return super().write(vals)
+        res = super().write(vals)
+        if vals.get('state') == 'soumis':
+            self._planifier_activite_validation()
+        elif 'state' in vals:
+            self._cloturer_activite_validation()
+        return res
+
+    # ------------------------------------------------------------------
+    # Alerte au chef de chantier : une activité « à valider » par soumission,
+    # clôturée automatiquement dès qu'il valide, refuse ou remet en brouillon.
+    # ------------------------------------------------------------------
+
+    def _activites_validation(self, chef):
+        todo = self.env.ref('mail.mail_activity_data_todo')
+        return self.activity_ids.filtered(lambda a: a.activity_type_id == todo and a.user_id == chef)
+
+    def _planifier_activite_validation(self):
+        for rec in self.sudo():
+            chef = rec.chantier_id.chef_chantier_id
+            # Pas d'alerte au chef qui encode lui-même, ni de doublon si une activité est déjà ouverte.
+            if not chef or chef == self.env.user or rec._activites_validation(chef):
+                continue
+            rec.activity_schedule(
+                'mail.mail_activity_data_todo',
+                user_id=chef.id,
+                summary=_("À valider : %(objet)s", objet=rec.display_name),
+                note=_("Soumis par %(auteur)s sur le chantier %(chantier)s.",
+                       auteur=self.env.user.name, chantier=rec.chantier_id.name),
+            )
+
+    def _cloturer_activite_validation(self):
+        etats = dict(self._fields['state']._description_selection(self.env))
+        for rec in self.sudo():
+            activites = rec._activites_validation(rec.chantier_id.chef_chantier_id)
+            if activites:
+                activites.action_feedback(feedback=etats.get(rec.state, rec.state))

@@ -171,6 +171,12 @@
               action="action_chantier_dashboard"
               sequence="10"/>
 
+    <menuitem id="menu_envoyer_resume"
+              name="Envoyer le résumé maintenant"
+              parent="menu_buildo_direction"
+              action="action_envoyer_resume"
+              sequence="15"/>
+
     <menuitem id="menu_paiement_fss"
               name="Paiements FSS"
               parent="menu_buildo_direction"

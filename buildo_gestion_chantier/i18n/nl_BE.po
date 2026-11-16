@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-13 19:21+0000\n"
-"PO-Revision-Date: 2026-11-13 19:21+0000\n"
+"POT-Creation-Date: 2026-11-16 10:28+0000\n"
+"PO-Revision-Date: 2026-11-16 10:28+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_BE\n"
@@ -15,6 +15,17 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_resume.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_resume.py:0
+msgid ""
+"%(heures)s encodées, %(photos)s photo(s), %(demandes)s demande(s) de "
+"matériel sur %(chantiers)s chantier(s)."
+msgstr ""
+"%(heures)s ingevoerd, %(photos)s foto('s), %(demandes)s "
+"materiaalaanvra(a)g(en) op %(chantiers)s werf/werven."
 
 #. module: buildo_gestion_chantier
 #. odoo-python
@@ -365,6 +376,13 @@ msgstr "Geen Odoo-product gekoppeld aan dit materiaal."
 
 #. module: buildo_gestion_chantier
 #. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_resume.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_resume.py:0
+msgid "Aucune activité terrain depuis le dernier résumé."
+msgstr "Geen werfactiviteit sinds het laatste overzicht."
+
+#. module: buildo_gestion_chantier
+#. odoo-python
 #: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_heure_prestee.py:0
 #: code:addons/buildo_gestion_chantier/models/chantier_heure_prestee.py:0
 msgid "Aucune arrivée pointée : pointez d'abord votre arrivée."
@@ -491,6 +509,11 @@ msgstr "Creditnota's"
 #: model:ir.ui.menu,name:buildo_gestion_chantier.menu_buildo_root
 msgid "BUILDO"
 msgstr "BUILDO"
+
+#. module: buildo_gestion_chantier
+#: model:ir.actions.server,name:buildo_gestion_chantier.cron_resume_quotidien_ir_actions_server
+msgid "BUILDO : résumé quotidien de l'activité terrain"
+msgstr "BUILDO: dagelijks overzicht van de werfactiviteit"
 
 #. module: buildo_gestion_chantier
 #: model:res.groups.privilege,name:buildo_gestion_chantier.privilege_buildo
@@ -642,6 +665,9 @@ msgid "Cette tâche a déjà été facturée."
 msgstr "Deze taak werd al gefactureerd."
 
 #. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_resume.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_resume.py:0
 #: model:ir.model.fields,field_description:buildo_gestion_chantier.field_account_bank_statement_line__chantier_id
 #: model:ir.model.fields,field_description:buildo_gestion_chantier.field_account_move__chantier_id
 #: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_assistant_ia__chantier_id
@@ -841,6 +867,13 @@ msgstr "Materiaalaanvraag"
 #: model:ir.model,name:buildo_gestion_chantier.model_chantier_demande_materiel
 msgid "Demande de matériel par un ouvrier"
 msgstr "Materiaalaanvraag door een arbeider"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_resume.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_resume.py:0
+msgid "Demandes"
+msgstr "Aanvragen"
 
 #. module: buildo_gestion_chantier
 #: model:ir.actions.act_window,name:buildo_gestion_chantier.action_chantier_demande_materiel
@@ -1084,6 +1117,12 @@ msgid "Envoyer"
 msgstr "Verzenden"
 
 #. module: buildo_gestion_chantier
+#: model:ir.actions.server,name:buildo_gestion_chantier.action_envoyer_resume
+#: model:ir.ui.menu,name:buildo_gestion_chantier.menu_envoyer_resume
+msgid "Envoyer le résumé maintenant"
+msgstr "Overzicht nu versturen"
+
+#. module: buildo_gestion_chantier
 #. odoo-python
 #: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_assistant_ia.py:0
 #: code:addons/buildo_gestion_chantier/models/chantier_assistant_ia.py:0
@@ -1223,6 +1262,13 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_wizard_rapport_avancement_form
 msgid "Générer le PDF"
 msgstr "PDF genereren"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_resume.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_resume.py:0
+msgid "Heures"
+msgstr "Uren"
 
 #. module: buildo_gestion_chantier
 #: model:ir.actions.act_window,name:buildo_gestion_chantier.action_chantier_heure_prestee
@@ -1846,6 +1892,9 @@ msgid "Photo du problème"
 msgstr "Foto van het probleem"
 
 #. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_resume.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_resume.py:0
 #: model:ir.actions.act_window,name:buildo_gestion_chantier.action_chantier_photo
 #: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_chantier__photo_ids
 #: model:ir.ui.menu,name:buildo_gestion_chantier.menu_photo
@@ -2194,6 +2243,20 @@ msgid "Réponse mise en forme"
 msgstr "Opgemaakt antwoord"
 
 #. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_resume.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_resume.py:0
+msgid "Résumé de l'activité terrain"
+msgstr "Overzicht van de werfactiviteit"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_resume.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_resume.py:0
+msgid "Résumé posté dans le canal « Résumé BUILDO »."
+msgstr "Overzicht gepost in het kanaal « Résumé BUILDO »."
+
+#. module: buildo_gestion_chantier
 #: model:ir.model,name:buildo_gestion_chantier.model_sale_order
 msgid "Sales Order"
 msgstr "Verkooporder"
@@ -2244,6 +2307,13 @@ msgstr "Indienen"
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_search
 msgid "Soumis"
 msgstr "Ingediend"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_validation_mixin.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_validation_mixin.py:0
+msgid "Soumis par %(auteur)s sur le chantier %(chantier)s."
+msgstr "Ingediend door %(auteur)s op de werf %(chantier)s."
 
 #. module: buildo_gestion_chantier
 #: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_materiau__en_alerte
@@ -2764,6 +2834,13 @@ msgstr "Te doen"
 #: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_paiement_fss__state__a_payer
 msgid "À payer"
 msgstr "Te betalen"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_validation_mixin.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_validation_mixin.py:0
+msgid "À valider : %(objet)s"
+msgstr "Te valideren: %(objet)s"
 
 #. module: buildo_gestion_chantier
 #: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_materiau__categorie__electricite

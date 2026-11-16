@@ -17,6 +17,7 @@ des matériaux, de la facturation et de la rentabilité.
         'security/ir.model.access.csv',
         'security/ir_rules.xml',
         'data/sequences.xml',
+        'data/alertes_data.xml',
         'views/chantier_chantier_views.xml',
         'views/chantier_tache_views.xml',
         'views/chantier_heure_prestee_views.xml',
