@@ -1,0 +1,3 @@
+# Statistiques de langages GitHub (Linguist) : seul le code écrit pour BUILDO est compté.
+postman/rapport_tests_api.html             linguist-generated
+buildo_gestion_chantier/static/lib/**      linguist-vendored
