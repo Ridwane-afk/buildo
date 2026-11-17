@@ -46,6 +46,13 @@ class ChantierOutil(models.Model):
         compute='_compute_attribution_en_cours',
         store=True,
     )
+    chantier_actuel_id = fields.Many2one(
+        'chantier.chantier',
+        string='Sur le chantier',
+        compute='_compute_attribution_en_cours',
+        store=True,
+    )
+    en_retard = fields.Boolean('En retard', compute='_compute_en_retard', search='_search_en_retard')
     qr_token = fields.Char('Jeton QR', copy=False, readonly=True, index=True,
                            help="Identifiant secret encodé dans le QR code collé sur l'outil.")
     qr_url = fields.Char('Lien du QR code', compute='_compute_qr')
@@ -131,9 +138,24 @@ class ChantierOutil(models.Model):
         attribution.action_retour()
         return self.env['chantier.heure.prestee']._notifier(_("%s rendu, merci !", self.name))
 
-    @api.depends('attribution_ids.state', 'attribution_ids.ouvrier_id', 'attribution_ids.date_retour_prevue')
+    @api.depends('attribution_ids.state', 'attribution_ids.ouvrier_id', 'attribution_ids.date_retour_prevue',
+                 'attribution_ids.chantier_id')
     def _compute_attribution_en_cours(self):
         for outil in self:
             attribution_en_cours = outil.attribution_ids.filtered(lambda a: a.state == 'attribue')[:1]
             outil.attribue_a_id = attribution_en_cours.ouvrier_id
             outil.date_retour_prevue = attribution_en_cours.date_retour_prevue
+            outil.chantier_actuel_id = attribution_en_cours.chantier_id
+
+    @api.depends('etat', 'date_retour_prevue')
+    def _compute_en_retard(self):
+        today = fields.Date.context_today(self)
+        for outil in self:
+            outil.en_retard = (outil.etat == 'attribue' and bool(outil.date_retour_prevue)
+                               and outil.date_retour_prevue < today)
+
+    def _search_en_retard(self, operator, value):
+        if operator not in ('=', '!=') or not isinstance(value, bool):
+            return NotImplemented
+        domaine = [('etat', '=', 'attribue'), ('date_retour_prevue', '<', fields.Date.context_today(self))]
+        return domaine if (operator == '=') == value else ['!', '&'] + domaine

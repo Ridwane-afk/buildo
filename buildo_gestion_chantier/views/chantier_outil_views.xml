@@ -16,8 +16,10 @@
                        decoration-danger="etat == 'hors_service'"/>
                 <field name="valeur_achat"/>
                 <field name="date_achat"/>
-                <field name="attribue_a_id"/>
-                <field name="date_retour_prevue"/>
+                <field name="attribue_a_id" widget="many2one_avatar_user"/>
+                <field name="chantier_actuel_id"/>
+                <field name="date_retour_prevue" decoration-danger="en_retard"/>
+                <field name="en_retard" column_invisible="1"/>
             </list>
         </field>
     </record>
@@ -53,10 +55,26 @@
                         </group>
                     </group>
                     <group string="Attribution en cours" invisible="etat != 'attribue'">
-                        <field name="attribue_a_id" readonly="1"/>
-                        <field name="date_retour_prevue" readonly="1"/>
+                        <field name="attribue_a_id" readonly="1" widget="many2one_avatar_user"/>
+                        <field name="chantier_actuel_id" readonly="1"/>
+                        <field name="date_retour_prevue" readonly="1" decoration-danger="en_retard"/>
+                        <field name="en_retard" invisible="1"/>
                     </group>
                     <field name="description" placeholder="Description..."/>
+                    <group string="Historique" groups="buildo_gestion_chantier.group_chef_chantier">
+                        <field name="attribution_ids" nolabel="1" colspan="2" readonly="1">
+                            <list decoration-danger="en_retard" decoration-muted="state == 'retourne'">
+                                <field name="ouvrier_id" widget="many2one_avatar_user"/>
+                                <field name="chantier_id"/>
+                                <field name="date_sortie"/>
+                                <field name="date_retour_prevue"/>
+                                <field name="date_retour_reelle"/>
+                                <field name="state" widget="badge" decoration-warning="state == 'attribue'"
+                                       decoration-success="state == 'retourne'"/>
+                                <field name="en_retard" column_invisible="1"/>
+                            </list>
+                        </field>
+                    </group>
                     <group string="QR code" groups="buildo_gestion_chantier.group_chef_chantier">
                         <field name="qr_url" widget="url" readonly="1"/>
                         <button name="action_regenerer_qr" type="object" string="Générer un nouveau QR code"
@@ -77,6 +95,9 @@
                 <field name="ref_interne"/>
                 <field name="categorie"/>
                 <field name="attribue_a_id"/>
+                <field name="chantier_actuel_id"/>
+                <separator/>
+                <filter string="En retard" name="en_retard" domain="[('en_retard', '=', True)]"/>
                 <separator/>
                 <filter string="Disponible" name="disponible" domain="[('etat', '=', 'disponible')]"/>
                 <filter string="Attribué" name="attribue" domain="[('etat', '=', 'attribue')]"/>
@@ -86,10 +107,49 @@
                 <filter string="Archivés" name="archives" domain="[('actif', '=', False)]"/>
                 <group name="groupby">
                     <filter string="Attribué à" name="group_attribue_a" context="{'group_by': 'attribue_a_id'}"/>
+                    <filter string="Chantier" name="group_chantier" context="{'group_by': 'chantier_actuel_id'}"/>
                     <filter string="Catégorie" name="group_categorie" context="{'group_by': 'categorie'}"/>
                     <filter string="État" name="group_etat" context="{'group_by': 'etat'}"/>
                 </group>
             </search>
+        </field>
+    </record>
+
+    <record id="view_chantier_outil_kanban" model="ir.ui.view">
+        <field name="name">chantier.outil.kanban</field>
+        <field name="model">chantier.outil</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="etat" class="o_kanban_mobile" group_create="false" records_draggable="false">
+                <field name="etat"/>
+                <field name="en_retard"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="d-flex justify-content-between">
+                            <field name="name" class="fw-bold"/>
+                            <field name="ref_interne" class="text-muted small"/>
+                        </div>
+                        <field name="categorie" class="text-muted small"/>
+                        <div t-if="record.etat.raw_value == 'attribue'" class="mt-2">
+                            <div class="d-flex align-items-center gap-1">
+                                <field name="attribue_a_id" widget="many2one_avatar_user"/>
+                            </div>
+                            <div class="small"><i class="fa fa-map-marker me-1" title="Chantier"/><field name="chantier_actuel_id"/></div>
+                            <div t-attf-class="small {{ record.en_retard.raw_value ? 'text-danger fw-bold' : 'text-muted' }}">
+                                <i class="fa fa-calendar me-1" title="Retour prévu"/>
+                                <t t-if="record.en_retard.raw_value">En retard, prévu le </t>
+                                <t t-else="">Retour le </t>
+                                <field name="date_retour_prevue"/>
+                            </div>
+                        </div>
+                        <footer class="mt-2">
+                            <button name="action_scan_prendre" type="object" class="btn btn-sm btn-primary"
+                                    invisible="etat != 'disponible'">Sortir</button>
+                            <button name="action_scan_rendre" type="object" class="btn btn-sm btn-secondary"
+                                    invisible="etat != 'attribue'">Rendre</button>
+                        </footer>
+                    </t>
+                </templates>
+            </kanban>
         </field>
     </record>
 
@@ -115,9 +175,8 @@
     <record id="action_chantier_outil" model="ir.actions.act_window">
         <field name="name">Outils</field>
         <field name="res_model">chantier.outil</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">kanban,list,form</field>
         <field name="domain">[('actif', '=', True)]</field>
         <field name="search_view_id" ref="view_chantier_outil_search"/>
-        <field name="context">{'search_default_group_attribue_a': 1, 'search_default_group_categorie': 1}</field>
     </record>
 </odoo>

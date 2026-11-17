@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
 
@@ -13,13 +15,27 @@ class ChantierAttributionOutil(models.Model):
     categorie = fields.Selection(related='outil_id.categorie', string='Catégorie')
     ouvrier_id = fields.Many2one('res.users', 'Ouvrier', required=True)
     date_sortie = fields.Date('Date de sortie', required=True, default=fields.Date.today)
-    date_retour_prevue = fields.Date('Date de retour prévue')
+    date_retour_prevue = fields.Date('Date de retour prévue',
+                                     default=lambda self: fields.Date.today() + timedelta(days=7))
     date_retour_reelle = fields.Date('Date de retour réelle')
     state = fields.Selection([
         ('attribue', 'Attribué'),
         ('retourne', 'Retourné'),
     ], default='attribue', string='État')
     note = fields.Text('Note')
+    en_retard = fields.Boolean('En retard', compute='_compute_en_retard', search='_search_en_retard')
+
+    @api.depends('state', 'date_retour_prevue')
+    def _compute_en_retard(self):
+        today = fields.Date.context_today(self)
+        for rec in self:
+            rec.en_retard = rec.state == 'attribue' and bool(rec.date_retour_prevue) and rec.date_retour_prevue < today
+
+    def _search_en_retard(self, operator, value):
+        if operator not in ('=', '!=') or not isinstance(value, bool):
+            return NotImplemented
+        domaine = [('state', '=', 'attribue'), ('date_retour_prevue', '<', fields.Date.context_today(self))]
+        return domaine if (operator == '=') == value else ['!', '&'] + domaine
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -27,6 +43,11 @@ class ChantierAttributionOutil(models.Model):
         for rec in records:
             rec.outil_id.write({'etat': 'attribue'})
         return records
+
+    def action_rendre(self):
+        """Bouton « Rendre » de Mes outils : mêmes contrôles que le scan du QR code."""
+        self.ensure_one()
+        return self.outil_id.action_scan_rendre()
 
     def action_retour(self):
         for rec in self:

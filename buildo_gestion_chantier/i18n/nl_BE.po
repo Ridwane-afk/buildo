@@ -3006,3 +3006,199 @@ msgstr "Gereedschap uitgeven"
 #: model:ir.actions.report,name:buildo_gestion_chantier.action_report_etiquette_outil
 msgid "Étiquettes QR des outils"
 msgstr "QR-labels van het gereedschap"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_demande_materiel.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_demande_materiel.py:0
+msgid "%(corps)s L'outil est à vous, à rendre pour le %(date)s."
+msgstr "%(corps)s Het gereedschap is van u, terug te brengen op %(date)s."
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_demande_materiel.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_demande_materiel.py:0
+msgid ""
+"%(outil)s n'est pas disponible : %(qui)s. Refusez la demande ou attendez son"
+" retour."
+msgstr ""
+"%(outil)s is niet beschikbaar: %(qui)s. Weiger de aanvraag of wacht tot het "
+"terug is."
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_outil_kanban
+msgid "<i class=\"fa fa-calendar me-1\" title=\"Retour prévu\"/>"
+msgstr "<i class=\"fa fa-calendar me-1\" title=\"Geplande terugkeer\"/>"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_attribution_outil_kanban
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_outil_kanban
+msgid "<i class=\"fa fa-map-marker me-1\" title=\"Chantier\"/>"
+msgstr "<i class=\"fa fa-map-marker me-1\" title=\"Werf\"/>"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_attribution_outil_kanban
+msgid "<i class=\"fa fa-undo me-1\"/>Rendre"
+msgstr "<i class=\"fa fa-undo me-1\"/>Terugbrengen"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.actions.act_window,help:buildo_gestion_chantier.action_mes_outils
+msgid "Aucun outil en votre possession"
+msgstr "Geen gereedschap in uw bezit"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.actions.act_window,help:buildo_gestion_chantier.action_mes_demandes_materiel
+msgid "Besoin de matériel ou d'un outil ?"
+msgstr "Materiaal of gereedschap nodig?"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_demande_materiel.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_demande_materiel.py:0
+msgid "Choisissez l'outil demandé."
+msgstr "Kies het gevraagde gereedschap."
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_demande_materiel.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_demande_materiel.py:0
+msgid "Choisissez un matériau ou décrivez votre besoin."
+msgstr "Kies een materiaal of beschrijf wat u nodig hebt."
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.actions.act_window,help:buildo_gestion_chantier.action_mes_demandes_materiel
+msgid ""
+"Cliquez sur Nouveau, choisissez l'article puis « Envoyer au chef ».\n"
+"               Vous recevrez un message dès qu'il aura répondu."
+msgstr ""
+"Klik op Nieuw, kies het artikel en daarna « Naar de werfleider sturen ».\n"
+"               U krijgt een bericht zodra die heeft geantwoord."
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_demande_materiel__outil_etat
+msgid "Disponibilité de l'outil"
+msgstr "Beschikbaarheid van het gereedschap"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_attribution_outil_kanban
+msgid "En retard ! À rendre depuis le"
+msgstr "Te laat! Terug te brengen sinds"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_outil_kanban
+msgid "En retard, prévu le"
+msgstr "Te laat, gepland op"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_form
+msgid "Envoyer au chef"
+msgstr "Naar de werfleider sturen"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_form
+msgid "Ex. : vis inox 6x60, livrer au 2e étage"
+msgstr "Bv.: inox schroeven 6x60, leveren op de 2e verdieping"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_outil_form
+msgid "Historique"
+msgstr "Geschiedenis"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_demande_materiel__type_demande
+msgid "Je demande"
+msgstr "Ik vraag"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_form
+msgid ""
+"L'outil vous a été confié. Retrouvez-le dans <strong>Mes outils</strong>."
+msgstr ""
+"Het gereedschap is aan u toevertrouwd. U vindt het terug in <strong>Mijn "
+"gereedschap</strong>."
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_form
+msgid "Note pour le chef..."
+msgstr "Opmerking voor de werfleider..."
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_form
+msgid "Précisions"
+msgstr "Details"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_attribution_outil_list
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_outil_kanban
+msgid "Rendre"
+msgstr "Terugbrengen"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_attribution_outil_form
+msgid "Rendre l'outil"
+msgstr "Gereedschap terugbrengen"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_attribution_outil_kanban
+msgid "Rendu le"
+msgstr "Teruggebracht op"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_outil_kanban
+msgid "Retour le"
+msgstr "Terug op"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.actions.act_window,help:buildo_gestion_chantier.action_mes_outils
+msgid ""
+"Scannez le QR code collé sur un outil pour le prendre,\n"
+"               ou demandez-le au chef via <strong>Mes demandes</strong>."
+msgstr ""
+"Scan de QR-code op een gereedschap om het te nemen,\n"
+"               of vraag het aan de werfleider via <strong>Mijn aanvragen</strong>."
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_attribution_outil_kanban
+msgid "Sorti le"
+msgstr "Uitgegeven op"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_demande_materiel__attribution_id
+msgid "Sortie de l'outil"
+msgstr "Uitgifte van het gereedschap"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_outil_kanban
+msgid "Sortir"
+msgstr "Uitgeven"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_outil__chantier_actuel_id
+msgid "Sur le chantier"
+msgstr "Op de werf"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_demande_materiel.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_demande_materiel.py:0
+msgid "Votre demande « %(objet)s » a été acceptée par %(chef)s."
+msgstr "Uw aanvraag « %(objet)s » werd aanvaard door %(chef)s."
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_demande_materiel.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_demande_materiel.py:0
+msgid "Votre demande « %(objet)s » a été refusée par %(chef)s : %(motif)s"
+msgstr "Uw aanvraag « %(objet)s » werd geweigerd door %(chef)s: %(motif)s"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_demande_materiel.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_demande_materiel.py:0
+msgid "chez %s"
+msgstr "bij %s"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_attribution_outil_kanban
+msgid "À rendre le"
+msgstr "Terug te brengen op"

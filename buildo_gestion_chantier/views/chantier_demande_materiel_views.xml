@@ -9,8 +9,10 @@
                 <field name="chantier_id"/>
                 <field name="ouvrier_id"/>
                 <field name="date"/>
+                <field name="type_demande" optional="show"/>
                 <field name="description"/>
-                <field name="materiau_id"/>
+                <field name="materiau_id" optional="hide"/>
+                <field name="outil_id" optional="hide"/>
                 <field name="quantite"/>
                 <field name="urgence" widget="badge"
                        decoration-danger="urgence == 'urgente'"/>
@@ -18,6 +20,14 @@
                        decoration-success="state == 'valide'"
                        decoration-danger="state == 'refuse'"
                        decoration-warning="state == 'soumis'"/>
+                <button name="action_soumettre" string="Envoyer" type="object" icon="fa-paper-plane"
+                        invisible="state != 'brouillon'" class="btn-sm btn-primary"/>
+                <button name="action_valider" string="Accepter" type="object" icon="fa-check"
+                        invisible="state != 'soumis'" class="btn-sm btn-success"
+                        groups="buildo_gestion_chantier.group_chef_chantier"/>
+                <button name="action_refuser" string="Refuser" type="object" icon="fa-times"
+                        invisible="state != 'soumis'" class="btn-sm btn-secondary"
+                        groups="buildo_gestion_chantier.group_chef_chantier"/>
             </list>
         </field>
     </record>
@@ -28,9 +38,9 @@
         <field name="arch" type="xml">
             <form string="Demande de matériel">
                 <header>
-                    <button name="action_soumettre" string="Soumettre" type="object"
+                    <button name="action_soumettre" string="Envoyer au chef" type="object" icon="fa-paper-plane"
                             invisible="state != 'brouillon'" class="btn-primary"/>
-                    <button name="action_valider" string="Valider" type="object"
+                    <button name="action_valider" string="Accepter" type="object"
                             invisible="state != 'soumis'" class="btn-primary"
                             groups="buildo_gestion_chantier.group_chef_chantier"/>
                     <button name="action_refuser" string="Refuser" type="object"
@@ -42,17 +52,36 @@
                            statusbar_visible="brouillon,soumis,valide"/>
                 </header>
                 <sheet>
+                    <div class="alert alert-info" role="status" invisible="state != 'valide' or not attribution_id">
+                        L'outil vous a été confié. Retrouvez-le dans <strong>Mes outils</strong>.
+                    </div>
                     <group>
-                        <field name="chantier_id"/>
-                        <field name="ouvrier_id" groups="buildo_gestion_chantier.group_chef_chantier"/>
-                        <field name="ouvrier_id" readonly="1" groups="!buildo_gestion_chantier.group_chef_chantier"/>
-                        <field name="date"/>
-                        <field name="materiau_id"/>
-                        <field name="description"/>
-                        <field name="quantite"/>
-                        <field name="urgence"/>
+                        <group>
+                            <field name="type_demande" widget="radio" options="{'horizontal': true}"/>
+                            <field name="materiau_id" string="Matériau" options="{'no_create': True}"
+                                   invisible="type_demande != 'materiau'"/>
+                            <field name="outil_id" options="{'no_create': True}"
+                                   invisible="type_demande != 'outil'" required="type_demande == 'outil'"/>
+                            <field name="outil_etat" widget="badge"
+                                   decoration-success="outil_etat == 'disponible'"
+                                   decoration-warning="outil_etat == 'attribue'"
+                                   decoration-danger="outil_etat in ('maintenance', 'hors_service')"
+                                   invisible="not outil_id"/>
+                            <field name="description" string="Précisions"
+                                   placeholder="Ex. : vis inox 6x60, livrer au 2e étage"
+                                   required="not materiau_id and not outil_id"/>
+                            <field name="quantite" invisible="type_demande == 'outil'"/>
+                            <field name="urgence" widget="radio" options="{'horizontal': true}"/>
+                        </group>
+                        <group>
+                            <field name="chantier_id" options="{'no_create': True}"/>
+                            <field name="ouvrier_id" groups="buildo_gestion_chantier.group_chef_chantier"/>
+                            <field name="ouvrier_id" readonly="1" groups="!buildo_gestion_chantier.group_chef_chantier"/>
+                            <field name="date"/>
+                            <field name="attribution_id" invisible="not attribution_id"/>
+                        </group>
                     </group>
-                    <field name="note" placeholder="Note..."/>
+                    <field name="note" placeholder="Note pour le chef..."/>
                 </sheet>
                 <chatter/>
             </form>
@@ -75,6 +104,8 @@
                 <filter string="Refusé" name="refuse" domain="[('state', '=', 'refuse')]"/>
                 <separator/>
                 <filter string="Urgentes" name="urgentes" domain="[('urgence', '=', 'urgente')]"/>
+                <filter string="Outils" name="outils" domain="[('type_demande', '=', 'outil')]"/>
+                <filter string="Matériaux" name="materiaux" domain="[('type_demande', '=', 'materiau')]"/>
                 <separator/>
                 <filter string="Aujourd'hui" name="aujourd_hui"
                         domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]"/>
@@ -110,5 +141,10 @@
         <field name="view_mode">list,form</field>
         <field name="search_view_id" ref="view_chantier_demande_materiel_search"/>
         <field name="domain">[('ouvrier_id', '=', uid)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Besoin de matériel ou d'un outil ?</p>
+            <p>Cliquez sur Nouveau, choisissez l'article puis « Envoyer au chef ».
+               Vous recevrez un message dès qu'il aura répondu.</p>
+        </field>
     </record>
 </odoo>
