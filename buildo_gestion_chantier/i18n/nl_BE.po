@@ -2880,3 +2880,129 @@ msgstr "Weet u zeker dat u deze toewijzing wilt verwijderen?"
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_list
 msgid "Êtes-vous sûr de vouloir supprimer cette tâche ?"
 msgstr "Weet u zeker dat u deze taak wilt verwijderen?"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_outil.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_outil.py:0
+msgid ""
+"%(outil)s est attribué à %(ouvrier)s : lui seul ou un chef peut le rendre."
+msgstr ""
+"%(outil)s is toegewezen aan %(ouvrier)s: alleen die persoon of een "
+"werfleider kan het terugbrengen."
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_outil.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_outil.py:0
+msgid "%(outil)s n'est pas disponible (%(etat)s)."
+msgstr "%(outil)s is niet beschikbaar (%(etat)s)."
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_outil.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_outil.py:0
+msgid "%(outil)s sorti pour %(ouvrier)s sur %(chantier)s."
+msgstr "%(outil)s uitgegeven aan %(ouvrier)s op %(chantier)s."
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_outil.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_outil.py:0
+msgid "%s n'est attribué à personne."
+msgstr "%s is aan niemand toegewezen."
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_outil.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_outil.py:0
+msgid "%s rendu, merci !"
+msgstr "%s teruggebracht, bedankt!"
+
+#. module: buildo_gestion_chantier
+#: model:ir.actions.report,print_report_name:buildo_gestion_chantier.action_report_etiquette_outil
+msgid "'Etiquettes QR outils'"
+msgstr "'QR-labels gereedschap'"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.etiquette_outil
+msgid "BUILDO · Scannez pour prendre ou rendre"
+msgstr "BUILDO · Scan om te nemen of terug te brengen"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.constraint,message:buildo_gestion_chantier.constraint_chantier_outil_qr_token_uniq
+msgid "Chaque outil doit avoir son propre QR code."
+msgstr "Elk gereedschap moet een eigen QR-code hebben."
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_outil_form
+msgid "Générer un nouveau QR code"
+msgstr "Nieuwe QR-code genereren"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,help:buildo_gestion_chantier.field_chantier_outil__qr_token
+msgid "Identifiant secret encodé dans le QR code collé sur l'outil."
+msgstr "Geheime code in de QR-code die op het gereedschap is geplakt."
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_outil_form
+msgid "Imprimer l'étiquette QR"
+msgstr "QR-label afdrukken"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_outil__qr_token
+msgid "Jeton QR"
+msgstr "QR-token"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_outil_form
+msgid "L'étiquette actuelle ne fonctionnera plus. Continuer ?"
+msgstr "Het huidige label werkt dan niet meer. Doorgaan?"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_outil__qr_url
+msgid "Lien du QR code"
+msgstr "Link van de QR-code"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_wizard_scan_outil__ouvrier_id
+msgid "Pour"
+msgstr "Voor"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_outil_form
+msgid "Prendre cet outil"
+msgstr "Dit gereedschap nemen"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_outil__qr_code
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_outil_form
+msgid "QR code"
+msgstr "QR-code"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_outil_form
+msgid "Rendre cet outil"
+msgstr "Dit gereedschap terugbrengen"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model,name:buildo_gestion_chantier.model_chantier_wizard_scan_outil
+msgid "Sortie d'un outil après scan du QR code"
+msgstr "Uitgifte van gereedschap na scan van de QR-code"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_outil.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_outil.py:0
+msgid "Sortir %s"
+msgstr "%s uitgeven"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_wizard_scan_outil_form
+msgid "Sortir l'outil"
+msgstr "Gereedschap uitgeven"
+
+#. module: buildo_gestion_chantier
+#: model:ir.actions.report,name:buildo_gestion_chantier.action_report_etiquette_outil
+msgid "Étiquettes QR des outils"
+msgstr "QR-labels van het gereedschap"

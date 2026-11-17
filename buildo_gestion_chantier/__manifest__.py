@@ -24,6 +24,7 @@ des matériaux, de la facturation et de la rentabilité.
         'views/chantier_demande_materiel_views.xml',
         'views/chantier_rapport_journalier_views.xml',
         'views/chantier_materiau_views.xml',
+        'report/chantier_outil_etiquette_report.xml',
         'views/chantier_outil_views.xml',
         'views/chantier_estimation_views.xml',
         'views/chantier_paiement_fss_views.xml',

@@ -27,7 +27,17 @@
         <field name="model">chantier.outil</field>
         <field name="arch" type="xml">
             <form string="Outil">
+                <header>
+                    <button name="action_scan_prendre" type="object" string="Prendre cet outil"
+                            class="btn-primary" icon="fa-sign-out" invisible="etat != 'disponible'"/>
+                    <button name="action_scan_rendre" type="object" string="Rendre cet outil"
+                            class="btn-primary" icon="fa-sign-in" invisible="etat != 'attribue'"/>
+                    <button name="%(action_report_etiquette_outil)d" type="action" string="Imprimer l'étiquette QR"
+                            icon="fa-qrcode" groups="buildo_gestion_chantier.group_chef_chantier"/>
+                </header>
                 <sheet>
+                    <field name="qr_code" widget="image" class="oe_avatar" readonly="1"
+                           groups="buildo_gestion_chantier.group_chef_chantier"/>
                     <group>
                         <group>
                             <field name="name"/>
@@ -47,6 +57,12 @@
                         <field name="date_retour_prevue" readonly="1"/>
                     </group>
                     <field name="description" placeholder="Description..."/>
+                    <group string="QR code" groups="buildo_gestion_chantier.group_chef_chantier">
+                        <field name="qr_url" widget="url" readonly="1"/>
+                        <button name="action_regenerer_qr" type="object" string="Générer un nouveau QR code"
+                                class="btn-link ps-0" icon="fa-refresh" colspan="2"
+                                confirm="L'étiquette actuelle ne fonctionnera plus. Continuer ?"/>
+                    </group>
                 </sheet>
             </form>
         </field>
@@ -74,6 +90,25 @@
                     <filter string="État" name="group_etat" context="{'group_by': 'etat'}"/>
                 </group>
             </search>
+        </field>
+    </record>
+
+    <record id="view_chantier_wizard_scan_outil_form" model="ir.ui.view">
+        <field name="name">chantier.wizard.scan.outil.form</field>
+        <field name="model">chantier.wizard.scan.outil</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="outil_id"/>
+                    <field name="chantier_id" options="{'no_create': True}"/>
+                    <field name="ouvrier_id" options="{'no_create': True}"
+                           groups="buildo_gestion_chantier.group_chef_chantier"/>
+                </group>
+                <footer>
+                    <button name="action_confirmer" type="object" string="Sortir l'outil" class="btn-primary"/>
+                    <button string="Annuler" special="cancel"/>
+                </footer>
+            </form>
         </field>
     </record>
 
