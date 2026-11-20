@@ -14,3 +14,4 @@ from . import test_carte
 from . import test_alertes
 from . import test_outil_qr
 from . import test_demande_outil
+from . import test_stock_materiau

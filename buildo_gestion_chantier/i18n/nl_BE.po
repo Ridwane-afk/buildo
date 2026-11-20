@@ -3202,3 +3202,18 @@ msgstr "bij %s"
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_attribution_outil_kanban
 msgid "À rendre le"
 msgstr "Terug te brengen op"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,help:buildo_gestion_chantier.field_chantier_estimation_materiau__stock_disponible
+#: model:ir.model.fields,help:buildo_gestion_chantier.field_chantier_materiau__stock_disponible
+msgid ""
+"Stock réel de l'Inventaire si un produit Odoo est lié, sinon saisi à la "
+"main."
+msgstr ""
+"Werkelijke voorraad uit Voorraadbeheer als een Odoo-product gekoppeld is, "
+"anders handmatig ingevoerd."
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_materiau__stock_manuel
+msgid "Stock saisi à la main"
+msgstr "Handmatig ingevoerde voorraad"

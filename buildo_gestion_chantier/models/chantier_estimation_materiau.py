@@ -1,6 +1,8 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError, UserError
 
+from .chantier_materiau import rechercher_par_calcul
+
 
 class ChantierEstimationMateriau(models.Model):
     _name = 'chantier.estimation.materiau'
@@ -18,7 +20,8 @@ class ChantierEstimationMateriau(models.Model):
     montant_estime = fields.Monetary('Montant estimé', compute='_compute_montant', store=True,
                                      currency_field='currency_id')
     stock_disponible = fields.Float('Stock disponible', related='materiau_id.stock_disponible', readonly=True)
-    quantite_manquante = fields.Float('Quantité manquante', compute='_compute_manquant', store=True)
+    quantite_manquante = fields.Float('Quantité manquante', compute='_compute_manquant',
+                                      search='_search_manquant')
     note = fields.Text('Note')
     produit_id = fields.Many2one('product.product', 'Produit Odoo', related='materiau_id.product_id', store=True)
 
@@ -50,6 +53,9 @@ class ChantierEstimationMateriau(models.Model):
         for rec in self:
             manquant = rec.quantite_estimee - rec.stock_disponible
             rec.quantite_manquante = manquant if manquant > 0 else 0.0
+
+    def _search_manquant(self, operator, value):
+        return rechercher_par_calcul(self, 'quantite_manquante', operator, value)
 
     def action_generer_commande(self):
         lignes = self.filtered(
