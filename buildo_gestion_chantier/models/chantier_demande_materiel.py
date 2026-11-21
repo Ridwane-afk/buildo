@@ -1,4 +1,4 @@
-from odoo import models, fields, api, _
+from odoo import models, fields, api, Command, _
 from odoo.exceptions import UserError, ValidationError
 
 
@@ -20,6 +20,7 @@ class ChantierDemandeMateriel(models.Model):
     materiau_id = fields.Many2one('chantier.materiau', 'Matériau (optionnel)')
     outil_id = fields.Many2one('chantier.outil', 'Outil', domain=[('actif', '=', True)])
     outil_etat = fields.Selection(related='outil_id.etat', string="Disponibilité de l'outil")
+    picking_id = fields.Many2one('stock.picking', 'Sortie de stock', readonly=True, copy=False)
     attribution_id = fields.Many2one('chantier.attribution.outil', 'Sortie de l\'outil', readonly=True, copy=False)
     description = fields.Char('Description du besoin')
     quantite = fields.Float('Quantité demandée', default=1.0)
@@ -89,6 +90,7 @@ class ChantierDemandeMateriel(models.Model):
                     qui=_("chez %s", outil.attribue_a_id.name) if outil.attribue_a_id
                     else dict(outil._fields['etat']._description_selection(self.env))[outil.etat]))
         self.write({'state': 'valide', 'validateur_id': self.env.user.id})
+        self.filtered(lambda d: d.type_demande == 'materiau' and not d.picking_id)._sortir_du_stock()
         # Valider une demande d'outil, c'est le confier à l'ouvrier.
         for demande in demandes_outil:
             demande.attribution_id = self.env['chantier.attribution.outil'].create({
@@ -96,6 +98,42 @@ class ChantierDemandeMateriel(models.Model):
                 'outil_id': demande.outil_id.id,
                 'ouvrier_id': demande.ouvrier_id.id,
             })
+
+    def _sortir_du_stock(self):
+        """Matériau accepté : il quitte l'entrepôt pour le chantier (bon de livraison validé).
+
+        Seulement pour un matériau lié à un produit stockable. Le chef n'a pas forcément
+        les droits Inventaire : l'opération passe en sudo, la demande gardant la trace du bon.
+        """
+        for demande in self.filtered(lambda d: d.materiau_id.product_id.is_storable):
+            produit = demande.materiau_id.product_id
+            entrepot = self.env['stock.warehouse'].sudo().search(
+                [('company_id', '=', self.env.company.id)], limit=1)
+            if not entrepot:
+                continue
+            type_sortie = entrepot.out_type_id
+            depart = type_sortie.default_location_src_id or entrepot.lot_stock_id
+            arrivee = self.env.ref('stock.stock_location_customers')
+            picking = self.env['stock.picking'].sudo().create({
+                'picking_type_id': type_sortie.id,
+                'partner_id': demande.chantier_id.client_id.id,
+                'origin': '%s - %s' % (demande.chantier_id.ref or demande.chantier_id.name, demande.description),
+                'location_id': depart.id,
+                'location_dest_id': arrivee.id,
+                'move_ids': [Command.create({
+                    'product_id': produit.id,
+                    'product_uom_qty': demande.quantite,
+                    'product_uom': produit.uom_id.id,
+                    'location_id': depart.id,
+                    'location_dest_id': arrivee.id,
+                })],
+            })
+            picking.action_confirm()
+            for move in picking.move_ids:
+                move.quantity = move.product_uom_qty
+                move.picked = True
+            picking.with_context(skip_backorder=True, skip_sms=True).button_validate()
+            demande.picking_id = picking
 
     def write(self, vals):
         res = super().write(vals)

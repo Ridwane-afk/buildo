@@ -27,4 +27,5 @@ from . import (
     purchase_order_chantier,
     chantier_audit,
     chantier_resume,
+    chantier_alertes,
 )

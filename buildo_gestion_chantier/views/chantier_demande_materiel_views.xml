@@ -79,6 +79,7 @@
                             <field name="ouvrier_id" readonly="1" groups="!buildo_gestion_chantier.group_chef_chantier"/>
                             <field name="date"/>
                             <field name="attribution_id" invisible="not attribution_id"/>
+                            <field name="picking_id" invisible="not picking_id" groups="stock.group_stock_user"/>
                         </group>
                     </group>
                     <field name="note" placeholder="Note pour le chef..."/>

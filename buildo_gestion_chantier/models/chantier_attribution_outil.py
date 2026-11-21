@@ -7,6 +7,7 @@ from odoo.exceptions import UserError
 class ChantierAttributionOutil(models.Model):
     _name = 'chantier.attribution.outil'
     _description = 'Attribution d\'un outil à un ouvrier'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _order = 'date_sortie desc'
 
     chantier_id = fields.Many2one('chantier.chantier', 'Chantier', required=True, ondelete='cascade')
@@ -55,3 +56,6 @@ class ChantierAttributionOutil(models.Model):
                 raise UserError(_("Cet outil a déjà été retourné."))
             rec.write({'state': 'retourne', 'date_retour_reelle': fields.Date.today()})
             rec.outil_id.write({'etat': 'disponible'})
+        # Le rappel « outil à rendre » n'a plus lieu d'être.
+        self.env['chantier.chantier']._cloturer_alertes(
+            self, 'buildo_gestion_chantier.activite_outil_a_rendre', feedback=_("Outil rendu"))

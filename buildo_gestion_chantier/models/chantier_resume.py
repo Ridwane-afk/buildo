@@ -65,12 +65,37 @@ class ChantierChantier(models.Model):
               heures=_format_heures(sum(heures.mapped('nb_heures'))), photos=len(photos),
               demandes=len(demandes), chantiers=len(chantiers)),
             _("Chantier"), _("Heures"), _("Photos"), _("Demandes"), lignes,
-        )
+        ) + self.sudo()._points_d_attention()
         canal = self.env.ref('buildo_gestion_chantier.canal_resume_buildo').sudo()
         return canal.message_post(
             body=corps, message_type='comment', subtype_xmlid='mail.mt_comment',
             author_id=self.env.ref('base.partner_root').id,
         )
+
+    def _points_d_attention(self):
+        """Outils en retard et chantiers hors budget, ajoutés en fin de résumé."""
+        retards = self.env['chantier.attribution.outil'].search([('en_retard', '=', True)], order='date_retour_prevue')
+        hors_budget = self._chantiers_hors_budget()
+        if not retards and not hors_budget:
+            return Markup()
+        items = []
+        if hors_budget:
+            items.append(Markup('<li>%s %s</li>') % (
+                _("Budget dépassé :"),
+                Markup(', ').join(
+                    Markup('<a href="#" data-oe-model="chantier.chantier" data-oe-id="%s">%s</a> (+%s %%)') % (
+                        c.id, c.display_name, round(c._depassement_budget_pct()))
+                    for c in hors_budget),
+            ))
+        if retards:
+            visibles = retards[:10]
+            detail = Markup(', ').join(
+                Markup('%s (%s)') % (a.outil_id.name, a.ouvrier_id.name) for a in visibles)
+            if len(retards) > len(visibles):
+                detail += Markup(' ') + _("et %s autre(s)", len(retards) - len(visibles))
+            items.append(Markup('<li>%s %s</li>') % (
+                _("%s outil(s) pas rendu(s) à temps :", len(retards)), detail))
+        return Markup('<p><b>%s</b></p><ul>%s</ul>') % (_("Points d'attention"), Markup().join(items))
 
     def action_envoyer_resume(self):
         """Envoie le résumé tout de suite (démonstration), sans attendre l'exécution du soir."""

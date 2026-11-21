@@ -59,6 +59,17 @@ class ChantierHeurePrestee(models.Model):
         for rec in self:
             rec.montant = rec.nb_heures * rec.taux_horaire
 
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super().create(vals_list)
+        # L'ouvrier a encodé : le rappel « heures à encoder » est réglé.
+        Chantier = self.env['chantier.chantier']
+        for ouvrier in records.ouvrier_id:
+            activites = Chantier._activites_heures(ouvrier)
+            if activites:
+                activites.action_feedback(feedback=_("Heures encodées"))
+        return records
+
     def action_soumettre(self):
         if any(rec.pointage_en_cours for rec in self):
             raise UserError(_("Pointez d'abord votre départ avant de soumettre ces heures."))

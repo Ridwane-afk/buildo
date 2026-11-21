@@ -3217,3 +3217,120 @@ msgstr ""
 #: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_materiau__stock_manuel
 msgid "Stock saisi à la main"
 msgstr "Handmatig ingevoerde voorraad"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_resume.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_resume.py:0
+msgid "%s outil(s) pas rendu(s) à temps :"
+msgstr "%s gereedschap(pen) niet op tijd teruggebracht:"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_alertes.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_alertes.py:0
+msgid ""
+"Aucune heure encodée ce jour-là. Pensez à Mes heures, ou au bouton « Copier "
+"ma dernière journée »."
+msgstr ""
+"Geen uren ingevoerd op die dag. Denk aan Mijn uren, of aan de knop « Mijn "
+"laatste werkdag kopiëren »."
+
+#. module: buildo_gestion_chantier
+#: model:ir.actions.server,name:buildo_gestion_chantier.cron_alertes_quotidiennes_ir_actions_server
+msgid "BUILDO : rappels outils en retard, heures oubliées et budgets dépassés"
+msgstr ""
+"BUILDO: herinneringen voor laat gereedschap, vergeten uren en overschreden "
+"budgetten"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_alertes.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_alertes.py:0
+msgid "Budget de nouveau respecté"
+msgstr "Budget opnieuw gerespecteerd"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_resume.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_resume.py:0
+msgid "Budget dépassé :"
+msgstr "Budget overschreden:"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_alertes.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_alertes.py:0
+msgid "Budget dépassé de %(pct)s %%"
+msgstr "Budget overschreden met %(pct)s %%"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_alertes.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_alertes.py:0
+msgid "Coût réel %(cout)s pour un budget révisé de %(budget)s."
+msgstr "Werkelijke kost %(cout)s voor een herzien budget van %(budget)s."
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_alertes.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_alertes.py:0
+msgid "Encoder vos heures du %(date)s"
+msgstr "Uw uren van %(date)s invoeren"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_heure_prestee.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_heure_prestee.py:0
+msgid "Heures encodées"
+msgstr "Uren ingevoerd"
+
+#. module: buildo_gestion_chantier
+#: model:mail.activity.type,name:buildo_gestion_chantier.activite_heures_a_encoder
+msgid "Heures à encoder"
+msgstr "In te voeren uren"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_attribution_outil.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_attribution_outil.py:0
+msgid "Outil rendu"
+msgstr "Gereedschap teruggebracht"
+
+#. module: buildo_gestion_chantier
+#: model:mail.activity.type,name:buildo_gestion_chantier.activite_outil_a_rendre
+msgid "Outil à rendre"
+msgstr "Terug te brengen gereedschap"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_resume.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_resume.py:0
+msgid "Points d'attention"
+msgstr "Aandachtspunten"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_alertes.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_alertes.py:0
+msgid "Rendre %(outil)s"
+msgstr "%(outil)s terugbrengen"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_alertes.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_alertes.py:0
+msgid "Retour prévu le %(date)s sur le chantier %(chantier)s."
+msgstr "Terugkeer gepland op %(date)s op de werf %(chantier)s."
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_demande_materiel__picking_id
+msgid "Sortie de stock"
+msgstr "Uitgaande levering"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_resume.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_resume.py:0
+msgid "et %s autre(s)"
+msgstr "en %s andere(n)"

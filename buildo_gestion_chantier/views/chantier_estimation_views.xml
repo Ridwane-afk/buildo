@@ -109,6 +109,7 @@
                 <separator/>
                 <filter string="En retard" name="en_retard" domain="[('en_retard', '=', True)]"/>
                 <group name="groupby">
+                    <filter string="Outil" name="group_outil" context="{'group_by': 'outil_id'}"/>
                     <filter string="Attribué à" name="group_ouvrier" context="{'group_by': 'ouvrier_id'}"/>
                     <filter string="Catégorie" name="group_categorie" context="{'group_by': 'categorie'}"/>
                     <filter string="Chantier" name="group_chantier" context="{'group_by': 'chantier_id'}"/>
