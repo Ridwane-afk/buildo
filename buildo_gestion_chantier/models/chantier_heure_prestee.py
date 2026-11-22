@@ -68,7 +68,47 @@ class ChantierHeurePrestee(models.Model):
             activites = Chantier._activites_heures(ouvrier)
             if activites:
                 activites.action_feedback(feedback=_("Heures encodées"))
+        Journal = self.env['chantier.journal']
+        pointages = records.filtered('heure_arrivee')
+        Journal._enregistrer('pointage_arrivee', pointages, description=lambda r: _(
+            "Arrivée à %(heure)s", heure=r._heure_locale(r.heure_arrivee)))
+        Journal._enregistrer('heures_encodees', records - pointages, description=lambda r: r._resume_journal())
         return records
+
+    def write(self, vals):
+        # Photo des lignes avant correction (le départ pointé n'est pas une correction).
+        suivi = {'chantier_id', 'date', 'nb_heures', 'description'} & set(vals) and 'heure_depart' not in vals
+        avant = {r.id: r._resume_journal() for r in self} if suivi else {}
+        res = super().write(vals)
+        modifiees = self.filtered(lambda r: r.id in avant and r._resume_journal() != avant[r.id])
+        Journal = self.env['chantier.journal']
+        if 'heure_depart' in vals:
+            Journal._enregistrer('pointage_depart', self.filtered('heure_depart'), description=lambda r: _(
+                "Départ à %(heure)s, %(duree)s", heure=r._heure_locale(r.heure_depart), duree=r._duree()))
+        if modifiees:
+            Journal._enregistrer('heures_modifiees', modifiees, description=lambda r: _(
+                "%(avant)s → %(apres)s", avant=avant[r.id], apres=r._resume_journal()))
+        if vals.get('state') == 'soumis':
+            Journal._enregistrer('heures_soumises', self, description=lambda r: r._resume_journal())
+        return res
+
+    def unlink(self):
+        self.env['chantier.journal']._enregistrer(
+            'heures_supprimees', self, description=lambda r: r._resume_journal())
+        return super().unlink()
+
+    def _duree(self):
+        return '%d:%02d' % divmod(round(self.nb_heures * 60), 60)
+
+    def _heure_locale(self, moment):
+        return fields.Datetime.context_timestamp(self, moment).strftime('%H:%M')
+
+    def _resume_journal(self):
+        """« 7:30 le 21/11/2026 sur Rénovation X (coffrage) », pour le journal d'audit."""
+        resume = _("%(duree)s le %(date)s sur %(chantier)s", duree=self._duree(),
+                   date=self.date.strftime('%d/%m/%Y') if self.date else '-',
+                   chantier=self.chantier_id.sudo().name or '-')
+        return '%s (%s)' % (resume, self.description) if self.description else resume
 
     def action_soumettre(self):
         if any(rec.pointage_en_cours for rec in self):

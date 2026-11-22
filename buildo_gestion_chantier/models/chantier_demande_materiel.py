@@ -60,7 +60,14 @@ class ChantierDemandeMateriel(models.Model):
                 article = (self.env['chantier.outil'].browse(vals['outil_id']) if vals.get('outil_id')
                            else self.env['chantier.materiau'].browse(vals.get('materiau_id')))
                 vals['description'] = article.name
-        return super().create(vals_list)
+        demandes = super().create(vals_list)
+        self.env['chantier.journal']._enregistrer('demande_creee', demandes, description=lambda d: d._resume_journal())
+        return demandes
+
+    def _resume_journal(self):
+        if self.type_demande == 'outil':
+            return _("Outil : %s", self.description)
+        return _("%(quantite)s × %(article)s", quantite='%g' % self.quantite, article=self.description)
 
     @api.constrains('description', 'type_demande', 'outil_id')
     def _check_besoin(self):
@@ -139,6 +146,9 @@ class ChantierDemandeMateriel(models.Model):
         res = super().write(vals)
         if vals.get('state') in ('valide', 'refuse'):
             self._prevenir_ouvrier()
+        if vals.get('state') == 'soumis':
+            self.env['chantier.journal']._enregistrer(
+                'demande_envoyee', self, description=lambda d: d._resume_journal())
         return res
 
     def _prevenir_ouvrier(self):

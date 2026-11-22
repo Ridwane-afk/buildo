@@ -190,9 +190,15 @@
               sequence="60"
               groups="group_admin_buildo"/>
 
-    <menuitem id="menu_chantier_audit"
+    <menuitem id="menu_chantier_journal"
               name="Journal d'audit"
               parent="menu_buildo_administration"
-              action="action_chantier_audit"
+              action="action_chantier_journal"
               sequence="10"/>
+
+    <menuitem id="menu_chantier_audit"
+              name="Historique des modifications"
+              parent="menu_buildo_administration"
+              action="action_chantier_audit"
+              sequence="20"/>
 </odoo>

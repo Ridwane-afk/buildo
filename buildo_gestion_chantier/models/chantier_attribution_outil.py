@@ -43,6 +43,9 @@ class ChantierAttributionOutil(models.Model):
         records = super().create(vals_list)
         for rec in records:
             rec.outil_id.write({'etat': 'attribue'})
+        self.env['chantier.journal']._enregistrer('outil_pris', records, description=lambda a: _(
+            "%(outil)s, à rendre le %(date)s", outil=a.outil_id.sudo().display_name,
+            date=a.date_retour_prevue.strftime('%d/%m/%Y') if a.date_retour_prevue else '-'))
         return records
 
     def action_rendre(self):
@@ -56,6 +59,10 @@ class ChantierAttributionOutil(models.Model):
                 raise UserError(_("Cet outil a déjà été retourné."))
             rec.write({'state': 'retourne', 'date_retour_reelle': fields.Date.today()})
             rec.outil_id.write({'etat': 'disponible'})
+        self.env['chantier.journal']._enregistrer('outil_rendu', self, description=lambda a: _(
+            "%(outil)s, %(retard)s", outil=a.outil_id.sudo().display_name,
+            retard=_("rendu en retard") if a.date_retour_prevue and a.date_retour_reelle > a.date_retour_prevue
+            else _("rendu à temps")))
         # Le rappel « outil à rendre » n'a plus lieu d'être.
         self.env['chantier.chantier']._cloturer_alertes(
             self, 'buildo_gestion_chantier.activite_outil_a_rendre', feedback=_("Outil rendu"))

@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 
 
 class ChantierPhoto(models.Model):
@@ -24,4 +24,8 @@ class ChantierPhoto(models.Model):
         for vals in vals_list:
             if vals.get('tache_id') and not vals.get('chantier_id'):
                 vals['chantier_id'] = self.env['chantier.tache'].browse(vals['tache_id']).chantier_id.id
-        return super().create(vals_list)
+        photos = super().create(vals_list)
+        self.env['chantier.journal']._enregistrer(
+            'photo_ajoutee', photos, ouvrier=lambda p: p.auteur_id,
+            description=lambda p: _("Tâche : %s", p.tache_id.name) if p.tache_id else p.name)
+        return photos

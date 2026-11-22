@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 
 
 class ChantierTacheChecklist(models.Model):
@@ -21,9 +21,16 @@ class ChantierTacheChecklist(models.Model):
         elif 'fait' in vals and not vals['fait']:
             vals['fait_par_id'] = False
             vals['fait_le'] = False
+        avant = {r.id: r.fait for r in self} if 'fait' in vals else {}
         result = super().write(vals)
         if 'fait' in vals:
             self.tache_id._sync_avancement_from_checklist()
+            changes = self.filtered(lambda r: r.fait != avant[r.id])
+            self.env['chantier.journal']._enregistrer(
+                'point_controle', changes, chantier=lambda r: r.tache_id.chantier_id, ouvrier=False,
+                description=lambda r: (_("Coché : %(point)s (%(tache)s)") if r.fait
+                                       else _("Décoché : %(point)s (%(tache)s)")) % {
+                    'point': r.name, 'tache': r.tache_id.name})
         return result
 
     @api.model_create_multi

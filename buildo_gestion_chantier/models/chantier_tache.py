@@ -68,6 +68,16 @@ class ChantierTache(models.Model):
             taches.message_subscribe(partner_ids=direction_partners.ids)
         return taches
 
+    def write(self, vals):
+        avant = {t.id: t.state for t in self} if 'state' in vals else {}
+        res = super().write(vals)
+        changees = self.filtered(lambda t: t.id in avant and t.state != avant[t.id])
+        if changees:
+            libelles = dict(self._fields['state']._description_selection(self.env))
+            self.env['chantier.journal']._enregistrer('tache_etat', changees, ouvrier=False, description=lambda t: _(
+                "%(avant)s → %(apres)s", avant=libelles.get(avant[t.id]), apres=libelles.get(t.state)))
+        return res
+
     def action_demarrer(self):
         self.write({'state': 'en_cours', 'date_fin_reelle': False})
 

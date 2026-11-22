@@ -26,6 +26,7 @@ from . import (
     account_move_chantier,
     purchase_order_chantier,
     chantier_audit,
+    chantier_journal,
     chantier_resume,
     chantier_alertes,
 )
