@@ -180,7 +180,7 @@
                                             groups="buildo_gestion_chantier.group_direction"/>
                                     <button name="action_open_form" type="object" icon="fa-external-link"
                                             class="btn-sm btn-link" title="Voir le détail"/>
-                                    <button name="unlink" type="object" icon="fa-trash-o"
+                                    <button name="unlink" type="object" icon="fa-trash-o" title="Supprimer"
                                             confirm="Êtes-vous sûr de vouloir supprimer cette tâche ?"
                                             class="btn-sm btn-link text-danger" groups="buildo_gestion_chantier.group_chef_chantier"/>
                                 </list>
@@ -230,7 +230,7 @@
                                     <field name="date_retour_prevue"/>
                                     <field name="date_retour_reelle"/>
                                     <field name="state"/>
-                                    <button name="unlink" type="object" icon="fa-trash-o"
+                                    <button name="unlink" type="object" icon="fa-trash-o" title="Supprimer"
                                             confirm="Êtes-vous sûr de vouloir supprimer cette attribution ?"
                                             class="btn-sm btn-link text-danger"/>
                                 </list>

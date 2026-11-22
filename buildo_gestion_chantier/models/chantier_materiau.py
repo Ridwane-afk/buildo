@@ -84,8 +84,10 @@ class ChantierMateriau(models.Model):
     @api.depends('product_id', 'stock_manuel')
     @api.depends_context('company')
     def _compute_stock_disponible(self):
+        # Le chef et l'ouvrier n'ont pas les droits Inventaire : lire le stock d'un produit
+        # parcourt les mouvements de stock, d'où le sudo (lecture seule, aucun droit accordé).
         for rec in self:
-            rec.stock_disponible = rec.product_id.qty_available if rec.product_id else rec.stock_manuel
+            rec.stock_disponible = rec.product_id.sudo().qty_available if rec.product_id else rec.stock_manuel
 
     def _inverse_stock_disponible(self):
         for rec in self.filtered(lambda r: not r.product_id):

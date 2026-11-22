@@ -3334,3 +3334,9 @@ msgstr "Uitgaande levering"
 #: code:addons/buildo_gestion_chantier/models/chantier_resume.py:0
 msgid "et %s autre(s)"
 msgstr "en %s andere(n)"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_list
+msgid "Supprimer"
+msgstr "Verwijderen"

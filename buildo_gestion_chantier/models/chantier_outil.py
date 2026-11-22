@@ -76,7 +76,8 @@ class ChantierOutil(models.Model):
 
     @api.depends('qr_token')
     def _compute_qr(self):
-        base_url = self.get_base_url()
+        # get_base_url() n'accepte qu'un seul enregistrement : on l'appelle sur un ensemble vide.
+        base_url = self.browse().get_base_url()
         for outil in self:
             if not outil.qr_token:
                 outil.qr_url = outil.qr_code = False

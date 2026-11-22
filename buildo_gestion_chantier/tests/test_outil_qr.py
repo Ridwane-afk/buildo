@@ -33,6 +33,14 @@ class TestOutilQr(HttpCase, ChantierTestCommon):
         self.assertTrue(base64.b64decode(self.outil.qr_code).startswith(b'\x89PNG'))
         self.assertFalse(self.outil.copy().qr_token == self.outil.qr_token)
 
+    def test_etiquettes_de_plusieurs_outils(self):
+        outils = self.outil | self.env['chantier.outil'].create({'name': 'Niveau laser'})
+        self.assertEqual(len(set(outils.mapped('qr_url'))), 2)
+        html, _type = self.env['ir.actions.report'].with_user(self.chef)._render_qweb_html(
+            'buildo_gestion_chantier.action_report_etiquette_outil', outils.ids)
+        self.assertIn(b'Perforateur Hilti', html)
+        self.assertIn(b'Niveau laser', html)
+
     def test_regenerer_invalide_l_ancien_qr(self):
         ancien = self.outil.qr_token
         self.outil.with_user(self.chef).action_regenerer_qr()

@@ -36,6 +36,15 @@ class TestStockMateriau(ChantierTestCommon):
         self.assertFalse(self.materiau.en_alerte)
         self.assertEqual(self.estimation.quantite_manquante, 10, "30 prévus - 20 en stock")
 
+    def test_chef_sans_droits_inventaire_voit_le_stock(self):
+        chef = self._create_buildo_user('stock_chef', 'buildo_gestion_chantier.group_chef_chantier')
+        self.assertFalse(chef.has_group('stock.group_stock_user'))
+        self.chantier.chef_chantier_id = chef
+        self._inventaire(20)
+        materiaux = self.env['chantier.materiau'].with_user(chef).search([('id', '=', self.materiau.id)])
+        self.assertEqual(materiaux.stock_disponible, 20)
+        self.assertEqual(self.estimation.with_user(chef).quantite_manquante, 10)
+
     def test_filtres_sur_le_stock_reel(self):
         Materiau = self.env['chantier.materiau']
         Estimation = self.env['chantier.estimation.materiau']
