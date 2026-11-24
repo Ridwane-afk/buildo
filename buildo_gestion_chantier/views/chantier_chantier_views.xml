@@ -347,7 +347,7 @@
                         <div class="fw-bold fs-5"><field name="name"/></div>
                         <div class="text-muted"><field name="client_id"/></div>
                         <div>Chef : <field name="chef_chantier_id"/></div>
-                        <div>Budget : <field name="budget_initial"/></div>
+                        <div groups="buildo_gestion_chantier.group_chef_chantier">Budget : <field name="budget_initial"/></div>
                         <div class="mt-2">
                             <field name="avancement" widget="progressbar"/>
                         </div>

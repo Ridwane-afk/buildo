@@ -1,4 +1,4 @@
-from odoo import models, api, _
+from odoo import models, fields, api, _
 from odoo.exceptions import AccessError
 
 
@@ -12,6 +12,17 @@ class ChantierValidationMixin(models.AbstractModel):
     """
     _name = 'chantier.validation.mixin'
     _description = 'Validation par le chef de chantier'
+
+    # Miroir de la règle serveur ci-dessous, pour griser le formulaire au lieu de laisser
+    # l'ouvrier modifier une ligne validée et ne découvrir le refus qu'à l'enregistrement.
+    modifiable = fields.Boolean('Modifiable', compute='_compute_modifiable')
+
+    @api.depends('state')
+    @api.depends_context('uid')
+    def _compute_modifiable(self):
+        est_chef = self._est_chef()
+        for rec in self:
+            rec.modifiable = est_chef or rec.state != 'valide'
 
     def _est_chef(self):
         return self.env.su or self.env.user.has_group('buildo_gestion_chantier.group_chef_chantier')

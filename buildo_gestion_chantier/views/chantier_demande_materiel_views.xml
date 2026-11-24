@@ -32,6 +32,55 @@
         </field>
     </record>
 
+    <!-- Vue cartes : celle que le téléphone ouvre en premier (mobile_view_mode = kanban) -->
+    <record id="view_chantier_demande_materiel_kanban" model="ir.ui.view">
+        <field name="name">chantier.demande.materiel.kanban</field>
+        <field name="model">chantier.demande.materiel</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile o_buildo_cartes" quick_create="false">
+                <field name="state"/>
+                <field name="type_demande"/>
+                <field name="urgence"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="d-flex align-items-start gap-2">
+                            <i t-attf-class="fa fa-fw fs-4 mt-1 text-muted {{ record.type_demande.raw_value == 'outil' ? 'fa-wrench' : 'fa-cubes' }}"
+                               title="Type de demande"/>
+                            <div class="flex-grow-1 min-w-0">
+                                <div class="fw-bold fs-5 text-truncate">
+                                    <t t-if="record.type_demande.raw_value != 'outil'"><field name="quantite"/> × </t>
+                                    <field name="description"/>
+                                </div>
+                                <div class="small"><i class="fa fa-map-marker me-1" title="Chantier"/><field name="chantier_id"/></div>
+                                <div class="small text-muted">
+                                    <field name="date"/>
+                                    <field name="ouvrier_id" class="ms-1" groups="buildo_gestion_chantier.group_chef_chantier"/>
+                                </div>
+                            </div>
+                            <div class="text-end">
+                                <field name="state" widget="badge"
+                                       decoration-success="state == 'valide'"
+                                       decoration-danger="state == 'refuse'"
+                                       decoration-warning="state == 'soumis'"/>
+                                <div t-if="record.urgence.raw_value == 'urgente'" class="badge text-bg-danger d-block mt-1">Urgent</div>
+                            </div>
+                        </div>
+                        <footer class="mt-2 gap-2" t-if="record.state.raw_value in ['brouillon', 'soumis']">
+                            <button t-if="record.state.raw_value == 'brouillon'" name="action_soumettre" type="object"
+                                    class="btn btn-sm btn-primary"><i class="fa fa-paper-plane me-1"/>Envoyer au chef</button>
+                            <t t-if="record.state.raw_value == 'soumis'">
+                                <button name="action_valider" type="object" class="btn btn-sm btn-success"
+                                        groups="buildo_gestion_chantier.group_chef_chantier"><i class="fa fa-check me-1"/>Accepter</button>
+                                <button name="action_refuser" type="object" class="btn btn-sm btn-secondary"
+                                        groups="buildo_gestion_chantier.group_chef_chantier"><i class="fa fa-times me-1"/>Refuser</button>
+                            </t>
+                        </footer>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
     <record id="view_chantier_demande_materiel_form" model="ir.ui.view">
         <field name="name">chantier.demande.materiel.form</field>
         <field name="model">chantier.demande.materiel</field>
@@ -52,32 +101,33 @@
                            statusbar_visible="brouillon,soumis,valide"/>
                 </header>
                 <sheet>
+                    <field name="modifiable" invisible="1"/>
                     <div class="alert alert-info" role="status" invisible="state != 'valide' or not attribution_id">
                         L'outil vous a été confié. Retrouvez-le dans <strong>Mes outils</strong>.
                     </div>
                     <group>
                         <group>
-                            <field name="type_demande" widget="radio" options="{'horizontal': true}"/>
-                            <field name="materiau_id" string="Matériau" options="{'no_create': True}"
+                            <field name="type_demande" readonly="not modifiable" widget="radio" options="{'horizontal': true}"/>
+                            <field name="materiau_id" readonly="not modifiable" string="Matériau" options="{'no_create': True}"
                                    invisible="type_demande != 'materiau'"/>
-                            <field name="outil_id" options="{'no_create': True}"
+                            <field name="outil_id" readonly="not modifiable" options="{'no_create': True}"
                                    invisible="type_demande != 'outil'" required="type_demande == 'outil'"/>
                             <field name="outil_etat" widget="badge"
                                    decoration-success="outil_etat == 'disponible'"
                                    decoration-warning="outil_etat == 'attribue'"
                                    decoration-danger="outil_etat in ('maintenance', 'hors_service')"
                                    invisible="not outil_id"/>
-                            <field name="description" string="Précisions"
+                            <field name="description" string="Précisions" readonly="not modifiable"
                                    placeholder="Ex. : vis inox 6x60, livrer au 2e étage"
                                    required="not materiau_id and not outil_id"/>
-                            <field name="quantite" invisible="type_demande == 'outil'"/>
-                            <field name="urgence" widget="radio" options="{'horizontal': true}"/>
+                            <field name="quantite" readonly="not modifiable" invisible="type_demande == 'outil'"/>
+                            <field name="urgence" readonly="not modifiable" widget="radio" options="{'horizontal': true}"/>
                         </group>
                         <group>
-                            <field name="chantier_id" options="{'no_create': True}"/>
+                            <field name="chantier_id" readonly="not modifiable" options="{'no_create': True}"/>
                             <field name="ouvrier_id" groups="buildo_gestion_chantier.group_chef_chantier"/>
                             <field name="ouvrier_id" readonly="1" groups="!buildo_gestion_chantier.group_chef_chantier"/>
-                            <field name="date"/>
+                            <field name="date" readonly="not modifiable"/>
                             <field name="attribution_id" invisible="not attribution_id"/>
                             <field name="picking_id" invisible="not picking_id" groups="stock.group_stock_user"/>
                         </group>
@@ -130,7 +180,7 @@
     <record id="action_chantier_demande_materiel" model="ir.actions.act_window">
         <field name="name">Demandes de matériel</field>
         <field name="res_model">chantier.demande.materiel</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">list,kanban,form</field>
         <field name="search_view_id" ref="view_chantier_demande_materiel_search"/>
         <field name="context">{'search_default_soumis': 1, 'search_default_group_chantier': 1, 'search_default_group_ouvrier': 1}</field>
     </record>
@@ -139,7 +189,7 @@
     <record id="action_mes_demandes_materiel" model="ir.actions.act_window">
         <field name="name">Mes demandes</field>
         <field name="res_model">chantier.demande.materiel</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">list,kanban,form</field>
         <field name="search_view_id" ref="view_chantier_demande_materiel_search"/>
         <field name="domain">[('ouvrier_id', '=', uid)]</field>
         <field name="help" type="html">

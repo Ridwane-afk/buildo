@@ -20,27 +20,31 @@
                            statusbar_visible="brouillon,soumis,valide"/>
                 </header>
                 <sheet>
+                    <field name="modifiable" invisible="1"/>
                     <group>
                         <group>
-                            <field name="chantier_id"/>
+                            <field name="chantier_id" readonly="not modifiable"/>
                             <field name="ouvrier_id" groups="buildo_gestion_chantier.group_chef_chantier"/>
                             <field name="ouvrier_id" readonly="1" groups="!buildo_gestion_chantier.group_chef_chantier"/>
-                            <field name="date"/>
+                            <field name="date" readonly="not modifiable"/>
                         </group>
                         <group>
                             <field name="heure_arrivee" invisible="not heure_arrivee"/>
                             <field name="heure_depart" invisible="not heure_depart"/>
                             <field name="pointage_en_cours" invisible="1"/>
-                            <field name="nb_heures" widget="float_time" readonly="pointage_en_cours"/>
+                            <field name="nb_heures" widget="float_time" readonly="pointage_en_cours or not modifiable"/>
                             <field name="taux_horaire"/>
                             <field name="montant"/>
                             <field name="currency_id" invisible="1"/>
                         </group>
                     </group>
-                    <field name="description" placeholder="Description du travail effectué..."/>
-                    <field name="note_refus" invisible="state != 'refuse'"
-                           placeholder="Motif du refus..."/>
-                    <field name="validateur_id" invisible="state != 'valide'" readonly="1"/>
+                    <group>
+                        <field name="description" placeholder="Description du travail effectué..."
+                               readonly="not modifiable"/>
+                        <field name="note_refus" invisible="state != 'refuse'"
+                               placeholder="Motif du refus..."/>
+                        <field name="validateur_id" invisible="state != 'valide'" readonly="1"/>
+                    </group>
                 </sheet>
                 <chatter/>
             </form>
@@ -54,9 +58,9 @@
             <list string="Heures prestées" decoration-success="state == 'valide'"
                   decoration-danger="state == 'refuse'" decoration-info="pointage_en_cours">
                 <header>
-                    <button name="action_pointer_arrivee" string="Pointer mon arrivée" type="object"
+                    <button name="action_pointer_arrivee" string="Arrivée" type="object"
                             class="btn-primary" display="always" icon="fa-sign-in"/>
-                    <button name="action_pointer_depart" string="Pointer mon départ" type="object"
+                    <button name="action_pointer_depart" string="Départ" type="object"
                             class="btn-primary" display="always" icon="fa-sign-out"/>
                     <button name="action_copier_derniere_journee" string="Copier ma dernière journée"
                             type="object" display="always" icon="fa-clone"/>
@@ -75,6 +79,68 @@
                        decoration-danger="state == 'refuse'"
                        decoration-warning="state == 'soumis'"/>
             </list>
+        </field>
+    </record>
+
+    <!-- Vue cartes : celle que le téléphone ouvre en premier (mobile_view_mode = kanban) -->
+    <record id="view_chantier_heure_prestee_kanban" model="ir.ui.view">
+        <field name="name">chantier.heure.prestee.kanban</field>
+        <field name="model">chantier.heure.prestee</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile o_buildo_cartes" quick_create="false">
+                <header>
+                    <button name="action_pointer_arrivee" string="Arrivée" type="object"
+                            class="btn-primary o_buildo_pointage" display="always" icon="fa-sign-in"/>
+                    <button name="action_pointer_depart" string="Départ" type="object"
+                            class="btn-primary o_buildo_pointage" display="always" icon="fa-sign-out"/>
+                    <button name="action_copier_derniere_journee" string="Copier hier"
+                            type="object" display="always" icon="fa-clone"/>
+                </header>
+                <field name="state"/>
+                <field name="pointage_en_cours"/>
+                <field name="heure_arrivee"/>
+                <field name="heure_depart"/>
+                <templates>
+                    <t t-name="card">
+                        <div t-attf-class="d-flex align-items-start gap-2 {{ record.pointage_en_cours.raw_value ? 'o_buildo_en_cours' : '' }}">
+                            <div class="flex-grow-1 min-w-0">
+                                <field name="chantier_id" class="fw-bold fs-5 d-block text-truncate"/>
+                                <div class="text-muted">
+                                    <i class="fa fa-calendar me-1" title="Date"/><field name="date"/>
+                                    <t t-if="record.heure_arrivee.raw_value">
+                                        <span class="ms-2"><i class="fa fa-clock-o me-1" title="Horaire"/><field name="heure_arrivee" widget="datetime" options="{'show_date': False}"/></span>
+                                        <span t-if="record.heure_depart.raw_value"> → <field name="heure_depart" widget="datetime" options="{'show_date': False}"/></span>
+                                    </t>
+                                </div>
+                                <field name="ouvrier_id" class="d-block small" groups="buildo_gestion_chantier.group_chef_chantier"/>
+                                <field name="description" class="d-block small text-muted text-truncate"/>
+                            </div>
+                            <div class="text-end">
+                                <div t-if="record.pointage_en_cours.raw_value" class="badge text-bg-info fs-6">
+                                    <i class="fa fa-circle me-1" title="En cours"/>Sur place
+                                </div>
+                                <t t-else="">
+                                    <field name="nb_heures" widget="float_time" class="fw-bold fs-3 d-block lh-1"/>
+                                </t>
+                                <field name="state" widget="badge" class="mt-1 d-inline-block"
+                                       decoration-success="state == 'valide'"
+                                       decoration-danger="state == 'refuse'"
+                                       decoration-warning="state == 'soumis'"/>
+                            </div>
+                        </div>
+                        <footer class="mt-2 gap-2" t-if="record.state.raw_value in ['brouillon', 'soumis'] and !record.pointage_en_cours.raw_value">
+                            <button t-if="record.state.raw_value == 'brouillon'" name="action_soumettre" type="object"
+                                    class="btn btn-sm btn-primary"><i class="fa fa-paper-plane me-1"/>Soumettre</button>
+                            <t t-if="record.state.raw_value == 'soumis'">
+                                <button name="action_valider" type="object" class="btn btn-sm btn-success"
+                                        groups="buildo_gestion_chantier.group_chef_chantier"><i class="fa fa-check me-1"/>Valider</button>
+                                <button name="action_refuser" type="object" class="btn btn-sm btn-secondary"
+                                        groups="buildo_gestion_chantier.group_chef_chantier"><i class="fa fa-times me-1"/>Refuser</button>
+                            </t>
+                        </footer>
+                    </t>
+                </templates>
+            </kanban>
         </field>
     </record>
 
@@ -104,7 +170,7 @@
     <record id="action_chantier_heure_prestee" model="ir.actions.act_window">
         <field name="name">Heures prestées</field>
         <field name="res_model">chantier.heure.prestee</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">list,kanban,form</field>
         <field name="search_view_id" ref="view_chantier_heure_search"/>
         <field name="context">{'search_default_group_chantier': 1, 'search_default_group_ouvrier': 1}</field>
     </record>
@@ -112,13 +178,13 @@
     <record id="action_mes_heures" model="ir.actions.act_window">
         <field name="name">Mes heures</field>
         <field name="res_model">chantier.heure.prestee</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">list,kanban,form</field>
         <field name="search_view_id" ref="view_chantier_heure_search"/>
         <field name="domain">[('ouvrier_id', '=', uid)]</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Pointez votre arrivée sur le chantier</p>
-            <p>Cliquez sur « Pointer mon arrivée » en début de journée et sur « Pointer mon départ »
-               en fin de journée : les heures sont calculées pour vous.</p>
+            <p>Touchez « Arrivée » en début de journée et « Départ » en fin de journée :
+               les heures sont calculées pour vous.</p>
         </field>
     </record>
 

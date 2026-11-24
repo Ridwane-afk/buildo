@@ -52,6 +52,7 @@ des matériaux, de la facturation et de la rentabilité.
         'web.assets_backend': [
             'buildo_gestion_chantier/static/src/scss/chantier_chatter_resize.scss',
             'buildo_gestion_chantier/static/src/scss/assistant_ia.scss',
+            'buildo_gestion_chantier/static/src/scss/vue_mobile.scss',
             'buildo_gestion_chantier/static/src/js/chantier_chatter_resize.js',
             'buildo_gestion_chantier/static/src/carte/*',
         ],

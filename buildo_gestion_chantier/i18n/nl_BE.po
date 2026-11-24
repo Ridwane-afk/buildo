@@ -180,6 +180,8 @@ msgstr "<strong>Startdatum:</strong>"
 
 #. module: buildo_gestion_chantier
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_avenant_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_list
 msgid "Accepter"
 msgstr "Aanvaarden"
 
@@ -273,6 +275,7 @@ msgstr "Aantekeningen op dit plan..."
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_wizard_pointage_form
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_wizard_rapport_avancement_form
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_wizard_refus_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_wizard_scan_outil_form
 msgid "Annuler"
 msgstr "Annuleren"
 
@@ -295,6 +298,8 @@ msgstr "Gearchiveerd"
 
 #. module: buildo_gestion_chantier
 #: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_heure_prestee__heure_arrivee
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_heure_prestee_kanban
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_heure_prestee_list
 msgid "Arrivée"
 msgstr "Aankomst"
 
@@ -572,6 +577,7 @@ msgstr "Budget:"
 
 #. module: buildo_gestion_chantier
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_search_v2
+#: model:mail.activity.type,name:buildo_gestion_chantier.activite_budget_depasse
 msgid "Budget dépassé"
 msgstr "Budget overschreden"
 
@@ -700,6 +706,8 @@ msgstr "Deze taak werd al gefactureerd."
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_search
 #: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_journal__chantier_id
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_journal_search
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_wizard_scan_outil__chantier_id
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_outil_search
 msgid "Chantier"
 msgstr "Werf"
 
@@ -993,6 +1001,8 @@ msgstr "Directie / Aannemer"
 #: model:ir.model.fields,field_description:buildo_gestion_chantier.field_purchase_order__display_name
 #: model:ir.model.fields,field_description:buildo_gestion_chantier.field_sale_order__display_name
 #: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_journal__display_name
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_wizard_scan_outil__display_name
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_res_users__display_name
 msgid "Display Name"
 msgstr "Weergavenaam"
 
@@ -1066,6 +1076,8 @@ msgstr "Starten"
 
 #. module: buildo_gestion_chantier
 #: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_heure_prestee__heure_depart
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_heure_prestee_kanban
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_heure_prestee_list
 msgid "Départ"
 msgstr "Vertrek"
 
@@ -1094,6 +1106,10 @@ msgstr "In onderhoud"
 #. module: buildo_gestion_chantier
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_search_v2
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_search
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_attribution_outil__en_retard
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_outil__en_retard
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_attribution_outil_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_outil_search
 msgid "En retard"
 msgstr "Te laat"
 
@@ -1122,6 +1138,7 @@ msgstr "Zonnig"
 
 #. module: buildo_gestion_chantier
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_assistant_ia_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_list
 msgid "Envoyer"
 msgstr "Verzenden"
 
@@ -1529,6 +1546,8 @@ msgstr "Markeren als betaald"
 #: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_estimation_materiau__materiau_id
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_estimation_materiau_search
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_materiau_form
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_demande_materiel__type_demande__materiau
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_form
 msgid "Matériau"
 msgstr "Materiaal"
 
@@ -1541,6 +1560,7 @@ msgstr "Materiaal (optioneel)"
 #: model:ir.actions.act_window,name:buildo_gestion_chantier.action_chantier_materiau
 #: model:ir.ui.menu,name:buildo_gestion_chantier.menu_materiau
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_materiau_list
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_search
 msgid "Matériaux"
 msgstr "Materialen"
 
@@ -1795,6 +1815,10 @@ msgstr "Bewolkt"
 #: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_attribution_outil__outil_id
 #: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_estimation_outil__outil_id
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_outil_form
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_demande_materiel__outil_id
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_wizard_scan_outil__outil_id
+#: model:ir.model.fields.selection,name:buildo_gestion_chantier.selection__chantier_demande_materiel__type_demande__outil
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_attribution_outil_search
 msgid "Outil"
 msgstr "Gereedschap"
 
@@ -1813,6 +1837,7 @@ msgstr "Elektrisch gereedschap"
 #: model:ir.ui.menu,name:buildo_gestion_chantier.menu_outil
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_outil_list
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_journal_search
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_search
 msgid "Outils"
 msgstr "Gereedschap"
 
@@ -2172,6 +2197,7 @@ msgstr "Een taak zoeken"
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_avenant_form
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_form
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_heure_prestee_form
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_list
 msgid "Refuser"
 msgstr "Weigeren"
 
@@ -3051,6 +3077,10 @@ msgstr "<i class=\"fa fa-calendar me-1\" title=\"Geplande terugkeer\"/>"
 #. module: buildo_gestion_chantier
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_attribution_outil_kanban
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_outil_kanban
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_kanban
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_plan_kanban
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rapport_journalier_kanban
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_kanban
 msgid "<i class=\"fa fa-map-marker me-1\" title=\"Chantier\"/>"
 msgstr "<i class=\"fa fa-map-marker me-1\" title=\"Werf\"/>"
 
@@ -3611,3 +3641,111 @@ msgstr "te laat teruggebracht"
 #: code:addons/buildo_gestion_chantier/models/chantier_attribution_outil.py:0
 msgid "rendu à temps"
 msgstr "op tijd teruggebracht"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_heure_prestee_kanban
+msgid "<i class=\"fa fa-calendar me-1\" title=\"Date\"/>"
+msgstr "<i class=\"fa fa-calendar me-1\" title=\"Datum\"/>"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_kanban
+msgid "<i class=\"fa fa-check me-1\"/>Accepter"
+msgstr "<i class=\"fa fa-check me-1\"/>Aanvaarden"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_heure_prestee_kanban
+msgid "<i class=\"fa fa-check me-1\"/>Valider"
+msgstr "<i class=\"fa fa-check me-1\"/>Goedkeuren"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_heure_prestee_kanban
+msgid "<i class=\"fa fa-circle me-1\" title=\"En cours\"/>Sur place"
+msgstr "<i class=\"fa fa-circle me-1\" title=\"Bezig\"/>Ter plaatse"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_heure_prestee_kanban
+msgid "<i class=\"fa fa-clock-o me-1\" title=\"Horaire\"/>"
+msgstr "<i class=\"fa fa-clock-o me-1\" title=\"Uurrooster\"/>"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_materiau_kanban
+msgid ""
+"<i class=\"fa fa-exclamation-triangle me-1\" title=\"Alerte\"/>Sous le seuil"
+" d'alerte ("
+msgstr ""
+"<i class=\"fa fa-exclamation-triangle me-1\" title=\"Waarschuwing\"/>Onder "
+"de alarmdrempel ("
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rapport_journalier_kanban
+msgid "<i class=\"fa fa-exclamation-triangle me-1\" title=\"Incident\"/>"
+msgstr "<i class=\"fa fa-exclamation-triangle me-1\" title=\"Incident\"/>"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_plan_kanban
+msgid "<i class=\"fa fa-file-pdf-o fa-fw fs-3 text-muted mt-1\" title=\"Plan\"/>"
+msgstr "<i class=\"fa fa-file-pdf-o fa-fw fs-3 text-muted mt-1\" title=\"Plan\"/>"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_tache_kanban
+msgid "<i class=\"fa fa-flag-checkered me-1\" title=\"Fin prévue\"/>Fin prévue le"
+msgstr ""
+"<i class=\"fa fa-flag-checkered me-1\" title=\"Gepland einde\"/>Gepland "
+"einde op"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_kanban
+msgid "<i class=\"fa fa-paper-plane me-1\"/>Envoyer au chef"
+msgstr "<i class=\"fa fa-paper-plane me-1\"/>Naar de werfleider sturen"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_heure_prestee_kanban
+msgid "<i class=\"fa fa-paper-plane me-1\"/>Soumettre"
+msgstr "<i class=\"fa fa-paper-plane me-1\"/>Indienen"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_kanban
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_heure_prestee_kanban
+msgid "<i class=\"fa fa-times me-1\"/>Refuser"
+msgstr "<i class=\"fa fa-times me-1\"/>Weigeren"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_attribution_outil_kanban
+msgid "<i class=\"fa fa-user me-1\" title=\"Détenteur\"/>"
+msgstr "<i class=\"fa fa-user me-1\" title=\"Houder\"/>"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_rapport_journalier_kanban
+msgid "<i class=\"fa fa-users me-1\" title=\"Ouvriers présents\"/>"
+msgstr "<i class=\"fa fa-users me-1\" title=\"Aanwezige arbeiders\"/>"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_heure_prestee_kanban
+msgid "Copier hier"
+msgstr "Gisteren kopiëren"
+
+#. module: buildo_gestion_chantier
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_demande_materiel__modifiable
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_heure_prestee__modifiable
+#: model:ir.model.fields,field_description:buildo_gestion_chantier.field_chantier_validation_mixin__modifiable
+msgid "Modifiable"
+msgstr "Wijzigbaar"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.actions.act_window,help:buildo_gestion_chantier.action_mes_heures
+msgid ""
+"Touchez « Arrivée » en début de journée et « Départ » en fin de journée :\n"
+"               les heures sont calculées pour vous."
+msgstr ""
+"Tik op « Aankomst » bij het begin van de dag en op « Vertrek » op het einde van de dag:\n"
+"               de uren worden voor u berekend."
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_kanban
+msgid "Type de demande"
+msgstr "Soort aanvraag"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_kanban
+msgid "Urgent"
+msgstr "Dringend"
