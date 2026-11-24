@@ -29,4 +29,5 @@ from . import (
     chantier_journal,
     chantier_resume,
     chantier_alertes,
+    res_users_accueil,
 )

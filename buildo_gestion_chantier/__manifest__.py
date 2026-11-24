@@ -11,7 +11,7 @@ des matériaux, de la facturation et de la rentabilité.
     """,
     'author': 'Ridwane Afkir',
     'license': 'LGPL-3',
-    'depends': ['base', 'mail', 'hr', 'stock', 'sale', 'account', 'purchase', 'base_geolocalize'],
+    'depends': ['base', 'mail', 'mail_bot', 'hr', 'stock', 'sale', 'account', 'purchase', 'base_geolocalize'],
     'data': [
         'security/res_groups.xml',
         'security/ir.model.access.csv',
