@@ -90,6 +90,16 @@ class ChantierChantier(models.Model):
                                     groups='buildo_gestion_chantier.group_chef_chantier')
     nb_heures = fields.Float('Heures validées', compute='_compute_heures', store=True)
     avancement = fields.Float('Avancement (%)', compute='_compute_avancement', store=True)
+    detail_couts_visible = fields.Boolean(compute='_compute_detail_couts_visible')
+
+    @api.depends('chef_chantier_id')
+    @api.depends_context('uid')
+    def _compute_detail_couts_visible(self):
+        # Un chef ne lit que les heures des chantiers qu'il dirige (plus les siennes) : sur le
+        # chantier d'un collègue, la liste ne correspondrait pas au montant de la carte.
+        tout_voir = self.env.user.has_group('buildo_gestion_chantier.group_service_administratif')
+        for rec in self:
+            rec.detail_couts_visible = tout_voir or rec.chef_chantier_id == self.env.user
 
     @api.constrains('date_debut', 'date_fin_prevue')
     def _check_dates(self):
@@ -289,6 +299,7 @@ class ChantierChantier(models.Model):
             'name': _("Tâches · %s", self.name),
             'res_model': 'chantier.tache',
             'view_mode': 'list,kanban,form',
+            'mobile_view_mode': 'kanban',
             'domain': [('chantier_id', '=', self.id)],
             'context': {'default_chantier_id': self.id},
         }
@@ -300,8 +311,9 @@ class ChantierChantier(models.Model):
             'name': _("Main d'œuvre · %s", self.name),
             'res_model': 'chantier.heure.prestee',
             'view_mode': 'list,kanban,form',
+            'mobile_view_mode': 'kanban',
             'domain': [('chantier_id', '=', self.id), ('state', '=', 'valide')],
-            'context': {'search_default_group_ouvrier': 1, 'create': False},
+            'context': {'search_default_group_ouvrier': 1, 'create': False, 'masquer_pointage': True},
         }
 
     def action_voir_achats(self):

@@ -51,3 +51,21 @@ class TestIndicateursCliquables(ChantierTestCommon):
         self._ouvrir(self.admin, 'action_voir_achats')
         self._ouvrir(self.admin, 'action_voir_encaissements')
         self.assertEqual(self._ouvrir(self.direction, 'action_voir_analyse_marge'), self.chantier)
+
+    def test_chef_sur_le_chantier_d_un_collegue_ne_detaille_pas_les_couts(self):
+        collegue = self._create_buildo_user('kpi_collegue', 'buildo_gestion_chantier.group_chef_chantier')
+        self.autre.write({'state': 'en_cours', 'chef_chantier_id': collegue.id})
+        self.env['chantier.tache'].create({
+            'name': 'Renfort', 'chantier_id': self.autre.id, 'ouvrier_ids': [(6, 0, self.chef.ids)]})
+        Chantier = self.env['chantier.chantier'].with_user(self.chef)
+        self.assertTrue(Chantier.browse(self.chantier.id).detail_couts_visible)
+        self.assertFalse(Chantier.browse(self.autre.id).detail_couts_visible,
+                         "Il ne verrait que ses propres heures, pas celles du montant")
+        self.assertTrue(self.autre.with_user(self.admin).detail_couts_visible)
+
+    def test_liste_main_d_oeuvre_sans_boutons_de_pointage(self):
+        action = self.chantier.with_user(self.chef).action_voir_main_oeuvre()
+        self.assertTrue(action['context']['masquer_pointage'])
+        arch = self.env['chantier.heure.prestee'].with_user(self.chef).get_views([(False, 'list')])['views']['list']['arch']
+        for bouton in etree.fromstring(arch).xpath('//header/button'):
+            self.assertIn('masquer_pointage', bouton.get('invisible', ''), bouton.get('name'))

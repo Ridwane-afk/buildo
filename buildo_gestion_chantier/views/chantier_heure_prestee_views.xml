@@ -59,11 +59,11 @@
                   decoration-danger="state == 'refuse'" decoration-info="pointage_en_cours">
                 <header>
                     <button name="action_pointer_arrivee" string="Arrivée" type="object"
-                            class="btn-primary" display="always" icon="fa-sign-in"/>
+                            class="btn-primary" display="always" invisible="context.get('masquer_pointage')" icon="fa-sign-in"/>
                     <button name="action_pointer_depart" string="Départ" type="object"
-                            class="btn-primary" display="always" icon="fa-sign-out"/>
+                            class="btn-primary" display="always" invisible="context.get('masquer_pointage')" icon="fa-sign-out"/>
                     <button name="action_copier_derniere_journee" string="Copier ma dernière journée"
-                            type="object" display="always" icon="fa-clone"/>
+                            type="object" display="always" invisible="context.get('masquer_pointage')" icon="fa-clone"/>
                 </header>
                 <field name="pointage_en_cours" column_invisible="1"/>
                 <field name="chantier_id"/>
@@ -90,11 +90,11 @@
             <kanban class="o_kanban_mobile o_buildo_cartes" quick_create="false">
                 <header>
                     <button name="action_pointer_arrivee" string="Arrivée" type="object"
-                            class="btn-primary o_buildo_pointage" display="always" icon="fa-sign-in"/>
+                            class="btn-primary o_buildo_pointage" display="always" invisible="context.get('masquer_pointage')" icon="fa-sign-in"/>
                     <button name="action_pointer_depart" string="Départ" type="object"
-                            class="btn-primary o_buildo_pointage" display="always" icon="fa-sign-out"/>
+                            class="btn-primary o_buildo_pointage" display="always" invisible="context.get('masquer_pointage')" icon="fa-sign-out"/>
                     <button name="action_copier_derniere_journee" string="Copier hier"
-                            type="object" display="always" icon="fa-clone"/>
+                            type="object" display="always" invisible="context.get('masquer_pointage')" icon="fa-clone"/>
                 </header>
                 <field name="state"/>
                 <field name="pointage_en_cours"/>

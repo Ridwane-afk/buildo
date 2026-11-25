@@ -112,11 +112,15 @@
                                     <i class="fa fa-wrench me-1"/>Coût réel
                                 </div>
                                 <div class="fs-4 fw-bold"><field name="cout_reel" nolabel="1"/></div>
+                                <field name="detail_couts_visible" invisible="1"/>
                                 <button name="action_voir_main_oeuvre" type="object" title="Voir les heures validées"
-                                        class="btn btn-link o_buildo_kpi_ligne">
+                                        class="btn btn-link o_buildo_kpi_ligne" invisible="not detail_couts_visible">
                                     Main d'œuvre : <field name="cout_main_oeuvre" nolabel="1" class="oe_inline"/>
                                     <i class="fa fa-angle-right ms-1"/>
                                 </button>
+                                <div class="text-muted small" invisible="detail_couts_visible">
+                                    Main d'œuvre : <field name="cout_main_oeuvre" nolabel="1" class="oe_inline"/>
+                                </div>
                                 <button name="action_voir_achats" type="object" title="Voir les commandes fournisseur"
                                         class="btn btn-link o_buildo_kpi_ligne" groups="buildo_gestion_chantier.group_service_administratif">
                                     Matériaux : <field name="cout_materiaux" nolabel="1" class="oe_inline"/>
