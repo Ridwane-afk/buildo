@@ -31,7 +31,7 @@ class ChantierChantier(models.Model):
             if records:
                 reperes[modele] = records[-1].id
             else:
-                reperes.setdefault(modele, self.env[modele].sudo().search([], order='id desc', limit=1).id)
+                reperes.setdefault(modele, self.env[modele].sudo().search([], order='id desc', limit=1).id or 0)
             return records
 
         # Un pointage encore ouvert est mis en attente et compté au résumé suivant.
