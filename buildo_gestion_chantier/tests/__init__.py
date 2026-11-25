@@ -18,3 +18,4 @@ from . import test_stock_materiau
 from . import test_alertes_auto
 from . import test_journal_audit
 from . import test_accueil_mobile
+from . import test_indicateurs

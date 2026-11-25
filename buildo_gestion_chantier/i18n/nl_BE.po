@@ -3749,3 +3749,90 @@ msgstr "Soort aanvraag"
 #: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_demande_materiel_kanban
 msgid "Urgent"
 msgstr "Dringend"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid ""
+"<i class=\"fa fa-balance-scale me-1\"/>Marge\n"
+"                                    <i class=\"fa fa-angle-right float-end o_buildo_kpi_fleche\"/>"
+msgstr ""
+"<i class=\"fa fa-balance-scale me-1\"/>Marge\n"
+"                                    <i class=\"fa fa-angle-right float-end o_buildo_kpi_fleche\"/>"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid ""
+"<i class=\"fa fa-file-text-o me-1\"/>Facturé\n"
+"                                    <i class=\"fa fa-angle-right float-end o_buildo_kpi_fleche\"/>"
+msgstr ""
+"<i class=\"fa fa-file-text-o me-1\"/>Gefactureerd\n"
+"                                    <i class=\"fa fa-angle-right float-end o_buildo_kpi_fleche\"/>"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid ""
+"<i class=\"fa fa-tasks me-1\"/>Avancement\n"
+"                                    <i class=\"fa fa-angle-right float-end o_buildo_kpi_fleche\"/>"
+msgstr ""
+"<i class=\"fa fa-tasks me-1\"/>Voortgang\n"
+"                                    <i class=\"fa fa-angle-right float-end o_buildo_kpi_fleche\"/>"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_chantier.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_chantier.py:0
+msgid "Achats matériaux · %s"
+msgstr "Materiaalaankopen · %s"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_chantier.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_chantier.py:0
+msgid "Budget et marge · %s"
+msgstr "Budget en marge · %s"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_chantier.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_chantier.py:0
+msgid "Factures et avoirs · %s"
+msgstr "Facturen en creditnota's · %s"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_chantier.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_chantier.py:0
+msgid "Main d'œuvre · %s"
+msgstr "Arbeid · %s"
+
+#. module: buildo_gestion_chantier
+#. odoo-python
+#: code:addons/buildo_gestion_chantier/buildo_gestion_chantier/models/chantier_chantier.py:0
+#: code:addons/buildo_gestion_chantier/models/chantier_chantier.py:0
+msgid "Tâches · %s"
+msgstr "Taken · %s"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid "Voir le budget et la marge"
+msgstr "Budget en marge bekijken"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid "Voir les commandes fournisseur"
+msgstr "Leveranciersbestellingen bekijken"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid "Voir les factures et avoirs"
+msgstr "Facturen en creditnota's bekijken"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid "Voir les heures validées"
+msgstr "Goedgekeurde uren bekijken"
+
+#. module: buildo_gestion_chantier
+#: model_terms:ir.ui.view,arch_db:buildo_gestion_chantier.view_chantier_chantier_form
+msgid "Voir les tâches"
+msgstr "Taken bekijken"

@@ -280,6 +280,65 @@ class ChantierChantier(models.Model):
             'context': {'default_chantier_id': self.id},
         }
 
+    # Cartes « Indicateurs financiers » : chaque montant ouvre les pièces qui le composent.
+
+    def action_voir_taches(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _("Tâches · %s", self.name),
+            'res_model': 'chantier.tache',
+            'view_mode': 'list,kanban,form',
+            'domain': [('chantier_id', '=', self.id)],
+            'context': {'default_chantier_id': self.id},
+        }
+
+    def action_voir_main_oeuvre(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _("Main d'œuvre · %s", self.name),
+            'res_model': 'chantier.heure.prestee',
+            'view_mode': 'list,kanban,form',
+            'domain': [('chantier_id', '=', self.id), ('state', '=', 'valide')],
+            'context': {'search_default_group_ouvrier': 1, 'create': False},
+        }
+
+    def action_voir_achats(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _("Achats matériaux · %s", self.name),
+            'res_model': 'purchase.order',
+            'view_mode': 'list,form',
+            'domain': [('chantier_id', '=', self.id), ('state', 'in', ('purchase', 'done'))],
+            'context': {'create': False},
+        }
+
+    def action_voir_encaissements(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _("Factures et avoirs · %s", self.name),
+            'res_model': 'account.move',
+            'view_mode': 'list,form',
+            'domain': [('chantier_id', '=', self.id), ('state', '=', 'posted'),
+                       ('move_type', 'in', ('out_invoice', 'out_refund'))],
+            'context': {'create': False},
+        }
+
+    def action_voir_analyse_marge(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _("Budget et marge · %s", self.name),
+            'res_model': 'chantier.chantier',
+            'view_mode': 'pivot',
+            'views': [(self.env.ref('buildo_gestion_chantier.view_chantier_pivot').id, 'pivot')],
+            'domain': [('id', '=', self.id)],
+            'context': {'pivot_row_groupby': ['name'], 'pivot_column_groupby': []},
+        }
+
     def action_start(self):
         self.write({'state': 'en_cours'})
 

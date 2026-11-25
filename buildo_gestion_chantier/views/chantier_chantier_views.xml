@@ -92,14 +92,19 @@
                          invisible="state == 'brouillon'">
                         <i class="fa fa-bar-chart me-1"/>Indicateurs financiers
                     </div>
-                    <div class="row g-3 mb-3" invisible="state == 'brouillon'">
+                    <!-- Chaque carte ouvre les pièces qui composent son chiffre. Les factures et les
+                         achats ne sont lisibles qu'à partir du service administratif : pour le chef,
+                         ces cartes restent de simples chiffres. -->
+                    <div class="row g-3 mb-3 o_buildo_kpis" invisible="state == 'brouillon'">
                         <div class="col-12 col-md-6 col-lg-3">
-                            <div class="border rounded-3 p-3 h-100 bg-light">
+                            <button name="action_voir_taches" type="object" title="Voir les tâches"
+                                    class="o_buildo_kpi border rounded-3 p-3 h-100 w-100 bg-light text-start">
                                 <div class="text-muted text-uppercase small fw-bold mb-2">
                                     <i class="fa fa-tasks me-1"/>Avancement
+                                    <i class="fa fa-angle-right float-end o_buildo_kpi_fleche"/>
                                 </div>
                                 <field name="avancement" widget="progressbar" nolabel="1" class="mb-0"/>
-                            </div>
+                            </button>
                         </div>
                         <div class="col-12 col-md-6 col-lg-3" groups="buildo_gestion_chantier.group_chef_chantier">
                             <div class="border rounded-3 p-3 h-100 bg-light">
@@ -107,15 +112,35 @@
                                     <i class="fa fa-wrench me-1"/>Coût réel
                                 </div>
                                 <div class="fs-4 fw-bold"><field name="cout_reel" nolabel="1"/></div>
-                                <div class="text-muted small">
+                                <button name="action_voir_main_oeuvre" type="object" title="Voir les heures validées"
+                                        class="btn btn-link o_buildo_kpi_ligne">
                                     Main d'œuvre : <field name="cout_main_oeuvre" nolabel="1" class="oe_inline"/>
-                                </div>
-                                <div class="text-muted small">
+                                    <i class="fa fa-angle-right ms-1"/>
+                                </button>
+                                <button name="action_voir_achats" type="object" title="Voir les commandes fournisseur"
+                                        class="btn btn-link o_buildo_kpi_ligne" groups="buildo_gestion_chantier.group_service_administratif">
+                                    Matériaux : <field name="cout_materiaux" nolabel="1" class="oe_inline"/>
+                                    <i class="fa fa-angle-right ms-1"/>
+                                </button>
+                                <div class="text-muted small" groups="!buildo_gestion_chantier.group_service_administratif">
                                     Matériaux : <field name="cout_materiaux" nolabel="1" class="oe_inline"/>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-6 col-lg-3" groups="buildo_gestion_chantier.group_chef_chantier">
+                        <div class="col-12 col-md-6 col-lg-3" groups="buildo_gestion_chantier.group_service_administratif">
+                            <button name="action_voir_encaissements" type="object" title="Voir les factures et avoirs"
+                                    class="o_buildo_kpi border rounded-3 p-3 h-100 w-100 bg-light text-start">
+                                <div class="text-muted text-uppercase small fw-bold mb-2">
+                                    <i class="fa fa-file-text-o me-1"/>Facturé
+                                    <i class="fa fa-angle-right float-end o_buildo_kpi_fleche"/>
+                                </div>
+                                <div class="fs-4 fw-bold"><field name="montant_facture" nolabel="1"/></div>
+                                <div class="text-muted small">
+                                    <field name="nb_heures" widget="float_time" nolabel="1" class="oe_inline"/> h validées
+                                </div>
+                            </button>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-3" groups="buildo_gestion_chantier.group_chef_chantier,!buildo_gestion_chantier.group_service_administratif">
                             <div class="border rounded-3 p-3 h-100 bg-light">
                                 <div class="text-muted text-uppercase small fw-bold mb-2">
                                     <i class="fa fa-file-text-o me-1"/>Facturé
@@ -126,7 +151,27 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-6 col-lg-3" groups="buildo_gestion_chantier.group_chef_chantier">
+                        <div class="col-12 col-md-6 col-lg-3" groups="buildo_gestion_chantier.group_direction">
+                            <button name="action_voir_analyse_marge" type="object" title="Voir le budget et la marge"
+                                    class="o_buildo_kpi border rounded-3 p-3 h-100 w-100 bg-light text-start">
+                                <div class="text-muted text-uppercase small fw-bold mb-2">
+                                    <i class="fa fa-balance-scale me-1"/>Marge
+                                    <i class="fa fa-angle-right float-end o_buildo_kpi_fleche"/>
+                                </div>
+                                <div class="fs-4 fw-bold">
+                                    <field name="marge" nolabel="1"
+                                           decoration-danger="marge &lt; 0"
+                                           decoration-success="marge &gt;= 0"/>
+                                </div>
+                                <div class="text-muted small" invisible="not budget_revise">
+                                    sur budget de <field name="budget_revise" nolabel="1" class="oe_inline"/>
+                                </div>
+                                <div class="text-muted small" invisible="not montant_avenants_acceptes">
+                                    dont <field name="montant_avenants_acceptes" nolabel="1" class="oe_inline"/> d'avenants acceptés
+                                </div>
+                            </button>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-3" groups="buildo_gestion_chantier.group_chef_chantier,!buildo_gestion_chantier.group_direction">
                             <div class="border rounded-3 p-3 h-100 bg-light">
                                 <div class="text-muted text-uppercase small fw-bold mb-2">
                                     <i class="fa fa-balance-scale me-1"/>Marge

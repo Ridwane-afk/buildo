@@ -1,0 +1,45 @@
+// Cartes « Indicateurs financiers » de la fiche chantier : une carte cliquable doit se voir.
+
+.o_buildo_kpis {
+    // Un <button> centre son contenu verticalement : on le remet en haut, comme une carte.
+    .btn.o_buildo_kpi {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        color: inherit;
+        cursor: pointer;
+        transition: border-color 0.15s, box-shadow 0.15s;
+
+        &:hover, &:focus-visible {
+            border-color: $o-action !important;
+            box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.08);
+
+            .o_buildo_kpi_fleche {
+                color: $o-action !important;
+            }
+        }
+    }
+
+    // Lignes de détail cliquables (main d'œuvre, matériaux) dans une carte qui ne l'est pas.
+    .btn.o_buildo_kpi_ligne {
+        display: block;
+        --btn-padding-x: 0;
+        --btn-padding-y: 0;
+        padding: 0;
+        border: 0;
+        font-size: $font-size-sm;
+        color: $text-muted;
+        text-align: start;
+        text-decoration: none;
+
+        &:hover, &:focus-visible {
+            color: $o-action;
+            text-decoration: underline;
+        }
+
+        .o_field_widget {
+            display: inline;
+        }
+    }
+}
